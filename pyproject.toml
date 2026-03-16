@@ -12,8 +12,10 @@ dependencies = [
     "httpx>=0.27",
     "tiktoken>=0.7",
     "pyyaml>=6.0",
-    "click>=8.1",
 ]
 
+[tool.setuptools.packages.find]
+include = ["fusion_lap*"]
+
 [project.scripts]
-fusion-lap = "fusion_lap.__main__:cli"
+fusion-lap = "fusion_lap.__main__:main"

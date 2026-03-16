@@ -24,16 +24,18 @@ DEFAULT_GOTCHAS = [
     "Collections are 0-indexed, use .item(i) or [i]",
 ]
 
+# Resolve paths relative to the repo root (parent of fusion_lap/)
+_REPO_ROOT = Path(__file__).parent.parent
+_DEFAULT_OUTPUT = _REPO_ROOT / "lap"
+_DEFAULT_DOMAINS = _REPO_ROOT / "domains.yaml"
+
 
 def build_lap_files(
-    output_dir: str = "lap",
+    output_dir: str | Path = _DEFAULT_OUTPUT,
     stubs_path: str | None = None,
-    no_enrich: bool = False,
-    domain_filter: str | None = None,
-    refresh: bool = False,
-    domains_yaml: str = "domains.yaml",
+    domains_yaml: str | Path = _DEFAULT_DOMAINS,
 ):
-    """Run the full build pipeline."""
+    """Run the full build pipeline. Finds stubs, scrapes HTML, enriches, renders."""
     out = Path(output_dir)
     out.mkdir(parents=True, exist_ok=True)
 
@@ -50,16 +52,18 @@ def build_lap_files(
             ir = IR()
 
     # Stage 2: Scrape & enrich
-    if not no_enrich:
-        logger.info("Scraping Autodesk CloudHelp for descriptions...")
-        class_names = scrape_class_index(refresh=refresh)
-        scraped = {}
-        for class_name in class_names:
-            html = fetch_class_page(class_name, refresh=refresh)
-            if html:
-                scraped[class_name] = parse_class_page(class_name, html)
+    logger.info("Scraping Autodesk CloudHelp for descriptions...")
+    class_names = scrape_class_index()
+    scraped = {}
+    for class_name in class_names:
+        html = fetch_class_page(class_name)
+        if html:
+            scraped[class_name] = parse_class_page(class_name, html)
+    if scraped:
         enrich_ir(ir, scraped)
         logger.info(f"Enriched with {len(scraped)} classes from HTML")
+    else:
+        logger.warning("No HTML docs fetched. Proceeding with stubs only.")
 
     # Add default gotchas
     ir.gotchas = DEFAULT_GOTCHAS
@@ -68,8 +72,6 @@ def build_lap_files(
     domains = _load_domains(domains_yaml)
 
     for domain_name, patterns in domains.items():
-        if domain_filter and domain_name != domain_filter:
-            continue
         content = render_domain(ir, domain_name, patterns)
         filepath = out / f"fusion-{domain_name}.lap"
         filepath.write_text(content, encoding="utf-8")
@@ -101,7 +103,7 @@ def build_lap_files(
     _print_summary(out)
 
 
-def _load_domains(domains_yaml: str) -> dict[str, list[str]]:
+def _load_domains(domains_yaml: str | Path) -> dict[str, list[str]]:
     path = Path(domains_yaml)
     if path.exists():
         with open(path) as f:

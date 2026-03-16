@@ -11,7 +11,6 @@ def test_e2e_build_and_validate(tmp_path):
     build_lap_files(
         output_dir=str(tmp_path),
         stubs_path=str(FIXTURES),
-        no_enrich=True,
     )
 
     # fusion-base.lap must exist and contain all three sections
