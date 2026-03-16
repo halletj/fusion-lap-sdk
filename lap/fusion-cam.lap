@@ -1,1 +1,587 @@
 # fusion-cam.lap
+
+[types]
+CAM3MFSupportInclusionType: NotIncluded | IncludeAsSupportType | IncludeAsModelType
+CAMAdditiveContainerTypes: SupportCAMAdditiveContainerType | OptimizedOrientationCAMAdditiveContainerType | BodyPresetCAMAdditiveContainerType | AdditiveProcessSimulationCAMAdditiveContainerType
+CAMEventChangeType: ErrorCAMEventChangeType | ToolCAMEventChangeType | ToolSwitchCAMEventChangeType | NameCAMEventChangeType | ParameterCAMEventChangeType
+CAMEventState: CAMEventStateSuccessful | CAMEventStateDeferred | CAMEventStateErrorMissingOperation | CAMEventStateErrorMissingDocument | CAMEventStateErrorOther
+PostCapabilities: Undefined | Milling | Turning | SetupSheet | Intermediate | Jet | Cascading | Additive | Inspection | MachineSimulation
+PostOutputUnitOptions: DocumentUnitsOutput | InchesOutput | MillimetersOutput
+PostProcessExecutionBehaviors: PostProcessExecutionBehavior_OmitInvalidAndEmptyOperations | PostProcessExecutionBehavior_Fail | PostProcessExecutionBehavior_PostAll
+
+[classes]
+CAM : Product
+  # Object that represents the CAM environment of a Fusion document.
+  allMachines: Machine]
+  allOperations: ObjectCollection
+  customGraphicsGroups: CustomGraphicsGroups
+  designRootOccurrence: Occurrence
+  documentStockMaterialLibrary: DocumentStockMaterialLibrary
+  documentToolLibrary: DocumentToolLibrary
+  exportManager: CAMExportManager
+  flatPatternOccurrences: OccurrenceList
+  genericPostFolder: str
+  importManager: CAMImportManager
+  inspectionResults: CAMInspectionResults
+  manufacturingModels: ManufacturingModels
+  ncPrograms: NCPrograms
+  personalPostFolder: str
+  setupActivated: SetupEvent
+  setupActivating: SetupEvent
+  setupChanged: SetupChangeEvent
+  setupCreated: SetupEvent
+  setupDeactivated: SetupEvent
+  setupDeactivating: SetupEvent
+  setupDestroying: SetupEvent
+  setupGroups: SetupGroups
+  setups: Setups
+  temporaryFolder: str
+  checkAllToolpaths() -> bool
+  checkToolpath(operations: Base) -> bool
+  checkValidity() -> void
+  clearAllToolpaths() -> bool
+  clearMissingReferences() -> void
+  clearToolpath(operations: Base) -> bool
+  deleteEntities(entities: ObjectCollection) -> bool
+  export3MFForDefaultAdditiveSetup(filepath: str, addSimulationInfo: bool, simPostProcess: bool, simSplitSurrogates: bool, simKeepThickeningStructure: bool) -> bool
+  findAttributes(groupName: str, attributeName: str) -> Attribute]
+  generateAllSetupSheets(format: SetupSheetFormats, folder: str, openDocument: bool) -> bool
+  generateAllToolpaths(skipValid: bool) -> GenerateToolpathFuture
+  generateSetupSheet(operations: Base, format: SetupSheetFormats, folder: str, openDocument: bool) -> bool
+  generateTemplateXML(operations: Base) -> str
+  generateToolpath(operations: Base) -> GenerateToolpathFuture
+  getMachiningTime(operations: Base, feedScale: float, rapidFeed: float, toolChangeTime: float) -> MachiningTime
+  postProcess(operations: Base, input: PostProcessInput) -> bool
+  postProcessAll(input: PostProcessInput) -> bool
+
+CAM3MFExportMetadataOptions : Base
+  # Class providing read and write access to meta data of a 3MF file.
+  copyright: str
+  creationDate: str
+  description: str
+  designer: str
+  enabled: bool
+  licenseTerms: str
+  modificationDate: str
+  title: str
+
+CAM3MFExportOptions : CAMExportOptions
+  areSimulationSurrogatesSplit: bool
+  areSimulationThickeningStructuresKept: bool
+  areSupportsIncluded: bool
+  isMachineInformationIncluded: bool
+  isProcessSimulationDataIncluded: bool
+  isSimulationPostProcessingIncluded: bool
+  isSliceDataIncluded: bool
+  isVolumetricDataIncluded: bool
+  metadata: CAM3MFExportMetadataOptions
+  supportInclusion: CAM3MFSupportInclusionType
+  volumetricDataResolution: int
+
+CAMAdditiveBuildExportFilter : Base
+  # Export filter used by CAMAdditiveMachineBuildFileExportOptions.
+  extension: str
+  id: str
+  isMultiFileExport: bool
+  name: str
+
+CAMAdditiveBuildExportFilterVector
+  append(x: CAMAdditiveBuildExportFilter) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::cam::CAMAdditiveBuildExportFilter > >::size_type, x: CAMAdditiveBuildExportFilter) -> void
+  back() -> CAMAdditiveBuildExportFilter >::value_type
+  begin() -> CAMAdditiveBuildExportFilter >::iterator
+  capacity() -> CAMAdditiveBuildExportFilter >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> CAMAdditiveBuildExportFilter >::iterator
+  erase() -> CAMAdditiveBuildExportFilter >::iterator
+  front() -> CAMAdditiveBuildExportFilter >::value_type
+  get_allocator() -> CAMAdditiveBuildExportFilter >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> CAMAdditiveBuildExportFilter >::value_type
+  pop_back() -> void
+  push_back(x: CAMAdditiveBuildExportFilter) -> void
+  rbegin() -> CAMAdditiveBuildExportFilter >::reverse_iterator
+  rend() -> CAMAdditiveBuildExportFilter >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::cam::CAMAdditiveBuildExportFilter > >::size_type) -> void
+  resize() -> void
+  size() -> CAMAdditiveBuildExportFilter >::size_type
+  swap(v: list[CAMAdditiveBuildExportFilter]) -> void
+
+CAMAdditiveBuildExportOptions : CAMExportOptions
+  exportFilters: CAMAdditiveBuildExportFilter]
+  selectedExportFilterId: str
+
+CAMAdditiveContainer : OperationBase
+  allOperations: ObjectCollection
+  children: ChildOperationList
+  parent: Base
+  copyAfter(operation: OperationBase) -> bool
+  copyBefore(operation: OperationBase) -> bool
+  copyInto(container: OperationBase) -> bool
+  deleteMe() -> bool
+  duplicate() -> bool
+  hasMissingReferences() -> bool
+  modifyUtility(utility: ModifyUtilityTypes) -> ModifyUtility
+  moveAfter(operation: OperationBase) -> bool
+  moveBefore(operation: OperationBase) -> bool
+  moveInto(container: OperationBase) -> bool
+  removeReferences(entity: Base, removeFromChildren: bool) -> bool
+
+CAMArrangeParameterValue : ParameterValue
+  applyArrangeSelections(arrangeSelections: ArrangeSelections) -> void
+  getArrangeSelections() -> ArrangeSelections
+
+CAMAutodeskCLDExportOptions : CAMExportOptions
+
+CAMAutodeskCLDImportOptions : CAMImportOptions
+  # Autodesk CLD import option to allow importing of Fusion toolpaths from a human readable text file.
+
+CAMCustomStrategyManager : Base
+  # Base class object representing all operations, folders, patterns and setups.
+  deregisterCustomOperationByStrategyName(strategyName: str) -> bool
+  deregisterCustomOperationsByAddinName(addinName: str) -> bool
+  registerCustomOperation(input: CustomOperationDefinitionInput) -> CustomOperationRegistrationResult
+  registerCustomOperations(inputs: list[CustomOperationDefinitionInput]) -> CustomOperationRegistrationResult]
+
+CAMEventArgs : Base
+  # The OperationEventArgs provides information associated with an operation event.
+  info: str
+
+CAMEventManager : Base
+  operationBaseChanged: OperationBaseEvent
+  operationBaseCommandButtonPressed: OperationBaseEvent
+  operationBaseCommandStarted: OperationBaseEvent
+  operationBaseGenerationStarted: OperationBaseEvent
+  operationBaseGenerationStarting: OperationBaseEvent
+
+CAMExportFuture : Base
+  # Used to check the state and get back the results of an operation generation.
+  error: str
+  exportOptions: CAMExportOptions
+  isGenerationCompleted: bool
+  progress: float
+  warning: str
+
+CAMExportManager : Base
+  create3MFOptions() -> CAM3MFExportOptions
+  createAutodeskCLDExportOptions() -> CAMAutodeskCLDExportOptions
+  createCAMAdditiveBuildExportOptions() -> CAMAdditiveBuildExportOptions
+  createFormlabsOptions() -> CAMFormlabsExportOptions
+  createPRMExportOptions() -> PRMExportOptions
+  execute(exportOptions: CAMExportOptions) -> bool
+  executeWithExportFuture(exportOptions: CAMExportOptions) -> CAMExportFuture
+
+CAMExportOptions : Base
+  error: str
+  exportObject: Base
+  fullFilename: str
+  isThumbnailSupported: bool
+  thumbnailPath: str
+
+CAMFolder : OperationBase
+  # Object that represents a folder in an existing Setup, Folder or Pattern.
+  allOperations: ObjectCollection
+  children: ChildOperationList
+  folders: CAMFolders
+  isActive: bool
+  operations: Operations
+  parent: Base
+  patterns: CAMPatterns
+  activate() -> bool
+  copyAfter(operation: OperationBase) -> bool
+  copyBefore(operation: OperationBase) -> bool
+  copyInto(container: OperationBase) -> bool
+  createFromCAMTemplate(camTemplate: CAMTemplate) -> OperationBase]
+  createFromCAMTemplate2(input: CreateFromCAMTemplateInput) -> OperationBase]
+  createFromTemplate(templateFilePath: str) -> ObjectCollection
+  createFromTemplateXML(templateXML: str) -> OperationBase]
+  deleteMe() -> bool
+  duplicate() -> bool
+  hasMissingReferences() -> bool
+  modifyUtility(utility: ModifyUtilityTypes) -> ModifyUtility
+  moveAfter(operation: OperationBase) -> bool
+  moveBefore(operation: OperationBase) -> bool
+  moveInto(container: OperationBase) -> bool
+  removeReferences(entity: Base, removeFromChildren: bool) -> bool
+
+CAMFolders *collection<CAMFolder>
+  # Collection that provides access to the folders within an existing setup, folder or pattern.
+  count: int
+  addFolder(name: str) -> CAMFolder
+  itemByName(name: str) -> CAMFolder
+  itemByOperationId(id: int) -> CAMFolder
+
+CAMFormlabsExportOptions : CAMExportOptions
+  areSupportsIncluded: bool
+  isVolumetricDataIncluded: bool
+  volumetricDataResolution: int
+
+CAMHoleRecognition : OperationBase
+  # Object that represents a hole recognition object in an existing Setup, Folder or Pattern.
+  allOperations: OperationBase]
+  children: ChildOperationList
+  folders: CAMFolders
+  isActive: bool
+  operations: Operations
+  parent: Base
+  activate() -> bool
+  copyAfter(operation: OperationBase) -> bool
+  copyBefore(operation: OperationBase) -> bool
+  copyInto(container: OperationBase) -> bool
+  deleteMe() -> bool
+  duplicate() -> bool
+  hasMissingReferences() -> bool
+  modifyUtility(utility: ModifyUtilityTypes) -> ModifyUtility
+  moveAfter(operation: OperationBase) -> bool
+  moveBefore(operation: OperationBase) -> bool
+  moveInto(container: OperationBase) -> bool
+  removeReferences(entity: Base, removeFromChildren: bool) -> bool
+
+CAMImportManager : Base
+  # Import manager used to import data into the selected setup.
+  createAutodeskCLDImportOptions() -> CAMAutodeskCLDImportOptions
+  execute(importOptions: CAMImportOptions) -> bool
+
+CAMImportOptions : Base
+  # Parent class for all ImportOptions objects giving access to the setup.
+  fullFilename: str
+  importObject: Base
+
+CAMInspectionResults *collection<CAMMeasure>
+  # Collection that provides access to the Measures in a results folder.
+  count: int
+  itemByName(name: str) -> CAMMeasure
+
+CAMLibrary : Base
+  # The CAMLibrary is the base-class for all other asset-specific libraries.
+  assetTypeName: str
+  childAssetURLs(url: URL) -> URL]
+  childFolderURLs(url: URL) -> URL]
+  createFolder(parentUrl: URL, folderName: str) -> URL
+  deleteAsset(url: URL) -> bool
+  deleteFolder(url: URL) -> bool
+  displayName(url: URL) -> str
+  doesPathExist(url: URL) -> bool
+  urlByLocation(location: LibraryLocations) -> URL
+
+CAMLibraryManager : Base
+  fusion360MachineFolder: str
+  fusion360PostFolder: str
+  localMachineFolder: str
+  localPostFolder: str
+  machineLibrary: MachineLibrary
+  networkMachineFolder: str
+  postLibrary: PostLibrary
+  printSettingLibrary: PrintSettingLibrary
+  stockMaterialLibrary: StockMaterialLibrary
+  templateLibrary: CAMTemplateLibrary
+  toolLibraries: ToolLibraries
+
+CAMManager : Base
+  camEventManager: CAMEventManager
+  customStrategyManager: CAMCustomStrategyManager
+  libraryManager: CAMLibraryManager
+  networkMachineIntegrationManager: NetworkMachineIntegrationManager
+  postEnginePath: str
+  @static get() -> CAMManager
+
+CAMMeasure : Base
+  # Object that represents a Measure folder.
+  inspectionPathResults: InspectionPathResults
+
+CAMParameter : Base
+  # Base class for representing parameter of an operation.
+  error: str
+  expression: str
+  fullTitle: str
+  isDeprecated: bool
+  isEditable: bool
+  isEnabled: bool
+  isVisible: bool
+  name: str
+  systemDefaultExpression: str
+  title: str
+  userDefaultExpression: str
+  value: ParameterValue
+  warning: str
+  saveExpressionAsUserDefault() -> bool
+
+CAMParameters *collection<CAMParameter>
+  # Collection that provides access to the parameters of an existing operation.
+  count: int
+  itemByName(internalName: str) -> CAMParameter
+  resetToSystemDefaults() -> bool
+
+CAMPattern : CAMFolder
+  # Object that represents a pattern in an existing Setup, Folder or Pattern.
+  activate() -> bool
+  copyAfter(operation: OperationBase) -> bool
+  copyBefore(operation: OperationBase) -> bool
+  copyInto(container: OperationBase) -> bool
+  createFromCAMTemplate(camTemplate: CAMTemplate) -> OperationBase]
+  createFromCAMTemplate2(input: CreateFromCAMTemplateInput) -> OperationBase]
+  createFromTemplate(templateFilePath: str) -> ObjectCollection
+  createFromTemplateXML(templateXML: str) -> OperationBase]
+  deleteMe() -> bool
+  duplicate() -> bool
+  hasMissingReferences() -> bool
+  modifyUtility(utility: ModifyUtilityTypes) -> ModifyUtility
+  moveAfter(operation: OperationBase) -> bool
+  moveBefore(operation: OperationBase) -> bool
+  moveInto(container: OperationBase) -> bool
+  removeReferences(entity: Base, removeFromChildren: bool) -> bool
+
+CAMPatterns *collection<CAMPattern>
+  # Collection that provides access to the patterns within an existing setup, folder or pattern.
+  count: int
+  itemByName(name: str) -> CAMPattern
+  itemByOperationId(id: int) -> CAMPattern
+
+CAMTemplate : Base
+  attributes: Attributes
+  description: str
+  isHoleTemplate: bool
+  name: str
+  operations: CAMTemplateOperations
+  @static createEmpty() -> CAMTemplate
+  @static createFromFile(filePath: str) -> CAMTemplate
+  @static createFromOperations(operations: list[Operation]) -> Operation]
+  @static createFromXML(xml: str) -> CAMTemplate
+  @static createHoleTemplateFromOperations(operations: list[Operation]) -> Operation]
+  getHoleSignatureXML() -> str
+  save(filePath: str) -> bool
+  setHoleSignatureXML(xmlSnippet: str) -> bool
+
+CAMTemplateLibrary : CAMLibrary
+  childAssetURLs(url: URL) -> URL]
+  childFolderURLs(url: URL) -> URL]
+  childTemplates(url: URL) -> CAMTemplate]
+  createFolder(parentUrl: URL, folderName: str) -> URL
+  deleteAsset(url: URL) -> bool
+  deleteFolder(url: URL) -> bool
+  displayName(url: URL) -> str
+  doesPathExist(url: URL) -> bool
+  importTemplate(camTemplate: CAMTemplate, destinationUrl: URL) -> URL
+  templateAtURL(url: URL) -> CAMTemplate
+  updateTemplate(camTemplate: CAMTemplate, url: URL) -> URL
+  urlByLocation(location: LibraryLocations) -> URL
+
+CAMTemplateOperationInput : Base
+  displayName: str
+  geometryIndexCount: int
+  parameters: CAMParameters
+  strategy: str
+  tool: Tool
+  toolPreset: ToolPreset
+  isGeometryIndexEnabled(index: int) -> bool
+  setGeometryIndexEnabled(index: int, enabled: bool) -> void
+
+CAMTemplateOperations : Base
+  count: int
+  add(input: CAMTemplateOperationInput) -> void
+  get(operationIndex: int) -> CAMTemplateOperationInput
+  makeInput(strategyType: str) -> CAMTemplateOperationInput
+  set(operationIndex: int, input: CAMTemplateOperationInput) -> void
+
+CAMTemplateVector
+  append(x: CAMTemplate) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::cam::CAMTemplate > >::size_type, x: CAMTemplate) -> void
+  back() -> CAMTemplate >::value_type
+  begin() -> CAMTemplate >::iterator
+  capacity() -> CAMTemplate >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> CAMTemplate >::iterator
+  erase() -> CAMTemplate >::iterator
+  front() -> CAMTemplate >::value_type
+  get_allocator() -> CAMTemplate >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> CAMTemplate >::value_type
+  pop_back() -> void
+  push_back(x: CAMTemplate) -> void
+  rbegin() -> CAMTemplate >::reverse_iterator
+  rend() -> CAMTemplate >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::cam::CAMTemplate > >::size_type) -> void
+  resize() -> void
+  size() -> CAMTemplate >::size_type
+  swap(v: list[CAMTemplate]) -> void
+
+NCProgram : OperationBase
+  # Object that represents an existing NC program.
+  filteredOperations: OperationBase]
+  fusionHubFolder: DataFolder
+  machine: Machine
+  operations: OperationBase]
+  postConfiguration: PostConfiguration
+  postParameters: CAMParameters
+  copyAfter(operation: OperationBase) -> bool
+  copyBefore(operation: OperationBase) -> bool
+  copyInto(container: OperationBase) -> bool
+  deleteMe() -> bool
+  duplicate() -> bool
+  hasMissingReferences() -> bool
+  modifyUtility(utility: ModifyUtilityTypes) -> ModifyUtility
+  moveAfter(operation: OperationBase) -> bool
+  moveBefore(operation: OperationBase) -> bool
+  moveInto(container: OperationBase) -> bool
+  postProcess(options: NCProgramPostProcessOptions) -> bool
+  removeReferences(entity: Base, removeFromChildren: bool) -> bool
+  updatePostParameters(parameters: CAMParameters) -> bool
+
+NCProgramPostProcessOptions : Base
+  fusionHubExecutionBehavior: FusionHubExecutionBehaviors
+  isFailOnToolNumberDuplication: bool
+  postProcessExecutionBehavior: PostProcessExecutionBehaviors
+  @static create() -> NCProgramPostProcessOptions
+
+Operation : OperationBase
+  # Object that represents an operation in an existing Setup, Folder or Pattern.
+  generatingProgress: str
+  hasToolpath: bool
+  isGenerating: bool
+  isToolpathValid: bool
+  operationState: OperationStates
+  parent: Base
+  referenceTool: Tool
+  strategyType: OperationStrategyTypes
+  tool: Tool
+  toolJson: str
+  toolPreset: ToolPreset
+  toolPresetId: str
+  copyAfter(operation: OperationBase) -> bool
+  copyBefore(operation: OperationBase) -> bool
+  copyInto(container: OperationBase) -> bool
+  deleteMe() -> bool
+  duplicate() -> bool
+  hasMissingReferences() -> bool
+  modifyUtility(utility: ModifyUtilityTypes) -> ModifyUtility
+  moveAfter(operation: OperationBase) -> bool
+  moveBefore(operation: OperationBase) -> bool
+  moveInto(container: OperationBase) -> bool
+  removeReferences(entity: Base, removeFromChildren: bool) -> bool
+
+PostConfiguration : Base
+  # Object that represents a post configuration.
+  capability: PostCapabilities
+  description: str
+  extension: str
+  keywords: list[str]
+  mimetype: str
+  vendor: str
+  version: str
+  @static createFromContent(content: str) -> PostConfiguration
+
+PostConfigurationQuery : Base
+  capability: PostCapabilities
+  location: LibraryLocations
+  url: URL
+  vendor: str
+  execute() -> PostConfiguration]
+
+PostConfigurationVector
+  append(x: PostConfiguration) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::cam::PostConfiguration > >::size_type, x: PostConfiguration) -> void
+  back() -> PostConfiguration >::value_type
+  begin() -> PostConfiguration >::iterator
+  capacity() -> PostConfiguration >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> PostConfiguration >::iterator
+  erase() -> PostConfiguration >::iterator
+  front() -> PostConfiguration >::value_type
+  get_allocator() -> PostConfiguration >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> PostConfiguration >::value_type
+  pop_back() -> void
+  push_back(x: PostConfiguration) -> void
+  rbegin() -> PostConfiguration >::reverse_iterator
+  rend() -> PostConfiguration >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::cam::PostConfiguration > >::size_type) -> void
+  resize() -> void
+  size() -> PostConfiguration >::size_type
+  swap(v: list[PostConfiguration]) -> void
+
+PostLibrary : CAMLibrary
+  childAssetURLs(url: URL) -> URL]
+  childFolderURLs(url: URL) -> URL]
+  childPostConfigurations(url: URL) -> PostConfiguration]
+  createFolder(parentUrl: URL, folderName: str) -> URL
+  createQuery(location: LibraryLocations) -> PostConfigurationQuery
+  deleteAsset(url: URL) -> bool
+  deleteFolder(url: URL) -> bool
+  displayName(url: URL) -> str
+  doesPathExist(url: URL) -> bool
+  importPostConfiguration(postConfig: PostConfiguration, destinationUrl: URL, postName: str) -> URL
+  postConfigurationAtURL(url: URL) -> PostConfiguration
+  urlByLocation(location: LibraryLocations) -> URL
+
+PostProcessInput : Base
+  areToolChangesMinimized: bool
+  isOpenInEditor: bool
+  machine: Machine
+  outputFolder: str
+  outputUnits: PostOutputUnitOptions
+  postConfiguration: str
+  postProperties: NamedValues
+  programComment: str
+  programName: str
+  @static create(programName: str, postConfiguration: str, outputFolder: str, outputUnits: PostOutputUnitOptions) -> PostProcessInput
+
+PostProcessingMachineElement : MachineElement
+  # Machine element representing the post processor and post properties.
+  outputFolder: str
+  postParameters: CAMParameters
+  postURL: URL
+  @static staticTypeId() -> str
+  updatePostParameters(parameters: CAMParameters) -> bool
+
+Setup : OperationBase
+  # Object that represents an existing Setup.
+  allOperations: ObjectCollection
+  children: ChildOperationList
+  fixtureEnabled: bool
+  fixtures: ObjectCollection
+  folders: CAMFolders
+  isActive: bool
+  machine: Machine
+  models: ObjectCollection
+  operationType: OperationTypes
+  operations: Operations
+  patterns: CAMPatterns
+  printSetting: PrintSetting
+  stockMaterial: StockMaterial
+  stockMode: SetupStockModes
+  stockSolids: ObjectCollection
+  visibilityManager: SetupVisibilityManager
+  workCoordinateSystem: Matrix3D
+  activate() -> bool
+  additiveContainerByType(containerType: CAMAdditiveContainerTypes) -> CAMAdditiveContainer
+  copyAfter(operation: OperationBase) -> bool
+  copyBefore(operation: OperationBase) -> bool
+  copyInto(container: OperationBase) -> bool
+  createFromCAMTemplate(camTemplate: CAMTemplate) -> OperationBase]
+  createFromCAMTemplate2(input: CreateFromCAMTemplateInput) -> OperationBase]
+  createFromTemplate(templateFilePath: str) -> ObjectCollection
+  createFromTemplateXML(templateXML: str) -> OperationBase]
+  deleteMe() -> bool
+  duplicate() -> bool
+  hasMissingReferences() -> bool
+  modifyUtility(utility: ModifyUtilityTypes) -> ModifyUtility
+  moveAfter(operation: OperationBase) -> bool
+  moveBefore(operation: OperationBase) -> bool
+  moveInto(container: OperationBase) -> bool
+  removeReferences(entity: Base, removeFromChildren: bool) -> bool
+
+Tool : Base
+  # Represents a Tool.
+  description: str
+  parameters: CAMParameters
+  presets: ToolPresets
+  @static createFromJson(json: str) -> Tool
+  @static createFromP21(p21: str) -> Tool
+  @static createFromP21File(filename: str) -> Tool
+  toJson() -> str

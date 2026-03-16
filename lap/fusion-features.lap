@@ -1,17 +1,2132 @@
 # fusion-features.lap
 
 [classes]
-ExtrudeFeature : Feature
+ArrangeFeature : Feature
+  # Represents an Arrange feature within a component.
+  arrangeComponents: ArrangeComponents
+  arrangeStatistics: str
+  definition: ArrangeDefinition
+  envelopeDefinition: ArrangeEnvelopeDefinition
+  nativeObject: ArrangeFeature
+  resultEnvelopes: ArrangeResultEnvelopes
+  unusedComponents: ArrangeComponent]
+  createForAssemblyContext(occurrence: Occurrence) -> ArrangeFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+ArrangeFeatureInput : Base
+  arrangeComponents: ArrangeComponents
+  definition: ArrangeDefinitionInput
+  solverType: ArrangeSolverTypes
+  set3DEnvelope(plane: ConstructionPlane, length: ValueInput, width: ValueInput, height: ValueInput) -> Arrange3DEnvelopeInput
+  setPlaneEnvelope(plane: ConstructionPlane, length: ValueInput, width: ValueInput) -> Arrange2DPlaneEnvelopeInput
+  setProfileOrFaceEnvelope(profilesOrFaces: list[Base]) -> Arrange2DProfileOrFaceEnvelopeInput
+
+ArrangeFeatures *collection<ArrangeFeature>
+  count: int
+  add(input: ArrangeFeatureInput) -> ArrangeFeature
+  createInput(solverType: ArrangeSolverTypes) -> ArrangeFeatureInput
+  itemByName(name: str) -> ArrangeFeature
+
+BaseFeature : Feature
+  # The BaseFeature class represents a direct edit feature within a parametric design.
+  constructionAxes: ConstructionAxis]
+  constructionPlanes: ConstructionPlane]
+  constructionPoints: ConstructionPoint]
+  meshBodies: MeshBody]
+  nativeObject: BaseFeature
+  sketches: Sketch]
+  sourceBodies: BRepBody]
+  createForAssemblyContext(occurrence: Occurrence) -> BaseFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+  finishEdit() -> bool
+  startEdit() -> bool
+  updateBody(sourceBody: BRepBody, newBody: BRepBody) -> bool
+
+BaseFeatures *collection<BaseFeature>
+  # The BaseFeature class represents a direct edit feature within a parametric design.
+  count: int
+  add() -> BaseFeature
+  itemByName(name: str) -> BaseFeature
+
+BossFeature : Feature
+  alignmentDepth: ModelParameter
+  alignmentDiameter: ModelParameter
+  alignmentDraftAngle: ModelParameter
+  alignmentRootRadius: ModelParameter
+  alignmentTipRadius: ModelParameter
+  alignmentType: BossAlignmentTypes
+  diameter: ModelParameter
+  direction: Vector3D
+  draftAngle: ModelParameter
+  holeCountersinkAngle: ModelParameter
+  holeDepth: ModelParameter
+  holeDiameter: ModelParameter
+  holeDraftAngle: ModelParameter
+  holeEndRadius: ModelParameter
+  holeExtentType: BossHoleExtentTypes
+  holeMajorDepth: ModelParameter
+  holeMajorDiameter: ModelParameter
+  holeMajorDraftAngle: ModelParameter
+  holeMajorRootRadius: ModelParameter
+  holeMajorTipRadius: ModelParameter
+  holeStartRadius: ModelParameter
+  holeType: HoleTypes
+  innerRadius: ModelParameter
+  isDirectionFlipped: bool
+  isGeometryOpposite: bool
+  nativeObject: BossFeature
+  offset: ModelParameter
+  offsetClearance: ModelParameter
+  positionDefinition: BossPositionDefinition
+  ribBlendRadius: ModelParameter
+  ribChamferAngle: ModelParameter
+  ribCount: ModelParameter
+  ribCutSize: ModelParameter
+  ribDraftAngle: ModelParameter
+  ribLength: ModelParameter
+  ribOffset: ModelParameter
+  ribOuterDraftAngle: ModelParameter
+  ribRotation: ModelParameter
+  ribThickness: ModelParameter
+  ribTipRadius: ModelParameter
+  ribTotalAngle: ModelParameter
+  ribType: BossRibShapeTypes
+  rootRadius: ModelParameter
+  screwDiameter: ModelParameter
+  screwHeadAngle: ModelParameter
+  screwHeadDiameter: ModelParameter
+  shapeType: BossShapeTypes
+  taperAngle: ModelParameter
+  thickness: ModelParameter
+  tipRadius: ModelParameter
+  createForAssemblyContext(occurrence: Occurrence) -> BossFeature
+  createInput() -> BossFeatureInput
+  deleteMe() -> bool
+  dissolve() -> bool
+  update(input: BossFeatureInput) -> bool
+
+BossFeatureInput : Base
+  creationOccurrence: Occurrence
+  isDefaultDirection: bool
+  offset: ValueInput
+  participantBodies: BRepBody]
+  side1: BossFeatureSideInput
+  side2: BossFeatureSideInput
+  targetBaseFeature: BaseFeature
+  createSideInput() -> BossFeatureSideInput
+  setPositionBySketchPoints(pointOrPoints: Base) -> bool
+
+BossFeatures *collection<BossFeature>
+  # Collection that provides access to all of the existing boss features in a design.
+  count: int
+  add(input: BossFeatureInput) -> BossFeature]
+  createInput() -> BossFeatureInput
+  itemByName(name: str) -> BossFeature
+
+BoundaryFillFeature : Feature
+  # Object that represents an existing boundary fill feature in a design.
+  bRepCells: BRepCells
+  isRemoveTools: bool
+  nativeObject: BoundaryFillFeature
   operation: FeatureOperations
+  tools: ObjectCollection
+  applyCellChanges() -> bool
+  createForAssemblyContext(occurrence: Occurrence) -> BoundaryFillFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+BoundaryFillFeatureInput : Base
+  bRepCells: BRepCells
+  creationOccurrence: Occurrence
+  isRemoveTools: bool
+  operation: FeatureOperations
+  targetBaseFeature: BaseFeature
+  tools: ObjectCollection
+  cancel() -> bool
+
+BoundaryFillFeatures *collection<BoundaryFillFeature>
+  count: int
+  add(input: BoundaryFillFeatureInput) -> BoundaryFillFeature
+  createInput(tools: ObjectCollection, operation: FeatureOperations) -> BoundaryFillFeatureInput
+  itemByName(name: str) -> BoundaryFillFeature
+
+BoxFeature : Feature
+  # Object that represents an existing box feature in a design.
+  deleteMe() -> bool
+  dissolve() -> bool
+
+BoxFeatures *collection<BoxFeature>
+  # Collection that provides access to all of the existing box features in a design.
+  count: int
+  itemByName(name: str) -> BoxFeature
+
+ChamferFeature : Feature
+  # Object that represents an existing chamfer feature in a design.
+  chamferType: ChamferTypes
+  chamferTypeDefinition: ChamferTypeDefinition
+  cornerType: ChamferCornerTypes
+  edgeSets: ChamferEdgeSets
+  edges: ObjectCollection
+  isTangentChain: bool
+  nativeObject: ChamferFeature
+  createForAssemblyContext(occurrence: Occurrence) -> ChamferFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+  setDistanceAndAngle(distance: ValueInput, angle: ValueInput) -> bool
+  setEqualDistance(distance: ValueInput) -> bool
+  setTwoDistances(distanceOne: ValueInput, distanceTwo: ValueInput) -> bool
+
+ChamferFeatureInput : Base
+  chamferEdgeSets: ChamferEdgeSets
+  cornerType: ChamferCornerTypes
+  edges: ObjectCollection
+  isTangentChain: bool
+  targetBaseFeature: BaseFeature
+  setToDistanceAndAngle(distance: ValueInput, angle: ValueInput) -> bool
+  setToEqualDistance(distance: ValueInput) -> bool
+  setToTwoDistances(distanceOne: ValueInput, distanceTwo: ValueInput) -> bool
+
+ChamferFeatures *collection<ChamferFeature>
+  count: int
+  add(input: ChamferFeatureInput) -> ChamferFeature
+  createInput(edges: ObjectCollection, isTangentChain: bool) -> ChamferFeatureInput
+  createInput2() -> ChamferFeatureInput
+  itemByName(name: str) -> ChamferFeature
+
+CircularPatternFeature : Feature
+  # Object that represents an existing circular pattern feature in a design.
+  axis: Base
+  inputEntities: ObjectCollection
+  isSymmetric: bool
+  nativeObject: CircularPatternFeature
+  patternComputeOption: PatternComputeOptions
+  patternElements: PatternElements
+  patternEntityType: PatternEntityTypes
+  quantity: ModelParameter
+  resultFeatures: ObjectCollection
+  suppressedElementsIds: list[int]
+  totalAngle: ModelParameter
+  createForAssemblyContext(occurrence: Occurrence) -> CircularPatternFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+CircularPatternFeatureInput : Base
+  axis: Base
+  inputEntities: ObjectCollection
+  isSymmetric: bool
+  patternComputeOption: PatternComputeOptions
+  quantity: ValueInput
+  targetBaseFeature: BaseFeature
+  totalAngle: ValueInput
+
+CircularPatternFeatures *collection<CircularPatternFeature>
+  count: int
+  add(input: CircularPatternFeatureInput) -> CircularPatternFeature
+  createInput(inputEntities: ObjectCollection, axis: Base) -> CircularPatternFeatureInput
+  itemByName(name: str) -> CircularPatternFeature
+
+CoilFeature : Feature
+  # Object that represents an existing coil primitive feature in a design.
+  deleteMe() -> bool
+  dissolve() -> bool
+
+CoilFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of a coil feature.
+  angle: ValueInput
+  basePlane: Base
+  coilSectionPosition: CoilFeatureSectionPositions
+  coilSectionType: CoilFeatureSectionTypes
+  coilType: CoilFeatureTypes
+  diameter: ValueInput
+  height: ValueInput
+  isClockwiseRotation: bool
+  isSolid: bool
+  operation: FeatureOperations
+  pitch: ValueInput
+  revolutions: ValueInput
+  sectionSize: ValueInput
+  targetBaseFeature: BaseFeature
+  setToHeightAndPitchCoil(height: ValueInput, pitch: ValueInput, angle: ValueInput) -> bool
+  setToRevolutionAndHeight(revolutions: ValueInput, height: ValueInput, angle: ValueInput) -> bool
+  setToRevolutionsAndPitch(revolutions: ValueInput, pitch: ValueInput, angle: ValueInput) -> bool
+  setToSpiral(revolutions: ValueInput, pitch: ValueInput) -> bool
+
+CoilFeatures *collection<CoilFeature>
+  count: int
+  itemByName(name: str) -> CoilFeature
+
+CombineFeature : Feature
+  isKeepToolBodies: bool
+  isNewComponent: bool
+  nativeObject: CombineFeature
+  operation: FeatureOperations
+  targetBody: BRepBody
+  toolBodies: ObjectCollection
+  createForAssemblyContext(occurrence: Occurrence) -> CombineFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+CombineFeatureInput : Base
+  isKeepToolBodies: bool
+  isNewComponent: bool
+  operation: FeatureOperations
+  targetBaseFeature: BaseFeature
+  targetBody: BRepBody
+  toolBodies: ObjectCollection
+
+CombineFeatures *collection<CombineFeature>
+  count: int
+  add(input: CombineFeatureInput) -> CombineFeature
+  createInput(targetBody: BRepBody, toolBodies: ObjectCollection) -> CombineFeatureInput
+  itemByName(name: str) -> CombineFeature
+
+CornerClosureFeature : Feature
+  # Defines a corner closure feature, providing methods to redefine the type of corner closure.
+  definition: CornerClosureFeatureDefinition
+  definitionType: CornerClosureFeatureDefinitionTypes
+  nativeObject: CornerClosureFeature
+  createForAssemblyContext(occurrence: Occurrence) -> CornerClosureFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+CornerClosureFeatureInput : Base
+  definitionType: CornerClosureFeatureDefinitionTypes
+  dominantEdge: BRepEdge
+  submissiveEdge: BRepEdge
+  setThreeBendCornerClosure(parameters: ThreeBendCornerClosureInputDefinition) -> bool
+  setTwoBendCornerClosure(parameters: TwoBendCornerClosureInputDefinition) -> bool
+
+CornerClosureFeatures *collection<CornerClosureFeature>
+  count: int
+  add(input: CornerClosureFeatureInput) -> CornerClosureFeature
+  createInput(dominantEdge: BRepEdge, submissiveEdge: BRepEdge) -> CornerClosureFeatureInput
+  itemByName(name: str) -> CornerClosureFeature
+
+CustomFeature : Feature
+  # Object that represents an existing CustomFeature feature in a design.
+  customNamedValues: CustomNamedValues
+  definition: CustomFeatureDefinition
+  dependencies: CustomFeatureDependencies
+  features: Base]
+  nativeObject: CustomFeature
+  parameters: CustomFeatureParameters
+  createForAssemblyContext(occurrence: Occurrence) -> CustomFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+  setStartAndEndFeatures(startFeature: Base, endFeature: Base) -> bool
+
+CustomFeatureInput : Base
+  features: Base]
+  addCustomParameter(id: str, label: str, value: ValueInput, units: str, isVisible: bool) -> bool
+  addDependency(id: str, entity: Base) -> bool
+  setStartAndEndFeatures(startFeature: Base, endFeature: Base) -> bool
+
+CustomFeatures *collection<CustomFeature>
+  count: int
+  add(input: CustomFeatureInput) -> CustomFeature
+  createInput(definition: CustomFeatureDefinition) -> CustomFeatureInput
+  itemByName(name: str) -> CustomFeature
+
+CylinderFeature : Feature
+  # Object that represents an existing cylinder feature in a design.
+  deleteMe() -> bool
+  dissolve() -> bool
+
+CylinderFeatures *collection<CylinderFeature>
+  # Collection that provides access to all of the existing cylinder features in a design.
+  count: int
+  itemByName(name: str) -> CylinderFeature
+
+DeleteFaceFeature : Feature
+  deletedFaces: BRepFace]
+  nativeObject: DeleteFaceFeature
+  createForAssemblyContext(occurrence: Occurrence) -> DeleteFaceFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+DeleteFaceFeatures *collection<DeleteFaceFeature>
+  count: int
+  add(facesToDelete: Base) -> DeleteFaceFeature
+  itemByName(name: str) -> DeleteFaceFeature
+
+DeriveFeature : Feature
+  # Object that represents an existing derive feature in a design.
+  documentReference: DocumentReference
+  excludedEntities: Base]
+  isIncludeComponentParameters: bool
+  isIncludeFavoriteParameters: bool
+  isPlaceObjectsAtOrigin: bool
+  nativeObject: DeriveFeature
+  sourceDesign: Design
+  sourceEntities: Base]
+  breakLink() -> bool
+  createForAssemblyContext(occurrence: Occurrence) -> DeriveFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+  getDerivedEntity(sourceEntity: Base) -> Base
+  getSourceEntity(derivedEntity: Base) -> Base
+  setSourceEntities(entities: list[Base], excludedEntities: list[Base]) -> bool
+
+DeriveFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of a derive feature.
+  excludedEntities: Base]
+  isIncludeComponentParameters: bool
+  isIncludeFavoriteParameters: bool
+  isPlaceObjectsAtOrigin: bool
+  sourceDesign: Design
+  sourceEntities: Base]
+
+DeriveFeatures *collection<DeriveFeature>
+  count: int
+  add(input: DeriveFeatureInput) -> DeriveFeature
+  createInput(sourceDesign: Design) -> DeriveFeatureInput
+  itemByName(name: str) -> DeriveFeature
+
+DraftFeature : Feature
+  # Object that represents an existing draft feature in a design.
+  draftDefinition: ExtentDefinition
+  inputFaces: BRepFace]
+  isDirectionFlipped: bool
+  isTangentChain: bool
+  nativeObject: DraftFeature
+  plane: Base
+  createForAssemblyContext(occurrence: Occurrence) -> DraftFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+  setSingleAngle(isSymmetric: bool, angle: ValueInput) -> bool
+  setTwoAngles(angleOne: ValueInput, angleTwo: ValueInput) -> bool
+
+DraftFeatureInput : Base
+  angleOne: ValueInput
+  angleTwo: ValueInput
+  inputFaces: BRepFace]
+  isDirectionFlipped: bool
+  isSymmetric: bool
+  isTangentChain: bool
+  plane: Base
+  targetBaseFeature: BaseFeature
+  setSingleAngle(isSymmetric: bool, angle: ValueInput) -> bool
+  setTwoAngles(angleOne: ValueInput, angleTwo: ValueInput) -> bool
+
+DraftFeatures *collection<DraftFeature>
+  count: int
+  add(input: DraftFeatureInput) -> DraftFeature
+  createInput(inputFaces: list[BRepFace], plane: Base, isTangentChain: bool) -> DraftFeatureInput
+  itemByName(name: str) -> DraftFeature
+
+EmbossFeature : Feature
+  # Object that represents an existing emboss feature in a design.
+  depth: ModelParameter
+  horizontalDistance: ModelParameter
+  inputFaces: BRepFace]
+  isTangentChain: bool
+  nativeObject: EmbossFeature
+  profiles: Base]
+  rotationAngle: ModelParameter
+  verticalDistance: ModelParameter
+  createForAssemblyContext(occurrence: Occurrence) -> EmbossFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+EmbossFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of an emboss feature.
+  creationOccurrence: Occurrence
+  depth: ValueInput
+  horizontalDistance: ValueInput
+  inputFaces: BRepFace]
+  isTangentChain: bool
+  profiles: Base]
+  rotationAngle: ValueInput
+  targetBaseFeature: BaseFeature
+  verticalDistance: ValueInput
+
+EmbossFeatures *collection<EmbossFeature>
+  count: int
+  add(input: EmbossFeatureInput) -> EmbossFeature
+  createInput(profiles: list[Base], faces: list[BRepFace], depth: ValueInput) -> EmbossFeatureInput
+  itemByName(name: str) -> EmbossFeature
+
+ExtendFeature : Feature
+  # Object that represents an existing extend feature in a design.
+  distance: ModelParameter
+  edges: ObjectCollection
+  extendAlignment: SurfaceExtendAlignment
+  extendType: SurfaceExtendTypes
+  isChainingEnabled: bool
+  nativeObject: ExtendFeature
+  createForAssemblyContext(occurrence: Occurrence) -> ExtendFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+  setInputEntities(edges: ObjectCollection, isChainingEnabled: bool) -> bool
+
+ExtendFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of an extend feature.
+  distance: ValueInput
+  edges: ObjectCollection
+  extendAlignment: SurfaceExtendAlignment
+  extendType: SurfaceExtendTypes
+  isChainingEnabled: bool
+  targetBaseFeature: BaseFeature
+
+ExtendFeatures *collection<ExtendFeature>
+  count: int
+  add(input: ExtendFeatureInput) -> ExtendFeature
+  createInput(edges: ObjectCollection, distance: ValueInput, extendType: SurfaceExtendTypes, isChainingEnabled: bool) -> ExtendFeatureInput
+  itemByName(name: str) -> ExtendFeature
+
+ExtentDefinition : Base
+  # The base class for the various definition objects used to define the extent of a feature.
+  parentFeature: Feature
+
+ExtrudeFeature : Feature
+  # Object that represents an existing extrude feature in a design.
+  endFaces: BRepFaces
+  extentDefinition: ExtentDefinition
+  extentOne: ExtentDefinition
+  extentTwo: ExtentDefinition
+  extentType: FeatureExtentTypes
+  hasTwoExtents: bool
+  isSolid: bool
+  isThinExtrude: bool
+  nativeObject: ExtrudeFeature
+  operation: FeatureOperations
+  participantBodies: BRepBody]
   profile: Base
-  setOneSideExtent(extent: ExtentDefinition, direction: ExtentDirections) -> bool
+  sideFaces: BRepFaces
+  startExtent: ExtentDefinition
+  startFaces: BRepFaces
+  symmetricExtent: SymmetricExtentDefinition
+  taperAngle: ModelParameter
+  taperAngleOne: ModelParameter
+  taperAngleTwo: ModelParameter
+  thinExtrudeWallLocationOne: ThinExtrudeWallLocation
+  thinExtrudeWallLocationTwo: ThinExtrudeWallLocation
+  thinExtrudeWallThicknessOne: ModelParameter
+  thinExtrudeWallThicknessTwo: ModelParameter
+  createForAssemblyContext(occurrence: Occurrence) -> ExtrudeFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+  setAllExtent(direction: ExtentDirections) -> bool
+  setDistanceExtent(isSymmetric: bool, distance: ValueInput) -> bool
+  setOneSideExtent() -> bool
+  setOneSideToExtent() -> bool
+  setSymmetricExtent() -> bool
+  setThinExtrude() -> bool
+  setTwoSidesDistanceExtent(distanceOne: ValueInput, distanceTwo: ValueInput) -> bool
+  setTwoSidesExtent() -> bool
+  setTwoSidesToExtent(toEntityOne: Base, toEntityTwo: Base, matchShape: bool) -> bool
+
+ExtrudeFeatureInput : Base
+  creationOccurrence: Occurrence
+  extentOne: ExtentDefinition
+  extentTwo: ExtentDefinition
+  hasTwoExtents: bool
+  isSolid: bool
+  isThinExtrude: bool
+  operation: FeatureOperations
+  participantBodies: BRepBody]
+  profile: Base
+  startExtent: ExtentDefinition
+  taperAngle: ValueInput
+  taperAngleOne: ValueInput
+  taperAngleTwo: ValueInput
+  targetBaseFeature: BaseFeature
+  thinExtrudeWallLocationOne: ThinExtrudeWallLocation
+  thinExtrudeWallLocationTwo: ThinExtrudeWallLocation
+  thinExtrudeWallThicknessOne: ValueInput
+  thinExtrudeWallThicknessTwo: ValueInput
+  setAllExtent(direction: ExtentDirections) -> bool
+  setDistanceExtent(isSymmetric: bool, distance: ValueInput) -> bool
+  setOneSideExtent() -> bool
+  setOneSideToExtent() -> bool
+  setSymmetricExtent() -> bool
+  setThinExtrude() -> bool
+  setTwoSidesDistanceExtent(distanceOne: ValueInput, distanceTwo: ValueInput) -> bool
+  setTwoSidesExtent() -> bool
+  setTwoSidesToExtent(toEntityOne: Base, toEntityTwo: Base, matchShape: bool) -> bool
 
 ExtrudeFeatures *collection<ExtrudeFeature>
   count: int
-  addSimple(profile: Base, distance: Base, operation: FeatureOperations) -> ExtrudeFeature
+  add(input: ExtrudeFeatureInput) -> ExtrudeFeature
+  addSimple(profile: Base, distance: ValueInput, operation: FeatureOperations) -> ExtrudeFeature
+  createInput(profile: Base, operation: FeatureOperations) -> ExtrudeFeatureInput
+  itemByName(name: str) -> ExtrudeFeature
 
 Feature : Base
+  # Base class object representing all features.
+  assemblyContext: Occurrence
+  attributes: Attributes
+  baseFeature: BaseFeature
   bodies: BRepBodies
-  isValid: bool
+  entityToken: str
+  errorOrWarningMessage: str
+  faces: BRepFaces
+  healthState: FeatureHealthStates
+  isParametric: bool
+  isSuppressed: bool
+  linkedFeatures: FeatureList
   name: str
+  parentComponent: Component
+  timelineObject: TimelineObject
   deleteMe() -> bool
+  dissolve() -> bool
+
+Features *collection<Feature>
+  arrangeFeatures: ArrangeFeatures
+  baseFeatures: BaseFeatures
+  bossFeatures: BossFeatures
+  boundaryFillFeatures: BoundaryFillFeatures
+  boxFeatures: BoxFeatures
+  chamferFeatures: ChamferFeatures
+  circularPatternFeatures: CircularPatternFeatures
+  coilFeatures: CoilFeatures
+  combineFeatures: CombineFeatures
+  copyPasteBodies: CopyPasteBodies
+  cornerClosureFeatures: CornerClosureFeatures
+  count: int
+  customFeatures: CustomFeatures
+  cutPasteBodies: CutPasteBodies
+  cylinderFeatures: CylinderFeatures
+  deleteFaceFeatures: DeleteFaceFeatures
+  deriveFeatures: DeriveFeatures
+  draftFeatures: DraftFeatures
+  embossFeatures: EmbossFeatures
+  extendFeatures: ExtendFeatures
+  extrudeFeatures: ExtrudeFeatures
+  filletFeatures: FilletFeatures
+  flangeFeatures: FlangeFeatures
+  formFeatures: FormFeatures
+  hemFeatures: HemFeatures
+  holeFeatures: HoleFeatures
+  loftFeatures: LoftFeatures
+  mergeFacesFeatures: MergeFacesFeatures
+  meshCombineFaceGroupsFeatures: MeshCombineFaceGroupsFeatures
+  meshCombineFeatures: MeshCombineFeatures
+  meshConvertFeatures: MeshConvertFeatures
+  meshGenerateFaceGroupsFeatures: MeshGenerateFaceGroupsFeatures
+  meshPlaneCutFeatures: MeshPlaneCutFeatures
+  meshReduceFeatures: MeshReduceFeatures
+  meshRemeshFeatures: MeshRemeshFeatures
+  meshRemoveFeatures: MeshRemoveFeatures
+  meshRepairFeatures: MeshRepairFeatures
+  meshReverseNormalFeatures: MeshReverseNormalFeatures
+  meshSeparateFeatures: MeshSeparateFeatures
+  meshShellFeatures: MeshShellFeatures
+  meshSmoothFeatures: MeshSmoothFeatures
+  mirrorFeatures: MirrorFeatures
+  moveFeatures: MoveFeatures
+  offsetFacesFeatures: OffsetFacesFeatures
+  offsetFeatures: OffsetFeatures
+  patchFeatures: PatchFeatures
+  pathPatternFeatures: PathPatternFeatures
+  pipeFeatures: PipeFeatures
+  rectangularPatternFeatures: RectangularPatternFeatures
+  refoldFeatures: RefoldFeatures
+  removeFeatures: RemoveFeatures
+  replaceFaceFeatures: ReplaceFaceFeatures
+  reverseNormalFeatures: ReverseNormalFeatures
+  revolveFeatures: RevolveFeatures
+  ribFeatures: RibFeatures
+  ripFeatures: RipFeatures
+  ruleFilletFeatures: RuleFilletFeatures
+  ruledSurfaceFeatures: RuledSurfaceFeatures
+  scaleFeatures: ScaleFeatures
+  shellFeatures: ShellFeatures
+  silhouetteSplitFeatures: SilhouetteSplitFeatures
+  sphereFeatures: SphereFeatures
+  splitBodyFeatures: SplitBodyFeatures
+  splitFaceFeatures: SplitFaceFeatures
+  stitchFeatures: StitchFeatures
+  surfaceDeleteFaceFeatures: SurfaceDeleteFaceFeatures
+  sweepFeatures: SweepFeatures
+  tessellateFeatures: TessellateFeatures
+  thickenFeatures: ThickenFeatures
+  threadFeatures: ThreadFeatures
+  torusFeatures: TorusFeatures
+  trimFeatures: TrimFeatures
+  unfoldFeatures: UnfoldFeatures
+  unstitchFeatures: UnstitchFeatures
+  untrimFeatures: UntrimFeatures
+  volumetricCustomFeatures: VolumetricCustomFeatures
+  volumetricModelToMeshFeatures: VolumetricModelToMeshFeatures
+  webFeatures: WebFeatures
+  createPath(curve: Base, isChain: bool) -> Path
+  itemByName(name: str) -> Feature
+
+FilletFeature : Feature
+  # Object that represents an existing fillet feature in a design.
+  edgeSets: FilletEdgeSets
+  filletFeatureType: FilletFeatureTypes
+  fullRoundFilletFaceSets: FullRoundFilletFaceSets
+  isG2: bool
+  isRollingBallCorner: bool
+  isTangentChain: bool
+  nativeObject: FilletFeature
+  ruleFilletSettings: RuleFilletSettings
+  convert(input: Base) -> bool
+  createForAssemblyContext(occurrence: Occurrence) -> FilletFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+FilletFeatureInput : Base
+  edgeSetInputs: FilletEdgeSetInputs
+  isG2: bool
+  isRollingBallCorner: bool
+  isTangentChain: bool
+  targetBaseFeature: BaseFeature
+  addChordLengthEdgeSet(edges: ObjectCollection, chordLength: ValueInput, isTangentChain: bool) -> bool
+  addConstantRadiusEdgeSet(edges: ObjectCollection, radius: ValueInput, isTangentChain: bool) -> bool
+  addVariableRadiusEdgeSet(tangentEdges: ObjectCollection, startRadius: ValueInput, endRadius: ValueInput, positions: list[ValueInput], radii: list[ValueInput]) -> bool
+
+FilletFeatures *collection<FilletFeature>
+  count: int
+  add(input: FilletFeatureInput) -> FilletFeature
+  addFullRoundFillet(input: FullRoundFilletFeatureInput) -> FilletFeature
+  addRuleFillet(input: RuleFilletFeatureInput) -> FilletFeature
+  createFullRoundFilletInput() -> FullRoundFilletFeatureInput
+  createInput() -> FilletFeatureInput
+  createRuleFilletInput() -> RuleFilletFeatureInput
+  itemByName(name: str) -> FilletFeature
+
+FlangeFeature : Feature
+  # Object that represents an existing flange feature in a design.
+  deleteMe() -> bool
+  dissolve() -> bool
+
+FlangeFeatures *collection<FlangeFeature>
+  # Collection that provides access to all of the existing flange features in a design.
+  count: int
+  itemByName(name: str) -> FlangeFeature
+
+FormFeature : Feature
+  # Object that represents an existing Form feature in a design.
+  tSplineBodies: TSplineBodies
+  deleteMe() -> bool
+  dissolve() -> bool
+  finishEdit() -> bool
+  startEdit() -> bool
+
+FormFeatures *collection<FormFeature>
+  # Collection that provides access to all of the existing Form features in a component.
+  count: int
+  add() -> FormFeature
+  itemByName(name: str) -> FormFeature
+
+FullRoundFilletFeatureInput : Base
+  faceSets: FullRoundFilletFaceSets
+  targetBaseFeature: BaseFeature
+
+HemFeature : FlangeFeature
+  # Defines a hem feature, providing methods to redefine the type of hem.
+  definition: HemFeatureDefinition
+  definitionType: HemFeatureDefinitionTypes
+  nativeObject: HemFeature
+  createForAssemblyContext(occurrence: Occurrence) -> HemFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+  redefineAsDoubleHem(gap: ValueInput, length: ValueInput, setback: ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool
+  redefineAsFlatHem(length: ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool
+  redefineAsOpenHem(length: ValueInput, gap: ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool
+  redefineAsRolledHem(radius: ValueInput, angle: ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool
+  redefineAsRopeHem(length: ValueInput, gap: ValueInput, radius: ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool
+  redefineAsTeardropHem(radius: ValueInput, length: ValueInput, gap: ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool
+
+HemFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of a hem feature.
+  setDoubleHem(edge: BRepEdge, gap: ValueInput, length: ValueInput, setback: ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool
+  setFlatHem(edge: BRepEdge, length: ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool
+  setOpenHem(edge: BRepEdge, length: ValueInput, gap: ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool
+  setRolledHem(edge: BRepEdge, radius: ValueInput, angle: ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool
+  setRopeHem(edge: BRepEdge, length: ValueInput, gap: ValueInput, radius: ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool
+  setTeardropHem(edge: BRepEdge, radius: ValueInput, length: ValueInput, gap: ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool
+
+HemFeatures *collection<HemFeature>
+  count: int
+  add(input: HemFeatureInput) -> HemFeature
+  createHemFeatureInput() -> HemFeatureInput
+  itemByName(name: str) -> HemFeature
+
+HoleFeature : Feature
+  # Object that represents an existing hole feature in a design.
+  clearanceHoleInfo: ClearanceHoleInfo
+  counterboreDepth: ModelParameter
+  counterboreDiameter: ModelParameter
+  countersinkAngle: ModelParameter
+  countersinkDiameter: ModelParameter
+  direction: Vector3D
+  endFaces: BRepFaces
+  extentDefinition: ExtentDefinition
+  holeDiameter: ModelParameter
+  holePositionDefinition: HolePositionDefinition
+  holeTapType: HoleTapTypes
+  holeType: HoleTypes
+  isDefaultDirection: bool
+  nativeObject: HoleFeature
+  participantBodies: BRepBody]
+  position: Point3D
+  sideFaces: BRepFaces
+  tappedHoleInfo: ThreadInfo
+  thread: ThreadFeature
+  tipAngle: ModelParameter
+  createForAssemblyContext(occurrence: Occurrence) -> HoleFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+  setAllExtent(direction: ExtentDirections) -> bool
+  setDistanceExtent(distance: ValueInput) -> bool
+  setOneSideToExtent() -> bool
+  setPositionAtCenter(planarEntity: Base, centerEdge: BRepEdge) -> bool
+  setPositionByPlaneAndOffsets() -> bool
+  setPositionByPoint(planarEntity: Base, point: Base) -> bool
+  setPositionBySketchPoint(sketchPoint: SketchPoint) -> bool
+  setPositionBySketchPoints(sketchPoints: ObjectCollection) -> bool
+  setPositionOnEdge(planarEntity: Base, edge: BRepEdge, position: HoleEdgePositions) -> bool
+  setToClearanceHole(clearanceHoleInfo: ClearanceHoleInfo) -> bool
+  setToCounterbore(counterboreDiameter: ValueInput, counterboreDepth: ValueInput) -> bool
+  setToCountersink(countersinkDiameter: ValueInput, countersinkAngle: ValueInput) -> bool
+  setToSimple() -> bool
+  setToSimpleHole() -> bool
+  setToTappedHole(threadInfo: ThreadInfo) -> bool
+
+HoleFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of a hole
+    feature.
+  creationOccurrence: Occurrence
+  holeTapType: HoleTapTypes
+  isDefaultDirection: bool
+  isFullLength: bool
+  isModeled: bool
+  participantBodies: BRepBody]
+  targetBaseFeature: BaseFeature
+  threadLength: ValueInput
+  threadOffset: ValueInput
+  tipAngle: ValueInput
+  setAllExtent(direction: ExtentDirections) -> bool
+  setDistanceExtent(distance: ValueInput) -> bool
+  setLengthAndOffset(length: ValueInput, offset: ValueInput) -> bool
+  setOneSideToExtent() -> bool
+  setPositionAtCenter(planarEntity: Base, centerEdge: BRepEdge) -> bool
+  setPositionByPlaneAndOffsets() -> bool
+  setPositionByPoint(planarEntity: Base, point: Base) -> bool
+  setPositionBySketchPoint(sketchPoint: SketchPoint) -> bool
+  setPositionBySketchPoints(sketchPoints: ObjectCollection) -> bool
+  setPositionOnEdge(planarEntity: Base, edge: BRepEdge, position: HoleEdgePositions) -> bool
+  setToClearanceHole(clearanceHoleInfo: ClearanceHoleInfo) -> bool
+  setToSimpleHole() -> bool
+  setToTappedHole(threadInfo: ThreadInfo) -> bool
+
+HoleFeatures *collection<HoleFeature>
+  count: int
+  add(input: HoleFeatureInput) -> HoleFeature
+  createCounterboreInput(holeDiameter: ValueInput, counterboreDiameter: ValueInput, counterboreDepth: ValueInput) -> HoleFeatureInput
+  createCountersinkInput(holeDiameter: ValueInput, countersinkDiameter: ValueInput, countersinkAngle: ValueInput) -> HoleFeatureInput
+  createSimpleInput(holeDiameter: ValueInput) -> HoleFeatureInput
+  itemByName(name: str) -> HoleFeature
+
+LoftFeature : Feature
+  # Object that represents an existing loft feature in a design.
+  centerLineOrRails: LoftCenterLineOrRails
+  endFace: BRepFace
+  endLoftEdgeAlignment: LoftEdgeAlignments
+  isClosed: bool
+  isSolid: bool
+  isTangentEdgesMerged: bool
+  loftSections: LoftSections
+  nativeObject: LoftFeature
+  operation: FeatureOperations
+  participantBodies: BRepBody]
+  sideFaces: BRepFaces
+  startFace: BRepFace
+  startLoftEdgeAlignment: LoftEdgeAlignments
+  createForAssemblyContext(occurrence: Occurrence) -> LoftFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+LoftFeatureInput : Base
+  centerLineOrRails: LoftCenterLineOrRails
+  creationOccurrence: Occurrence
+  endLoftEdgeAlignment: LoftEdgeAlignments
+  isClosed: bool
+  isSolid: bool
+  isTangentEdgesMerged: bool
+  loftSections: LoftSections
+  operation: FeatureOperations
+  participantBodies: BRepBody]
+  startLoftEdgeAlignment: LoftEdgeAlignments
+  targetBaseFeature: BaseFeature
+
+LoftFeatures *collection<LoftFeature>
+  # Collection that provides access to all of the existing loft features in a design.
+  count: int
+  add(input: LoftFeatureInput) -> LoftFeature
+  createInput(operation: FeatureOperations) -> LoftFeatureInput
+  itemByName(name: str) -> LoftFeature
+
+MergeFacesFeatureInput : Base
+  creationOccurrence: Occurrence
+  inputFaces: BRepFace]
+  isChainSelection: bool
+
+MergeFacesFeatures : Base
+  add(input: MergeFacesFeatureInput) -> bool
+  createInput(inputFaces: list[BRepFace], isChainSelection: bool) -> MergeFacesFeatureInput
+
+MeshCombineFaceGroupsFeature : MeshFeature
+  # Object that represents an existing mesh combine face groups feature in a design.
+  inputFaceGroups: FaceGroup]
+  mesh: Base
+  nativeObject: MeshCombineFaceGroupsFeature
+  createForAssemblyContext(occurrence: Occurrence) -> MeshCombineFaceGroupsFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MeshCombineFaceGroupsFeatureInput : Base
+  inputFaceGroups: FaceGroup]
+  targetBaseFeature: BaseFeature
+
+MeshCombineFaceGroupsFeatures *collection<MeshCombineFaceGroupsFeature>
+  count: int
+  add(input: MeshCombineFaceGroupsFeatureInput) -> MeshCombineFaceGroupsFeature
+  createInput(inputFaceGroups: list[FaceGroup]) -> MeshCombineFaceGroupsFeatureInput
+  itemByName(name: str) -> MeshCombineFaceGroupsFeature
+
+MeshCombineFeature : MeshFeature
+  # Object that represents an existing mesh combine feature in a design.
+  isKeepToolBodies: bool
+  isNewComponent: bool
+  meshCombineOperationType: MeshCombineOperationTypes
+  nativeObject: MeshCombineFeature
+  targetBody: MeshBody
+  toolBodies: MeshBody]
+  createForAssemblyContext(occurrence: Occurrence) -> MeshCombineFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MeshCombineFeatureInput : Base
+  algorithmType: MeshCombineAlgorithmTypes
+  isKeepToolBodies: bool
+  isNewComponent: bool
+  meshCombineOperationType: MeshCombineOperationTypes
+  targetBaseFeature: BaseFeature
+  targetBody: MeshBody
+  toolBodies: MeshBody]
+
+MeshCombineFeatures *collection<MeshCombineFeature>
+  count: int
+  add(input: MeshCombineFeatureInput) -> MeshCombineFeature
+  createInput(targetBody: MeshBody, toolBodies: list[MeshBody]) -> MeshCombineFeatureInput
+  itemByName(name: str) -> MeshCombineFeature
+
+MeshConvertFeature : Feature
+  inputBodies: MeshBody]
+  isPreprocessHoles: bool
+  meshConvertAccuracyType: MeshConvertAccuracyTypes
+  meshConvertMethodType: MeshConvertMethodTypes
+  meshConvertResolutionType: MeshConvertResolutionTypes
+  nativeObject: MeshConvertFeature
+  numberOfFaces: ModelParameter
+  createForAssemblyContext(occurrence: Occurrence) -> MeshConvertFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MeshConvertFeatureInput : Base
+  inputBodies: MeshBody]
+  isPreprocessHoles: bool
+  meshConvertAccuracyType: MeshConvertAccuracyTypes
+  meshConvertMethodType: MeshConvertMethodTypes
+  meshConvertOperationType: MeshConvertOperationTypes
+  meshConvertResolutionType: MeshConvertResolutionTypes
+  numberOfFaces: ValueInput
+  targetBaseFeature: BaseFeature
+
+MeshConvertFeatures *collection<MeshConvertFeature>
+  count: int
+  add(input: MeshConvertFeatureInput) -> MeshConvertFeature
+  createInput(inputBodies: list[MeshBody]) -> MeshConvertFeatureInput
+  itemByName(name: str) -> MeshConvertFeature
+
+MeshFeature : Feature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MeshGenerateFaceGroupsFeature : MeshFeature
+  # Object that represents an existing mesh generate face groups feature in a design.
+  angleThreshold: ModelParameter
+  boundaryTolerance: ModelParameter
+  mesh: Base
+  meshGenerateFaceGroupsMethodType: MeshGenerateFaceGroupsMethodTypes
+  minimumFaceGroupSize: ModelParameter
+  nativeObject: MeshGenerateFaceGroupsFeature
+  createForAssemblyContext(occurrence: Occurrence) -> MeshGenerateFaceGroupsFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MeshGenerateFaceGroupsFeatureInput : Base
+  angleThreshold: ValueInput
+  boundaryTolerance: ValueInput
+  mesh: Base
+  meshGenerateFaceGroupsMethodType: MeshGenerateFaceGroupsMethodTypes
+  minimumFaceGroupSize: ValueInput
+  targetBaseFeature: BaseFeature
+
+MeshGenerateFaceGroupsFeatures *collection<MeshGenerateFaceGroupsFeature>
+  count: int
+  add(input: MeshGenerateFaceGroupsFeatureInput) -> MeshGenerateFaceGroupsFeature
+  createInput(mesh: Base) -> MeshGenerateFaceGroupsFeatureInput
+  itemByName(name: str) -> MeshGenerateFaceGroupsFeature
+
+MeshPlaneCutFeature : MeshFeature
+  # Object that represents an existing mesh plane cut feature in a design.
+  isFlip: bool
+  mesh: Base
+  meshPlaneCutFillType: MeshPlaneCutFillTypes
+  meshPlaneCutType: MeshPlaneCutTypes
+  nativeObject: MeshPlaneCutFeature
+  createForAssemblyContext(occurrence: Occurrence) -> MeshPlaneCutFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MeshPlaneCutFeatureInput : Base
+  cutPlane: Base
+  isFlip: bool
+  mesh: Base
+  meshPlaneCutFillType: MeshPlaneCutFillTypes
+  meshPlaneCutType: MeshPlaneCutTypes
+  targetBaseFeature: BaseFeature
+
+MeshPlaneCutFeatures *collection<MeshPlaneCutFeature>
+  count: int
+  add(input: MeshPlaneCutFeatureInput) -> MeshPlaneCutFeature
+  createInput(mesh: Base, cutPlane: Base) -> MeshPlaneCutFeatureInput
+  itemByName(name: str) -> MeshPlaneCutFeature
+
+MeshReduceFeature : MeshFeature
+  facecount: ModelParameter
+  maximumDeviation: ModelParameter
+  mesh: Base
+  meshReduceMethodType: MeshReduceMethodTypes
+  meshReduceTargetType: MeshReduceTargetTypes
+  nativeObject: MeshReduceFeature
+  proportion: ModelParameter
+  createForAssemblyContext(occurrence: Occurrence) -> MeshReduceFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MeshReduceFeatureInput : Base
+  facecount: ValueInput
+  maximumDeviation: ValueInput
+  mesh: Base
+  meshReduceMethodType: MeshReduceMethodTypes
+  meshReduceTargetType: MeshReduceTargetTypes
+  proportion: ValueInput
+  targetBaseFeature: BaseFeature
+
+MeshReduceFeatures *collection<MeshReduceFeature>
+  count: int
+  add(input: MeshReduceFeatureInput) -> MeshReduceFeature
+  createInput(mesh: Base) -> MeshReduceFeatureInput
+  itemByName(name: str) -> MeshReduceFeature
+
+MeshRemeshFeature : MeshFeature
+  density: ModelParameter
+  isPreserveBoundariesEnabled: bool
+  isPreserveSharpEdgesEnabled: bool
+  mesh: Base
+  meshRemeshMethodType: MeshRemeshMethodTypes
+  nativeObject: MeshRemeshFeature
+  shapePreservation: ModelParameter
+  createForAssemblyContext(occurrence: Occurrence) -> MeshRemeshFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MeshRemeshFeatureInput : Base
+  density: ValueInput
+  isPreserveBoundariesEnabled: bool
+  isPreserveSharpEdgesEnabled: bool
+  mesh: Base
+  meshRemeshMethodType: MeshRemeshMethodTypes
+  shapePreservation: ValueInput
+  targetBaseFeature: BaseFeature
+
+MeshRemeshFeatures *collection<MeshRemeshFeature>
+  count: int
+  add(input: MeshRemeshFeatureInput) -> MeshRemeshFeature
+  createInput(mesh: Base) -> MeshRemeshFeatureInput
+  itemByName(name: str) -> MeshRemeshFeature
+
+MeshRemoveFeature : MeshFeature
+  # Object that represents an existing mesh remove feature in a design.
+  inputBodies: MeshBody]
+  nativeObject: MeshRemoveFeature
+  createForAssemblyContext(occurrence: Occurrence) -> MeshRemoveFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MeshRemoveFeatureInput : Base
+  inputBodies: MeshBody]
+  targetBaseFeature: BaseFeature
+
+MeshRemoveFeatures *collection<MeshRemoveFeature>
+  count: int
+  add(input: MeshRemoveFeatureInput) -> MeshRemoveFeature]
+  createInput(inputBodies: list[MeshBody]) -> MeshRemoveFeatureInput
+  itemByName(name: str) -> MeshRemoveFeature
+
+MeshRepairFeature : MeshFeature
+  density: ModelParameter
+  mesh: Base
+  meshRepairRebuildType: MeshRepairRebuildTypes
+  meshRepairType: MeshRepairTypes
+  nativeObject: MeshRepairFeature
+  offset: ModelParameter
+  createForAssemblyContext(occurrence: Occurrence) -> MeshRepairFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MeshRepairFeatureInput : Base
+  density: ValueInput
+  mesh: Base
+  meshRepairRebuildType: MeshRepairRebuildTypes
+  meshRepairType: MeshRepairTypes
+  offset: ValueInput
+  targetBaseFeature: BaseFeature
+
+MeshRepairFeatures *collection<MeshRepairFeature>
+  count: int
+  add(input: MeshRepairFeatureInput) -> MeshRepairFeature
+  createInput(mesh: Base) -> MeshRepairFeatureInput
+  itemByName(name: str) -> MeshRepairFeature
+
+MeshReverseNormalFeature : MeshFeature
+  mesh: Base
+  nativeObject: MeshReverseNormalFeature
+  createForAssemblyContext(occurrence: Occurrence) -> MeshReverseNormalFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MeshReverseNormalFeatureInput : Base
+  mesh: Base
+  targetBaseFeature: BaseFeature
+
+MeshReverseNormalFeatures *collection<MeshReverseNormalFeature>
+  count: int
+  add(input: MeshReverseNormalFeatureInput) -> MeshReverseNormalFeature
+  createInput(mesh: Base) -> MeshReverseNormalFeatureInput
+  itemByName(name: str) -> MeshReverseNormalFeature
+
+MeshSeparateFeature : MeshFeature
+  isKeepBody: bool
+  isMultipleBodies: bool
+  mesh: Base
+  meshSeparateType: MeshSeparateTypes
+  nativeObject: MeshSeparateFeature
+  createForAssemblyContext(occurrence: Occurrence) -> MeshSeparateFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MeshSeparateFeatureInput : Base
+  isKeepBody: bool
+  isMultipleBodies: bool
+  mesh: Base
+  meshSeparateType: MeshSeparateTypes
+  targetBaseFeature: BaseFeature
+
+MeshSeparateFeatures *collection<MeshSeparateFeature>
+  count: int
+  add(input: MeshSeparateFeatureInput) -> MeshSeparateFeature
+  createInput(mesh: Base) -> MeshSeparateFeatureInput
+  itemByName(name: str) -> MeshSeparateFeature
+
+MeshShellFeature : MeshFeature
+  mesh: Base
+  nativeObject: MeshShellFeature
+  thickness: ModelParameter
+  createForAssemblyContext(occurrence: Occurrence) -> MeshShellFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MeshShellFeatureInput : Base
+  mesh: Base
+  targetBaseFeature: BaseFeature
+  thickness: ValueInput
+
+MeshShellFeatures *collection<MeshShellFeature>
+  count: int
+  add(input: MeshShellFeatureInput) -> MeshShellFeature
+  createInput(mesh: Base) -> MeshShellFeatureInput
+  itemByName(name: str) -> MeshShellFeature
+
+MeshSmoothFeature : MeshFeature
+  mesh: Base
+  nativeObject: MeshSmoothFeature
+  smoothness: ModelParameter
+  createForAssemblyContext(occurrence: Occurrence) -> MeshSmoothFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MeshSmoothFeatureInput : Base
+  mesh: Base
+  smoothness: ValueInput
+  targetBaseFeature: BaseFeature
+
+MeshSmoothFeatures *collection<MeshSmoothFeature>
+  count: int
+  add(input: MeshSmoothFeatureInput) -> MeshSmoothFeature
+  createInput(mesh: Base) -> MeshSmoothFeatureInput
+  itemByName(name: str) -> MeshSmoothFeature
+
+MirrorFeature : Feature
+  # Object that represents an existing mirror feature in a design.
+  inputEntities: ObjectCollection
+  isCombine: bool
+  mirrorPlane: Base
+  nativeObject: MirrorFeature
+  patternComputeOption: PatternComputeOptions
+  patternElements: PatternElements
+  resultFeatures: ObjectCollection
+  stitchTolerance: ModelParameter
+  createForAssemblyContext(occurrence: Occurrence) -> MirrorFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MirrorFeatureInput : Base
+  inputEntities: ObjectCollection
+  isCombine: bool
+  mirrorPlane: Base
+  patternComputeOption: PatternComputeOptions
+  stitchTolerance: ValueInput
+  targetBaseFeature: BaseFeature
+
+MirrorFeatures *collection<MirrorFeature>
+  count: int
+  add(input: MirrorFeatureInput) -> MirrorFeature
+  createInput(inputEntities: ObjectCollection, mirrorPlane: Base) -> MirrorFeatureInput
+  itemByName(name: str) -> MirrorFeature
+
+MoveFeature : Feature
+  # Object that represents an existing move feature in a design.
+  definition: MoveFeatureDefinition
+  inputEntities: ObjectCollection
+  nativeObject: MoveFeature
+  transform: Matrix3D
+  createForAssemblyContext(occurrence: Occurrence) -> MoveFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+  redefineAsFreeMove(transform: Matrix3D) -> bool
+  redefineAsPointToPoint(originPoint: Base, targetPoint: Base) -> bool
+  redefineAsPointToPosition(point: Base, xDistance: ValueInput, yDistance: ValueInput, zDistance: ValueInput, isDesignSpace: bool) -> bool
+  redefineAsRotate(axisEntity: Base, angle: ValueInput) -> bool
+  redefineAsTranslateAlongEntity(linearEntity: Base, distance: ValueInput) -> bool
+  redefineAsTranslateXYZ(xDistance: ValueInput, yDistance: ValueInput, zDistance: ValueInput, isDesignSpace: bool) -> bool
+
+MoveFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of a move feature.
+  inputEntities: ObjectCollection
+  targetBaseFeature: BaseFeature
+  transform: Matrix3D
+  defineAsFreeMove(transform: Matrix3D) -> bool
+  defineAsPointToPoint(originPoint: Base, targetPoint: Base) -> bool
+  defineAsPointToPosition(point: Base, xDistance: ValueInput, yDistance: ValueInput, zDistance: ValueInput, isDesignSpace: bool) -> bool
+  defineAsRotate(axisEntity: Base, angle: ValueInput) -> bool
+  defineAsTranslateAlongEntity(linearEntity: Base, distance: ValueInput) -> bool
+  defineAsTranslateXYZ(xDistance: ValueInput, yDistance: ValueInput, zDistance: ValueInput, isDesignSpace: bool) -> bool
+
+MoveFeatures *collection<MoveFeature>
+  count: int
+  add(input: MoveFeatureInput) -> MoveFeature
+  createInput(inputEntities: ObjectCollection, transform: Matrix3D) -> MoveFeatureInput
+  createInput2(inputEntities: ObjectCollection) -> MoveFeatureInput
+  itemByName(name: str) -> MoveFeature
+
+OffsetFacesFeature : Feature
+  distance: ModelParameter
+  inputFaces: BRepFace]
+  nativeObject: OffsetFacesFeature
+  createForAssemblyContext(occurrence: Occurrence) -> OffsetFacesFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+OffsetFacesFeatureInput : Base
+  distance: ValueInput
+  faces: BRepFace]
+  targetBaseFeature: BaseFeature
+
+OffsetFacesFeatures *collection<OffsetFacesFeature>
+  count: int
+  add(input: OffsetFacesFeatureInput) -> OffsetFacesFeature
+  createInput(faces: list[BRepFace], distance: ValueInput) -> OffsetFacesFeatureInput
+  itemByName(name: str) -> OffsetFacesFeature
+
+OffsetFeature : Feature
+  # Object that represents an existing offset feature in a design.
+  distance: ModelParameter
+  entities: ObjectCollection
+  isChainSelection: bool
+  nativeObject: OffsetFeature
+  operation: FeatureOperations
+  createForAssemblyContext(occurrence: Occurrence) -> OffsetFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+  setInputEntities(entities: ObjectCollection, isChainSelection: bool) -> bool
+
+OffsetFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of an offset feature.
+  distance: ValueInput
+  entities: ObjectCollection
+  isChainSelection: bool
+  operation: FeatureOperations
+  targetBaseFeature: BaseFeature
+
+OffsetFeatures *collection<OffsetFeature>
+  count: int
+  add(input: OffsetFeatureInput) -> OffsetFeature
+  createInput(entities: ObjectCollection, distance: ValueInput, operation: FeatureOperations, isChainSelection: bool) -> OffsetFeatureInput
+  itemByName(name: str) -> OffsetFeature
+
+PatchFeature : Feature
+  # An object that represents an existing patch feature in a design.
+  boundaryCurve: Base
+  continuity: SurfaceContinuityTypes
+  groupContinuity: SurfaceContinuityTypes
+  groupIsContinuityDirectionFlipped: bool
+  groupWeight: float
+  interiorRailsAndPoints: ObjectCollection
+  isGroupEdges: bool
+  nativeObject: PatchFeature
+  operation: FeatureOperations
+  createForAssemblyContext(occurrence: Occurrence) -> PatchFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+  getContinuity() -> bool
+  setContinuity(continuity: list[int], weight: list[float], isContinuityDirectionFlipped: list[bool]) -> bool
+
+PatchFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of a patch feature.
+  boundaryCurve: Base
+  continuity: SurfaceContinuityTypes
+  creationOccurrence: Occurrence
+  groupContinuity: SurfaceContinuityTypes
+  groupIsContinuityDirectionFlipped: bool
+  groupWeight: float
+  interiorRailsAndPoints: ObjectCollection
+  isGroupEdges: bool
+  operation: FeatureOperations
+  targetBaseFeature: BaseFeature
+  getContinuity() -> bool
+  setContinuity(continuity: list[int], weight: list[float], isContinuityDirectionFlipped: list[bool]) -> bool
+
+PatchFeatures *collection<PatchFeature>
+  count: int
+  add(input: PatchFeatureInput) -> PatchFeature
+  createInput(boundaryCurve: Base, operation: FeatureOperations) -> PatchFeatureInput
+  itemByName(name: str) -> PatchFeature
+
+PathPatternFeature : Feature
+  # Object that represents an existing path pattern feature in a design.
+  distance: ModelParameter
+  inputEntities: ObjectCollection
+  isFlipDirection: bool
+  isOrientationAlongPath: bool
+  isSymmetric: bool
+  nativeObject: PathPatternFeature
+  path: Path
+  patternComputeOption: PatternComputeOptions
+  patternDistanceType: PatternDistanceType
+  patternElements: PatternElements
+  patternEntityType: PatternEntityTypes
+  quantity: ModelParameter
+  resultFeatures: ObjectCollection
+  startPoint: float
+  suppressedElementsIds: list[int]
+  createForAssemblyContext(occurrence: Occurrence) -> PathPatternFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+PathPatternFeatureInput : Base
+  distance: ValueInput
+  inputEntities: ObjectCollection
+  isFlipDirection: bool
+  isOrientationAlongPath: bool
+  isSymmetric: bool
+  path: Path
+  patternComputeOption: PatternComputeOptions
+  patternDistanceType: PatternDistanceType
+  quantity: ValueInput
+  startPoint: float
+  targetBaseFeature: BaseFeature
+
+PathPatternFeatures *collection<PathPatternFeature>
+  count: int
+  add(input: PathPatternFeatureInput) -> PathPatternFeature
+  createInput(inputEntities: ObjectCollection, path: Path, quantity: ValueInput, distance: ValueInput, patternDistanceType: PatternDistanceType) -> PathPatternFeatureInput
+  itemByName(name: str) -> PathPatternFeature
+
+PipeFeature : Feature
+  # Object that represents an existing pipe feature in a design.
+  distanceOne: ModelParameter
+  distanceTwo: ModelParameter
+  endFaces: BRepFaces
+  isHollow: bool
+  nativeObject: PipeFeature
+  operation: FeatureOperations
+  participantBodies: BRepBody]
+  path: Path
+  sectionSize: ModelParameter
+  sectionThickness: ModelParameter
+  sectionType: PipeSectionTypes
+  sideFaces: BRepFaces
+  startFaces: BRepFaces
+  createForAssemblyContext(occurrence: Occurrence) -> PipeFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+  setThickness(value: ValueInput) -> bool
+
+PipeFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of a Pipe
+    feature.
+  creationOccurrence: Occurrence
+  distanceOne: ValueInput
+  distanceTwo: ValueInput
+  isHollow: bool
+  operation: FeatureOperations
+  participantBodies: BRepBody]
+  path: Path
+  sectionSize: ValueInput
+  sectionThickness: ValueInput
+  sectionType: PipeSectionTypes
+  targetBaseFeature: BaseFeature
+
+PipeFeatures *collection<PipeFeature>
+  # Collection that provides access to all of the existing Pipe features in a design.
+  count: int
+  add(input: PipeFeatureInput) -> PipeFeature
+  createInput(path: Path, operation: FeatureOperations) -> PipeFeatureInput
+  itemByName(name: str) -> PipeFeature
+
+RectangularPatternFeature : Feature
+  # Object that represents an existing rectangular pattern feature in a design.
+  directionOne: Vector3D
+  directionOneEntity: Base
+  directionTwo: Vector3D
+  directionTwoEntity: Base
+  distanceOne: ModelParameter
+  distanceTwo: ModelParameter
+  inputEntities: ObjectCollection
+  isSymmetricInDirectionOne: bool
+  isSymmetricInDirectionTwo: bool
+  nativeObject: RectangularPatternFeature
+  patternComputeOption: PatternComputeOptions
+  patternDistanceType: PatternDistanceType
+  patternElements: PatternElements
+  patternEntityType: PatternEntityTypes
+  quantityOne: ModelParameter
+  quantityTwo: ModelParameter
+  resultFeatures: ObjectCollection
+  suppressedElementsIds: list[int]
+  createForAssemblyContext(occurrence: Occurrence) -> RectangularPatternFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+RectangularPatternFeatureInput : Base
+  directionOne: Vector3D
+  directionOneEntity: Base
+  directionTwo: Vector3D
+  directionTwoEntity: Base
+  distanceOne: ValueInput
+  distanceTwo: ValueInput
+  inputEntities: ObjectCollection
+  isSymmetricInDirectionOne: bool
+  isSymmetricInDirectionTwo: bool
+  patternComputeOption: PatternComputeOptions
+  patternDistanceType: PatternDistanceType
+  quantityOne: ValueInput
+  quantityTwo: ValueInput
+  targetBaseFeature: BaseFeature
+  setDirectionTwo(directionTwoEntity: Base, quantityTwo: ValueInput, distanceTwo: ValueInput) -> bool
+
+RectangularPatternFeatures *collection<RectangularPatternFeature>
+  count: int
+  add(input: RectangularPatternFeatureInput) -> RectangularPatternFeature
+  createInput(inputEntities: ObjectCollection, directionOneEntity: Base, quantityOne: ValueInput, distanceOne: ValueInput, patternDistanceType: PatternDistanceType) -> RectangularPatternFeatureInput
+  itemByName(name: str) -> RectangularPatternFeature
+
+RefoldFeature : Feature
+  # Object that represents an existing refold feature in a design.
+  deleteMe() -> bool
+  dissolve() -> bool
+
+RefoldFeatures *collection<RefoldFeature>
+  # Collection that provides access to all of the existing refold features in a design.
+  count: int
+  itemByName(name: str) -> RefoldFeature
+
+RemoveFeature : Feature
+  # Object that represents an existing Remove feature in a design.
+  itemToRemove: Base
+  nativeObject: RemoveFeature
+  createForAssemblyContext(occurrence: Occurrence) -> RemoveFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+RemoveFeatures *collection<RemoveFeature>
+  count: int
+  add(itemToRemove: Base) -> RemoveFeature
+  itemByName(name: str) -> RemoveFeature
+
+ReplaceFaceFeature : Feature
+  # Object that represents an existing replace face feature in a design.
+  isTangentChain: bool
+  nativeObject: ReplaceFaceFeature
+  targetFaces: Base
+  createForAssemblyContext(occurrence: Occurrence) -> ReplaceFaceFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+  setInputEntities(sourceFaces: ObjectCollection, isTangentChain: bool) -> bool
+
+ReplaceFaceFeatureInput : Base
+  isTangentChain: bool
+  sourceFaces: ObjectCollection
+  targetBaseFeature: BaseFeature
+  targetFaces: Base
+
+ReplaceFaceFeatures *collection<ReplaceFaceFeature>
+  count: int
+  add(input: ReplaceFaceFeatureInput) -> ReplaceFaceFeature
+  createInput(sourceFaces: ObjectCollection, isTangentChain: bool, targetFaces: Base) -> ReplaceFaceFeatureInput
+  itemByName(name: str) -> ReplaceFaceFeature
+
+ReverseNormalFeature : Feature
+  # Object that represents an existing Reverse Normal feature in a design.
+  nativeObject: ReverseNormalFeature
+  surfaces: ObjectCollection
+  createForAssemblyContext(occurrence: Occurrence) -> ReverseNormalFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+ReverseNormalFeatures *collection<ReverseNormalFeature>
+  count: int
+  add(surfaces: ObjectCollection) -> ReverseNormalFeature
+  itemByName(name: str) -> ReverseNormalFeature
+
+RevolveFeature : Feature
+  # Object that represents an existing revolve feature in a design.
+  axis: Base
+  endFaces: BRepFaces
+  extentDefinition: ExtentDefinition
+  isProjectAxis: bool
+  isSolid: bool
+  nativeObject: RevolveFeature
+  operation: FeatureOperations
+  participantBodies: BRepBody]
+  profile: Base
+  sideFaces: BRepFaces
+  startFaces: BRepFaces
+  createForAssemblyContext(occurrence: Occurrence) -> RevolveFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+  setAngleExtent(isSymmetric: bool, angle: ValueInput) -> bool
+  setOneSideToExtent() -> bool
+  setTwoSideAngleExtent(angleOne: ValueInput, angleTwo: ValueInput) -> bool
+  setTwoSidesToExtent(toEntityOne: Base, toEntityTwo: Base) -> bool
+
+RevolveFeatureInput : Base
+  axis: Base
+  creationOccurrence: Occurrence
+  isProjectAxis: bool
+  isSolid: bool
+  operation: FeatureOperations
+  participantBodies: BRepBody]
+  profile: Base
+  targetBaseFeature: BaseFeature
+  setAngleExtent(isSymmetric: bool, angle: ValueInput) -> bool
+  setOneSideToExtent() -> bool
+  setTwoSideAngleExtent(angleOne: ValueInput, angleTwo: ValueInput) -> bool
+  setTwoSideToExtent(toEntityOne: Base, toEntityTwo: Base) -> bool
+
+RevolveFeatures *collection<RevolveFeature>
+  count: int
+  add(input: RevolveFeatureInput) -> RevolveFeature
+  createInput(profile: Base, axis: Base, operation: FeatureOperations) -> RevolveFeatureInput
+  itemByName(name: str) -> RevolveFeature
+
+RibFeature : Feature
+  # Object that represents an existing Rib feature in a design.
+  deleteMe() -> bool
+  dissolve() -> bool
+
+RibFeatures *collection<RibFeature>
+  # Collection that provides access to all of the existing rib features in a design.
+  count: int
+  itemByName(name: str) -> RibFeature
+
+RipFeature : Feature
+  # Object that represents an existing Rip feature in a design.
+  definition: RipFeatureDefinition
+  definitionType: RipFeatureDefinitionTypes
+  nativeObject: RipFeature
+  createForAssemblyContext(occurrence: Occurrence) -> RipFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+  redefineToAlongEdge(edge: BRepEdge, gapDistance: ValueInput) -> bool
+  redefineToBetweenPoints() -> bool
+  setByFace(face: BRepFace) -> bool
+
+RipFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of a Rip feature.
+  setAlongEdge(edge: BRepEdge, gapDistance: ValueInput) -> bool
+  setBetweenPoints() -> bool
+  setByFace(face: BRepFace) -> bool
+
+RipFeatures *collection<RipFeature>
+  # Collection that provides access to all of the existing Rip features in a design.
+  count: int
+  add(input: RipFeatureInput) -> RipFeature
+  createRipFeatureInput() -> RipFeatureInput
+  itemByName(name: str) -> RipFeature
+
+RuleFilletFeature : Feature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+RuleFilletFeatureInput : Base
+  asymmetricOffsetOne: ValueInput
+  asymmetricOffsetTwo: ValueInput
+  facesOrFeatures: Base]
+  facesOrFeaturesOne: Base]
+  facesOrFeaturesTwo: Base]
+  isRollingBallCorner: bool
+  radius: ValueInput
+  ruleType: RuleFilletRuleTypes
+  targetBaseFeature: BaseFeature
+  topologyType: RuleFilletTopologyTypes
+  setAsymmetricOffsets(offsetOne: ValueInput, offsetTwo: ValueInput) -> bool
+  setByAllEdges(facesOrFeatures: list[Base]) -> bool
+  setByBetweenFacesOrFeatures(facesOrFeaturesOne: list[Base], facesOrFeaturesTwo: list[Base]) -> bool
+
+RuleFilletFeatures *collection<RuleFilletFeature>
+  count: int
+  itemByName(name: str) -> RuleFilletFeature
+
+RuledSurfaceFeature : Feature
+  # Object that represents an existing RuledSurface feature in a design.
+  alternateFace: bool
+  angle: ModelParameter
+  cornerType: RuledSurfaceCornerTypes
+  direction: Base
+  distance: ModelParameter
+  nativeObject: RuledSurfaceFeature
+  profile: Base
+  ruledSurfaceType: RuledSurfaceTypes
+  createForAssemblyContext(occurrence: Occurrence) -> RuledSurfaceFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+RuledSurfaceFeatureInput : Base
+  alternateFace: bool
+  angle: ValueInput
+  cornerType: RuledSurfaceCornerTypes
+  creationOccurrence: Occurrence
+  direction: Base
+  distance: ValueInput
+  operation: FeatureOperations
+  profile: Base
+  ruledSurfaceType: RuledSurfaceTypes
+  targetBaseFeature: BaseFeature
+
+RuledSurfaceFeatures *collection<RuledSurfaceFeature>
+  count: int
+  add(input: RuledSurfaceFeatureInput) -> RuledSurfaceFeature
+  createInput() -> RuledSurfaceFeatureInput
+  itemByName(name: str) -> RuledSurfaceFeature
+
+ScaleFeature : Feature
+  # Object that represents an existing scale feature in a design.
+  inputEntities: ObjectCollection
+  isUniform: bool
+  nativeObject: ScaleFeature
+  point: Base
+  scaleFactor: ModelParameter
+  xScale: ModelParameter
+  yScale: ModelParameter
+  zScale: ModelParameter
+  createForAssemblyContext(occurrence: Occurrence) -> ScaleFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+  setToNonUniform(xScale: ValueInput, yScale: ValueInput, zScale: ValueInput) -> bool
+  setToUniform(scaleFactor: ValueInput) -> bool
+
+ScaleFeatureInput : Base
+  inputEntities: ObjectCollection
+  isUniform: bool
+  point: Base
+  scaleFactor: ValueInput
+  targetBaseFeature: BaseFeature
+  xScale: ValueInput
+  yScale: ValueInput
+  zScale: ValueInput
+  setToNonUniform(xScale: ValueInput, yScale: ValueInput, zScale: ValueInput) -> bool
+
+ScaleFeatures *collection<ScaleFeature>
+  count: int
+  add(input: ScaleFeatureInput) -> ScaleFeature
+  createInput(inputEntities: ObjectCollection, point: Base, scaleFactor: ValueInput) -> ScaleFeatureInput
+  itemByName(name: str) -> ScaleFeature
+
+ShellFeature : Feature
+  # Object that represents an existing shell feature in a design.
+  inputEntities: ObjectCollection
+  insideThickness: ModelParameter
+  isTangentChain: bool
+  nativeObject: ShellFeature
+  outsideThickness: ModelParameter
+  shellType: ShellTypes
+  createForAssemblyContext(occurrence: Occurrence) -> ShellFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+  setInputEntities(inputEntities: ObjectCollection, isTangentChain: bool) -> bool
+  setThicknesses(insideThickness: ValueInput, outsideThickness: ValueInput) -> bool
+
+ShellFeatureInput : Base
+  creationOccurrence: Occurrence
+  inputEntities: ObjectCollection
+  insideThickness: ValueInput
+  isTangentChain: bool
+  outsideThickness: ValueInput
+  shellType: ShellTypes
+  targetBaseFeature: BaseFeature
+
+ShellFeatures *collection<ShellFeature>
+  count: int
+  add(input: ShellFeatureInput) -> ShellFeature
+  createInput(inputEntities: ObjectCollection, isTangentChain: bool) -> ShellFeatureInput
+  itemByName(name: str) -> ShellFeature
+
+SilhouetteSplitFeature : Feature
+  # Object that represents an existing silhouette split feature in a design.
+  nativeObject: SilhouetteSplitFeature
+  operation: SilhouetteSplitOperations
+  targetBody: BRepBody
+  viewDirection: Base
+  createForAssemblyContext(occurrence: Occurrence) -> SilhouetteSplitFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+SilhouetteSplitFeatureInput : Base
+  operation: SilhouetteSplitOperations
+  targetBaseFeature: BaseFeature
+  targetBody: BRepBody
+  viewDirection: Base
+
+SilhouetteSplitFeatures *collection<SilhouetteSplitFeature>
+  count: int
+  add(input: SilhouetteSplitFeatureInput) -> SilhouetteSplitFeature
+  createInput(viewDirection: Base, targetBody: BRepBody, operation: SilhouetteSplitOperations) -> SilhouetteSplitFeatureInput
+  itemByName(name: str) -> SilhouetteSplitFeature
+
+SphereFeature : Feature
+  # Object that represents an existing sphere feature in a design.
+  deleteMe() -> bool
+  dissolve() -> bool
+
+SphereFeatures *collection<SphereFeature>
+  # Collection that provides access to all of the existing torus features in a design.
+  count: int
+  itemByName(name: str) -> SphereFeature
+
+SplitBodyFeature : Feature
+  # Object that represents an existing split body feature in a design.
+  isSplittingToolExtended: bool
+  nativeObject: SplitBodyFeature
+  splitBodies: ObjectCollection
+  splittingTool: Base
+  createForAssemblyContext(occurrence: Occurrence) -> SplitBodyFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+  setSplittingTool(splittingTool: Base, isSplittingToolExtended: bool) -> bool
+
+SplitBodyFeatureInput : Base
+  isSplittingToolExtended: bool
+  splitBodies: Base
+  splittingTool: Base
+  targetBaseFeature: BaseFeature
+
+SplitBodyFeatures *collection<SplitBodyFeature>
+  count: int
+  add(input: SplitBodyFeatureInput) -> SplitBodyFeature
+  createInput(splitBodies: Base, splittingTool: Base, isSplittingToolExtended: bool) -> SplitBodyFeatureInput
+  itemByName(name: str) -> SplitBodyFeature
+
+SplitFaceFeature : Feature
+  # Object that represents an existing split face feature in a design.
+  directionEntity: Base
+  facesToSplit: ObjectCollection
+  isSplittingToolExtended: bool
+  nativeObject: SplitFaceFeature
+  splitType: SplitFaceSplitTypes
+  splittingTool: ObjectCollection
+  createForAssemblyContext(occurrence: Occurrence) -> SplitFaceFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+  setAsAlongVectorSplitType(splittingTool: Base, directionEntity: Base) -> bool
+  setAsClosestPointSplitType(splittingTool: Base) -> bool
+  setAsSurfaceIntersectionSplitType(splittingTool: Base, isSplittingToolExtended: bool) -> bool
+  setSplittingTool(splittingTool: Base, isSplittingToolExtended: bool) -> bool
+
+SplitFaceFeatureInput : Base
+  facesToSplit: ObjectCollection
+  isSplittingToolExtended: bool
+  splitType: SplitFaceSplitTypes
+  splittingTool: Base
+  targetBaseFeature: BaseFeature
+  setAlongVectorSplitType(directionEntity: Base) -> bool
+  setClosestPointSplitType() -> bool
+  setSurfaceIntersectionSplitType(isSplittingToolExtended: bool) -> bool
+
+SplitFaceFeatures *collection<SplitFaceFeature>
+  count: int
+  add(input: SplitFaceFeatureInput) -> SplitFaceFeature
+  createInput(facesToSplit: ObjectCollection, splittingTool: Base, isSplittingToolExtended: bool) -> SplitFaceFeatureInput
+  itemByName(name: str) -> SplitFaceFeature
+
+StitchFeature : Feature
+  # Object that represents an existing stitch feature in a design.
+  nativeObject: StitchFeature
+  operation: FeatureOperations
+  stitchSurfaces: ObjectCollection
+  tolerance: ModelParameter
+  createForAssemblyContext(occurrence: Occurrence) -> StitchFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+StitchFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of a stitch feature.
+  operation: FeatureOperations
+  stitchSurfaces: ObjectCollection
+  targetBaseFeature: BaseFeature
+  tolerance: ValueInput
+
+StitchFeatures *collection<StitchFeature>
+  count: int
+  add(input: StitchFeatureInput) -> StitchFeature
+  createInput() -> StitchFeatureInput
+  itemByName(name: str) -> StitchFeature
+
+SurfaceDeleteFaceFeature : Feature
+  deletedFaces: BRepFace]
+  nativeObject: SurfaceDeleteFaceFeature
+  createForAssemblyContext(occurrence: Occurrence) -> SurfaceDeleteFaceFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+SurfaceDeleteFaceFeatures *collection<SurfaceDeleteFaceFeature>
+  count: int
+  add(facesToDelete: Base) -> SurfaceDeleteFaceFeature
+  itemByName(name: str) -> SurfaceDeleteFaceFeature
+
+SweepFeature : Feature
+  # Object that represents an existing sweep feature in a design.
+  distanceOne: ModelParameter
+  distanceTwo: ModelParameter
+  endFaces: BRepFaces
+  extent: SweepExtentTypes
+  guideRail: Path
+  guideSurfaces: BRepFace]
+  isChainSelection: bool
+  isDirectionFlipped: bool
+  isSolid: bool
+  nativeObject: SweepFeature
+  operation: FeatureOperations
+  orientation: SweepOrientationTypes
+  participantBodies: BRepBody]
+  path: Path
+  profile: Base
+  profileScaling: SweepProfileScalingOptions
+  sideFaces: BRepFaces
+  solidAlignedAxis: Base
+  solidBody: BRepBody
+  solidOrientation: SweepSolidOrientationTypes
+  solidTwistAxis: Base
+  startFaces: BRepFaces
+  taperAngle: ModelParameter
+  twistAngle: ModelParameter
+  createForAssemblyContext(occurrence: Occurrence) -> SweepFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+SweepFeatureInput : Base
+  creationOccurrence: Occurrence
+  distanceOne: ValueInput
+  distanceTwo: ValueInput
+  extent: SweepExtentTypes
+  guideRail: Path
+  guideSurfaces: BRepFace]
+  isChainSelection: bool
+  isDirectionFlipped: bool
+  isSolid: bool
+  operation: FeatureOperations
+  orientation: SweepOrientationTypes
+  participantBodies: BRepBody]
+  path: Path
+  profile: Base
+  profileScaling: SweepProfileScalingOptions
+  solidAlignedAxis: Base
+  solidBody: BRepBody
+  solidOrientation: SweepSolidOrientationTypes
+  solidTwistAxis: Base
+  taperAngle: ValueInput
+  targetBaseFeature: BaseFeature
+  twistAngle: ValueInput
+
+SweepFeatures *collection<SweepFeature>
+  count: int
+  add(input: SweepFeatureInput) -> SweepFeature
+  createInput(profile: Base, path: Path, operation: FeatureOperations) -> SweepFeatureInput
+  createInputForSolid(solidBody: BRepBody, path: Path, operation: FeatureOperations) -> SweepFeatureInput
+  itemByName(name: str) -> SweepFeature
+
+TessellateFeature : MeshFeature
+  # Object that represents an existing tessellate feature in a design.
+  aspectRatio: ModelParameter
+  createQuads: bool
+  inputBodies: BRepBody]
+  maximumEdgeLength: ModelParameter
+  nativeObject: TessellateFeature
+  normalDeviation: ModelParameter
+  surfaceDeviation: ModelParameter
+  tessellateRefinementType: TessellateRefinementTypes
+  createForAssemblyContext(occurrence: Occurrence) -> TessellateFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+TessellateFeatureInput : Base
+  aspectRatio: ValueInput
+  createQuads: bool
+  inputBodies: BRepBody]
+  maximumEdgeLength: ValueInput
+  normalDeviation: ValueInput
+  surfaceDeviation: ValueInput
+  targetBaseFeature: BaseFeature
+  tessellateRefinementType: TessellateRefinementTypes
+
+TessellateFeatures *collection<TessellateFeature>
+  count: int
+  add(input: TessellateFeatureInput) -> TessellateFeature
+  createInput(bodies: list[BRepBody]) -> TessellateFeatureInput
+  itemByName(name: str) -> TessellateFeature
+
+ThickenFeature : Feature
+  # Object that represents an existing Thicken feature in a design.
+  inputFaces: ObjectCollection
+  isChainSelection: bool
+  isSymmetric: bool
+  nativeObject: ThickenFeature
+  operation: FeatureOperations
+  thickenType: ThickenTypes
+  thickness: ModelParameter
+  createForAssemblyContext(occurrence: Occurrence) -> ThickenFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+  setInputEntities(inputFaces: ObjectCollection, isChainSelection: bool) -> bool
+
+ThickenFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of a Thicken feature.
+  creationOccurrence: Occurrence
+  inputFaces: ObjectCollection
+  isChainSelection: bool
+  isSymmetric: bool
+  operation: FeatureOperations
+  targetBaseFeature: BaseFeature
+  thickenType: ThickenTypes
+  thickness: ValueInput
+
+ThickenFeatures *collection<ThickenFeature>
+  count: int
+  add(input: ThickenFeatureInput) -> ThickenFeature
+  createInput(inputFaces: ObjectCollection, thickness: ValueInput, isSymmetric: bool, operation: FeatureOperations, isChainSelection: bool) -> ThickenFeatureInput
+  itemByName(name: str) -> ThickenFeature
+
+ThreadFeature : Feature
+  hole: HoleFeature
+  inputCylindricalFace: BRepFace
+  inputCylindricalFaces: ObjectCollection
+  isFullLength: bool
+  isModeled: bool
+  isRightHanded: bool
+  nativeObject: ThreadFeature
+  threadInfo: ThreadInfo
+  threadLength: ModelParameter
+  threadLocation: ThreadLocations
+  threadOffset: ModelParameter
+  createForAssemblyContext(occurrence: Occurrence) -> ThreadFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+  setThreadOffsetLength(threadOffset: ValueInput, threadLength: ValueInput, threadLocation: ThreadLocations) -> bool
+
+ThreadFeatureInput : Base
+  inputCylindricalFace: BRepFace
+  inputCylindricalFaces: ObjectCollection
+  isFullLength: bool
+  isModeled: bool
+  isRightHanded: bool
+  targetBaseFeature: BaseFeature
+  threadInfo: ThreadInfo
+  threadLength: ValueInput
+  threadLocation: ThreadLocations
+  threadOffset: ValueInput
+
+ThreadFeatures *collection<ThreadFeature>
+  count: int
+  threadDataQuery: ThreadDataQuery
+  add(input: ThreadFeatureInput) -> ThreadFeature
+  createInput(inputCylindricalFaces: Base, threadInfo: ThreadInfo) -> ThreadFeatureInput
+  createThreadInfo(isInternal: bool, threadType: str, threadDesignation: str, threadClass: str) -> ThreadInfo
+  itemByName(name: str) -> ThreadFeature
+
+TorusFeature : Feature
+  # Object that represents an existing torus feature in a design.
+  deleteMe() -> bool
+  dissolve() -> bool
+
+TorusFeatures *collection<TorusFeature>
+  # Collection that provides access to all of the existing torus features in a design.
+  count: int
+  itemByName(name: str) -> TorusFeature
+
+TrimFeature : Feature
+  # Object that represents an existing trim feature in a design.
+  bRepCells: BRepCells
+  nativeObject: TrimFeature
+  trimTool: Base
+  applyCellChanges() -> bool
+  createForAssemblyContext(occurrence: Occurrence) -> TrimFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+TrimFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of a TrimFeatureInput.
+  bRepCells: BRepCells
+  targetBaseFeature: BaseFeature
+  trimTool: Base
+  cancel() -> bool
+
+TrimFeatures *collection<TrimFeature>
+  count: int
+  add(input: TrimFeatureInput) -> TrimFeature
+  createInput(trimTool: Base) -> TrimFeatureInput
+  itemByName(name: str) -> TrimFeature
+
+UnfoldFeature : Feature
+  # Object that represents an existing unfold feature in a design.
+  deleteMe() -> bool
+  dissolve() -> bool
+
+UnfoldFeatures *collection<UnfoldFeature>
+  # Collection that provides access to all of the existing unfold features in a design.
+  count: int
+  itemByName(name: str) -> UnfoldFeature
+
+UnstitchFeature : Feature
+  # Object that represents an existing Unstitch feature in a design.
+  inputFaces: ObjectCollection
+  isChainSelection: bool
+  nativeObject: UnstitchFeature
+  createForAssemblyContext(occurrence: Occurrence) -> UnstitchFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+  setInputFaces(faces: ObjectCollection, isChainSelection: bool) -> bool
+
+UnstitchFeatures *collection<UnstitchFeature>
+  count: int
+  add(faces: ObjectCollection, isChainSelection: bool) -> UnstitchFeature
+  itemByName(name: str) -> UnstitchFeature
+
+UntrimFeature : Feature
+  # Object that represents an existing Untrim feature in a design.
+  extensionDistance: ModelParameter
+  facesToUntrim: BRepFace]
+  loopsToUntrim: BRepLoop]
+  nativeObject: UntrimFeature
+  untrimLoopType: UntrimLoopTypes
+  createForAssemblyContext(occurrence: Occurrence) -> UntrimFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+  redefineLoops(loops: list[BRepLoop]) -> bool
+  redefineLoopsFromFaces(faces: list[BRepFace], untrimLoopType: UntrimLoopTypes) -> bool
+
+UntrimFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of an Untrim feature.
+  extensionDistance: ValueInput
+  facesToUntrim: BRepFace]
+  loopsToUntrim: BRepLoop]
+  untrimLoopType: UntrimLoopTypes
+  setLoops(loops: list[BRepLoop]) -> bool
+  setLoopsFromFaces(faces: list[BRepFace], untrimLoopType: UntrimLoopTypes) -> bool
+
+UntrimFeatures *collection<UntrimFeature>
+  count: int
+  add(input: UntrimFeatureInput) -> UntrimFeature
+  createInputFromFaces() -> UntrimFeatureInput
+  createInputFromLoops() -> UntrimFeatureInput
+  itemByName(name: str) -> UntrimFeature
+
+VolumetricCustomFeature : Feature
+  # Object that represents an existing volumetric custom feature in a design.
+  nativeObject: VolumetricCustomFeature
+  volumetricModel: Base
+  createForAssemblyContext(occurrence: Occurrence) -> VolumetricCustomFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+VolumetricCustomFeatureInput : Base
+  # An input object for creating a volumetric custom feature.
+  boundaryBody: Base
+
+VolumetricCustomFeatures *collection<VolumetricCustomFeature>
+  count: int
+  add(input: VolumetricCustomFeatureInput) -> VolumetricCustomFeature
+  createInput(boundaryBody: Base) -> VolumetricCustomFeatureInput
+  itemByName(name: str) -> VolumetricCustomFeature
+
+VolumetricModelToMeshFeature : Feature
+  # Object that represents a model to mesh feature.
+  elementSize: ModelParameter
+  isComputeSuspended: bool
+  isSmallShellsRemoved: bool
+  isVolumetricModelRemoved: bool
+  meshBody: MeshBody
+  meshingApproach: VolumetricMeshingApproachTypes
+  nativeObject: VolumetricModelToMeshFeature
+  refinementType: VolumetricMeshRefinementTypes
+  smallShellThreshold: ModelParameter
+  volumetricModel: Base
+  createForAssemblyContext(occurrence: Occurrence) -> VolumetricModelToMeshFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+VolumetricModelToMeshFeatureInput : Base
+  # An input object for creating a volumetric model to mesh feature.
+  elementSize: ValueInput
+  isComputeSuspended: bool
+  isSmallShellsRemoved: bool
+  isVolumetricModelRemoved: bool
+  meshingApproach: VolumetricMeshingApproachTypes
+  refinementType: VolumetricMeshRefinementTypes
+  smallShellThreshold: ValueInput
+  volumetricModel: Base
+
+VolumetricModelToMeshFeatures *collection<VolumetricModelToMeshFeature>
+  count: int
+  add(input: VolumetricModelToMeshFeatureInput) -> VolumetricModelToMeshFeature
+  createInput(volumetricModel: Base) -> VolumetricModelToMeshFeatureInput
+  itemByName(name: str) -> VolumetricModelToMeshFeature
+
+WebFeature : Feature
+  # Object that represents an existing web feature in a design.
+  deleteMe() -> bool
+  dissolve() -> bool
+
+WebFeatures *collection<WebFeature>
+  # Collection that provides access to all of the existing web features in a design.
+  count: int
+  itemByName(name: str) -> WebFeature

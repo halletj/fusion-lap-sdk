@@ -1,1 +1,901 @@
 # fusion-bodies.lap
+
+[types]
+BRepConvertOptions: ProceduralToNURBSConversion | AnalyticsToNURBSConversion | PlanesToNURBSConversion | SplitPeriodicFacesConversion
+BRepEntityTypes: BRepBodyEntityType | BRepFaceEntityType | BRepEdgeEntityType | BRepVertexEntityType
+MeshCombineAlgorithmTypes: LegacyMeshCombineAlgorithmType | EnhancedMeshCombineAlgorithmType
+MeshCombineOperationTypes: JoinMeshCombineType | CutMeshCombineType | IntersectMeshCombineType | MergeMeshCombineType
+MeshConvertAccuracyTypes: LowMeshConvertAccuracyType | MediumMeshConvertAccuracyType | HighMeshConvertAccuracyType | PreciseMeshConvertAccuracyType
+MeshConvertMethodTypes: FacetedMeshConvertMethodType | PrismaticMeshConvertMethodType | OrganicMeshConvertMethodType
+MeshConvertOperationTypes: ParametricFeatureMeshConvertOperationType | BaseFeatureMeshConvertOperationType
+MeshConvertResolutionTypes: ByAccuracyMeshConvertResolutionType | ByFacetNumberMeshConvertResolutionType
+MeshGenerateFaceGroupsMethodTypes: FastGenerateFaceGroupsType | AccurateGenerateFaceGroupsType
+MeshPlaneCutFillTypes: NoFillMeshPlaneCutFillType | MinimalMeshPlaneCutFillType | UniformMeshPlaneCutFillType
+MeshPlaneCutTypes: TrimMeshPlaneCutType | SplitBodyMeshPlaneCutType | SplitFacesMeshPlaneCutType
+MeshReduceMethodTypes: AdaptiveReduceType | UniformReduceType
+MeshReduceTargetTypes: MaximumDeviationMeshReduceTargetType | ProportionMeshReduceTargetType | FaceCountMeshReduceTargetType
+MeshRefinementSettings: MeshRefinementHigh | MeshRefinementMedium | MeshRefinementLow | MeshRefinementCustom
+MeshRemeshMethodTypes: AdaptiveRemeshType | UniformRemeshType
+MeshRepairRebuildTypes: FastMeshRepairRebuildType | PreserveSharpEdgesMeshRepairRebuildType | AccurateMeshRepairRebuildType | BlockyMeshRepairRebuildType | AdaptiveMeshRepairRebuildType | AdaptivePreserveSharpEdgesMeshRepairRebuildType
+MeshRepairTypes: CloseHolesMeshRepairType | StitchAndRemoveMeshRepairType | WrapMeshRepairType | RebuildMeshRepairType
+MeshSeparateTypes: ShellMeshSeparateType | FaceGroupMeshSeparateType
+MeshUnits: CentimeterMeshUnit | MillimeterMeshUnit | MeterMeshUnit | InchMeshUnit | FootMeshUnit
+
+[classes]
+BRepBodies *collection<BRepBody>
+  # The BRepBodies collection provides access to all of the B-Rep
+    bodies within a component.
+  count: int
+  add() -> BRepBody
+  itemByName(name: str) -> BRepBody
+
+BRepBody : Base
+  # Represents a B-Rep (Boundary Representation) body.
+  appearance: Appearance
+  appearanceSourceType: AppearanceSourceTypes
+  area: float
+  assemblyContext: Occurrence
+  attributes: Attributes
+  baseFeature: BaseFeature
+  boundingBox: BoundingBox3D
+  concaveEdges: BRepEdges
+  convexEdges: BRepEdges
+  deriveFeature: DeriveFeature
+  edges: BRepEdges
+  entityToken: str
+  faces: BRepFaces
+  isDerived: bool
+  isLightBulbOn: bool
+  isSelectable: bool
+  isSheetMetal: bool
+  isSolid: bool
+  isTemporary: bool
+  isTransient: bool
+  isVisible: bool
+  lumps: BRepLumps
+  material: Material
+  meshManager: MeshManager
+  name: str
+  nativeObject: BRepBody
+  opacity: float
+  orientedMinimumBoundingBox: OrientedBoundingBox3D
+  parentComponent: Component
+  physicalProperties: PhysicalProperties
+  preciseBoundingBox: BoundingBox3D
+  revisionId: str
+  shells: BRepShells
+  textureMapControl: TextureMapControl
+  vertices: BRepVertices
+  visibleOpacity: float
+  volume: float
+  wires: BRepWires
+  convert(options: BRepConvertOptions) -> BRepBody
+  copy() -> bool
+  copyToComponent(target: Base) -> BRepBody
+  createComponent() -> BRepBody
+  createForAssemblyContext(occurrence: Occurrence) -> BRepBody
+  cut() -> bool
+  deleteMe() -> bool
+  findByTempId(tempId: int) -> Base]
+  getPhysicalProperties() -> PhysicalProperties
+  moveToComponent(target: Base) -> BRepBody
+  pointContainment(point: Point3D) -> PointContainment
+
+BRepBodyDefinition : Base
+  doFullHealing: bool
+  lumpDefinitions: BRepLumpDefinitions
+  outcomeInfo: list[str]
+  @static create() -> BRepBodyDefinition
+  createBody() -> BRepBody
+  createEdgeDefinitionByCurve(startVertex: BRepVertexDefinition, endVertex: BRepVertexDefinition, modelSpaceCurve: Curve3D) -> BRepEdgeDefinition
+  createVertexDefinition(position: Point3D) -> BRepVertexDefinition
+
+BRepBodyVector
+  append(x: BRepBody) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::BRepBody > >::size_type, x: BRepBody) -> void
+  back() -> BRepBody >::value_type
+  begin() -> BRepBody >::iterator
+  capacity() -> BRepBody >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> BRepBody >::iterator
+  erase() -> BRepBody >::iterator
+  front() -> BRepBody >::value_type
+  get_allocator() -> BRepBody >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> BRepBody >::value_type
+  pop_back() -> void
+  push_back(x: BRepBody) -> void
+  rbegin() -> BRepBody >::reverse_iterator
+  rend() -> BRepBody >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::BRepBody > >::size_type) -> void
+  resize() -> void
+  size() -> BRepBody >::size_type
+  swap(v: list[BRepBody]) -> void
+
+BRepCell : Base
+  # Object that represents an existing BRepCell.
+  cellBody: BRepBody
+  isSelected: bool
+  sourceTools: ObjectCollection
+
+BRepCells *collection<BRepCell>
+  count: int
+
+BRepCoEdge : Base
+  # Represents the use of a BRepEdge by a BRepFace.
+  assemblyContext: Occurrence
+  body: BRepBody
+  edge: BRepEdge
+  entityToken: str
+  evaluator: CurveEvaluator2D
+  geometry: Curve2D
+  isOpposedToEdge: bool
+  isParamReversed: bool
+  loop: BRepLoop
+  nativeObject: BRepCoEdge
+  next: BRepCoEdge
+  partner: BRepCoEdge
+  previous: BRepCoEdge
+  createForAssemblyContext(occurrence: Occurrence) -> BRepCoEdge
+
+BRepCoEdgeDefinition : Base
+  edgeDefinition: BRepEdgeDefinition
+  isOpposedToEdge: bool
+
+BRepCoEdgeDefinitions *collection<BRepCoEdgeDefinition>
+  count: int
+  add(edgeDefinition: BRepEdgeDefinition, isOpposedToEdge: bool) -> BRepCoEdgeDefinition
+
+BRepCoEdges *collection<BRepCoEdge>
+  # BRepCoEdge Collection.
+  count: int
+
+BRepEdge : Base
+  assemblyContext: Occurrence
+  attributes: Attributes
+  body: BRepBody
+  boundingBox: BoundingBox3D
+  coEdges: BRepCoEdges
+  endVertex: BRepVertex
+  entityToken: str
+  evaluator: CurveEvaluator3D
+  faces: BRepFaces
+  geometry: Curve3D
+  isDegenerate: bool
+  isParamReversed: bool
+  isTolerant: bool
+  length: float
+  nativeObject: BRepEdge
+  pointOnEdge: Point3D
+  shell: BRepShell
+  startVertex: BRepVertex
+  tangentiallyConnectedEdges: ObjectCollection
+  tempId: int
+  tolerance: float
+  createForAssemblyContext(occurrence: Occurrence) -> BRepEdge
+
+BRepEdgeDefinition : Base
+  # Represents the definition of a B-Rep edge that can be used as input to create a BRepBody.
+  associativeID: int
+  endVertex: BRepVertexDefinition
+  isMergeable: bool
+  modelSpaceCurve: Curve3D
+  startVertex: BRepVertexDefinition
+
+BRepEdgeVector
+  append(x: BRepEdge) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::BRepEdge > >::size_type, x: BRepEdge) -> void
+  back() -> BRepEdge >::value_type
+  begin() -> BRepEdge >::iterator
+  capacity() -> BRepEdge >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> BRepEdge >::iterator
+  erase() -> BRepEdge >::iterator
+  front() -> BRepEdge >::value_type
+  get_allocator() -> BRepEdge >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> BRepEdge >::value_type
+  pop_back() -> void
+  push_back(x: BRepEdge) -> void
+  rbegin() -> BRepEdge >::reverse_iterator
+  rend() -> BRepEdge >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::BRepEdge > >::size_type) -> void
+  resize() -> void
+  size() -> BRepEdge >::size_type
+  swap(v: list[BRepEdge]) -> void
+
+BRepEdges *collection<BRepEdge>
+  # BRepEdge collection.
+  count: int
+
+BRepFace : Base
+  # Represent a connected region on a single geometric surface.
+  appearance: Appearance
+  appearanceSourceType: AppearanceSourceTypes
+  area: float
+  assemblyContext: Occurrence
+  attributes: Attributes
+  body: BRepBody
+  boundingBox: BoundingBox3D
+  centroid: Point3D
+  edges: BRepEdges
+  entityToken: str
+  evaluator: SurfaceEvaluator
+  geometry: Surface
+  isParamReversed: bool
+  loops: BRepLoops
+  meshManager: MeshManager
+  nativeObject: BRepFace
+  pointOnFace: Point3D
+  shell: BRepShell
+  tangentiallyConnectedFaces: BRepFaces
+  tempId: int
+  vertices: BRepVertices
+  convert(options: BRepConvertOptions) -> BRepBody
+  createForAssemblyContext(occurrence: Occurrence) -> BRepFace
+  isPointOnFace(point: Point3D, tolerance: float) -> bool
+
+BRepFaceDefinition : Base
+  associativeID: int
+  isParamReversed: bool
+  loopDefinitions: BRepLoopDefinitions
+  surfaceGeometry: Surface
+
+BRepFaceDefinitions *collection<BRepFaceDefinition>
+  count: int
+  add(surfaceGeometry: Surface, isParamReversed: bool) -> BRepFaceDefinition
+
+BRepFaceVector
+  append(x: std::vector< adsk::core::Ptr< adsk::fusion::BRepFace > >::value_type const) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::BRepFace > >::size_type, x: std::vector< adsk::core::Ptr< adsk::fusion::BRepFace > >::value_type const) -> void
+  back() -> BRepFace >::value_type
+  begin() -> BRepFace >::iterator
+  capacity() -> BRepFace >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> BRepFace >::iterator
+  erase() -> BRepFace >::iterator
+  front() -> BRepFace >::value_type
+  get_allocator() -> BRepFace >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> BRepFace >::value_type
+  pop_back() -> void
+  push_back(x: std::vector< adsk::core::Ptr< adsk::fusion::BRepFace > >::value_type const) -> void
+  rbegin() -> BRepFace >::reverse_iterator
+  rend() -> BRepFace >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::BRepFace > >::size_type) -> void
+  resize() -> void
+  size() -> BRepFace >::size_type
+  swap(v: list[BRepFace]) -> void
+
+BRepFaceVector
+  append(x: BRepFace) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::BRepFace > >::size_type, x: BRepFace) -> void
+  back() -> BRepFace >::value_type
+  begin() -> BRepFace >::iterator
+  capacity() -> BRepFace >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> BRepFace >::iterator
+  erase() -> BRepFace >::iterator
+  front() -> BRepFace >::value_type
+  get_allocator() -> BRepFace >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> BRepFace >::value_type
+  pop_back() -> void
+  push_back(x: BRepFace) -> void
+  rbegin() -> BRepFace >::reverse_iterator
+  rend() -> BRepFace >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::BRepFace > >::size_type) -> void
+  resize() -> void
+  size() -> BRepFace >::size_type
+  swap(v: list[BRepFace]) -> void
+
+BRepFaces *collection<BRepFace>
+  # BRepFace collection.
+  count: int
+
+BRepLoop : Base
+  # Represents a connected portion of a BRepFace boundary. It consists of a chain of BRepCoEdges.
+  assemblyContext: Occurrence
+  body: BRepBody
+  boundingBox: BoundingBox3D
+  coEdges: BRepCoEdges
+  edges: BRepEdges
+  entityToken: str
+  face: BRepFace
+  isOuter: bool
+  nativeObject: BRepLoop
+  createForAssemblyContext(occurrence: Occurrence) -> BRepLoop
+
+BRepLoopDefinition : Base
+  bRepCoEdgeDefinitions: BRepCoEdgeDefinitions
+
+BRepLoopDefinitions *collection<BRepLoopDefinition>
+  count: int
+  add() -> BRepLoopDefinition
+
+BRepLoopVector
+  append(x: BRepLoop) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::BRepLoop > >::size_type, x: BRepLoop) -> void
+  back() -> BRepLoop >::value_type
+  begin() -> BRepLoop >::iterator
+  capacity() -> BRepLoop >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> BRepLoop >::iterator
+  erase() -> BRepLoop >::iterator
+  front() -> BRepLoop >::value_type
+  get_allocator() -> BRepLoop >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> BRepLoop >::value_type
+  pop_back() -> void
+  push_back(x: BRepLoop) -> void
+  rbegin() -> BRepLoop >::reverse_iterator
+  rend() -> BRepLoop >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::BRepLoop > >::size_type) -> void
+  resize() -> void
+  size() -> BRepLoop >::size_type
+  swap(v: list[BRepLoop]) -> void
+
+BRepLoops *collection<BRepLoop>
+  # BRepLoop collection.
+  count: int
+
+BRepLump : Base
+  # Represents an entirely connected set of entities. A BRepBody consists of BRepLumps.
+  area: float
+  assemblyContext: Occurrence
+  body: BRepBody
+  boundingBox: BoundingBox3D
+  edges: BRepEdges
+  entityToken: str
+  faces: BRepFaces
+  isClosed: bool
+  meshManager: MeshManager
+  nativeObject: BRepLump
+  shells: BRepShells
+  vertices: BRepVertices
+  volume: float
+  createForAssemblyContext(occurrence: Occurrence) -> BRepLump
+  pointContainment(point: Point3D) -> PointContainment
+
+BRepLumpDefinition : Base
+  # Represents the definition of a B-Rep lump which is used in defining the topology of a B-Rep body.
+  shellDefinitions: BRepShellDefinitions
+
+BRepLumpDefinitions *collection<BRepLumpDefinition>
+  count: int
+  add() -> BRepLumpDefinition
+
+BRepLumps *collection<BRepLump>
+  # BRepLump collection.
+  count: int
+
+BRepShell : Base
+  # Represents an entirely connected set of BRepFaces. A BRepLump may contain multiple BRepShells.
+  area: float
+  assemblyContext: Occurrence
+  body: BRepBody
+  boundingBox: BoundingBox3D
+  edges: BRepEdges
+  entityToken: str
+  faces: BRepFaces
+  isClosed: bool
+  isVoid: bool
+  lump: BRepLump
+  meshManager: MeshManager
+  nativeObject: BRepShell
+  vertices: BRepVertices
+  volume: float
+  wire: BRepWire
+  createForAssemblyContext(occurrence: Occurrence) -> BRepShell
+  pointContainment(point: Point3D) -> PointContainment
+
+BRepShellDefinition : Base
+  faceDefinitions: BRepFaceDefinitions
+  wireDefinition: BRepWireDefinition
+
+BRepShellDefinitions *collection<BRepShellDefinition>
+  count: int
+  add() -> BRepShellDefinition
+
+BRepShells *collection<BRepShell>
+  # BRepShell collection.
+  count: int
+
+BRepVertex : Base
+  # A 0-dimensional topological entity that bounds a BRepEdge.
+  assemblyContext: Occurrence
+  attributes: Attributes
+  body: BRepBody
+  edges: BRepEdges
+  entityToken: str
+  faces: BRepFaces
+  geometry: Point3D
+  isTolerant: bool
+  nativeObject: BRepVertex
+  shell: BRepShell
+  tempId: int
+  tolerance: float
+  createForAssemblyContext(occurrence: Occurrence) -> BRepVertex
+
+BRepVertexDefinition : Base
+  position: Point3D
+
+BRepVertices *collection<BRepVertex>
+  # BRepVertex collection.
+  count: int
+
+BRepWire : Base
+  assemblyContext: Occurrence
+  coEdges: BRepCoEdges
+  edges: BRepEdges
+  isPlanar: bool
+  nativeObject: BRepWire
+  parent: BRepBody
+  vertices: BRepVertices
+  createForAssemblyContext(occurrence: Occurrence) -> BRepWire
+  offsetPlanarWire(planeNormal: Vector3D, distance: float, cornerType: OffsetCornerTypes) -> BRepBody
+
+BRepWireDefinition : Base
+  wireEdgeDefinitions: BRepWireEdgeDefinitions
+
+BRepWireEdgeDefinition : Base
+  associativeID: int
+  endVertex: BRepVertexDefinition
+  modelSpaceCurve: Curve3D
+  startVertex: BRepVertexDefinition
+
+BRepWireEdgeDefinitions *collection<BRepWireEdgeDefinition>
+  count: int
+  add(startVertex: BRepVertexDefinition, endVertex: BRepVertexDefinition, modelSpaceCurve: Curve3D) -> BRepWireEdgeDefinition
+
+BRepWires *collection<BRepWire>
+  # Provides access to B-Rep wire bodies.
+  count: int
+
+MeshBodies *collection<MeshBody>
+  count: int
+  add() -> MeshBodyList
+  addByTriangleMeshData(coordinates: list[float], coordinateIndexList: list[int], normalVectors: list[float], normalIndexList: list[int]) -> MeshBody
+
+MeshBody : Base
+  # Provides access to a mesh body.
+  appearance: Appearance
+  appearanceSourceType: AppearanceSourceTypes
+  area: float
+  assemblyContext: Occurrence
+  attributes: Attributes
+  baseOrFormFeature: Base
+  boundingBox: BoundingBox3D
+  displayMesh: TriangleMesh
+  displayOverrides: MeshBodyDisplayOverrides
+  entityToken: str
+  faceGroups: FaceGroups
+  isClosed: bool
+  isLightBulbOn: bool
+  isOriented: bool
+  isSelectable: bool
+  isVisible: bool
+  material: Material
+  mesh: PolygonMesh
+  name: str
+  nativeObject: MeshBody
+  opacity: float
+  orientedMinimumBoundingBox: OrientedBoundingBox3D
+  parentComponent: Component
+  textureMapControl: TextureMapControl
+  visibleOpacity: float
+  volume: float
+  copy() -> bool
+  copyToComponent(target: Base) -> MeshBody
+  createComponent() -> MeshBody
+  createForAssemblyContext(occurrence: Occurrence) -> MeshBody
+  cut() -> bool
+  deleteMe() -> bool
+  findByTempId(tempId: int) -> Base
+  moveToComponent(target: Base) -> MeshBody
+
+MeshBodyDisplayOverrides : Base
+  # Container for overrides that control how the mesh is displayed in the interactive 3D view.
+  isSuppressFaceGroupColors: bool
+  isSuppressTriangleEdges: bool
+
+MeshBodyList *collection<MeshBody>
+  # Provides access to a list of MeshBody objects.
+  count: int
+
+MeshBodyVector
+  append(x: MeshBody) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::MeshBody > >::size_type, x: MeshBody) -> void
+  back() -> MeshBody >::value_type
+  begin() -> MeshBody >::iterator
+  capacity() -> MeshBody >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> MeshBody >::iterator
+  erase() -> MeshBody >::iterator
+  front() -> MeshBody >::value_type
+  get_allocator() -> MeshBody >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> MeshBody >::value_type
+  pop_back() -> void
+  push_back(x: MeshBody) -> void
+  rbegin() -> MeshBody >::reverse_iterator
+  rend() -> MeshBody >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::MeshBody > >::size_type) -> void
+  resize() -> void
+  size() -> MeshBody >::size_type
+  swap(v: list[MeshBody]) -> void
+
+MeshCombineFaceGroupsFeature : MeshFeature
+  # Object that represents an existing mesh combine face groups feature in a design.
+  inputFaceGroups: FaceGroup]
+  mesh: Base
+  nativeObject: MeshCombineFaceGroupsFeature
+  createForAssemblyContext(occurrence: Occurrence) -> MeshCombineFaceGroupsFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MeshCombineFaceGroupsFeatureInput : Base
+  inputFaceGroups: FaceGroup]
+  targetBaseFeature: BaseFeature
+
+MeshCombineFaceGroupsFeatures *collection<MeshCombineFaceGroupsFeature>
+  count: int
+  add(input: MeshCombineFaceGroupsFeatureInput) -> MeshCombineFaceGroupsFeature
+  createInput(inputFaceGroups: list[FaceGroup]) -> MeshCombineFaceGroupsFeatureInput
+  itemByName(name: str) -> MeshCombineFaceGroupsFeature
+
+MeshCombineFeature : MeshFeature
+  # Object that represents an existing mesh combine feature in a design.
+  isKeepToolBodies: bool
+  isNewComponent: bool
+  meshCombineOperationType: MeshCombineOperationTypes
+  nativeObject: MeshCombineFeature
+  targetBody: MeshBody
+  toolBodies: MeshBody]
+  createForAssemblyContext(occurrence: Occurrence) -> MeshCombineFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MeshCombineFeatureInput : Base
+  algorithmType: MeshCombineAlgorithmTypes
+  isKeepToolBodies: bool
+  isNewComponent: bool
+  meshCombineOperationType: MeshCombineOperationTypes
+  targetBaseFeature: BaseFeature
+  targetBody: MeshBody
+  toolBodies: MeshBody]
+
+MeshCombineFeatures *collection<MeshCombineFeature>
+  count: int
+  add(input: MeshCombineFeatureInput) -> MeshCombineFeature
+  createInput(targetBody: MeshBody, toolBodies: list[MeshBody]) -> MeshCombineFeatureInput
+  itemByName(name: str) -> MeshCombineFeature
+
+MeshConvertFeature : Feature
+  inputBodies: MeshBody]
+  isPreprocessHoles: bool
+  meshConvertAccuracyType: MeshConvertAccuracyTypes
+  meshConvertMethodType: MeshConvertMethodTypes
+  meshConvertResolutionType: MeshConvertResolutionTypes
+  nativeObject: MeshConvertFeature
+  numberOfFaces: ModelParameter
+  createForAssemblyContext(occurrence: Occurrence) -> MeshConvertFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MeshConvertFeatureInput : Base
+  inputBodies: MeshBody]
+  isPreprocessHoles: bool
+  meshConvertAccuracyType: MeshConvertAccuracyTypes
+  meshConvertMethodType: MeshConvertMethodTypes
+  meshConvertOperationType: MeshConvertOperationTypes
+  meshConvertResolutionType: MeshConvertResolutionTypes
+  numberOfFaces: ValueInput
+  targetBaseFeature: BaseFeature
+
+MeshConvertFeatures *collection<MeshConvertFeature>
+  count: int
+  add(input: MeshConvertFeatureInput) -> MeshConvertFeature
+  createInput(inputBodies: list[MeshBody]) -> MeshConvertFeatureInput
+  itemByName(name: str) -> MeshConvertFeature
+
+MeshFeature : Feature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MeshGenerateFaceGroupsFeature : MeshFeature
+  # Object that represents an existing mesh generate face groups feature in a design.
+  angleThreshold: ModelParameter
+  boundaryTolerance: ModelParameter
+  mesh: Base
+  meshGenerateFaceGroupsMethodType: MeshGenerateFaceGroupsMethodTypes
+  minimumFaceGroupSize: ModelParameter
+  nativeObject: MeshGenerateFaceGroupsFeature
+  createForAssemblyContext(occurrence: Occurrence) -> MeshGenerateFaceGroupsFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MeshGenerateFaceGroupsFeatureInput : Base
+  angleThreshold: ValueInput
+  boundaryTolerance: ValueInput
+  mesh: Base
+  meshGenerateFaceGroupsMethodType: MeshGenerateFaceGroupsMethodTypes
+  minimumFaceGroupSize: ValueInput
+  targetBaseFeature: BaseFeature
+
+MeshGenerateFaceGroupsFeatures *collection<MeshGenerateFaceGroupsFeature>
+  count: int
+  add(input: MeshGenerateFaceGroupsFeatureInput) -> MeshGenerateFaceGroupsFeature
+  createInput(mesh: Base) -> MeshGenerateFaceGroupsFeatureInput
+  itemByName(name: str) -> MeshGenerateFaceGroupsFeature
+
+MeshManager : Base
+  # Provides access to meshes that approximate a B-Rep and T-Spline.
+  displayMeshes: TriangleMeshList
+  parent: Base
+  createMeshCalculator() -> TriangleMeshCalculator
+
+MeshPlaneCutFeature : MeshFeature
+  # Object that represents an existing mesh plane cut feature in a design.
+  isFlip: bool
+  mesh: Base
+  meshPlaneCutFillType: MeshPlaneCutFillTypes
+  meshPlaneCutType: MeshPlaneCutTypes
+  nativeObject: MeshPlaneCutFeature
+  createForAssemblyContext(occurrence: Occurrence) -> MeshPlaneCutFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MeshPlaneCutFeatureInput : Base
+  cutPlane: Base
+  isFlip: bool
+  mesh: Base
+  meshPlaneCutFillType: MeshPlaneCutFillTypes
+  meshPlaneCutType: MeshPlaneCutTypes
+  targetBaseFeature: BaseFeature
+
+MeshPlaneCutFeatures *collection<MeshPlaneCutFeature>
+  count: int
+  add(input: MeshPlaneCutFeatureInput) -> MeshPlaneCutFeature
+  createInput(mesh: Base, cutPlane: Base) -> MeshPlaneCutFeatureInput
+  itemByName(name: str) -> MeshPlaneCutFeature
+
+MeshReduceFeature : MeshFeature
+  facecount: ModelParameter
+  maximumDeviation: ModelParameter
+  mesh: Base
+  meshReduceMethodType: MeshReduceMethodTypes
+  meshReduceTargetType: MeshReduceTargetTypes
+  nativeObject: MeshReduceFeature
+  proportion: ModelParameter
+  createForAssemblyContext(occurrence: Occurrence) -> MeshReduceFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MeshReduceFeatureInput : Base
+  facecount: ValueInput
+  maximumDeviation: ValueInput
+  mesh: Base
+  meshReduceMethodType: MeshReduceMethodTypes
+  meshReduceTargetType: MeshReduceTargetTypes
+  proportion: ValueInput
+  targetBaseFeature: BaseFeature
+
+MeshReduceFeatures *collection<MeshReduceFeature>
+  count: int
+  add(input: MeshReduceFeatureInput) -> MeshReduceFeature
+  createInput(mesh: Base) -> MeshReduceFeatureInput
+  itemByName(name: str) -> MeshReduceFeature
+
+MeshRemeshFeature : MeshFeature
+  density: ModelParameter
+  isPreserveBoundariesEnabled: bool
+  isPreserveSharpEdgesEnabled: bool
+  mesh: Base
+  meshRemeshMethodType: MeshRemeshMethodTypes
+  nativeObject: MeshRemeshFeature
+  shapePreservation: ModelParameter
+  createForAssemblyContext(occurrence: Occurrence) -> MeshRemeshFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MeshRemeshFeatureInput : Base
+  density: ValueInput
+  isPreserveBoundariesEnabled: bool
+  isPreserveSharpEdgesEnabled: bool
+  mesh: Base
+  meshRemeshMethodType: MeshRemeshMethodTypes
+  shapePreservation: ValueInput
+  targetBaseFeature: BaseFeature
+
+MeshRemeshFeatures *collection<MeshRemeshFeature>
+  count: int
+  add(input: MeshRemeshFeatureInput) -> MeshRemeshFeature
+  createInput(mesh: Base) -> MeshRemeshFeatureInput
+  itemByName(name: str) -> MeshRemeshFeature
+
+MeshRemoveFeature : MeshFeature
+  # Object that represents an existing mesh remove feature in a design.
+  inputBodies: MeshBody]
+  nativeObject: MeshRemoveFeature
+  createForAssemblyContext(occurrence: Occurrence) -> MeshRemoveFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MeshRemoveFeatureInput : Base
+  inputBodies: MeshBody]
+  targetBaseFeature: BaseFeature
+
+MeshRemoveFeatureVector
+  append(x: MeshRemoveFeature) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::MeshRemoveFeature > >::size_type, x: MeshRemoveFeature) -> void
+  back() -> MeshRemoveFeature >::value_type
+  begin() -> MeshRemoveFeature >::iterator
+  capacity() -> MeshRemoveFeature >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> MeshRemoveFeature >::iterator
+  erase() -> MeshRemoveFeature >::iterator
+  front() -> MeshRemoveFeature >::value_type
+  get_allocator() -> MeshRemoveFeature >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> MeshRemoveFeature >::value_type
+  pop_back() -> void
+  push_back(x: MeshRemoveFeature) -> void
+  rbegin() -> MeshRemoveFeature >::reverse_iterator
+  rend() -> MeshRemoveFeature >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::MeshRemoveFeature > >::size_type) -> void
+  resize() -> void
+  size() -> MeshRemoveFeature >::size_type
+  swap(v: list[MeshRemoveFeature]) -> void
+
+MeshRemoveFeatures *collection<MeshRemoveFeature>
+  count: int
+  add(input: MeshRemoveFeatureInput) -> MeshRemoveFeature]
+  createInput(inputBodies: list[MeshBody]) -> MeshRemoveFeatureInput
+  itemByName(name: str) -> MeshRemoveFeature
+
+MeshRepairFeature : MeshFeature
+  density: ModelParameter
+  mesh: Base
+  meshRepairRebuildType: MeshRepairRebuildTypes
+  meshRepairType: MeshRepairTypes
+  nativeObject: MeshRepairFeature
+  offset: ModelParameter
+  createForAssemblyContext(occurrence: Occurrence) -> MeshRepairFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MeshRepairFeatureInput : Base
+  density: ValueInput
+  mesh: Base
+  meshRepairRebuildType: MeshRepairRebuildTypes
+  meshRepairType: MeshRepairTypes
+  offset: ValueInput
+  targetBaseFeature: BaseFeature
+
+MeshRepairFeatures *collection<MeshRepairFeature>
+  count: int
+  add(input: MeshRepairFeatureInput) -> MeshRepairFeature
+  createInput(mesh: Base) -> MeshRepairFeatureInput
+  itemByName(name: str) -> MeshRepairFeature
+
+MeshReverseNormalFeature : MeshFeature
+  mesh: Base
+  nativeObject: MeshReverseNormalFeature
+  createForAssemblyContext(occurrence: Occurrence) -> MeshReverseNormalFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MeshReverseNormalFeatureInput : Base
+  mesh: Base
+  targetBaseFeature: BaseFeature
+
+MeshReverseNormalFeatures *collection<MeshReverseNormalFeature>
+  count: int
+  add(input: MeshReverseNormalFeatureInput) -> MeshReverseNormalFeature
+  createInput(mesh: Base) -> MeshReverseNormalFeatureInput
+  itemByName(name: str) -> MeshReverseNormalFeature
+
+MeshSeparateFeature : MeshFeature
+  isKeepBody: bool
+  isMultipleBodies: bool
+  mesh: Base
+  meshSeparateType: MeshSeparateTypes
+  nativeObject: MeshSeparateFeature
+  createForAssemblyContext(occurrence: Occurrence) -> MeshSeparateFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MeshSeparateFeatureInput : Base
+  isKeepBody: bool
+  isMultipleBodies: bool
+  mesh: Base
+  meshSeparateType: MeshSeparateTypes
+  targetBaseFeature: BaseFeature
+
+MeshSeparateFeatures *collection<MeshSeparateFeature>
+  count: int
+  add(input: MeshSeparateFeatureInput) -> MeshSeparateFeature
+  createInput(mesh: Base) -> MeshSeparateFeatureInput
+  itemByName(name: str) -> MeshSeparateFeature
+
+MeshSettings : Base
+  # Object that represents simulation mesh settings.
+  absoluteElementSize: float
+  elementOrderType: ElementOrderTypes
+  elementSizeDeterminationType: ElementSizeDeterminationTypes
+  isCreatingCurvedMeshElements: bool
+  isScalingMeshSizePerPart: bool
+  maxAdjacentMeshSizeRatio: float
+  maxAspectRatio: float
+  maxTurnAngle: float
+  minElementSize: float
+  modelBasedElementSize: float
+
+MeshShellFeature : MeshFeature
+  mesh: Base
+  nativeObject: MeshShellFeature
+  thickness: ModelParameter
+  createForAssemblyContext(occurrence: Occurrence) -> MeshShellFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MeshShellFeatureInput : Base
+  mesh: Base
+  targetBaseFeature: BaseFeature
+  thickness: ValueInput
+
+MeshShellFeatures *collection<MeshShellFeature>
+  count: int
+  add(input: MeshShellFeatureInput) -> MeshShellFeature
+  createInput(mesh: Base) -> MeshShellFeatureInput
+  itemByName(name: str) -> MeshShellFeature
+
+MeshSmoothFeature : MeshFeature
+  mesh: Base
+  nativeObject: MeshSmoothFeature
+  smoothness: ModelParameter
+  createForAssemblyContext(occurrence: Occurrence) -> MeshSmoothFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+MeshSmoothFeatureInput : Base
+  mesh: Base
+  smoothness: ValueInput
+  targetBaseFeature: BaseFeature
+
+MeshSmoothFeatures *collection<MeshSmoothFeature>
+  count: int
+  add(input: MeshSmoothFeatureInput) -> MeshSmoothFeature
+  createInput(mesh: Base) -> MeshSmoothFeatureInput
+  itemByName(name: str) -> MeshSmoothFeature
+
+TSplineBodies *collection<TSplineBody>
+  # A collection of TSpline bodies.
+  count: int
+  addByTSMDescription(tsmDescription: str) -> TSplineBody
+  addByTSMFile(tsmFilename: str) -> TSplineBody
+  itemByName(name: str) -> TSplineBody
+
+TSplineBody : Base
+  # A TSpline body.
+  entityToken: str
+  name: str
+  parentFormFeature: FormFeature
+  textureMapControl: TextureMapControl
+  getTSMDescription() -> str
+  saveAsTSMFile(filename: str) -> bool

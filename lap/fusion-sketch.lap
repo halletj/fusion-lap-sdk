@@ -1,1 +1,1045 @@
 # fusion-sketch.lap
+
+[types]
+SketchCurveConstructionStates: ToggleSketchCurveConstructionState | ConstructionSketchCurveConstructionState | NormalSketchCurveConstructionState
+SketchLineCenterlineStates: ToggleSketchLineCenterlineState | CenterlineSketchLineCenterlineState | NormalSketchLineCenterlineState
+
+[classes]
+AssemblyConstraint : Base
+  # Represents an assembly constraint.
+  assemblyContext: Occurrence
+  attributes: Attributes
+  entityToken: str
+  errorOrWarningMessage: str
+  geometricRelationships: GeometricRelationships
+  healthState: FeatureHealthStates
+  isLightBulbOn: bool
+  isSuppressed: bool
+  isVisible: bool
+  name: str
+  nativeObject: AssemblyConstraint
+  parentComponent: Component
+  timelineObject: TimelineObject
+  createForAssemblyContext(occurrence: Occurrence) -> AssemblyConstraint
+  deleteMe() -> bool
+
+CircularPatternConstraint : GeometricConstraint
+  # A circular pattern constraint in a sketch.
+  centerPoint: SketchPoint
+  createdEntities: SketchEntity]
+  entities: SketchEntity]
+  isSuppressed: list[bool]
+  isSymmetric: bool
+  nativeObject: CircularPatternConstraint
+  quantity: ModelParameter
+  totalAngle: ModelParameter
+  createForAssemblyContext(occurrence: Occurrence) -> CircularPatternConstraint
+  deleteMe() -> bool
+
+CoincidentConstraint : GeometricConstraint
+  # A coincident constraint in a sketch.
+  entity: SketchEntity
+  nativeObject: CoincidentConstraint
+  point: SketchPoint
+  createForAssemblyContext(occurrence: Occurrence) -> CoincidentConstraint
+  deleteMe() -> bool
+
+CoincidentToSurfaceConstraint : GeometricConstraint
+  # A sketch constraint defining that a point is coincident to a surface.
+  nativeObject: CoincidentToSurfaceConstraint
+  point: SketchPoint
+  surface: Base
+  createForAssemblyContext(occurrence: Occurrence) -> CoincidentToSurfaceConstraint
+  deleteMe() -> bool
+
+CollinearConstraint : GeometricConstraint
+  # A collinear constraint in a sketch.
+  lineOne: SketchLine
+  lineTwo: SketchLine
+  nativeObject: CollinearConstraint
+  createForAssemblyContext(occurrence: Occurrence) -> CollinearConstraint
+  deleteMe() -> bool
+
+ConcentricConstraint : GeometricConstraint
+  # A concentric constraint in a sketch.
+  entityOne: SketchCurve
+  entityTwo: SketchCurve
+  nativeObject: ConcentricConstraint
+  createForAssemblyContext(occurrence: Occurrence) -> ConcentricConstraint
+  deleteMe() -> bool
+
+EqualConstraint : GeometricConstraint
+  # An equal constraint in a sketch.
+  curveOne: SketchCurve
+  curveTwo: SketchCurve
+  nativeObject: EqualConstraint
+  createForAssemblyContext(occurrence: Occurrence) -> EqualConstraint
+  deleteMe() -> bool
+
+GeometricConstraint : Base
+  # The base class for all geometric constraints.
+  assemblyContext: Occurrence
+  attributes: Attributes
+  entityToken: str
+  isDeletable: bool
+  parentSketch: Sketch
+  deleteMe() -> bool
+
+GeometricConstraintList *collection<GeometricConstraint>
+  # A list of geometric constraints.
+  count: int
+
+GeometricConstraintVector
+  append(x: GeometricConstraint) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::GeometricConstraint > >::size_type, x: GeometricConstraint) -> void
+  back() -> GeometricConstraint >::value_type
+  begin() -> GeometricConstraint >::iterator
+  capacity() -> GeometricConstraint >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> GeometricConstraint >::iterator
+  erase() -> GeometricConstraint >::iterator
+  front() -> GeometricConstraint >::value_type
+  get_allocator() -> GeometricConstraint >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> GeometricConstraint >::value_type
+  pop_back() -> void
+  push_back(x: GeometricConstraint) -> void
+  rbegin() -> GeometricConstraint >::reverse_iterator
+  rend() -> GeometricConstraint >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::GeometricConstraint > >::size_type) -> void
+  resize() -> void
+  size() -> GeometricConstraint >::size_type
+  swap(v: list[GeometricConstraint]) -> void
+
+GeometricConstraints *collection<GeometricConstraint>
+  count: int
+  addCircularPattern(input: CircularPatternConstraintInput) -> CircularPatternConstraint
+  addCoincident(point: SketchPoint, entity: SketchEntity) -> CoincidentConstraint
+  addCoincidentToSurface(point: SketchPoint, surface: Base) -> CoincidentToSurfaceConstraint
+  addCollinear(lineOne: SketchLine, lineTwo: SketchLine) -> CollinearConstraint
+  addConcentric(entityOne: SketchCurve, entityTwo: SketchCurve) -> ConcentricConstraint
+  addEqual(curveOne: SketchCurve, curveTwo: SketchCurve) -> EqualConstraint
+  addHorizontal(line: SketchLine) -> HorizontalConstraint
+  addHorizontalPoints(pointOne: SketchPoint, pointTwo: SketchPoint) -> HorizontalPointsConstraint
+  addLineOnPlanarSurface(line: SketchLine, planarSurface: Base) -> LineOnPlanarSurfaceConstraint
+  addLineParallelToPlanarSurface(line: SketchLine, planarSurface: Base) -> LineParallelToPlanarSurfaceConstraint
+  addMidPoint(point: SketchPoint, midPointCurve: SketchCurve) -> MidPointConstraint
+  addOffset(curves: list[SketchCurve], offset: ValueInput, basePoint: Point3D) -> OffsetConstraint
+  addOffset2(input: OffsetConstraintInput) -> OffsetConstraint
+  addParallel(lineOne: SketchLine, lineTwo: SketchLine) -> ParallelConstraint
+  addPerpendicular(lineOne: SketchLine, lineTwo: SketchLine) -> PerpendicularConstraint
+  addPerpendicularToSurface(curve: SketchCurve, surface: Base) -> PerpendicularToSurfaceConstraint
+  addPolygon(lines: list[SketchLine]) -> PolygonConstraint
+  addRectangularPattern(input: RectangularPatternConstraintInput) -> RectangularPatternConstraint
+  addSmooth(curveOne: SketchCurve, curveTwo: SketchCurve) -> SmoothConstraint
+  addSymmetry(entityOne: SketchEntity, entityTwo: SketchEntity, symmetryLine: SketchLine) -> SymmetryConstraint
+  addTangent(curveOne: SketchCurve, curveTwo: SketchCurve) -> TangentConstraint
+  addTwoSidesOffset(input: OffsetConstraintInput, linkOffsets: bool) -> OffsetConstraint]
+  addVertical(line: SketchLine) -> VerticalConstraint
+  addVerticalPoints(pointOne: SketchPoint, pointTwo: SketchPoint) -> VerticalPointsConstraint
+  createCircularPatternInput(inputEntities: list[SketchEntity], centerPoint: SketchPoint) -> CircularPatternConstraintInput
+  createOffsetInput(curves: list[SketchCurve], offset: ValueInput) -> OffsetConstraintInput
+  createRectangularPatternInput(entities: list[SketchEntity], distanceType: PatternDistanceType) -> RectangularPatternConstraintInput
+
+HorizontalConstraint : GeometricConstraint
+  # A horizontal constraint in a sketch.
+  line: SketchLine
+  nativeObject: HorizontalConstraint
+  createForAssemblyContext(occurrence: Occurrence) -> HorizontalConstraint
+  deleteMe() -> bool
+
+HorizontalPointsConstraint : GeometricConstraint
+  # A horizontal constraint between two points in a sketch.
+  nativeObject: HorizontalPointsConstraint
+  pointOne: SketchPoint
+  pointTwo: SketchPoint
+  createForAssemblyContext(occurrence: Occurrence) -> HorizontalPointsConstraint
+  deleteMe() -> bool
+
+LineOnPlanarSurfaceConstraint : GeometricConstraint
+  # A sketch constraint defining that a line that lies on a planar face or construction plane.
+  line: SketchLine
+  nativeObject: LineOnPlanarSurfaceConstraint
+  planarSurface: Base
+  createForAssemblyContext(occurrence: Occurrence) -> LineOnPlanarSurfaceConstraint
+  deleteMe() -> bool
+
+LineParallelToPlanarSurfaceConstraint : GeometricConstraint
+  # A sketch constraint defining that a line is parallel to a planar face or construction plane.
+  line: SketchLine
+  nativeObject: LineParallelToPlanarSurfaceConstraint
+  planarSurface: Base
+  createForAssemblyContext(occurrence: Occurrence) -> LineParallelToPlanarSurfaceConstraint
+  deleteMe() -> bool
+
+MidPointConstraint : GeometricConstraint
+  # A midpoint constraint in a sketch.
+  midPointCurve: SketchCurve
+  nativeObject: MidPointConstraint
+  point: SketchPoint
+  createForAssemblyContext(occurrence: Occurrence) -> MidPointConstraint
+  deleteMe() -> bool
+
+OffsetConstraint : GeometricConstraint
+  # An offset constraint in a sketch.
+  childCurves: SketchCurve]
+  dimension: SketchDimension
+  distance: float
+  isTopologyMatched: bool
+  nativeObject: OffsetConstraint
+  parentCurves: SketchCurve]
+  createForAssemblyContext(occurrence: Occurrence) -> OffsetConstraint
+  deleteMe() -> bool
+
+ParallelConstraint : GeometricConstraint
+  # A parallel constraint in a sketch.
+  lineOne: SketchLine
+  lineTwo: SketchLine
+  nativeObject: ParallelConstraint
+  createForAssemblyContext(occurrence: Occurrence) -> ParallelConstraint
+  deleteMe() -> bool
+
+PerpendicularConstraint : GeometricConstraint
+  # A perpendicular constraint in a sketch.
+  lineOne: SketchLine
+  lineTwo: SketchLine
+  nativeObject: PerpendicularConstraint
+  createForAssemblyContext(occurrence: Occurrence) -> PerpendicularConstraint
+  deleteMe() -> bool
+
+PerpendicularToSurfaceConstraint : GeometricConstraint
+  curve: SketchCurve
+  nativeObject: PerpendicularToSurfaceConstraint
+  surface: Base
+  createForAssemblyContext(occurrence: Occurrence) -> PerpendicularToSurfaceConstraint
+  deleteMe() -> bool
+
+PolygonConstraint : GeometricConstraint
+  # A polygon constraint in a sketch.
+  centerPoint: SketchPoint
+  lines: SketchLine]
+  points: SketchPoint]
+  deleteMe() -> bool
+
+Profile : Base
+  assemblyContext: Occurrence
+  boundingBox: BoundingBox3D
+  entityToken: str
+  face: BRepFace
+  nativeObject: Profile
+  parentSketch: Sketch
+  plane: Plane
+  profileLoops: ProfileLoops
+  areaProperties() -> AreaProperties
+  createForAssemblyContext(occurrence: Occurrence) -> Profile
+
+ProfileCurve : Base
+  # A single curve in a profile.
+  assemblyContext: Occurrence
+  boundingBox: BoundingBox3D
+  geometry: Curve3D
+  geometryType: Curve3DTypes
+  nativeObject: ProfileCurve
+  parentProfile: Profile
+  parentProfileLoop: ProfileLoop
+  parentSketch: Sketch
+  sketchEntity: SketchEntity
+  createForAssemblyContext(occurrence: Occurrence) -> ProfileCurve
+
+ProfileCurves *collection<ProfileCurve>
+  # A collection of profile curves within a profile loop.
+  count: int
+
+ProfileLoop : Base
+  # A loop within a profile.
+  assemblyContext: Occurrence
+  isOuter: bool
+  nativeObject: ProfileLoop
+  parentProfile: Profile
+  profileCurves: ProfileCurves
+  createForAssemblyContext(occurrence: Occurrence) -> ProfileLoop
+
+ProfileLoops *collection<ProfileLoop>
+  # A collection of loops within a Profile.
+  count: int
+
+ProfilePlaneStartDefinition : ExtentDefinition
+  profilePlane: Plane
+  @static create() -> ProfilePlaneStartDefinition
+
+Profiles *collection<Profile>
+  count: int
+
+RectangularPatternConstraint : GeometricConstraint
+  # A rectangular pattern constraint in a sketch.
+  createdEntities: SketchEntity]
+  directionOneEntity: SketchLine
+  directionTwoEntity: SketchLine
+  distanceOne: ModelParameter
+  distanceTwo: ModelParameter
+  distanceType: PatternDistanceType
+  entities: SketchEntity]
+  isSuppressed: list[bool]
+  isSymmetricInDirectionOne: bool
+  isSymmetricInDirectionTwo: bool
+  nativeObject: RectangularPatternConstraint
+  quantityOne: ModelParameter
+  quantityTwo: ModelParameter
+  createForAssemblyContext(occurrence: Occurrence) -> RectangularPatternConstraint
+  deleteMe() -> bool
+  setDirectionOne(directionOneEntity: SketchLine, quantityOne: ValueInput, distanceOne: ValueInput) -> bool
+  setDirectionTwo(directionTwoEntity: SketchLine, quantityTwo: ValueInput, distanceTwo: ValueInput) -> bool
+
+Sketch : Base
+  # Represents a sketch within a component.
+  areConstraintsShown: bool
+  areDimensionsShown: bool
+  arePointsShown: bool
+  areProfilesShown: bool
+  assemblyContext: Occurrence
+  attributes: Attributes
+  baseOrFormFeature: Base
+  boundingBox: BoundingBox3D
+  deriveFeature: DeriveFeature
+  entityToken: str
+  errorOrWarningMessage: str
+  geometricConstraints: GeometricConstraints
+  healthState: FeatureHealthStates
+  isComputeDeferred: bool
+  isConstructionGeometryShown: bool
+  isDerived: bool
+  isFullyConstrained: bool
+  isLightBulbOn: bool
+  isModelSliced: bool
+  isParametric: bool
+  isProjectedGeometryShown: bool
+  isVisible: bool
+  name: str
+  nativeObject: Sketch
+  origin: Point3D
+  originPoint: SketchPoint
+  parentComponent: Component
+  profiles: Profiles
+  referencePlane: Base
+  revisionId: str
+  sketchCurves: SketchCurves
+  sketchDimensions: SketchDimensions
+  sketchPoints: SketchPoints
+  sketchTexts: SketchTexts
+  timelineObject: TimelineObject
+  transform: Matrix3D
+  xDirection: Vector3D
+  yDirection: Vector3D
+  addCenterPointSlot() -> Base]
+  addCenterToCenterSlot() -> Base]
+  addOverallSlot() -> Base]
+  autoConstrain(input: AutoConstrainInput) -> AutoConstrainResult
+  copy() -> ObjectCollection
+  createAutoConstrainInput() -> AutoConstrainInput
+  createForAssemblyContext(occurrence: Occurrence) -> Sketch
+  createSpunProfile(input: SpunProfileInput) -> SketchEntity]
+  createSpunProfileInput(entities: list[Base], axis: Base) -> SpunProfileInput
+  deleteMe() -> bool
+  findConnectedCurves(curve: SketchCurve) -> ObjectCollection
+  importSVG(fullFilename: str, xPosition: float, yPosition: float, scale: float) -> bool
+  include(entity: Base) -> ObjectCollection
+  intersectWithSketchPlane(entities: list[Base]) -> SketchEntity]
+  modelToSketchSpace(modelCoordinate: Point3D) -> Point3D
+  move(sketchEntities: ObjectCollection, transform: Matrix3D) -> bool
+  offset(curves: ObjectCollection, directionPoint: Point3D, offset: float) -> ObjectCollection
+  project(entity: Base) -> ObjectCollection
+  project2(entities: list[Base], isLinked: bool) -> SketchEntity]
+  projectCutEdges(body: BRepBody) -> ObjectCollection
+  projectToSurface() -> SketchEntity]
+  redefine(planarEntity: Base) -> bool
+  saveAsDXF(fullFilename: str) -> bool
+  setCenterlineState(sketchLines: list[SketchLine], centerlineState: SketchLineCenterlineStates) -> bool
+  setConstructionState(sketchCurves: list[SketchCurve], constructionState: SketchCurveConstructionStates) -> bool
+  sketchToModelSpace(sketchCoordinate: Point3D) -> Point3D
+
+SketchAngularDimension : SketchDimension
+  # An angular dimension in a sketch.
+  lineOne: SketchLine
+  lineTwo: SketchLine
+  nativeObject: SketchAngularDimension
+  createForAssemblyContext(occurrence: Occurrence) -> SketchAngularDimension
+  deleteMe() -> bool
+
+SketchArc : SketchCurve
+  # An arc in a sketch.
+  centerSketchPoint: SketchPoint
+  endSketchPoint: SketchPoint
+  geometry: Arc3D
+  nativeObject: SketchArc
+  radius: float
+  startSketchPoint: SketchPoint
+  worldGeometry: Arc3D
+  breakCurve(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  createForAssemblyContext(occurrence: Occurrence) -> SketchArc
+  deleteMe() -> bool
+  extend(endPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  intersections(sketchCurves: ObjectCollection) -> bool
+  split(splitPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  trim(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+
+SketchArcs *collection<SketchArc>
+  count: int
+  addByCenterStartEnd() -> SketchArc
+  addByCenterStartSweep(centerPoint: Base, startPoint: Base, sweepAngle: float) -> SketchArc
+  addByThreePoints(startPoint: Base, point: Point3D, endPoint: Base) -> SketchArc
+  addFillet(firstEntity: SketchCurve, firstEntityPoint: Point3D, secondEnitity: SketchCurve, secondEntityPoint: Point3D, radius: float) -> SketchArc
+
+SketchCircle : SketchCurve
+  # A circle in a sketch.
+  area: float
+  centerSketchPoint: SketchPoint
+  geometry: Circle3D
+  nativeObject: SketchCircle
+  radius: float
+  worldGeometry: Circle3D
+  breakCurve(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  createForAssemblyContext(occurrence: Occurrence) -> SketchCircle
+  deleteMe() -> bool
+  extend(endPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  intersections(sketchCurves: ObjectCollection) -> bool
+  split(splitPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  trim(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+
+SketchCircles *collection<SketchCircle>
+  count: int
+  addByCenterRadius(centerPoint: Base, radius: float) -> SketchCircle
+  addByThreePoints(pointOne: Point3D, pointTwo: Point3D, pointThree: Point3D) -> SketchCircle
+  addByThreeTangents(tangentOne: SketchLine, tangentTwo: SketchLine, tangentThree: SketchLine, hintPoint: Point3D) -> SketchCircle
+  addByTwoPoints(pointOne: Point3D, pointTwo: Point3D) -> SketchCircle
+  addByTwoTangents(tangentOne: SketchLine, tangentTwo: SketchLine, radius: float, hintPoint: Point3D) -> SketchCircle
+
+SketchConcentricCircleDimension : SketchDimension
+  # A concentric circle dimension in a sketch.
+  circleOne: SketchCurve
+  circleTwo: SketchCurve
+  nativeObject: SketchConcentricCircleDimension
+  createForAssemblyContext(occurrence: Occurrence) -> SketchConcentricCircleDimension
+  deleteMe() -> bool
+
+SketchConicCurve : SketchCurve
+  # The SketchConicCurve class represents conic curves in a sketch.
+  apexSketchPoint: SketchPoint
+  endSketchPoint: SketchPoint
+  evaluator: CurveEvaluator3D
+  geometry: NurbsCurve3D
+  nativeObject: SketchConicCurve
+  rhoValue: float
+  startSketchPoint: SketchPoint
+  worldGeometry: NurbsCurve3D
+  breakCurve(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  createForAssemblyContext(occurrence: Occurrence) -> SketchConicCurve
+  deleteMe() -> bool
+  extend(endPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  intersections(sketchCurves: ObjectCollection) -> bool
+  split(splitPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  trim(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+
+SketchConicCurves *collection<SketchConicCurve>
+  count: int
+  add(startPoint: Base, endPoint: Base, apexPoint: Base, rhoValue: float) -> SketchConicCurve
+
+SketchControlPointSpline : SketchCurve
+  # A control point spline in a sketch.
+  controlFrameLines: SketchLine]
+  controlPoints: SketchPoint]
+  degree: SplineDegrees
+  endSketchPoint: SketchPoint
+  evaluator: CurveEvaluator3D
+  geometry: NurbsCurve3D
+  isControlFrameDisplayed: bool
+  nativeObject: SketchControlPointSpline
+  startSketchPoint: SketchPoint
+  worldGeometry: NurbsCurve3D
+  addControlPoint(parameter: float) -> bool
+  breakCurve(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  createForAssemblyContext(occurrence: Occurrence) -> SketchControlPointSpline
+  deleteMe() -> bool
+  extend(endPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  intersections(sketchCurves: ObjectCollection) -> bool
+  split(splitPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  trim(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+
+SketchControlPointSplines *collection<SketchControlPointSpline>
+  # The collection of control point splines in a sketch.
+  count: int
+  add(controlPoints: list[Base], degree: SplineDegrees) -> SketchControlPointSpline
+
+SketchCurve : SketchEntity
+  # A single sketch curve. This is the base class for the specific curve types.
+  isConstruction: bool
+  length: float
+  breakCurve(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  deleteMe() -> bool
+  extend(endPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  intersections(sketchCurves: ObjectCollection) -> bool
+  split(splitPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  trim(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+
+SketchCurveVector
+  append(x: SketchCurve) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::SketchCurve > >::size_type, x: SketchCurve) -> void
+  back() -> SketchCurve >::value_type
+  begin() -> SketchCurve >::iterator
+  capacity() -> SketchCurve >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> SketchCurve >::iterator
+  erase() -> SketchCurve >::iterator
+  front() -> SketchCurve >::value_type
+  get_allocator() -> SketchCurve >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> SketchCurve >::value_type
+  pop_back() -> void
+  push_back(x: SketchCurve) -> void
+  rbegin() -> SketchCurve >::reverse_iterator
+  rend() -> SketchCurve >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::SketchCurve > >::size_type) -> void
+  resize() -> void
+  size() -> SketchCurve >::size_type
+  swap(v: list[SketchCurve]) -> void
+
+SketchCurves *collection<SketchCurve>
+  count: int
+  sketchArcs: SketchArcs
+  sketchCircles: SketchCircles
+  sketchConicCurves: SketchConicCurves
+  sketchControlPointSplines: SketchControlPointSplines
+  sketchEllipses: SketchEllipses
+  sketchEllipticalArcs: SketchEllipticalArcs
+  sketchFittedSplines: SketchFittedSplines
+  sketchFixedSplines: SketchFixedSplines
+  sketchLines: SketchLines
+
+SketchDiameterDimension : SketchDimension
+  # An diameter dimension in a sketch.
+  entity: SketchCurve
+  nativeObject: SketchDiameterDimension
+  createForAssemblyContext(occurrence: Occurrence) -> SketchDiameterDimension
+  deleteMe() -> bool
+
+SketchDimension : Base
+  # The base class for the all sketch dimensions.
+  assemblyContext: Occurrence
+  attributes: Attributes
+  entityToken: str
+  isDeletable: bool
+  isDriving: bool
+  parameter: ModelParameter
+  parentSketch: Sketch
+  textPosition: Point3D
+  value: float
+  deleteMe() -> bool
+
+SketchDimensionList *collection<SketchDimension>
+  # A list of sketch dimensions.
+  count: int
+
+SketchDimensionVector
+  append(x: SketchDimension) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::SketchDimension > >::size_type, x: SketchDimension) -> void
+  back() -> SketchDimension >::value_type
+  begin() -> SketchDimension >::iterator
+  capacity() -> SketchDimension >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> SketchDimension >::iterator
+  erase() -> SketchDimension >::iterator
+  front() -> SketchDimension >::value_type
+  get_allocator() -> SketchDimension >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> SketchDimension >::value_type
+  pop_back() -> void
+  push_back(x: SketchDimension) -> void
+  rbegin() -> SketchDimension >::reverse_iterator
+  rend() -> SketchDimension >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::SketchDimension > >::size_type) -> void
+  resize() -> void
+  size() -> SketchDimension >::size_type
+  swap(v: list[SketchDimension]) -> void
+
+SketchDimensions *collection<SketchDimension>
+  count: int
+  addAngularDimension(lineOne: SketchLine, lineTwo: SketchLine, textPoint: Point3D, isDriving: bool) -> SketchAngularDimension
+  addConcentricCircleDimension(circleOne: SketchCurve, circleTwo: SketchCurve, textPoint: Point3D, isDriving: bool) -> SketchConcentricCircleDimension
+  addDiameterDimension(entity: SketchCurve, textPoint: Point3D, isDriving: bool) -> SketchDiameterDimension
+  addDistanceBetweenLineAndPlanarSurfaceDimension(line: SketchLine, planarSurface: Base, isDriving: bool) -> SketchDistanceBetweenLineAndPlanarSurfaceDimension
+  addDistanceBetweenPointAndSurfaceDimension(point: SketchPoint, surface: Base, isDriving: bool) -> SketchDistanceBetweenPointAndSurfaceDimension
+  addDistanceDimension(pointOne: SketchPoint, pointTwo: SketchPoint, orientation: DimensionOrientations, textPoint: Point3D, isDriving: bool) -> SketchLinearDimension
+  addEllipseMajorRadiusDimension(ellipse: SketchCurve, textPoint: Point3D, isDriving: bool) -> SketchEllipseMajorRadiusDimension
+  addEllipseMinorRadiusDimension(ellipse: SketchCurve, textPoint: Point3D, isDriving: bool) -> SketchEllipseMinorRadiusDimension
+  addLinearDiameterDimension(centerLine: SketchLine, entityTwo: SketchEntity, textPoint: Point3D, isDriving: bool) -> SketchLinearDiameterDimension
+  addOffsetDimension(line: SketchLine, entityTwo: SketchEntity, textPoint: Point3D, isDriving: bool) -> SketchOffsetDimension
+  addRadialDimension(entity: SketchCurve, textPoint: Point3D, isDriving: bool) -> SketchRadialDimension
+  addTangentDistanceDimension(entityOne: SketchEntity, isCloseToEnityTwo: bool, entityTwo: SketchCurve, isCloseToEnityOne: bool, textPoint: Point3D, isDriving: bool) -> SketchTangentDistanceDimension
+
+SketchDistanceBetweenLineAndPlanarSurfaceDimension : SketchDimension
+  # A linear dimension in a sketch between a sketch line and a planar surface.
+  line: SketchLine
+  nativeObject: SketchDistanceBetweenLineAndPlanarSurfaceDimension
+  planarSurface: Base
+  createForAssemblyContext(occurrence: Occurrence) -> SketchDistanceBetweenLineAndPlanarSurfaceDimension
+  deleteMe() -> bool
+
+SketchDistanceBetweenPointAndSurfaceDimension : SketchDimension
+  # A linear dimension in a sketch between a sketch point and a surface.
+  nativeObject: SketchDistanceBetweenPointAndSurfaceDimension
+  point: SketchPoint
+  surface: Base
+  createForAssemblyContext(occurrence: Occurrence) -> SketchDistanceBetweenPointAndSurfaceDimension
+  deleteMe() -> bool
+
+SketchEllipse : SketchCurve
+  # An ellipse in a sketch.
+  centerSketchPoint: SketchPoint
+  geometry: Ellipse3D
+  majorAxis: Vector3D
+  majorAxisLine: SketchLine
+  majorAxisRadius: float
+  minorAxisLine: SketchLine
+  minorAxisRadius: float
+  nativeObject: SketchEllipse
+  worldGeometry: Ellipse3D
+  breakCurve(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  createForAssemblyContext(occurrence: Occurrence) -> SketchEllipse
+  deleteMe() -> bool
+  extend(endPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  intersections(sketchCurves: ObjectCollection) -> bool
+  split(splitPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  trim(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+
+SketchEllipseMajorRadiusDimension : SketchDimension
+  # An ellipse major radius dimension in a sketch.
+  ellipse: SketchCurve
+  nativeObject: SketchEllipseMajorRadiusDimension
+  createForAssemblyContext(occurrence: Occurrence) -> SketchEllipseMajorRadiusDimension
+  deleteMe() -> bool
+
+SketchEllipseMinorRadiusDimension : SketchDimension
+  # An ellipse minor radius dimension in a sketch.
+  ellipse: SketchCurve
+  nativeObject: SketchEllipseMinorRadiusDimension
+  createForAssemblyContext(occurrence: Occurrence) -> SketchEllipseMinorRadiusDimension
+  deleteMe() -> bool
+
+SketchEllipses *collection<SketchEllipse>
+  count: int
+  add(centerPoint: Base, majorAxisPoint: Point3D, point: Point3D) -> SketchEllipse
+
+SketchEllipticalArc : SketchCurve
+  # An elliptical arc in a sketch.
+  centerSketchPoint: SketchPoint
+  endSketchPoint: SketchPoint
+  geometry: EllipticalArc3D
+  majorAxis: Vector3D
+  majorAxisRadius: float
+  minorAxisRadius: float
+  nativeObject: SketchEllipticalArc
+  startSketchPoint: SketchPoint
+  worldGeometry: EllipticalArc3D
+  breakCurve(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  createForAssemblyContext(occurrence: Occurrence) -> SketchEllipticalArc
+  deleteMe() -> bool
+  extend(endPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  intersections(sketchCurves: ObjectCollection) -> bool
+  split(splitPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  trim(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+
+SketchEllipticalArcs *collection<SketchEllipticalArc>
+  count: int
+  addByAngle(centerPoint: Base, majorAxis: Vector3D, minorAxis: Vector3D, startAngle: float, sweepAngle: float) -> SketchEllipticalArc
+  addByEndPoints(centerPoint: Base, majorAxis: Vector3D, minorAxis: Vector3D, startPoint: Base, endPoint: Base) -> SketchEllipticalArc
+
+SketchEntity : Base
+  assemblyContext: Occurrence
+  attributes: Attributes
+  boundingBox: BoundingBox3D
+  entityToken: str
+  geometricConstraints: GeometricConstraintList
+  is2D: bool
+  isDeletable: bool
+  isFixed: bool
+  isFullyConstrained: bool
+  isLinked: bool
+  isReference: bool
+  isVisible: bool
+  parentSketch: Sketch
+  referencedEntity: Base
+  sketchDimensions: SketchDimensionList
+  deleteMe() -> bool
+
+SketchEntityList *collection<SketchEntity>
+  # A list of sketch entities.
+  count: int
+
+SketchEntityVector
+  append(x: SketchEntity) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::SketchEntity > >::size_type, x: SketchEntity) -> void
+  back() -> SketchEntity >::value_type
+  begin() -> SketchEntity >::iterator
+  capacity() -> SketchEntity >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> SketchEntity >::iterator
+  erase() -> SketchEntity >::iterator
+  front() -> SketchEntity >::value_type
+  get_allocator() -> SketchEntity >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> SketchEntity >::value_type
+  pop_back() -> void
+  push_back(x: SketchEntity) -> void
+  rbegin() -> SketchEntity >::reverse_iterator
+  rend() -> SketchEntity >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::SketchEntity > >::size_type) -> void
+  resize() -> void
+  size() -> SketchEntity >::size_type
+  swap(v: list[SketchEntity]) -> void
+
+SketchFittedSpline : SketchCurve
+  # A fitted spline in a sketch.
+  endSketchPoint: SketchPoint
+  fitPoints: SketchPointList
+  geometry: NurbsCurve3D
+  isClosed: bool
+  nativeObject: SketchFittedSpline
+  startSketchPoint: SketchPoint
+  worldGeometry: NurbsCurve3D
+  activateCurvatureHandle(fitPoint: SketchPoint) -> SketchArc
+  activateTangentHandle(fitPoint: SketchPoint) -> SketchLine
+  addFitPoint(parameter: float) -> SketchPoint
+  breakCurve(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  createForAssemblyContext(occurrence: Occurrence) -> SketchFittedSpline
+  deleteMe() -> bool
+  extend(endPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  getCurvatureHandle(fitPoint: SketchPoint) -> SketchArc
+  getTangentHandle(fitPoint: SketchPoint) -> SketchLine
+  intersections(sketchCurves: ObjectCollection) -> bool
+  split(splitPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  trim(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+
+SketchFittedSplines *collection<SketchFittedSpline>
+  count: int
+  add(fitPoints: ObjectCollection) -> SketchFittedSpline
+  addByNurbsCurve(nurbsCurve: NurbsCurve3D) -> SketchFittedSpline
+
+SketchFixedSpline : SketchCurve
+  endSketchPoint: SketchPoint
+  evaluator: CurveEvaluator3D
+  geometry: NurbsCurve3D
+  nativeObject: SketchFixedSpline
+  startSketchPoint: SketchPoint
+  worldGeometry: NurbsCurve3D
+  breakCurve(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  createForAssemblyContext(occurrence: Occurrence) -> SketchFixedSpline
+  deleteMe() -> bool
+  extend(endPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  intersections(sketchCurves: ObjectCollection) -> bool
+  replaceGeometry(nurbsCurve: NurbsCurve3D) -> bool
+  split(splitPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  trim(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+
+SketchFixedSplines *collection<SketchFixedSpline>
+  count: int
+  addByNurbsCurve(nurbsCurve: NurbsCurve3D) -> SketchFixedSpline
+
+SketchLine : SketchCurve
+  # A line in a sketch.
+  endSketchPoint: SketchPoint
+  geometry: Line3D
+  isCenterLine: bool
+  nativeObject: SketchLine
+  startSketchPoint: SketchPoint
+  worldGeometry: Line3D
+  breakCurve(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  createForAssemblyContext(occurrence: Occurrence) -> SketchLine
+  deleteMe() -> bool
+  extend(endPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  intersections(sketchCurves: ObjectCollection) -> bool
+  split(splitPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  trim(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+
+SketchLineList *collection<SketchLine>
+  # A list of sketch lines.
+  count: int
+
+SketchLineVector
+  append(x: SketchLine) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::SketchLine > >::size_type, x: SketchLine) -> void
+  back() -> SketchLine >::value_type
+  begin() -> SketchLine >::iterator
+  capacity() -> SketchLine >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> SketchLine >::iterator
+  erase() -> SketchLine >::iterator
+  front() -> SketchLine >::value_type
+  get_allocator() -> SketchLine >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> SketchLine >::value_type
+  pop_back() -> void
+  push_back(x: SketchLine) -> void
+  rbegin() -> SketchLine >::reverse_iterator
+  rend() -> SketchLine >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::SketchLine > >::size_type) -> void
+  resize() -> void
+  size() -> SketchLine >::size_type
+  swap(v: list[SketchLine]) -> void
+
+SketchLinearDiameterDimension : SketchDimension
+  # A linear diameter dimension in a sketch.
+  entityTwo: SketchEntity
+  line: SketchLine
+  nativeObject: SketchLinearDiameterDimension
+  createForAssemblyContext(occurrence: Occurrence) -> SketchLinearDiameterDimension
+  deleteMe() -> bool
+
+SketchLinearDimension : SketchDimension
+  # A linear dimension in a sketch.
+  entityOne: SketchEntity
+  entityTwo: SketchEntity
+  nativeObject: SketchLinearDimension
+  orientation: DimensionOrientations
+  createForAssemblyContext(occurrence: Occurrence) -> SketchLinearDimension
+  deleteMe() -> bool
+
+SketchLines *collection<SketchLine>
+  count: int
+  addAngleChamfer(firstLine: SketchLine, firstLinePoint: Point3D, secondLine: SketchLine, secondLinePoint: Point3D, distance: float, angle: float) -> SketchLine
+  addByMidpoint(midPoint: Base, secondPoint: Base) -> SketchLine
+  addByTwoPoints(startPoint: Base, endPoint: Base) -> SketchLine
+  addCenterPointRectangle(centerPoint: Point3D, cornerPoint: Base) -> SketchLineList
+  addDistanceChamfer(firstLine: SketchLine, firstLinePoint: Point3D, secondLine: SketchLine, secondLinePoint: Point3D, distanceOne: float, distanceTwo: float) -> SketchLine
+  addEdgePolygon(pointOne: Base, pointTwo: Base, isRight: bool, edgeCount: int) -> SketchLineList
+  addScribedPolygon(centerPoint: Base, edgeCount: int, angle: float, radius: float, isInscribed: bool) -> SketchLineList
+  addThreePointRectangle(pointOne: Base, pointTwo: Base, pointThree: Point3D) -> SketchLineList
+  addTwoPointRectangle(pointOne: Base, pointTwo: Base) -> SketchLineList
+
+SketchOffsetCurvesDimension : SketchDimension
+  # A SketchOffsetCurvesDimension object is created automatically whenever curves are offset.
+  nativeObject: SketchOffsetCurvesDimension
+  offsetConstraint: OffsetConstraint
+  createForAssemblyContext(occurrence: Occurrence) -> SketchOffsetCurvesDimension
+  deleteMe() -> bool
+
+SketchOffsetDimension : SketchDimension
+  # An offset dimension in a sketch.
+  entityTwo: SketchEntity
+  line: SketchLine
+  nativeObject: SketchOffsetDimension
+  createForAssemblyContext(occurrence: Occurrence) -> SketchOffsetDimension
+  deleteMe() -> bool
+
+SketchPoint : SketchEntity
+  # A point within a sketch.
+  connectedEntities: SketchEntityList
+  geometry: Point3D
+  nativeObject: SketchPoint
+  worldGeometry: Point3D
+  createForAssemblyContext(occurrence: Occurrence) -> SketchPoint
+  deleteMe() -> bool
+  detach(curve: SketchCurve) -> SketchPoint
+  merge(point: SketchPoint) -> bool
+  move(translation: Vector3D) -> bool
+
+SketchPointHolePositionDefinition : HolePositionDefinition
+  # Provides positioning information for a hole that is positioned by a sketch point.
+  sketchPoint: SketchPoint
+
+SketchPointList *collection<SketchPoint>
+  # A list of sketch points.
+  count: int
+
+SketchPointVector
+  append(x: SketchPoint) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::SketchPoint > >::size_type, x: SketchPoint) -> void
+  back() -> SketchPoint >::value_type
+  begin() -> SketchPoint >::iterator
+  capacity() -> SketchPoint >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> SketchPoint >::iterator
+  erase() -> SketchPoint >::iterator
+  front() -> SketchPoint >::value_type
+  get_allocator() -> SketchPoint >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> SketchPoint >::value_type
+  pop_back() -> void
+  push_back(x: SketchPoint) -> void
+  rbegin() -> SketchPoint >::reverse_iterator
+  rend() -> SketchPoint >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::SketchPoint > >::size_type) -> void
+  resize() -> void
+  size() -> SketchPoint >::size_type
+  swap(v: list[SketchPoint]) -> void
+
+SketchPoints *collection<SketchPoint>
+  # A collection of sketch points.
+  count: int
+  add(point: Point3D) -> SketchPoint
+
+SketchPointsBossPositionDefinition : BossPositionDefinition
+  # Provides positioning information for a boss feature that is positioned by a sketch point(s).
+  sketchPoints: ObjectCollection
+
+SketchPointsHolePositionDefinition : HolePositionDefinition
+  # Provides positioning information for a hole that is positioned by a sketch point.
+  sketchPoints: ObjectCollection
+
+SketchRadialDimension : SketchDimension
+  # An radial dimension in a sketch.
+  entity: SketchCurve
+  nativeObject: SketchRadialDimension
+  createForAssemblyContext(occurrence: Occurrence) -> SketchRadialDimension
+  deleteMe() -> bool
+
+SketchSelection : CurveSelection
+  loopType: LoopTypes
+  sideType: SideTypes
+
+SketchTangentDistanceDimension : SketchDimension
+  # A distance dimension measuring to the tangent on one or two circles or arcs.
+  circleOrArc: SketchCurve
+  entityOne: SketchEntity
+  nativeObject: SketchTangentDistanceDimension
+  createForAssemblyContext(occurrence: Occurrence) -> SketchTangentDistanceDimension
+  deleteMe() -> bool
+
+SketchText : SketchEntity
+  # Text in a sketch.
+  angle: float
+  boundaryLines: SketchLineList
+  definition: SketchTextDefinition
+  fontName: str
+  height: float
+  heightParameter: ModelParameter
+  isHorizontalFlip: bool
+  isVerticalFlip: bool
+  nativeObject: SketchText
+  position: Point3D
+  text: str
+  textParameter: ModelParameter
+  textStyle: TextStyles
+  asCurves() -> Curve3D]
+  createForAssemblyContext(occurrence: Occurrence) -> SketchText
+  deleteMe() -> bool
+  explode() -> SketchCurve]
+  redefineAsAlongPath(path: Base, isAbovePath: bool, horizontalAlignment: HorizontalAlignments, characterSpacing: float) -> bool
+  redefineAsFitOnPath(path: Base, isAbovePath: bool) -> bool
+
+SketchTextDefinition : Base
+  # The base class for the classes that define how text can be defined.
+  parentSketchText: SketchText
+
+SketchTextInput : Base
+  angle: float
+  definition: SketchTextDefinition
+  expression: str
+  fontName: str
+  height: float
+  height2: ValueInput
+  isHorizontalFlip: bool
+  isVerticalFlip: bool
+  position: Point3D
+  text: str
+  textStyle: TextStyles
+  setAsAlongPath(path: Base, isAbovePath: bool, horizontalAlignment: HorizontalAlignments, characterSpacing: float) -> bool
+  setAsFitOnPath(path: Base, isAbovePath: bool) -> bool
+  setAsMultiLine(cornerPoint: Base, diagonalPoint: Base, horizontalAlignment: HorizontalAlignments, verticalAlignment: VerticalAlignments, characterSpacing: float) -> bool
+
+SketchTexts *collection<SketchText>
+  count: int
+  add(input: SketchTextInput) -> SketchText
+  createInput(formattedText: str, height: float, position: Point3D) -> SketchTextInput
+  createInput2(formattedText: str, height: float) -> SketchTextInput
+  createInput3(expression: str, height: ValueInput) -> SketchTextInput
+
+SketchVector
+  append(x: Sketch) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::Sketch > >::size_type, x: Sketch) -> void
+  back() -> Sketch >::value_type
+  begin() -> Sketch >::iterator
+  capacity() -> Sketch >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> Sketch >::iterator
+  erase() -> Sketch >::iterator
+  front() -> Sketch >::value_type
+  get_allocator() -> Sketch >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> Sketch >::value_type
+  pop_back() -> void
+  push_back(x: Sketch) -> void
+  rbegin() -> Sketch >::reverse_iterator
+  rend() -> Sketch >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::Sketch > >::size_type) -> void
+  resize() -> void
+  size() -> Sketch >::size_type
+  swap(v: list[Sketch]) -> void
+
+Sketches *collection<Sketch>
+  # Provides access to the sketches within a design and provides
+    methods to create new sketches.
+  count: int
+  add() -> Sketch
+  addToBaseOrFormFeature(planarEntity: Base, targetBaseOrFormFeature: Base, includeFaceEdges: bool) -> Sketch
+  addWithoutEdges() -> Sketch
+  itemByName(name: str) -> Sketch
+
+SmoothConstraint : GeometricConstraint
+  # A smooth constraint in a sketch.
+  curveOne: SketchCurve
+  curveTwo: SketchCurve
+  nativeObject: SmoothConstraint
+  createForAssemblyContext(occurrence: Occurrence) -> SmoothConstraint
+  deleteMe() -> bool
+
+StructuralConstraint : SimAttribute
+  # Object that represents a structural constraint.
+  displacement: Vector3D
+  maskDefinition: ConstraintMaskDefinition
+  rotation: Vector3D
+  type: ConstraintTypes
+
+SymmetryConstraint : GeometricConstraint
+  # A symmetry constraint in a sketch.
+  entityOne: SketchEntity
+  entityTwo: SketchEntity
+  nativeObject: SymmetryConstraint
+  symmetryLine: SketchLine
+  createForAssemblyContext(occurrence: Occurrence) -> SymmetryConstraint
+  deleteMe() -> bool
+
+TangentConstraint : GeometricConstraint
+  # A tangent constraint in a sketch.
+  curveOne: SketchCurve
+  curveTwo: SketchCurve
+  nativeObject: TangentConstraint
+  createForAssemblyContext(occurrence: Occurrence) -> TangentConstraint
+  deleteMe() -> bool
+
+VerticalConstraint : GeometricConstraint
+  # A vertical constraint in a sketch.
+  line: SketchLine
+  nativeObject: VerticalConstraint
+  createForAssemblyContext(occurrence: Occurrence) -> VerticalConstraint
+  deleteMe() -> bool
+
+VerticalPointsConstraint : GeometricConstraint
+  # A vertical constraint between two points in a sketch.
+  nativeObject: VerticalPointsConstraint
+  pointOne: SketchPoint
+  pointTwo: SketchPoint
+  createForAssemblyContext(occurrence: Occurrence) -> VerticalPointsConstraint
+  deleteMe() -> bool

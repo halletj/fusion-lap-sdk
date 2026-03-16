@@ -1,4 +1,55 @@
 # fusion-graph.lap
 
 [graph]
-# Application class not found in IR
+Application
+  .activeDocument -> Document
+  .activeEditObject -> Base
+  .activeProduct -> Product
+  .activeViewport -> Viewport
+  .applicationFolders -> ApplicationFolders
+  .cameraChanged -> CameraEvent
+  .crashDescription -> str
+  .currentUser -> User
+  .data -> Data
+  .dataFileComplete -> DataEvent
+  .dataFileCopyComplete -> DataEvent
+  .documentActivated -> DocumentEvent
+  .documentActivating -> DocumentEvent
+  .documentClosed -> DocumentEvent
+  .documentClosing -> DocumentEvent
+  .documentCreated -> DocumentEvent
+  .documentDeactivated -> DocumentEvent
+  .documentDeactivating -> DocumentEvent
+  .documentOpened -> DocumentEvent
+  .documentOpening -> DocumentEvent
+  .documentSaved -> DocumentEvent
+  .documentSaving -> DocumentEvent
+  .documents -> Documents
+  .favoriteAppearances -> FavoriteAppearances
+  .favoriteMaterials -> FavoriteMaterials
+  .fontNames -> list[str]
+  .hasActiveJobs -> bool
+  .importManager -> ImportManager
+  .insertedFromURL -> WebRequestEvent
+  .insertingFromURL -> WebRequestEvent
+  .isComponentColorsDisplayed -> bool
+  .isOffLine -> bool
+  .isStartupComplete -> bool
+  .lightingEnvironment -> LightingEnvironments
+  .materialLibraries -> MaterialLibraries
+  .measureManager -> MeasureManager
+  .mfgdmDataReady -> MFGDMDataEvent
+  .onlineStatusChanged -> ApplicationEvent
+  .openedFromURL -> WebRequestEvent
+  .openingFromURL -> WebRequestEvent
+  .pointTolerance -> float
+  .preferences -> Preferences
+  .scripts -> Scripts
+  .startupCompleted -> ApplicationEvent
+  .supportedProductTypes -> list[str]
+  .token -> str
+  .userId -> str
+  .userInterface -> UserInterface
+  .userName -> str
+  .vectorAngleTolerance -> float
+  .version -> str

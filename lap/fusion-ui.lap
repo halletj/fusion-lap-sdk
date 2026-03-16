@@ -1,1 +1,913 @@
 # fusion-ui.lap
+
+[types]
+CAMEventChangeType: ErrorCAMEventChangeType | ToolCAMEventChangeType | ToolSwitchCAMEventChangeType | NameCAMEventChangeType | ParameterCAMEventChangeType
+CAMEventState: CAMEventStateSuccessful | CAMEventStateDeferred | CAMEventStateErrorMissingOperation | CAMEventStateErrorMissingDocument | CAMEventStateErrorOther
+OperationBaseEventTypes: ErrorOperationBaseEventType | CommandStartedOperationBaseEventType | GenerationStartedOperationBaseEventType | ChangeOperationBaseEventType | GenerationStartingOperationBaseEventType | CommandButtonPressedOperationBaseEventType
+SetupChangeEventType: Arbitrary | PrintSettingSelection
+
+[classes]
+ActiveSelectionEvent : Event
+  add(handler: ActiveSelectionEventHandler) -> bool
+  remove(handler: ActiveSelectionEventHandler) -> bool
+
+ActiveSelectionEventArgs : EventArgs
+  currentSelection: Selection]
+
+ActiveSelectionEventHandler
+  notify(eventArgs: ActiveSelectionEventArgs) -> void
+
+AngleValueCommandInput : CommandInput
+  expression: str
+  hasMaximumValue: bool
+  hasMinimumValue: bool
+  isMaximumValueInclusive: bool
+  isMinimumValueInclusive: bool
+  isValidExpression: bool
+  manipulatorOrigin: Point3D
+  manipulatorXDirection: Vector3D
+  manipulatorYDirection: Vector3D
+  maximumValue: float
+  minimumValue: float
+  value: float
+  deleteMe() -> bool
+  setManipulator(origin: Point3D, xDirection: Vector3D, yDirection: Vector3D) -> bool
+
+ApplicationCommandEvent : Event
+  # An event endpoint that supports the connection to ApplicationCommandEventHandlers.
+  add(handler: ApplicationCommandEventHandler) -> bool
+  remove(handler: ApplicationCommandEventHandler) -> bool
+
+ApplicationCommandEventArgs : EventArgs
+  commandDefinition: CommandDefinition
+  commandId: str
+  isCanceled: bool
+  terminationReason: CommandTerminationReason
+
+ApplicationCommandEventHandler
+  notify(eventArgs: ApplicationCommandEventArgs) -> void
+
+ApplicationEvent : Event
+  add(handler: ApplicationEventHandler) -> bool
+  remove(handler: ApplicationEventHandler) -> bool
+
+ApplicationEventArgs : EventArgs
+  hasInternetAccess: bool
+  isOffLine: bool
+
+ApplicationEventHandler
+  notify(eventArgs: ApplicationEventArgs) -> void
+
+BoolValueCommandInput : CommandInput
+  isCheckBox: bool
+  resourceFolder: str
+  text: str
+  value: bool
+  deleteMe() -> bool
+
+BrowserCommandInput : CommandInput
+  htmlFileURL: str
+  maximumHeight: int
+  minimumHeight: int
+  deleteMe() -> bool
+  sendInfoToHTML(action: str, data: str) -> bool
+
+ButtonRowCommandInput : CommandInput
+  # Provides a command input to get a selection of a single button from a row of buttons.
+  isMultiSelectEnabled: bool
+  listItems: ListItems
+  selectedItem: ListItem
+  deleteMe() -> bool
+
+CAMEventArgs : Base
+  # The OperationEventArgs provides information associated with an operation event.
+  info: str
+
+CAMEventManager : Base
+  operationBaseChanged: OperationBaseEvent
+  operationBaseCommandButtonPressed: OperationBaseEvent
+  operationBaseCommandStarted: OperationBaseEvent
+  operationBaseGenerationStarted: OperationBaseEvent
+  operationBaseGenerationStarting: OperationBaseEvent
+
+CameraEvent : Event
+  add(handler: CameraEventHandler) -> bool
+  remove(handler: CameraEventHandler) -> bool
+
+CameraEventArgs : EventArgs
+  viewport: Viewport
+
+CameraEventHandler
+  notify(eventArgs: CameraEventArgs) -> void
+
+Command : Base
+  activate: CommandEvent
+  cancelButtonText: str
+  commandInputs: CommandInputs
+  deactivate: CommandEvent
+  destroy: CommandEvent
+  editingFeature: Base
+  execute: CommandEvent
+  executePreview: CommandEvent
+  hasDistinctSelectionSets: bool
+  helpFile: str
+  incomingFromHTML: HTMLEvent
+  inputChanged: InputChangedEvent
+  isAutoExecute: bool
+  isExecutedWhenPreEmpted: bool
+  isOKButtonVisible: bool
+  isPositionDependent: bool
+  isRepeatable: bool
+  keyDown: KeyboardEvent
+  keyUp: KeyboardEvent
+  mouseClick: MouseEvent
+  mouseDoubleClick: MouseEvent
+  mouseDown: MouseEvent
+  mouseDrag: MouseEvent
+  mouseDragBegin: MouseEvent
+  mouseDragEnd: MouseEvent
+  mouseMove: MouseEvent
+  mouseUp: MouseEvent
+  mouseWheel: MouseEvent
+  navigatingURL: NavigationEvent
+  okButtonText: str
+  parentCommandDefinition: CommandDefinition
+  preSelect: SelectionEvent
+  preSelectEnd: SelectionEvent
+  preSelectMouseMove: SelectionEvent
+  preSelectStart: SelectionEvent
+  select: SelectionEvent
+  selectionEvent: SelectionEvent
+  unselect: SelectionEvent
+  validateInputs: ValidateInputsEvent
+  beginStep(makeExistingStepNonUndoable: bool) -> bool
+  doExecute(terminate: bool) -> bool
+  doExecutePreview() -> bool
+  getCursor() -> bool
+  setCursor(cursorImage: str, xHotSpot: int, yHotSpot: int) -> bool
+  setDialogInitialSize(width: int, height: int) -> bool
+  setDialogMinimumSize(width: int, height: int) -> bool
+  setDialogSize(width: int, height: int) -> bool
+
+CommandCreatedEvent : Event
+  # Class that needs to be implemented in order to respond to the CommandCreatedEvent event.
+  add(handler: CommandCreatedEventHandler) -> bool
+  remove(handler: CommandCreatedEventHandler) -> bool
+
+CommandCreatedEventArgs : EventArgs
+  # Provides data for the CommandCreated event.
+  command: Command
+
+CommandCreatedEventHandler
+  notify(eventArgs: CommandCreatedEventArgs) -> void
+
+CommandEvent : Event
+  # An event endpoint that supports the connection to client implemented CommandEventHandlers.
+  add(handler: CommandEventHandler) -> bool
+  remove(handler: CommandEventHandler) -> bool
+
+CommandEventArgs : EventArgs
+  command: Command
+  executeFailed: bool
+  executeFailedMessage: str
+  isValidResult: bool
+  terminationReason: CommandTerminationReason
+
+CommandEventHandler
+  notify(eventArgs: CommandEventArgs) -> void
+
+CommandInput : Base
+  commandInputs: CommandInputs
+  id: str
+  isEnabled: bool
+  isFullWidth: bool
+  isVisible: bool
+  name: str
+  parentCommand: Command
+  parentCommandInput: CommandInput
+  toolClipFilename: str
+  tooltip: str
+  tooltipDescription: str
+  deleteMe() -> bool
+
+CommandInputs *collection<CommandInput>
+  command: Command
+  count: int
+  addAngleValueCommandInput(id: str, name: str, initialValue: ValueInput) -> AngleValueCommandInput
+  addBoolValueInput() -> BoolValueCommandInput
+  addBrowserCommandInput(id: str, name: str, htmlFileURL: str, minimumHeight: int, maximumHeight: int) -> BrowserCommandInput
+  addButtonRowCommandInput(id: str, name: str, isMultiSelectEnabled: bool) -> ButtonRowCommandInput
+  addDirectionCommandInput() -> DirectionCommandInput
+  addDistanceValueCommandInput(id: str, name: str, initialValue: ValueInput) -> DistanceValueCommandInput
+  addDropDownCommandInput(id: str, name: str, dropDownStyle: DropDownStyles) -> DropDownCommandInput
+  addFloatSliderCommandInput(id: str, name: str, unitType: str, min: float, max: float, hasTwoSliders: bool) -> FloatSliderCommandInput
+  addFloatSliderListCommandInput(id: str, name: str, unitType: str, valueList: list[float], hasTwoSliders: bool) -> FloatSliderCommandInput
+  addFloatSpinnerCommandInput(id: str, name: str, unitType: str, min: float, max: float, spinStep: float, initialValue: float) -> FloatSpinnerCommandInput
+  addGroupCommandInput(id: str, name: str) -> GroupCommandInput
+  addImageCommandInput(id: str, name: str, imageFile: str) -> ImageCommandInput
+  addIntegerSliderCommandInput(id: str, name: str, min: int, max: int, hasTwoSliders: bool) -> IntegerSliderCommandInput
+  addIntegerSliderListCommandInput(id: str, name: str, valueList: list[int], hasTwoSliders: bool) -> IntegerSliderCommandInput
+  addIntegerSpinnerCommandInput(id: str, name: str, min: int, max: int, spinStep: int, initialValue: int) -> IntegerSpinnerCommandInput
+  addRadioButtonGroupCommandInput() -> RadioButtonGroupCommandInput
+  addSelectionInput(id: str, name: str, commandPrompt: str) -> SelectionCommandInput
+  addSeparatorCommandInput(id: str) -> SeparatorCommandInput
+  addStringValueInput() -> StringValueCommandInput
+  addTabCommandInput() -> TabCommandInput
+  addTableCommandInput(id: str, name: str, numberOfColumns: int, columnRatio: str) -> TableCommandInput
+  addTextBoxCommandInput(id: str, name: str, formattedText: str, numRows: int, isReadOnly: bool) -> TextBoxCommandInput
+  addTriadCommandInput(id: str, transform: Matrix3D) -> TriadCommandInput
+  addValueInput(id: str, name: str, unitType: str, initialValue: ValueInput) -> ValueCommandInput
+  itemById(id: str) -> CommandInput
+
+CreateMachineConfigurationsEvent : Event
+  add(handler: CreateMachineConfigurationsEventHandler) -> bool
+  remove(handler: CreateMachineConfigurationsEventHandler) -> bool
+
+CreateMachineConfigurationsEventArgs : EventArgs
+  # This EventArgs object will be sent with the CreateMachineConfigurationsEvent.
+  machineDescriptions: MachineDescription]
+  machines: Machine]
+
+CreateMachineConfigurationsEventHandler
+  notify(eventArgs: CreateMachineConfigurationsEventArgs) -> void
+
+CustomEvent : Event
+  eventId: str
+  add(handler: CustomEventHandler) -> bool
+  remove(handler: CustomEventHandler) -> bool
+
+CustomEventArgs : EventArgs
+  additionalInfo: str
+
+CustomEventHandler
+  notify(eventArgs: CustomEventArgs) -> void
+
+CustomFeatureEvent : Event
+  # A CustomFeature event is an event associated with handling changes to a custom feature.
+  add(handler: CustomFeatureEventHandler) -> bool
+  remove(handler: CustomFeatureEventHandler) -> bool
+
+CustomFeatureEventArgs : EventArgs
+  # The CustomFeatureEventArgs provides information associated with a custom feature event.
+  computeStatus: Status
+  customFeature: CustomFeature
+
+CustomFeatureEventHandler
+  notify(eventArgs: CustomFeatureEventArgs) -> void
+
+CustomSDFCallbackEventHandler
+  boundingBox(bboxOut: BoundingBox3D) -> bool
+  signedDistanceAt(x: float, y: float, z: float) -> float
+
+DataEvent : Event
+  # A Data event is an event associated with operations on Data items.
+  add(handler: DataEventHandler) -> bool
+  remove(handler: DataEventHandler) -> bool
+
+DataEventArgs : EventArgs
+  file: DataFile
+  filename: str
+  status: Status
+
+DataEventHandler
+  notify(eventArgs: DataEventArgs) -> void
+
+DirectionCommandInput : CommandInput
+  isDirectionFlipped: bool
+  manipulatorDirection: Vector3D
+  manipulatorOrigin: Point3D
+  resourceFolder: str
+  deleteMe() -> bool
+  setManipulator(origin: Point3D, direction: Vector3D) -> bool
+
+DistanceValueCommandInput : CommandInput
+  expression: str
+  hasMaximumValue: bool
+  hasMinimumValue: bool
+  isMaximumValueInclusive: bool
+  isMinimumValueInclusive: bool
+  isValidExpression: bool
+  manipulatorDirection: Vector3D
+  manipulatorOrigin: Point3D
+  maximumValue: float
+  minimumValue: float
+  value: float
+  deleteMe() -> bool
+  setManipulator(origin: Point3D, direction: Vector3D) -> bool
+
+DocumentEvent : Event
+  add(handler: DocumentEventHandler) -> bool
+  remove(handler: DocumentEventHandler) -> bool
+
+DocumentEventArgs : EventArgs
+  cancelReason: str
+  document: Document
+  fullPath: str
+  isOperationCancelled: bool
+
+DocumentEventHandler
+  notify(eventArgs: DocumentEventArgs) -> void
+
+DropDownCommandInput : CommandInput
+  # Provides a command input to get the choice in a drop-down list from the user.
+  dropDownStyle: DropDownStyles
+  listItems: ListItems
+  maxVisibleItems: int
+  selectedItem: ListItem
+  deleteMe() -> bool
+
+Event : Base
+  name: str
+  sender: Base
+
+EventArgs : Base
+  firingEvent: Event
+
+FloatSliderCommandInput : SliderCommandInput
+  # Provides a command input to get the value of a slider from the user, the value type is float.
+  maximumValue: float
+  minimumValue: float
+  spinStep: float
+  valueList: list[float]
+  valueOne: float
+  valueTwo: float
+  deleteMe() -> bool
+  getText(isLeft: bool) -> str
+  setText(left: str, right: str) -> bool
+
+FloatSpinnerCommandInput : CommandInput
+  # Provides a command input to get the value of a spinner from the user, the value type is float.
+  expression: str
+  isValidExpression: bool
+  maximumValue: float
+  minimumValue: float
+  spinStep: float
+  unitType: str
+  value: float
+  deleteMe() -> bool
+
+GroupCommandInput : CommandInput
+  children: CommandInputs
+  isEnabledCheckBoxChecked: bool
+  isEnabledCheckBoxDisplayed: bool
+  isExpanded: bool
+  deleteMe() -> bool
+
+HTMLEvent : Event
+  add(handler: HTMLEventHandler) -> bool
+  remove(handler: HTMLEventHandler) -> bool
+
+HTMLEventArgs : EventArgs
+  action: str
+  browserCommandInput: BrowserCommandInput
+  data: str
+  returnData: str
+
+HTMLEventHandler
+  notify(eventArgs: HTMLEventArgs) -> void
+
+HttpEvent : Event
+  # A HttpEvent represents an event that occurs in reaction to a http request.
+  add(handler: HttpEventHandler) -> bool
+  remove(handler: HttpEventHandler) -> bool
+
+HttpEventArgs : EventArgs
+  # The HttpEventArgs provides information associated with a http request.
+  response: HttpResponse
+
+HttpEventHandler
+  notify(eventArgs: HttpEventArgs) -> void
+
+ImageCommandInput : CommandInput
+  # Provides an image command input for including an image in a command dialog.
+  imageFile: str
+  scaleFactor: float
+  deleteMe() -> bool
+
+InputChangedEvent : Event
+  # An event endpoint that supports the connection to client implemented InputChangedEventHandlers.
+  add(handler: InputChangedEventHandler) -> bool
+  remove(handler: InputChangedEventHandler) -> bool
+
+InputChangedEventArgs : EventArgs
+  input: CommandInput
+  inputs: CommandInputs
+
+InputChangedEventHandler
+  notify(eventArgs: InputChangedEventArgs) -> void
+
+IntegerSliderCommandInput : SliderCommandInput
+  # Provides a command input to get the value of a slider from the user, the value type is integer.
+  maximumValue: int
+  minimumValue: int
+  spinStep: int
+  valueList: list[int]
+  valueOne: int
+  valueTwo: int
+  deleteMe() -> bool
+  getText(isLeft: bool) -> str
+  setText(left: str, right: str) -> bool
+
+IntegerSpinnerCommandInput : CommandInput
+  # Provides a command input to get the value of a spinner from the user, the value type is integer.
+  maximumValue: int
+  minimumValue: int
+  spinStep: int
+  value: int
+  deleteMe() -> bool
+
+KeyboardEvent : Event
+  # An event endpoint that supports the connection to client implemented KeyboardEventHandlers.
+  add(handler: KeyboardEventHandler) -> bool
+  remove(handler: KeyboardEventHandler) -> bool
+
+KeyboardEventArgs : EventArgs
+  keyCode: KeyCodes
+  modifierMask: int
+
+KeyboardEventHandler
+  notify(eventArgs: KeyboardEventArgs) -> void
+
+MFGDMDataEvent : Event
+  # A MFGDMDataEvent represents an event related to the state of the MFGDM data structure.
+  add(handler: MFGDMDataEventHandler) -> bool
+  remove(handler: MFGDMDataEventHandler) -> bool
+
+MFGDMDataEventArgs : EventArgs
+  # The MFGDMDataEventArgs provides information associated with the MFGDM event.
+  document: Document
+
+MFGDMDataEventHandler
+  notify(eventArgs: MFGDMDataEventArgs) -> void
+
+MarkingMenuEvent : Event
+  add(handler: MarkingMenuEventHandler) -> bool
+  remove(handler: MarkingMenuEventHandler) -> bool
+
+MarkingMenuEventArgs : EventArgs
+  linearMarkingMenu: LinearMarkingMenu
+  radialMarkingMenu: RadialMarkingMenu
+  selectedEntities: Base]
+
+MarkingMenuEventHandler
+  notify(eventArgs: MarkingMenuEventArgs) -> void
+
+MouseEvent : Event
+  # An event endpoint that supports the connection to client implemented MouseEventHandlers.
+  add(handler: MouseEventHandler) -> bool
+  remove(handler: MouseEventHandler) -> bool
+
+MouseEventArgs : EventArgs
+  button: MouseButtons
+  clicks: int
+  keyboardModifiers: KeyboardModifiers
+  position: Point2D
+  viewport: Viewport
+  viewportPosition: Point2D
+  wheelDelta: int
+
+MouseEventHandler
+  notify(eventArgs: MouseEventArgs) -> void
+
+NavigationEvent : Event
+  # A NavigationEvent is fired when a link is navigated on the page in a palette.
+  add(handler: NavigationEventHandler) -> bool
+  remove(handler: NavigationEventHandler) -> bool
+
+NavigationEventArgs : EventArgs
+  browserCommandInput: BrowserCommandInput
+  launchExternally: bool
+  navigationURL: str
+  preventDefault: bool
+
+NavigationEventHandler
+  notify(eventArgs: NavigationEventArgs) -> void
+
+OperationBaseCommandButtonPressedEventArgs : CAMEventArgs
+  # Event arguments specific to an operationBaseCommandButtonPressed event.
+  buttonName: str
+
+OperationBaseCommandStartedEventArgs : CAMEventArgs
+  # Event arguments specific to an operationBaseCommandStarted event.
+  isEdit: bool
+
+OperationBaseEvent : Event
+  add(handler: OperationBaseEventHandler) -> bool
+  remove(handler: OperationBaseEventHandler) -> bool
+
+OperationBaseEventArgs : EventArgs
+  # The OperationEventArgs provides information associated with an operation event.
+  camEventArgs: CAMEventArgs
+  document: Document
+  documentName: str
+  eventState: CAMEventState
+  eventType: OperationBaseEventTypes
+  operationbase: OperationBase
+  operationid: int
+  stateMessage: str
+
+OperationBaseEventHandler
+  notify(eventArgs: OperationBaseEventArgs) -> void
+
+OperationChangedEventArgs : CAMEventArgs
+  # Event arguments specific to an OperationChanged event.
+  changeType: CAMEventChangeType
+
+Palette : Base
+  closed: UserInterfaceGeneralEvent
+  dockingOption: PaletteDockingOptions
+  dockingState: PaletteDockingStates
+  height: int
+  htmlFileURL: str
+  id: str
+  incomingFromHTML: HTMLEvent
+  isNative: bool
+  isTransparent: bool
+  isVisible: bool
+  left: int
+  name: str
+  navigatingURL: NavigationEvent
+  top: int
+  width: int
+  deleteMe() -> bool
+  sendInfoToHTML(action: str, data: str) -> str
+  setMaximumSize(width: int, height: int) -> bool
+  setMinimumSize(width: int, height: int) -> bool
+  setPosition(left: int, top: int) -> bool
+  setSize(width: int, height: int) -> bool
+  snapTo(palette: Palette, snapOption: PaletteSnapOptions) -> bool
+
+RadioButtonGroupCommandInput : CommandInput
+  # Provides a command input to get the choice from a radio button group from the user.
+  listItems: ListItems
+  selectedItem: ListItem
+  deleteMe() -> bool
+
+RenderEvent : Event
+  add(handler: RenderEventHandler) -> bool
+  remove(handler: RenderEventHandler) -> bool
+
+RenderEventArgs : EventArgs
+  viewport: Viewport
+
+RenderEventHandler
+  notify(eventArgs: RenderEventArgs) -> void
+
+SandvikIntegrationEvent : Event
+  add(handler: SandvikIntegrationEventHandler) -> bool
+  remove(handler: SandvikIntegrationEventHandler) -> bool
+
+SandvikIntegrationEventArgs : EventArgs
+  # This EventArgs object will be sent with the SandvikIntegrationEvent.
+  action: str
+  contextObject: OperationBase
+
+SandvikIntegrationEventHandler
+  notify(eventArgs: SandvikIntegrationEventArgs) -> void
+
+SandvikPreIntegrationEvent : Event
+  add(handler: SandvikPreIntegrationEventHandler) -> bool
+  remove(handler: SandvikPreIntegrationEventHandler) -> bool
+
+SandvikPreIntegrationEventArgs : EventArgs
+  # This EventArgs object will be sent with the SandvikPreIntegrationEvent.
+  contextObject: OperationBase
+  showEditToolAssembly: bool
+  showGetCuttingData: bool
+  showGetToolRecommendation: bool
+  showSelectToolAssembly: bool
+  showSetMaterial: bool
+
+SandvikPreIntegrationEventHandler
+  notify(eventArgs: SandvikPreIntegrationEventArgs) -> void
+
+SearchNetworkMachinesEvent : Event
+  add(handler: SearchNetworkMachinesEventHandler) -> bool
+  remove(handler: SearchNetworkMachinesEventHandler) -> bool
+
+SearchNetworkMachinesEventArgs : EventArgs
+  # This EventArgs object will be sent with the SearchNetworkMachinesEvent.
+  machineDescriptions: MachineDescription]
+
+SearchNetworkMachinesEventHandler
+  notify(eventArgs: SearchNetworkMachinesEventArgs) -> void
+
+SelectionCommandInput : CommandInput
+  # Provides a command input to get a selection from the user.
+  commandPrompt: str
+  hasFocus: bool
+  isUseCurrentSelections: bool
+  selectionCount: int
+  selectionFilters: list[str]
+  addSelection(selection: Base) -> bool
+  addSelectionFilter(filter: str) -> bool
+  clearSelection() -> bool
+  clearSelectionFilter() -> bool
+  deleteMe() -> bool
+  getSelectionLimits() -> bool
+  selection(index: int) -> Selection
+  setSelectionLimits(minimum: int, maximum: int) -> bool
+
+SelectionEvent : Event
+  # An event endpoint that supports the connection to client implemented SelectionEventHandlers.
+  activeInput: SelectionCommandInput
+  add(handler: SelectionEventHandler) -> bool
+  remove(handler: SelectionEventHandler) -> bool
+
+SelectionEventArgs : EventArgs
+  activeInput: SelectionCommandInput
+  additionalEntities: ObjectCollection
+  isSelectable: bool
+  selection: Selection
+
+SelectionEventHandler
+  notify(eventArgs: SelectionEventArgs) -> void
+
+SeparatorCommandInput : CommandInput
+  # An object that represents a visual separator within a command dialog.
+  deleteMe() -> bool
+
+SetupChangeEvent : Event
+  add(handler: SetupChangeEventHandler) -> bool
+  remove(handler: SetupChangeEventHandler) -> bool
+
+SetupChangeEventArgs : EventArgs
+  # The SetupChangeEventArgs provides information associated with a change event of a setup.
+  info: str
+  setup: Setup
+  type: SetupChangeEventType
+
+SetupChangeEventHandler
+  notify(eventArgs: SetupChangeEventArgs) -> void
+
+SetupEvent : Event
+  # A SetupEvent represents a setup related event.  For example, SetupCreated or SetupDestroying.
+  add(handler: SetupEventHandler) -> bool
+  remove(handler: SetupEventHandler) -> bool
+
+SetupEventArgs : EventArgs
+  # The SetupEventArgs provides information associated with a setup event.
+  setup: Setup
+
+SetupEventHandler
+  notify(eventArgs: SetupEventArgs) -> void
+
+SliderCommandInput : CommandInput
+  # Provides a command input to get the value of a slider from the user.
+  expressionOne: str
+  expressionTwo: str
+  hasTwoSliders: bool
+  unitType: str
+  deleteMe() -> bool
+  getText(isLeft: bool) -> str
+  setText(left: str, right: str) -> bool
+
+StringValueCommandInput : CommandInput
+  # Provides a command input to get a string value from the user.
+  isPassword: bool
+  isReadOnly: bool
+  isValueError: bool
+  value: str
+  deleteMe() -> bool
+
+TabCommandInput : CommandInput
+  # Tab command inputs contain a set of command inputs and/or group command inputs/
+  children: CommandInputs
+  isActive: bool
+  resourceFolder: str
+  activate() -> bool
+  deleteMe() -> bool
+
+TableCommandInput : CommandInput
+  columnRatio: str
+  columnSpacing: int
+  hasGrid: bool
+  maximumVisibleRows: int
+  minimumVisibleRows: int
+  numberOfColumns: int
+  rowCount: int
+  rowSpacing: int
+  selectedRow: int
+  tablePresentationStyle: TablePresentationStyles
+  addCommandInput(input: CommandInput, row: int, column: int, rowSpan: int, columnSpan: int) -> bool
+  addToolbarCommandInput(input: CommandInput) -> bool
+  clear() -> bool
+  deleteMe() -> bool
+  deleteRow(row: int) -> bool
+  getInputAtPosition(row: int, column: int) -> CommandInput
+  getPosition(input: CommandInput) -> bool
+  removeInput(row: int, column: int) -> bool
+
+TextBoxCommandInput : CommandInput
+  # Provides a command input to interact with a text box.
+  formattedText: str
+  isReadOnly: bool
+  numRows: int
+  text: str
+  deleteMe() -> bool
+
+Toolbar : Base
+  # Provides access to a toolbar in the user interface. A toolbar is a collection of toolbar controls.
+  controls: ToolbarControls
+  id: str
+  parentUserInterface: UserInterface
+
+ToolbarPanel : Base
+  # Toolbar panels are the panels shown in the command toolbar.
+  controls: ToolbarControls
+  id: str
+  index: int
+  isVisible: bool
+  name: str
+  parentUserInterface: UserInterface
+  productType: str
+  promotedControls: ToolbarControlList
+  relatedWorkspaces: ObjectCollection
+  deleteMe() -> bool
+  indexWithinTab(tabId: str) -> int
+
+ToolbarTab : Base
+  # Toolbar tabs are the tabs shown in the command toolbar.
+  id: str
+  index: int
+  isActive: bool
+  isNative: bool
+  isVisible: bool
+  name: str
+  parentUserInterface: UserInterface
+  productType: str
+  toolbarPanels: ToolbarPanels
+  activate() -> bool
+  deleteMe() -> bool
+  move(positionId: str, isBefore: bool) -> bool
+
+TriadCommandInput : CommandInput
+  isFlippedHorizontal: bool
+  isFlippedVertical: bool
+  isHorizontalFlipVisible: bool
+  isOriginTranslationVisible: bool
+  isUnifiedScalingVisible: bool
+  isValidExpressions: bool
+  isVerticalFlipVisible: bool
+  isXRotationVisible: bool
+  isXScalingInXYVisible: bool
+  isXScalingInXZVisible: bool
+  isXTranslationVisible: bool
+  isXYPlaneScalingVisible: bool
+  isXYPlaneTranslationVisible: bool
+  isXZPlaneScalingVisible: bool
+  isXZPlaneTranslationVisible: bool
+  isYRotationVisible: bool
+  isYScalingInXYVisible: bool
+  isYScalingInYZVisible: bool
+  isYTranslationVisible: bool
+  isYZPlaneScalingVisible: bool
+  isYZPlaneTranslationVisible: bool
+  isZRotationVisible: bool
+  isZScalingInXZVisible: bool
+  isZScalingInYZVisible: bool
+  isZTranslationVisible: bool
+  lastChangeMade: TriadChanges
+  lastTransform: Matrix3D
+  positionTransform: Matrix3D
+  transform: Matrix3D
+  unifiedScaleFactorExpression: str
+  unifiedeScaleFactor: float
+  xRotation: float
+  xRotationExpression: str
+  xScaleFactor: float
+  xScaleFactorExpression: str
+  xTranslation: float
+  xTranslationExpression: str
+  xYPlaneScaleFactor: float
+  xYPlaneScaleFactorExpression: str
+  yRotation: float
+  yRotationExpression: str
+  yScaleFactor: float
+  yScaleFactorExpression: str
+  yTranslation: float
+  yTranslationExpression: str
+  yZPlaneScaleFactor: float
+  yZPlaneScaleFactorExpression: str
+  zRotation: float
+  zRotationExpression: str
+  zScaleFactor: float
+  zScaleFactorExpression: str
+  zTranslation: float
+  zTranslationExpression: str
+  zXPlaneScaleFactor: float
+  zXPlaneScaleFactorExpression: str
+  deleteMe() -> bool
+  hideAll() -> bool
+  hideAllRotations() -> bool
+  hideAllScaling() -> bool
+  setFlipVisibility(isVisible: bool) -> bool
+  setFullVisibility(isVisible: bool) -> bool
+  setPlanarMoveVisibility(isVisible: bool) -> bool
+  setRotateVisibility(isVisible: bool) -> bool
+  setScaleVisibility(isVisible: bool) -> bool
+  setTranslateVisibility(isVisible: bool) -> bool
+
+UserInterface : Base
+  # Provides access to the user-interface related objects and functionality.
+  activeCommand: str
+  activeSelectionChanged: ActiveSelectionEvent
+  activeSelections: Selections
+  activeToolbar: Toolbar
+  activeToolbarTab: ToolbarTab
+  activeWorkspace: Workspace
+  allToolbarPanels: ToolbarPanelList
+  allToolbarTabs: ToolbarTabList
+  commandCreated: ApplicationCommandEvent
+  commandDefinitions: CommandDefinitions
+  commandStarting: ApplicationCommandEvent
+  commandTerminated: ApplicationCommandEvent
+  isTabbedToolbarUI: bool
+  isUIEnabled: bool
+  markingMenuDisplaying: MarkingMenuEvent
+  palettes: Palettes
+  progressBar: ProgressBar
+  statusMessage: str
+  toolbars: Toolbars
+  workspaceActivated: WorkspaceEvent
+  workspaceDeactivated: WorkspaceEvent
+  workspacePreActivate: WorkspaceEvent
+  workspacePreDeactivate: WorkspaceEvent
+  workspaces: Workspaces
+  createCloudFileDialog() -> CloudFileDialog
+  createCloudFolderDialog() -> CloudFolderDialog
+  createFileDialog() -> FileDialog
+  createFolderDialog() -> FolderDialog
+  createProgressDialog() -> ProgressDialog
+  getText(module: str, id: str, defaultValue: str) -> str
+  inputBox() -> str
+  messageBox() -> DialogResults
+  selectEntity(prompt: str, filter: str) -> Selection
+  terminateActiveCommand() -> bool
+  toolbarPanelsByProductType(productType: str) -> ToolbarPanelList
+  toolbarTabsByProductType(productType: str) -> ToolbarTabList
+  workspacesByProductType(productType: str) -> WorkspaceList
+
+UserInterfaceGeneralEvent : Event
+  add(handler: UserInterfaceGeneralEventHandler) -> bool
+  remove(handler: UserInterfaceGeneralEventHandler) -> bool
+
+UserInterfaceGeneralEventArgs : EventArgs
+  # The UserInterfaceGeneralEventArgs is passed when a UserInterfaceGeneralEvent is fired.
+
+UserInterfaceGeneralEventHandler
+  notify(eventArgs: UserInterfaceGeneralEventArgs) -> void
+
+ValidateInputsEvent : Event
+  # An event endpoint that supports the connection to client implemented ValidateInputsEventHandlers.
+  add(handler: ValidateInputsEventHandler) -> bool
+  remove(handler: ValidateInputsEventHandler) -> bool
+
+ValidateInputsEventArgs : EventArgs
+  areInputsValid: bool
+  inputs: CommandInputs
+
+ValidateInputsEventHandler
+  notify(eventArgs: ValidateInputsEventArgs) -> void
+
+ValueCommandInput : CommandInput
+  # Provides a command input to get a unit based value from the user.
+  expression: str
+  isMaximumInclusive: bool
+  isMaximumLimited: bool
+  isMinimumInclusive: bool
+  isMinimumLimited: bool
+  isValidExpression: bool
+  maximumValue: float
+  minimumValue: float
+  unitType: str
+  value: float
+  deleteMe() -> bool
+
+WebRequestEvent : Event
+  add(handler: WebRequestEventHandler) -> bool
+  remove(handler: WebRequestEventHandler) -> bool
+
+WebRequestEventArgs : EventArgs
+  file: str
+  id: str
+  isCanceled: bool
+  occurrenceOrDocument: Base
+  privateInfo: str
+  properties: str
+
+WebRequestEventHandler
+  notify(eventArgs: WebRequestEventArgs) -> void
+
+WorkspaceEvent : Event
+  add(handler: WorkspaceEventHandler) -> bool
+  remove(handler: WorkspaceEventHandler) -> bool
+
+WorkspaceEventArgs : EventArgs
+  # The WorkspaceEventArgs provides information associated with a workspace event.
+  workspace: Workspace
+
+WorkspaceEventHandler
+  notify(eventArgs: WorkspaceEventArgs) -> void
+
+_SelectionCommandInput_Meta_Class : type

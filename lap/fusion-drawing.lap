@@ -1,1 +1,86 @@
 # fusion-drawing.lap
+
+[classes]
+ConfigurationAppearanceTable : ConfigurationTable
+  # Represents a configuration table that defines the appearances assigned to bodies and components.
+  columns: ConfigurationAppearanceColumns
+  name: str
+  parentTableColumn: ConfigurationThemeColumn
+  clear() -> bool
+  getCell(column: int, row: int) -> ConfigurationCell
+
+ConfigurationCustomThemeTable : ConfigurationTable
+  # API object representing a custom theme configuration table associated with a top table.
+  columns: ConfigurationColumns
+  name: str
+  parentTableColumn: ConfigurationThemeColumn
+  deleteMe(deleteColumns: bool) -> bool
+  getCell(column: int, row: int) -> ConfigurationCell
+  moveColumns(columns: list[ConfigurationColumn], targetTable: ConfigurationTable) -> ConfigurationColumn]
+
+ConfigurationMaterialTable : ConfigurationTable
+  # Represents a configuration table that defines materials assigned to bodies and components.
+  columns: ConfigurationMaterialColumns
+  name: str
+  parentTableColumn: ConfigurationThemeColumn
+  clear() -> bool
+  getCell(column: int, row: int) -> ConfigurationCell
+
+ConfigurationPlasticRuleTable : ConfigurationTable
+  # Represents a configuration table that defines different plastic rules.
+  columns: ConfigurationPlasticRuleColumns
+  name: str
+  parentTableColumn: ConfigurationThemeColumn
+  clear() -> bool
+  getCell(column: int, row: int) -> ConfigurationCell
+
+ConfigurationSheetMetalRuleTable : ConfigurationTable
+  # Represents a configuration table that defines different sheet metal rules.
+  columns: ConfigurationSheetMetalRuleColumns
+  name: str
+  parentTableColumn: ConfigurationThemeColumn
+  clear() -> bool
+  getCell(column: int, row: int) -> ConfigurationCell
+
+ConfigurationTable : Base
+  # The base class of all configuration tables.
+  id: str
+  rows: ConfigurationRows
+  getCell(column: int, row: int) -> ConfigurationCell
+
+ConfigurationTopTable : ConfigurationTable
+  activeRow: ConfigurationRow
+  appearanceTable: ConfigurationAppearanceTable
+  columns: ConfigurationColumns
+  customThemeTables: ConfigurationCustomThemeTables
+  materialTable: ConfigurationMaterialTable
+  name: str
+  plasticRuleTable: ConfigurationPlasticRuleTable
+  sheetMetalRuleTable: ConfigurationSheetMetalRuleTable
+  getCell(column: int, row: int) -> ConfigurationCell
+  moveColumns(columns: list[ConfigurationColumn], targetTable: ConfigurationCustomThemeTable) -> ConfigurationColumn]
+
+Drawing : Product
+  # Object that represents the drawing specific data within a drawing document.
+  exportManager: DrawingExportManager
+  deleteEntities(entities: ObjectCollection) -> bool
+  findAttributes(groupName: str, attributeName: str) -> Attribute]
+
+DrawingDocument : Document
+  # Object that represents a Fusion 360 drawing document.
+  drawing: Drawing
+  activate() -> bool
+  close(saveChanges: bool) -> bool
+  save(description: str) -> bool
+  saveAs(name: str, dataFolder: DataFolder, description: str, tag: str) -> bool
+  saveDataVersion(versionDescription: str) -> bool
+  saveMilestone(milestoneName: str, versionDescription: str) -> bool
+  updateAllReferences() -> bool
+
+DrawingExportManager : Base
+  # Provides support to export the drawing in various formats.
+  createPDFExportOptions(filename: str) -> PDFExportOptions
+  execute(exportOptions: DrawingExportOptions) -> bool
+
+DrawingExportOptions : Base
+  filename: str

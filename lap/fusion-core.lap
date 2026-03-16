@@ -6,21 +6,1855 @@ import: import adsk.core, adsk.fusion, adsk.cam
 
 # fusion-core.lap
 
+[types]
+PointContainment: PointInsidePointContainment | PointOnPointContainment | PointOutsidePointContainment | UnknownPointContainment
+VectorError: ZeroLengthVectorError
+
 [classes]
+AdditiveFEAOperationInput : OperationInput
+  base64PRMData: str
+  generationType: AdditiveFEAGenerationType
+  internalStudyName: str
+  text: str
+  workDirectory: str
+  addSolverFileContent(destFileName: str, fileContentsBase64: str) -> void
+  applyDeck(deck: AdditiveFEADeckBuilder) -> void
+  linkDependentThermalInput(thermalInput: AdditiveFEAOperationInput) -> void
+
+AngleValueCommandInput : CommandInput
+  expression: str
+  hasMaximumValue: bool
+  hasMinimumValue: bool
+  isMaximumValueInclusive: bool
+  isMinimumValueInclusive: bool
+  isValidExpression: bool
+  manipulatorOrigin: Point3D
+  manipulatorXDirection: Vector3D
+  manipulatorYDirection: Vector3D
+  maximumValue: float
+  minimumValue: float
+  value: float
+  deleteMe() -> bool
+  setManipulator(origin: Point3D, xDirection: Vector3D, yDirection: Vector3D) -> bool
+
+Application : Base
+  activeDocument: Document
+  activeEditObject: Base
+  activeProduct: Product
+  activeViewport: Viewport
+  applicationFolders: ApplicationFolders
+  cameraChanged: CameraEvent
+  crashDescription: str
+  currentUser: User
+  data: Data
+  dataFileComplete: DataEvent
+  dataFileCopyComplete: DataEvent
+  documentActivated: DocumentEvent
+  documentActivating: DocumentEvent
+  documentClosed: DocumentEvent
+  documentClosing: DocumentEvent
+  documentCreated: DocumentEvent
+  documentDeactivated: DocumentEvent
+  documentDeactivating: DocumentEvent
+  documentOpened: DocumentEvent
+  documentOpening: DocumentEvent
+  documentSaved: DocumentEvent
+  documentSaving: DocumentEvent
+  documents: Documents
+  favoriteAppearances: FavoriteAppearances
+  favoriteMaterials: FavoriteMaterials
+  fontNames: list[str]
+  hasActiveJobs: bool
+  importManager: ImportManager
+  insertedFromURL: WebRequestEvent
+  insertingFromURL: WebRequestEvent
+  isComponentColorsDisplayed: bool
+  isOffLine: bool
+  isStartupComplete: bool
+  lightingEnvironment: LightingEnvironments
+  materialLibraries: MaterialLibraries
+  measureManager: MeasureManager
+  mfgdmDataReady: MFGDMDataEvent
+  onlineStatusChanged: ApplicationEvent
+  openedFromURL: WebRequestEvent
+  openingFromURL: WebRequestEvent
+  pointTolerance: float
+  preferences: Preferences
+  scripts: Scripts
+  startupCompleted: ApplicationEvent
+  supportedProductTypes: list[str]
+  token: str
+  userId: str
+  userInterface: UserInterface
+  userName: str
+  vectorAngleTolerance: float
+  version: str
+  executeTextCommand(command: str) -> str
+  fireCustomEvent() -> bool
+  @static get() -> Application
+  getLastError() -> int
+  @static log() -> void
+  registerCustomEvent(eventId: str) -> CustomEvent
+  unregisterCustomEvent(eventId: str) -> bool
+
+Arrange2DEnvelopeInput : ArrangeEnvelopeInput
+  isFlipped: bool
+
+Arrange2DPlaneEnvelopeInput : Arrange2DEnvelopeInput
+  # This object is used to specify the input needed to define a 2D rectangular envelope.
+  envelopeSpacing: ValueInput
+  length: ValueInput
+  originXOffset: ValueInput
+  originYOffset: ValueInput
+  plane: ConstructionPlane
+  quantity: ValueInput
+  width: ValueInput
+
+Arrange2DProfileOrFaceEnvelopeInput : Arrange2DEnvelopeInput
+  profilesOrFaces: Base]
+
+Arrange3DEnvelopeInput : ArrangeEnvelopeInput
+  # This object is used to specify the input needed to define a 3D envelope.
+  ceilingClearance: ValueInput
+  height: ValueInput
+  length: ValueInput
+  originXOffset: ValueInput
+  originYOffset: ValueInput
+  plane: ConstructionPlane
+  width: ValueInput
+
+ArrangeDefinition2DInput : ArrangeDefinitionInput
+  globalQuantity: ValueInput
+  globalRotation: ArrangeRotationTypes
+  grainDirection: ValueInput
+  isGlobalDirectionFaceUp: bool
+  isPartInPartAllowed: bool
+
+ArrangeDefinition3DInput : ArrangeDefinitionInput
+  # This object defines all of the settings associated with a 3D arrangement.
+
+ArrangeDefinitionInput : Base
+  isCreateCopies: bool
+  solverType: ArrangeSolverTypes
+
+ArrangeEnvelopeInput : Base
+  # The base class used to define the arrange envelope when creating an Arrange feature.
+  frameWidth: ValueInput
+  isPartialArrangeAllowed: bool
+  objectSpacing: ValueInput
+  placementClearance: ValueInput
+
+ArrangeFeatureInput : Base
+  arrangeComponents: ArrangeComponents
+  definition: ArrangeDefinitionInput
+  solverType: ArrangeSolverTypes
+  set3DEnvelope(plane: ConstructionPlane, length: ValueInput, width: ValueInput, height: ValueInput) -> Arrange3DEnvelopeInput
+  setPlaneEnvelope(plane: ConstructionPlane, length: ValueInput, width: ValueInput) -> Arrange2DPlaneEnvelopeInput
+  setProfileOrFaceEnvelope(profilesOrFaces: list[Base]) -> Arrange2DProfileOrFaceEnvelopeInput
+
+AsBuiltJointInput : Base
+  # Defines all of the information needed to create an as-built joint.
+  geometry: JointGeometry
+  jointMotion: JointMotion
+  occurrenceOne: Occurrence
+  occurrenceTwo: Occurrence
+  setAsBallJointMotion() -> bool
+  setAsCylindricalJointMotion() -> bool
+  setAsPinSlotJointMotion() -> bool
+  setAsPlanarJointMotion() -> bool
+  setAsRevoluteJointMotion() -> bool
+  setAsRigidJointMotion() -> bool
+  setAsSliderJointMotion() -> bool
+
+AssemblyConstraintInput : Base
+  geometricRelationships: GeometricRelationships
+
+AsymmetricFilletEdgeSetInput : FilletEdgeSetInput
+  # Provides access to the edges and the parameters associated with an asymmetric fillet.
+  isFlipped: bool
+  offsetOne: ValueInput
+  offsetTwo: ValueInput
+
+AutoConstrainInput : Base
+  datumPoint: SketchPoint
+  dimensionStrategy: DimensionStrategyTypes
+  interLoopDimensionStrategy: InterLoopDimensionStrategyTypes
+  linearDiameterDimensionPreference: LinearDiameterDimensionPreferenceTypes
+  parentSketch: Sketch
+  symmetricDimensionStrategy: SymmetricDimensionStrategyTypes
+
 Base
   isValid: bool
   objectType: str
-  classType() -> str
+
+Base
+  isValid: bool
+  objectType: str
+
+Base
+  isValid: bool
+  objectType: str
+
+Base
+  isValid: bool
+  objectType: str
+
+Base
+  isValid: bool
+  objectType: str
+
+Base
+  isValid: bool
+  objectType: str
+
+BoolValueCommandInput : CommandInput
+  isCheckBox: bool
+  resourceFolder: str
+  text: str
+  value: bool
+  deleteMe() -> bool
+
+BossFeatureInput : Base
+  creationOccurrence: Occurrence
+  isDefaultDirection: bool
+  offset: ValueInput
+  participantBodies: BRepBody]
+  side1: BossFeatureSideInput
+  side2: BossFeatureSideInput
+  targetBaseFeature: BaseFeature
+  createSideInput() -> BossFeatureSideInput
+  setPositionBySketchPoints(pointOrPoints: Base) -> bool
+
+BossFeatureSideInput : Base
+  alignmentDepth: ValueInput
+  alignmentDiameter: ValueInput
+  alignmentDraftAngle: ValueInput
+  alignmentRootRadius: ValueInput
+  alignmentTipRadius: ValueInput
+  alignmentType: BossAlignmentTypes
+  diameter: ValueInput
+  draftAngle: ValueInput
+  holeCountersinkAngle: ValueInput
+  holeDepth: ValueInput
+  holeDiameter: ValueInput
+  holeDraftAngle: ValueInput
+  holeEndRadius: ValueInput
+  holeExtentType: BossHoleExtentTypes
+  holeMajorDepth: ValueInput
+  holeMajorDiameter: ValueInput
+  holeMajorDraftAngle: ValueInput
+  holeMajorRootRadius: ValueInput
+  holeMajorTipRadius: ValueInput
+  holeStartRadius: ValueInput
+  offsetClearance: ValueInput
+  ribChamferAngle: ValueInput
+  ribCount: ValueInput
+  ribCutSize: ValueInput
+  ribDraftAngle: ValueInput
+  ribLength: ValueInput
+  ribOffset: ValueInput
+  ribOuterDraftAngle: ValueInput
+  ribRootRadius: ValueInput
+  ribRotation: ValueInput
+  ribThickness: ValueInput
+  ribTipRadius: ValueInput
+  ribTotalAngle: ValueInput
+  ribType: BossRibShapeTypes
+  rootRadius: ValueInput
+  tipRadius: ValueInput
+  clearRibExtent() -> void
+  setBlank(diameter: ValueInput) -> void
+  setCounterbore(diameter: ValueInput, holeDiameter: ValueInput, holeMajorDiameter: ValueInput, depth: ValueInput) -> void
+  setCountersink() -> void
+  setRibExtent(position: Base, ribExtentTypes: list[int]) -> void
+  setSimple(diameter: ValueInput, holeDiameter: ValueInput) -> void
+
+BoundaryFillFeatureInput : Base
+  bRepCells: BRepCells
+  creationOccurrence: Occurrence
+  isRemoveTools: bool
+  operation: FeatureOperations
+  targetBaseFeature: BaseFeature
+  tools: ObjectCollection
+  cancel() -> bool
+
+BrowserCommandInput : CommandInput
+  htmlFileURL: str
+  maximumHeight: int
+  minimumHeight: int
+  deleteMe() -> bool
+  sendInfoToHTML(action: str, data: str) -> bool
+
+ButtonRowCommandInput : CommandInput
+  # Provides a command input to get a selection of a single button from a row of buttons.
+  isMultiSelectEnabled: bool
+  listItems: ListItems
+  selectedItem: ListItem
+  deleteMe() -> bool
+
+CAMTemplateOperationInput : Base
+  displayName: str
+  geometryIndexCount: int
+  parameters: CAMParameters
+  strategy: str
+  tool: Tool
+  toolPreset: ToolPreset
+  isGeometryIndexEnabled(index: int) -> bool
+  setGeometryIndexEnabled(index: int, enabled: bool) -> void
+
+Camera : Base
+  cameraType: CameraTypes
+  eye: Point3D
+  isFitView: bool
+  isSmoothTransition: bool
+  perspectiveAngle: float
+  target: Point3D
+  upVector: Vector3D
+  viewExtents: float
+  viewOrientation: ViewOrientations
+  @static create() -> Camera
+  getExtents() -> bool
+  setExtents(width: float, height: float) -> bool
+
+CanvasInput : Base
+  creationOccurrence: Occurrence
+  imageFilename: str
+  isDisplayedThrough: bool
+  isRenderable: bool
+  isSelectable: bool
+  opacity: int
+  planarEntity: Base
+  plane: Plane
+  targetBaseFeature: BaseFeature
+  transform: Matrix2D
+  flipHorizontal() -> bool
+  flipVertical() -> bool
+
+ChamferFeatureInput : Base
+  chamferEdgeSets: ChamferEdgeSets
+  cornerType: ChamferCornerTypes
+  edges: ObjectCollection
+  isTangentChain: bool
+  targetBaseFeature: BaseFeature
+  setToDistanceAndAngle(distance: ValueInput, angle: ValueInput) -> bool
+  setToEqualDistance(distance: ValueInput) -> bool
+  setToTwoDistances(distanceOne: ValueInput, distanceTwo: ValueInput) -> bool
+
+ChordLengthFilletEdgeSetInput : FilletEdgeSetInput
+  # Provides access to the edges and the parameter associated with a chord length fillet.
+  chordLength: ValueInput
+
+CircularPatternConstraintInput : Base
+  centerPoint: SketchPoint
+  entities: SketchEntity]
+  isSuppressed: list[bool]
+  isSymmetric: bool
+  quantity: ValueInput
+  totalAngle: ValueInput
+
+CircularPatternFeatureInput : Base
+  axis: Base
+  inputEntities: ObjectCollection
+  isSymmetric: bool
+  patternComputeOption: PatternComputeOptions
+  quantity: ValueInput
+  targetBaseFeature: BaseFeature
+  totalAngle: ValueInput
+
+CoilFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of a coil feature.
+  angle: ValueInput
+  basePlane: Base
+  coilSectionPosition: CoilFeatureSectionPositions
+  coilSectionType: CoilFeatureSectionTypes
+  coilType: CoilFeatureTypes
+  diameter: ValueInput
+  height: ValueInput
+  isClockwiseRotation: bool
+  isSolid: bool
+  operation: FeatureOperations
+  pitch: ValueInput
+  revolutions: ValueInput
+  sectionSize: ValueInput
+  targetBaseFeature: BaseFeature
+  setToHeightAndPitchCoil(height: ValueInput, pitch: ValueInput, angle: ValueInput) -> bool
+  setToRevolutionAndHeight(revolutions: ValueInput, height: ValueInput, angle: ValueInput) -> bool
+  setToRevolutionsAndPitch(revolutions: ValueInput, pitch: ValueInput, angle: ValueInput) -> bool
+  setToSpiral(revolutions: ValueInput, pitch: ValueInput) -> bool
 
 Color : Base
-  blue: int
-  green: int
-  opacity: int
-  red: int
-  @static create(red: int, green: int, blue: int, opacity: int) -> Color
+  # The Color class wraps all of the information that defines a simple color.
+  blue: short
+  green: short
+  opacity: short
+  red: short
+  @static create(red: short, green: short, blue: short, opacity: short) -> Color
+  getColor() -> bool
+  setColor(red: short, green: short, blue: short, opacity: short) -> bool
+
+CombineFeatureInput : Base
+  isKeepToolBodies: bool
+  isNewComponent: bool
+  operation: FeatureOperations
+  targetBaseFeature: BaseFeature
+  targetBody: BRepBody
+  toolBodies: ObjectCollection
+
+CommandInput : Base
+  commandInputs: CommandInputs
+  id: str
+  isEnabled: bool
+  isFullWidth: bool
+  isVisible: bool
+  name: str
+  parentCommand: Command
+  parentCommandInput: CommandInput
+  toolClipFilename: str
+  tooltip: str
+  tooltipDescription: str
+  deleteMe() -> bool
+
+ConstantRadiusFilletEdgeSetInput : FilletEdgeSetInput
+  # Provides access to the edges and the parameter associated with a constant radius fillet.
+  radius: ValueInput
+
+ConstructionAxisInput : Base
+  creationOccurrence: Occurrence
+  targetBaseOrFormFeature: Base
+  setByCircularFace(circularFace: BRepFace) -> bool
+  setByEdge(edgeEntity: Base) -> bool
+  setByLine(line: InfiniteLine3D) -> bool
+  setByNormalToFaceAtPoint(face: BRepFace, pointEntity: Base) -> bool
+  setByPerpendicularAtPoint(face: BRepFace, pointEntity: Base) -> bool
+  setByTwoPlanes(planarEntityOne: Base, planarEntityTwo: Base) -> bool
+  setByTwoPoints(pointEntityOne: Base, pointEntityTwo: Base) -> bool
+
+ConstructionPlaneInput : Base
+  creationOccurrence: Occurrence
+  targetBaseOrFormFeature: Base
+  setByAngle(linearEntity: Base, angle: ValueInput, planarEntity: Base) -> bool
+  setByDistanceOnPath(pathEntity: Base, distance: ValueInput) -> bool
+  setByOffset(planarEntity: Base, offset: ValueInput) -> bool
+  setByOffsetThroughPoint(planarEntity: Base, point: Base) -> bool
+  setByPlane(plane: Plane) -> bool
+  setByTangent(tangentFace: BRepFace, angle: ValueInput, planarEntity: Base) -> bool
+  setByTangentAtPoint(tangentFace: BRepFace, pointEntity: Base) -> bool
+  setByThreePoints(pointEntityOne: Base, pointEntityTwo: Base, pointEntityThree: Base) -> bool
+  setByTwoEdges(linearEntityOne: Base, linearEntityTwo: Base) -> bool
+  setByTwoPlanes(planarEntityOne: Base, planarEntityTwo: Base) -> bool
+
+ConstructionPointInput : Base
+  creationOccurrence: Occurrence
+  targetBaseOrFormFeature: Base
+  setByCenter(circularEntity: Base) -> bool
+  setByEdgePlane(edge: Base, plane: Base) -> bool
+  setByPoint(point: Base) -> bool
+  setByThreePlanes(planeOne: Base, planeTwo: Base, planeThree: Base) -> bool
+  setByTwoEdges(edgeOne: Base, edgeTwo: Base) -> bool
+
+CopyDesignFileInput : CopyFileInput
+  isCopyDrawings: bool
+  isCopyReferencedExternalComponents: bool
+
+CopyFileInput : Base
+  # The base class for any copy file input objects.
+  copyType: DataFileCopyTypes
+  targetFolder: DataFolder
+
+CornerClosureFeatureInput : Base
+  definitionType: CornerClosureFeatureDefinitionTypes
+  dominantEdge: BRepEdge
+  submissiveEdge: BRepEdge
+  setThreeBendCornerClosure(parameters: ThreeBendCornerClosureInputDefinition) -> bool
+  setTwoBendCornerClosure(parameters: TwoBendCornerClosureInputDefinition) -> bool
+
+CreateFromCAMTemplateInput : Base
+  # Object that contains the settings used by createFromCAMTemplate.
+  camTemplate: CAMTemplate
+  mode: AutomaticGenerationModes
+  @static create() -> CreateFromCAMTemplateInput
+
+CustomFeatureInput : Base
+  features: Base]
+  addCustomParameter(id: str, label: str, value: ValueInput, units: str, isVisible: bool) -> bool
+  addDependency(id: str, entity: Base) -> bool
+  setStartAndEndFeatures(startFeature: Base, endFeature: Base) -> bool
+
+CustomOperationDefinitionInput : Base
+  addinName: str
+  addinPath: str
+  isSkippingKernelRegistration: bool
+  kernelPath: str
+  strategyCommandDefinitions: StrategyCommandDefinition]
+  strategyDefinition: str
+  strategyRegistrationIssues: StrategyRegistrationIssues
+  @static create() -> CustomOperationDefinitionInput
+
+DecalInput : Base
+  creationOccurrence: Occurrence
+  faces: BRepFace]
+  imageFilename: str
+  isChainFaces: bool
+  opacity: float
+  targetBaseFeature: BaseFeature
+  transform: Matrix3D
+
+DeriveFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of a derive feature.
+  excludedEntities: Base]
+  isIncludeComponentParameters: bool
+  isIncludeFavoriteParameters: bool
+  isPlaceObjectsAtOrigin: bool
+  sourceDesign: Design
+  sourceEntities: Base]
+
+DirectionCommandInput : CommandInput
+  isDirectionFlipped: bool
+  manipulatorDirection: Vector3D
+  manipulatorOrigin: Point3D
+  resourceFolder: str
+  deleteMe() -> bool
+  setManipulator(origin: Point3D, direction: Vector3D) -> bool
+
+DistanceValueCommandInput : CommandInput
+  expression: str
+  hasMaximumValue: bool
+  hasMinimumValue: bool
+  isMaximumValueInclusive: bool
+  isMinimumValueInclusive: bool
+  isValidExpression: bool
+  manipulatorDirection: Vector3D
+  manipulatorOrigin: Point3D
+  maximumValue: float
+  minimumValue: float
+  value: float
+  deleteMe() -> bool
+  setManipulator(origin: Point3D, direction: Vector3D) -> bool
+
+Document : Base
+  # Object that represents an open document. This is the base class for all document types.
+  allDocumentReferences: DocumentReferences
+  attributes: Attributes
+  creationId: str
+  dataFile: DataFile
+  designDataFile: DesignDataFile
+  documentReferences: DocumentReferences
+  isActive: bool
+  isModified: bool
+  isSaved: bool
+  isUpToDate: bool
+  isVisible: bool
+  name: str
+  parent: Application
+  products: Products
+  version: str
+  activate() -> bool
+  close(saveChanges: bool) -> bool
+  save(description: str) -> bool
+  saveAs(name: str, dataFolder: DataFolder, description: str, tag: str) -> bool
+  saveDataVersion(versionDescription: str) -> bool
+  saveMilestone(milestoneName: str, versionDescription: str) -> bool
+  updateAllReferences() -> bool
+
+DraftFeatureInput : Base
+  angleOne: ValueInput
+  angleTwo: ValueInput
+  inputFaces: BRepFace]
+  isDirectionFlipped: bool
+  isSymmetric: bool
+  isTangentChain: bool
+  plane: Base
+  targetBaseFeature: BaseFeature
+  setSingleAngle(isSymmetric: bool, angle: ValueInput) -> bool
+  setTwoAngles(angleOne: ValueInput, angleTwo: ValueInput) -> bool
+
+DropDownCommandInput : CommandInput
+  # Provides a command input to get the choice in a drop-down list from the user.
+  dropDownStyle: DropDownStyles
+  listItems: ListItems
+  maxVisibleItems: int
+  selectedItem: ListItem
+  deleteMe() -> bool
+
+EmbossFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of an emboss feature.
+  creationOccurrence: Occurrence
+  depth: ValueInput
+  horizontalDistance: ValueInput
+  inputFaces: BRepFace]
+  isTangentChain: bool
+  profiles: Base]
+  rotationAngle: ValueInput
+  targetBaseFeature: BaseFeature
+  verticalDistance: ValueInput
+
+ExtendFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of an extend feature.
+  distance: ValueInput
+  edges: ObjectCollection
+  extendAlignment: SurfaceExtendAlignment
+  extendType: SurfaceExtendTypes
+  isChainingEnabled: bool
+  targetBaseFeature: BaseFeature
+
+ExtrudeFeatureInput : Base
+  creationOccurrence: Occurrence
+  extentOne: ExtentDefinition
+  extentTwo: ExtentDefinition
+  hasTwoExtents: bool
+  isSolid: bool
+  isThinExtrude: bool
+  operation: FeatureOperations
+  participantBodies: BRepBody]
+  profile: Base
+  startExtent: ExtentDefinition
+  taperAngle: ValueInput
+  taperAngleOne: ValueInput
+  taperAngleTwo: ValueInput
+  targetBaseFeature: BaseFeature
+  thinExtrudeWallLocationOne: ThinExtrudeWallLocation
+  thinExtrudeWallLocationTwo: ThinExtrudeWallLocation
+  thinExtrudeWallThicknessOne: ValueInput
+  thinExtrudeWallThicknessTwo: ValueInput
+  setAllExtent(direction: ExtentDirections) -> bool
+  setDistanceExtent(isSymmetric: bool, distance: ValueInput) -> bool
+  setOneSideExtent() -> bool
+  setOneSideToExtent() -> bool
+  setSymmetricExtent() -> bool
+  setThinExtrude() -> bool
+  setTwoSidesDistanceExtent(distanceOne: ValueInput, distanceTwo: ValueInput) -> bool
+  setTwoSidesExtent() -> bool
+  setTwoSidesToExtent(toEntityOne: Base, toEntityTwo: Base, matchShape: bool) -> bool
+
+ExtruderMachineElementInput : MachineElementInput
+  # Specialization of MachineElementInput for creating an additive FFF extruder element.
+
+FilletEdgeSetInput : Base
+  # Represents the input to define a fillet edge set.
+  continuity: SurfaceContinuityTypes
+  entities: ObjectCollection
+  tangencyWeight: ValueInput
+
+FilletFeatureInput : Base
+  edgeSetInputs: FilletEdgeSetInputs
+  isG2: bool
+  isRollingBallCorner: bool
+  isTangentChain: bool
+  targetBaseFeature: BaseFeature
+  addChordLengthEdgeSet(edges: ObjectCollection, chordLength: ValueInput, isTangentChain: bool) -> bool
+  addConstantRadiusEdgeSet(edges: ObjectCollection, radius: ValueInput, isTangentChain: bool) -> bool
+  addVariableRadiusEdgeSet(tangentEdges: ObjectCollection, startRadius: ValueInput, endRadius: ValueInput, positions: list[ValueInput], radii: list[ValueInput]) -> bool
+
+FloatSliderCommandInput : SliderCommandInput
+  # Provides a command input to get the value of a slider from the user, the value type is float.
+  maximumValue: float
+  minimumValue: float
+  spinStep: float
+  valueList: list[float]
+  valueOne: float
+  valueTwo: float
+  deleteMe() -> bool
+  getText(isLeft: bool) -> str
+  setText(left: str, right: str) -> bool
+
+FloatSpinnerCommandInput : CommandInput
+  # Provides a command input to get the value of a spinner from the user, the value type is float.
+  expression: str
+  isValidExpression: bool
+  maximumValue: float
+  minimumValue: float
+  spinStep: float
+  unitType: str
+  value: float
+  deleteMe() -> bool
+
+FullRoundFilletFeatureInput : Base
+  faceSets: FullRoundFilletFaceSets
+  targetBaseFeature: BaseFeature
+
+GroupCommandInput : CommandInput
+  children: CommandInputs
+  isEnabledCheckBoxChecked: bool
+  isEnabledCheckBoxDisplayed: bool
+  isExpanded: bool
+  deleteMe() -> bool
+
+HemFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of a hem feature.
+  setDoubleHem(edge: BRepEdge, gap: ValueInput, length: ValueInput, setback: ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool
+  setFlatHem(edge: BRepEdge, length: ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool
+  setOpenHem(edge: BRepEdge, length: ValueInput, gap: ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool
+  setRolledHem(edge: BRepEdge, radius: ValueInput, angle: ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool
+  setRopeHem(edge: BRepEdge, length: ValueInput, gap: ValueInput, radius: ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool
+  setTeardropHem(edge: BRepEdge, radius: ValueInput, length: ValueInput, gap: ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool
+
+HoleFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of a hole
+    feature.
+  creationOccurrence: Occurrence
+  holeTapType: HoleTapTypes
+  isDefaultDirection: bool
+  isFullLength: bool
+  isModeled: bool
+  participantBodies: BRepBody]
+  targetBaseFeature: BaseFeature
+  threadLength: ValueInput
+  threadOffset: ValueInput
+  tipAngle: ValueInput
+  setAllExtent(direction: ExtentDirections) -> bool
+  setDistanceExtent(distance: ValueInput) -> bool
+  setLengthAndOffset(length: ValueInput, offset: ValueInput) -> bool
+  setOneSideToExtent() -> bool
+  setPositionAtCenter(planarEntity: Base, centerEdge: BRepEdge) -> bool
+  setPositionByPlaneAndOffsets() -> bool
+  setPositionByPoint(planarEntity: Base, point: Base) -> bool
+  setPositionBySketchPoint(sketchPoint: SketchPoint) -> bool
+  setPositionBySketchPoints(sketchPoints: ObjectCollection) -> bool
+  setPositionOnEdge(planarEntity: Base, edge: BRepEdge, position: HoleEdgePositions) -> bool
+  setToClearanceHole(clearanceHoleInfo: ClearanceHoleInfo) -> bool
+  setToSimpleHole() -> bool
+  setToTappedHole(threadInfo: ThreadInfo) -> bool
+
+ImageCommandInput : CommandInput
+  # Provides an image command input for including an image in a command dialog.
+  imageFile: str
+  scaleFactor: float
+  deleteMe() -> bool
+
+InferredJointInput : Base
+  geometricRelationships: GeometricRelationships
+
+IntegerSliderCommandInput : SliderCommandInput
+  # Provides a command input to get the value of a slider from the user, the value type is integer.
+  maximumValue: int
+  minimumValue: int
+  spinStep: int
+  valueList: list[int]
+  valueOne: int
+  valueTwo: int
+  deleteMe() -> bool
+  getText(isLeft: bool) -> str
+  setText(left: str, right: str) -> bool
+
+IntegerSpinnerCommandInput : CommandInput
+  # Provides a command input to get the value of a spinner from the user, the value type is integer.
+  maximumValue: int
+  minimumValue: int
+  spinStep: int
+  value: int
+  deleteMe() -> bool
+
+InterferenceInput : Base
+  areCoincidentFacesIncluded: bool
+  entities: ObjectCollection
+
+JointInput : Base
+  angle: ValueInput
+  geometryOrOriginOne: Base
+  geometryOrOriginTwo: Base
+  isFlipped: bool
+  jointMotion: JointMotion
+  offset: ValueInput
+  setAsBallJointMotion() -> bool
+  setAsCylindricalJointMotion() -> bool
+  setAsPinSlotJointMotion() -> bool
+  setAsPlanarJointMotion() -> bool
+  setAsRevoluteJointMotion() -> bool
+  setAsRigidJointMotion() -> bool
+  setAsSliderJointMotion() -> bool
+
+JointOriginInput : Base
+  angle: ValueInput
+  geometry: JointGeometry
+  globalOrientParamOne: ValueInput
+  globalOrientParamTwo: ValueInput
+  isFlipped: bool
+  offsetX: ValueInput
+  offsetY: ValueInput
+  offsetZ: ValueInput
+  primaryAxisVector: Vector3D
+  secondaryAxisVector: Vector3D
+  thirdAxisVector: Vector3D
+  xAxisEntity: Base
+  zAxisEntity: Base
+
+LaserMachineElementInput : MachineElementInput
+  # Specialization of MachineElementInput for creating an additive MPBF laser element.
+
+LinearMachineAxisInput : MachineAxisInput
+  # Object that defines the properties required to create a new linear machine axis object.
+  direction: Vector3D
+  useContinuousResolution() -> void
+
+LoftFeatureInput : Base
+  centerLineOrRails: LoftCenterLineOrRails
+  creationOccurrence: Occurrence
+  endLoftEdgeAlignment: LoftEdgeAlignments
+  isClosed: bool
+  isSolid: bool
+  isTangentEdgesMerged: bool
+  loftSections: LoftSections
+  operation: FeatureOperations
+  participantBodies: BRepBody]
+  startLoftEdgeAlignment: LoftEdgeAlignments
+  targetBaseFeature: BaseFeature
+
+MachineAxisInput : Base
+  # Object that defines the properties required to create a machine axis object.
+  axisType: MachineAxisTypes
+  homePosition: float
+  name: str
+  physicalMax: float
+  physicalMin: float
+  physicalRange: MachineAxisRange
+  resolutionStepSize: float
+  toolChangePosition: float
+  useContinuousResolution() -> void
+
+MachineElementInput : Base
+  # Base class for machine element inputs.
+  inputType: MachineElementInputType
+
+MachineFromFileInput : MachineInput
+  filePath: str
+  ignoreSimulationModel: bool
+  @static create(filePath: str) -> MachineFromFileInput
+
+MachineFromLibraryInput : MachineInput
+  # Object used as input to create a machine from library URL.
+  ignoreSimulationModel: bool
+  url: URL
+  @static create(url: URL) -> URL
+
+MachineFromTemplateInput : MachineInput
+  machineTemplate: MachineTemplate
+  @static create(machineTemplate: MachineTemplate) -> MachineFromTemplateInput
+
+MachineInput : Base
+  type: MachineInputTypes
+
+MachinePartInput : Base
+  axisInput: MachineAxisInput
+  id: str
+  partType: MachinePartTypes
+  spindleInput: MachineSpindleInput
+  toolStationInput: MachineToolStationInput
+  createAxisInput(axisType: MachineAxisTypes) -> MachineAxisInput
+  createSpindleInput() -> MachineSpindleInput
+  createToolStationInput() -> MachineToolStationInput
+
+MachineSpindleInput : Base
+  # Object representing the set of inputs required to create a new MachineSpindle.
+  description: str
+  maxSpeed: float
+  minSpeed: float
+  peakTorque: float
+  peakTorqueSpeed: float
+  power: float
+
+MachineToolStationInput : Base
+  # Object representing the set of inputs required to create a new MachineToolStation.
+  coolants: list[int]
+  maxToolDiameter: float
+  maxToolLength: float
+  toolInterface: str
+
+ManufacturingModelInput : Base
+  name: str
+
+Matrix2D : Base
+  determinant: float
+  asArray() -> list[float]
+  copy() -> Matrix2D
+  @static create() -> Matrix2D
+  getAsCoordinateSystem() -> void
+  getCell(row: int, column: int) -> float
+  invert() -> bool
+  isEqualTo(matrix: Matrix2D) -> bool
+  setCell(row: int, column: int, value: float) -> bool
+  setToAlignCoordinateSystems(fromOrigin: Point2D, fromXAxis: Vector2D, fromYAxis: Vector2D, toOrigin: Point2D, toXAxis: Vector2D, toYAxis: Vector2D) -> bool
+  setToIdentity() -> bool
+  setToRotateTo(_from: Vector2D, to: Vector2D) -> bool
+  setToRotation(angle: float, origin: Point2D) -> bool
+  setWithArray(cells: list[float]) -> bool
+  setWithCoordinateSystem(origin: Point2D, xAxis: Vector2D, yAxis: Vector2D) -> bool
+  transformBy(matrix: Matrix2D) -> bool
+
+Matrix3D : Base
+  determinant: float
+  translation: Vector3D
+  asArray() -> list[float]
+  copy() -> Matrix3D
+  @static create() -> Matrix3D
+  getAsCoordinateSystem() -> void
+  getCell(row: int, column: int) -> float
+  invert() -> bool
+  isEqualTo(matrix: Matrix3D) -> bool
+  setCell(row: int, column: int, value: float) -> bool
+  setToAlignCoordinateSystems(fromOrigin: Point3D, fromXAxis: Vector3D, fromYAxis: Vector3D, fromZAxis: Vector3D, toOrigin: Point3D, toXAxis: Vector3D, toYAxis: Vector3D, toZAxis: Vector3D) -> bool
+  setToIdentity() -> bool
+  setToRotateTo() -> bool
+  setToRotation(angle: float, axis: Vector3D, origin: Point3D) -> bool
+  setWithArray(cells: list[float]) -> bool
+  setWithCoordinateSystem(origin: Point3D, xAxis: Vector3D, yAxis: Vector3D, zAxis: Vector3D) -> bool
+  transformBy(matrix: Matrix3D) -> bool
+
+Matrix3DGraphNodeProperty : GraphNodeProperty
+  # A property value that is a 3D Matrix.
+  value: Matrix3D
+
+Matrix3DVector
+  append(x: Matrix3D) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::core::Matrix3D > >::size_type, x: Matrix3D) -> void
+  back() -> Matrix3D >::value_type
+  begin() -> Matrix3D >::iterator
+  capacity() -> Matrix3D >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> Matrix3D >::iterator
+  erase() -> Matrix3D >::iterator
+  front() -> Matrix3D >::value_type
+  get_allocator() -> Matrix3D >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> Matrix3D >::value_type
+  pop_back() -> void
+  push_back(x: Matrix3D) -> void
+  rbegin() -> Matrix3D >::reverse_iterator
+  rend() -> Matrix3D >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::core::Matrix3D > >::size_type) -> void
+  resize() -> void
+  size() -> Matrix3D >::size_type
+  swap(v: list[Matrix3D]) -> void
+
+MergeFacesFeatureInput : Base
+  creationOccurrence: Occurrence
+  inputFaces: BRepFace]
+  isChainSelection: bool
+
+MeshCombineFaceGroupsFeatureInput : Base
+  inputFaceGroups: FaceGroup]
+  targetBaseFeature: BaseFeature
+
+MeshCombineFeatureInput : Base
+  algorithmType: MeshCombineAlgorithmTypes
+  isKeepToolBodies: bool
+  isNewComponent: bool
+  meshCombineOperationType: MeshCombineOperationTypes
+  targetBaseFeature: BaseFeature
+  targetBody: MeshBody
+  toolBodies: MeshBody]
+
+MeshConvertFeatureInput : Base
+  inputBodies: MeshBody]
+  isPreprocessHoles: bool
+  meshConvertAccuracyType: MeshConvertAccuracyTypes
+  meshConvertMethodType: MeshConvertMethodTypes
+  meshConvertOperationType: MeshConvertOperationTypes
+  meshConvertResolutionType: MeshConvertResolutionTypes
+  numberOfFaces: ValueInput
+  targetBaseFeature: BaseFeature
+
+MeshGenerateFaceGroupsFeatureInput : Base
+  angleThreshold: ValueInput
+  boundaryTolerance: ValueInput
+  mesh: Base
+  meshGenerateFaceGroupsMethodType: MeshGenerateFaceGroupsMethodTypes
+  minimumFaceGroupSize: ValueInput
+  targetBaseFeature: BaseFeature
+
+MeshPlaneCutFeatureInput : Base
+  cutPlane: Base
+  isFlip: bool
+  mesh: Base
+  meshPlaneCutFillType: MeshPlaneCutFillTypes
+  meshPlaneCutType: MeshPlaneCutTypes
+  targetBaseFeature: BaseFeature
+
+MeshReduceFeatureInput : Base
+  facecount: ValueInput
+  maximumDeviation: ValueInput
+  mesh: Base
+  meshReduceMethodType: MeshReduceMethodTypes
+  meshReduceTargetType: MeshReduceTargetTypes
+  proportion: ValueInput
+  targetBaseFeature: BaseFeature
+
+MeshRemeshFeatureInput : Base
+  density: ValueInput
+  isPreserveBoundariesEnabled: bool
+  isPreserveSharpEdgesEnabled: bool
+  mesh: Base
+  meshRemeshMethodType: MeshRemeshMethodTypes
+  shapePreservation: ValueInput
+  targetBaseFeature: BaseFeature
+
+MeshRemoveFeatureInput : Base
+  inputBodies: MeshBody]
+  targetBaseFeature: BaseFeature
+
+MeshRepairFeatureInput : Base
+  density: ValueInput
+  mesh: Base
+  meshRepairRebuildType: MeshRepairRebuildTypes
+  meshRepairType: MeshRepairTypes
+  offset: ValueInput
+  targetBaseFeature: BaseFeature
+
+MeshReverseNormalFeatureInput : Base
+  mesh: Base
+  targetBaseFeature: BaseFeature
+
+MeshSeparateFeatureInput : Base
+  isKeepBody: bool
+  isMultipleBodies: bool
+  mesh: Base
+  meshSeparateType: MeshSeparateTypes
+  targetBaseFeature: BaseFeature
+
+MeshShellFeatureInput : Base
+  mesh: Base
+  targetBaseFeature: BaseFeature
+  thickness: ValueInput
+
+MeshSmoothFeatureInput : Base
+  mesh: Base
+  smoothness: ValueInput
+  targetBaseFeature: BaseFeature
+
+MirrorFeatureInput : Base
+  inputEntities: ObjectCollection
+  isCombine: bool
+  mirrorPlane: Base
+  patternComputeOption: PatternComputeOptions
+  stitchTolerance: ValueInput
+  targetBaseFeature: BaseFeature
+
+MotionLinkInput : Base
+  isReversed: bool
+  jointOne: Base
+  jointTwo: Base
+  motionOne: JointMotionTypes
+  motionTwo: JointMotionTypes
+  valueOne: ValueInput
+  valueTwo: ValueInput
+
+MoveFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of a move feature.
+  inputEntities: ObjectCollection
+  targetBaseFeature: BaseFeature
+  transform: Matrix3D
+  defineAsFreeMove(transform: Matrix3D) -> bool
+  defineAsPointToPoint(originPoint: Base, targetPoint: Base) -> bool
+  defineAsPointToPosition(point: Base, xDistance: ValueInput, yDistance: ValueInput, zDistance: ValueInput, isDesignSpace: bool) -> bool
+  defineAsRotate(axisEntity: Base, angle: ValueInput) -> bool
+  defineAsTranslateAlongEntity(linearEntity: Base, distance: ValueInput) -> bool
+  defineAsTranslateXYZ(xDistance: ValueInput, yDistance: ValueInput, zDistance: ValueInput, isDesignSpace: bool) -> bool
+
+MultiAxisFeedrateSettingsInput : Base
+  # Input class for creating MultiAxisFeedrateSettings objects.
+  dpmType: MultiAxisDegreesPerMinuteType
+  feedMode: MultiAxisFeedMode
+
+MultiAxisMachineElementInput : MachineElementInput
+  # Specialization of MachineElementInput for creating a multi-axis machine element.
+
+NCProgramInput : Base
+  displayName: str
+  operations: OperationBase]
+  parameters: CAMParameters
+
+NetworkMachineIntegrationInput : Base
+  description: str
+  displayName: str
+  @static create(displayName: str, description: str) -> NetworkMachineIntegrationInput
+
+ObjectCollection *collection<Base>
+  # Generic collection used to handle lists of any object type.
+  count: int
+  add(item: Base) -> bool
+  asArray() -> Base]
+  clear() -> bool
+  contains(item: Base) -> bool
+  @static create() -> ObjectCollection
+  @static createWithArray(array: list[Base]) -> Base]
+  find(item: Base, startIndex: int) -> int
+  removeByIndex(index: int) -> bool
+  removeByItem(item: Base) -> bool
+
+OffsetConstraintInput : Base
+  # Used to define the inputs needed to create an offset constraint.
+  curves: SketchCurve]
+  dimensionPoint: Point3D
+  isTopologyMatched: bool
+  offset: ValueInput
+
+OffsetFacesFeatureInput : Base
+  distance: ValueInput
+  faces: BRepFace]
+  targetBaseFeature: BaseFeature
+
+OffsetFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of an offset feature.
+  distance: ValueInput
+  entities: ObjectCollection
+  isChainSelection: bool
+  operation: FeatureOperations
+  targetBaseFeature: BaseFeature
+
+OperationInput : Base
+  displayName: str
+  generationMode: AutomaticGenerationModes
+  parameters: CAMParameters
+  referenceTool: Tool
+  strategy: str
+  tool: Tool
+  toolPreset: ToolPreset
+
+PatchFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of a patch feature.
+  boundaryCurve: Base
+  continuity: SurfaceContinuityTypes
+  creationOccurrence: Occurrence
+  groupContinuity: SurfaceContinuityTypes
+  groupIsContinuityDirectionFlipped: bool
+  groupWeight: float
+  interiorRailsAndPoints: ObjectCollection
+  isGroupEdges: bool
+  operation: FeatureOperations
+  targetBaseFeature: BaseFeature
+  getContinuity() -> bool
+  setContinuity(continuity: list[int], weight: list[float], isContinuityDirectionFlipped: list[bool]) -> bool
+
+PathPatternFeatureInput : Base
+  distance: ValueInput
+  inputEntities: ObjectCollection
+  isFlipDirection: bool
+  isOrientationAlongPath: bool
+  isSymmetric: bool
+  path: Path
+  patternComputeOption: PatternComputeOptions
+  patternDistanceType: PatternDistanceType
+  quantity: ValueInput
+  startPoint: float
+  targetBaseFeature: BaseFeature
+
+PipeFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of a Pipe
+    feature.
+  creationOccurrence: Occurrence
+  distanceOne: ValueInput
+  distanceTwo: ValueInput
+  isHollow: bool
+  operation: FeatureOperations
+  participantBodies: BRepBody]
+  path: Path
+  sectionSize: ValueInput
+  sectionThickness: ValueInput
+  sectionType: PipeSectionTypes
+  targetBaseFeature: BaseFeature
+
+Point2D : Base
+  x: float
+  y: float
+  asArray() -> list[float]
+  asVector() -> Vector2D
+  copy() -> Point2D
+  @static create(x: float, y: float) -> Point2D
+  distanceTo(point: Point2D) -> float
+  getData() -> bool
+  isEqualTo(point: Point2D) -> bool
+  isEqualToByTolerance(point: Point2D, tolerance: float) -> bool
+  set(x: float, y: float) -> bool
+  setWithArray(coordinates: list[float]) -> bool
+  transformBy(matrix: Matrix2D) -> bool
+  translateBy(vector: Vector2D) -> bool
+  vectorTo(point: Point2D) -> Vector2D
+
+Point2DVector
+  append(x: Point2D) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::core::Point2D > >::size_type, x: Point2D) -> void
+  back() -> Point2D >::value_type
+  begin() -> Point2D >::iterator
+  capacity() -> Point2D >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> Point2D >::iterator
+  erase() -> Point2D >::iterator
+  front() -> Point2D >::value_type
+  get_allocator() -> Point2D >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> Point2D >::value_type
+  pop_back() -> void
+  push_back(x: Point2D) -> void
+  rbegin() -> Point2D >::reverse_iterator
+  rend() -> Point2D >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::core::Point2D > >::size_type) -> void
+  resize() -> void
+  size() -> Point2D >::size_type
+  swap(v: list[Point2D]) -> void
 
 Point3D : Base
   x: float
   y: float
   z: float
+  asArray() -> list[float]
+  asVector() -> Vector3D
+  copy() -> Point3D
   @static create(x: float, y: float, z: float) -> Point3D
+  distanceTo(point: Point3D) -> float
+  getData() -> bool
+  isEqualTo(point: Point3D) -> bool
+  isEqualToByTolerance(point: Point3D, tolerance: float) -> bool
+  set(x: float, y: float, z: float) -> bool
+  setWithArray(coordinates: list[float]) -> bool
+  transformBy(matrix: Matrix3D) -> bool
+  translateBy(vector: Vector3D) -> bool
+  vectorTo(point: Point3D) -> Vector3D
+
+Point3DVector
+  append(x: Point3D) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::core::Point3D > >::size_type, x: Point3D) -> void
+  back() -> Point3D >::value_type
+  begin() -> Point3D >::iterator
+  capacity() -> Point3D >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> Point3D >::iterator
+  erase() -> Point3D >::iterator
+  front() -> Point3D >::value_type
+  get_allocator() -> Point3D >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> Point3D >::value_type
+  pop_back() -> void
+  push_back(x: Point3D) -> void
+  rbegin() -> Point3D >::reverse_iterator
+  rend() -> Point3D >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::core::Point3D > >::size_type) -> void
+  resize() -> void
+  size() -> Point3D >::size_type
+  swap(v: list[Point3D]) -> void
+
+PointHolePositionDefinition : HolePositionDefinition
+  planarEntity: Base
+  point: Base
+
+PostProcessInput : Base
+  areToolChangesMinimized: bool
+  isOpenInEditor: bool
+  machine: Machine
+  outputFolder: str
+  outputUnits: PostOutputUnitOptions
+  postConfiguration: str
+  postProperties: NamedValues
+  programComment: str
+  programName: str
+  @static create(programName: str, postConfiguration: str, outputFolder: str, outputUnits: PostOutputUnitOptions) -> PostProcessInput
+
+RadioButtonGroupCommandInput : CommandInput
+  # Provides a command input to get the choice from a radio button group from the user.
+  listItems: ListItems
+  selectedItem: ListItem
+  deleteMe() -> bool
+
+RecognizedHolesInput : Base
+  # Object that contains the settings used by recognizedHoles and recognizedHoleGroups.
+  filterPartialHoles: bool
+  @static create() -> RecognizedHolesInput
+
+RecognizedPocketInput : Base
+  attackVectors: Vector3D]
+  body: Base
+  isIncludingBosses: bool
+  @static create() -> RecognizedPocketInput
+
+RectangularPatternConstraintInput : Base
+  # Used to define the inputs need to create a rectangular pattern in a sketch.
+  directionOneEntity: SketchLine
+  directionTwoEntity: SketchLine
+  distanceOne: ValueInput
+  distanceTwo: ValueInput
+  distanceType: PatternDistanceType
+  entities: SketchEntity]
+  isSuppressed: list[bool]
+  isSymmetricInDirectionOne: bool
+  isSymmetricInDirectionTwo: bool
+  quantityOne: ValueInput
+  quantityTwo: ValueInput
+  setDirectionOne(directionOneEntity: SketchLine, quantityOne: ValueInput, distanceOne: ValueInput) -> bool
+  setDirectionTwo(directionTwoEntity: SketchLine, quantityTwo: ValueInput, distanceTwo: ValueInput) -> bool
+
+RectangularPatternFeatureInput : Base
+  directionOne: Vector3D
+  directionOneEntity: Base
+  directionTwo: Vector3D
+  directionTwoEntity: Base
+  distanceOne: ValueInput
+  distanceTwo: ValueInput
+  inputEntities: ObjectCollection
+  isSymmetricInDirectionOne: bool
+  isSymmetricInDirectionTwo: bool
+  patternComputeOption: PatternComputeOptions
+  patternDistanceType: PatternDistanceType
+  quantityOne: ValueInput
+  quantityTwo: ValueInput
+  targetBaseFeature: BaseFeature
+  setDirectionTwo(directionTwoEntity: Base, quantityTwo: ValueInput, distanceTwo: ValueInput) -> bool
+
+ReplaceFaceFeatureInput : Base
+  isTangentChain: bool
+  sourceFaces: ObjectCollection
+  targetBaseFeature: BaseFeature
+  targetFaces: Base
+
+RevolveFeatureInput : Base
+  axis: Base
+  creationOccurrence: Occurrence
+  isProjectAxis: bool
+  isSolid: bool
+  operation: FeatureOperations
+  participantBodies: BRepBody]
+  profile: Base
+  targetBaseFeature: BaseFeature
+  setAngleExtent(isSymmetric: bool, angle: ValueInput) -> bool
+  setOneSideToExtent() -> bool
+  setTwoSideAngleExtent(angleOne: ValueInput, angleTwo: ValueInput) -> bool
+  setTwoSideToExtent(toEntityOne: Base, toEntityTwo: Base) -> bool
+
+RipFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of a Rip feature.
+  setAlongEdge(edge: BRepEdge, gapDistance: ValueInput) -> bool
+  setBetweenPoints() -> bool
+  setByFace(face: BRepFace) -> bool
+
+RotaryMachineAxisInput : MachineAxisInput
+  # Object that defines the properties required to create a new rotary machine axis object.
+  rotationAxis: InfiniteLine3D
+  useContinuousResolution() -> void
+
+RuleFilletFeatureInput : Base
+  asymmetricOffsetOne: ValueInput
+  asymmetricOffsetTwo: ValueInput
+  facesOrFeatures: Base]
+  facesOrFeaturesOne: Base]
+  facesOrFeaturesTwo: Base]
+  isRollingBallCorner: bool
+  radius: ValueInput
+  ruleType: RuleFilletRuleTypes
+  targetBaseFeature: BaseFeature
+  topologyType: RuleFilletTopologyTypes
+  setAsymmetricOffsets(offsetOne: ValueInput, offsetTwo: ValueInput) -> bool
+  setByAllEdges(facesOrFeatures: list[Base]) -> bool
+  setByBetweenFacesOrFeatures(facesOrFeaturesOne: list[Base], facesOrFeaturesTwo: list[Base]) -> bool
+
+RuledSurfaceFeatureInput : Base
+  alternateFace: bool
+  angle: ValueInput
+  cornerType: RuledSurfaceCornerTypes
+  creationOccurrence: Occurrence
+  direction: Base
+  distance: ValueInput
+  operation: FeatureOperations
+  profile: Base
+  ruledSurfaceType: RuledSurfaceTypes
+  targetBaseFeature: BaseFeature
+
+ScaleFeatureInput : Base
+  inputEntities: ObjectCollection
+  isUniform: bool
+  point: Base
+  scaleFactor: ValueInput
+  targetBaseFeature: BaseFeature
+  xScale: ValueInput
+  yScale: ValueInput
+  zScale: ValueInput
+  setToNonUniform(xScale: ValueInput, yScale: ValueInput, zScale: ValueInput) -> bool
+
+ScriptInput : Base
+  author: str
+  description: str
+  isAddIn: bool
+  name: str
+  programmingLanguage: ProgrammingLanguages
+  runOnStartup: bool
+  targetFolder: str
+  targetOperatingSystem: OperatingSystems
+  version: str
+
+SectionAnalysisInput : Base
+  cutPlaneEntity: Base
+  initialPosition: Matrix3D
+  isHatchShown: bool
+  sectionColor: Color
+  transform: Matrix3D
+  flip() -> bool
+
+SelectionCommandInput : CommandInput
+  # Provides a command input to get a selection from the user.
+  commandPrompt: str
+  hasFocus: bool
+  isUseCurrentSelections: bool
+  selectionCount: int
+  selectionFilters: list[str]
+  addSelection(selection: Base) -> bool
+  addSelectionFilter(filter: str) -> bool
+  clearSelection() -> bool
+  clearSelectionFilter() -> bool
+  deleteMe() -> bool
+  getSelectionLimits() -> bool
+  selection(index: int) -> Selection
+  setSelectionLimits(minimum: int, maximum: int) -> bool
+
+SeparatorCommandInput : CommandInput
+  # An object that represents a visual separator within a command dialog.
+  deleteMe() -> bool
+
+SetupInput : Base
+  fixtureEnabled: bool
+  fixtures: Base]
+  isUsingPreviousSetupData: bool
+  machine: Machine
+  models: Base]
+  name: str
+  operationType: OperationTypes
+  parameters: CAMParameters
+  printSetting: PrintSetting
+  stockMode: SetupStockModes
+  stockSolids: Base]
+
+ShellFeatureInput : Base
+  creationOccurrence: Occurrence
+  inputEntities: ObjectCollection
+  insideThickness: ValueInput
+  isTangentChain: bool
+  outsideThickness: ValueInput
+  shellType: ShellTypes
+  targetBaseFeature: BaseFeature
+
+SilhouetteSplitFeatureInput : Base
+  operation: SilhouetteSplitOperations
+  targetBaseFeature: BaseFeature
+  targetBody: BRepBody
+  viewDirection: Base
+
+SimAttributeInput : Base
+  entities: Base]
+
+SketchTextInput : Base
+  angle: float
+  definition: SketchTextDefinition
+  expression: str
+  fontName: str
+  height: float
+  height2: ValueInput
+  isHorizontalFlip: bool
+  isVerticalFlip: bool
+  position: Point3D
+  text: str
+  textStyle: TextStyles
+  setAsAlongPath(path: Base, isAbovePath: bool, horizontalAlignment: HorizontalAlignments, characterSpacing: float) -> bool
+  setAsFitOnPath(path: Base, isAbovePath: bool) -> bool
+  setAsMultiLine(cornerPoint: Base, diagonalPoint: Base, horizontalAlignment: HorizontalAlignments, verticalAlignment: VerticalAlignments, characterSpacing: float) -> bool
+
+SliderCommandInput : CommandInput
+  # Provides a command input to get the value of a slider from the user.
+  expressionOne: str
+  expressionTwo: str
+  hasTwoSliders: bool
+  unitType: str
+  deleteMe() -> bool
+  getText(isLeft: bool) -> str
+  setText(left: str, right: str) -> bool
+
+SplitBodyFeatureInput : Base
+  isSplittingToolExtended: bool
+  splitBodies: Base
+  splittingTool: Base
+  targetBaseFeature: BaseFeature
+
+SplitFaceFeatureInput : Base
+  facesToSplit: ObjectCollection
+  isSplittingToolExtended: bool
+  splitType: SplitFaceSplitTypes
+  splittingTool: Base
+  targetBaseFeature: BaseFeature
+  setAlongVectorSplitType(directionEntity: Base) -> bool
+  setClosestPointSplitType() -> bool
+  setSurfaceIntersectionSplitType(isSplittingToolExtended: bool) -> bool
+
+SpunProfileInput : Base
+  axis: Base
+  entities: Base]
+  flipResult: bool
+  isAxisProjected: bool
+  isCenterlineAdded: bool
+  tolerance: float
+
+StitchFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of a stitch feature.
+  operation: FeatureOperations
+  stitchSurfaces: ObjectCollection
+  targetBaseFeature: BaseFeature
+  tolerance: ValueInput
+
+StringValueCommandInput : CommandInput
+  # Provides a command input to get a string value from the user.
+  isPassword: bool
+  isReadOnly: bool
+  isValueError: bool
+  value: str
+  deleteMe() -> bool
+
+StructuralConstraintInput : SimAttributeInput
+  type: ConstraintTypes
+  setTargets(entities: list[Base]) -> bool
+
+SweepFeatureInput : Base
+  creationOccurrence: Occurrence
+  distanceOne: ValueInput
+  distanceTwo: ValueInput
+  extent: SweepExtentTypes
+  guideRail: Path
+  guideSurfaces: BRepFace]
+  isChainSelection: bool
+  isDirectionFlipped: bool
+  isSolid: bool
+  operation: FeatureOperations
+  orientation: SweepOrientationTypes
+  participantBodies: BRepBody]
+  path: Path
+  profile: Base
+  profileScaling: SweepProfileScalingOptions
+  solidAlignedAxis: Base
+  solidBody: BRepBody
+  solidOrientation: SweepSolidOrientationTypes
+  solidTwistAxis: Base
+  taperAngle: ValueInput
+  targetBaseFeature: BaseFeature
+  twistAngle: ValueInput
+
+TabCommandInput : CommandInput
+  # Tab command inputs contain a set of command inputs and/or group command inputs/
+  children: CommandInputs
+  isActive: bool
+  resourceFolder: str
+  activate() -> bool
+  deleteMe() -> bool
+
+TableCommandInput : CommandInput
+  columnRatio: str
+  columnSpacing: int
+  hasGrid: bool
+  maximumVisibleRows: int
+  minimumVisibleRows: int
+  numberOfColumns: int
+  rowCount: int
+  rowSpacing: int
+  selectedRow: int
+  tablePresentationStyle: TablePresentationStyles
+  addCommandInput(input: CommandInput, row: int, column: int, rowSpan: int, columnSpan: int) -> bool
+  addToolbarCommandInput(input: CommandInput) -> bool
+  clear() -> bool
+  deleteMe() -> bool
+  deleteRow(row: int) -> bool
+  getInputAtPosition(row: int, column: int) -> CommandInput
+  getPosition(input: CommandInput) -> bool
+  removeInput(row: int, column: int) -> bool
+
+TangentRelationshipInput : Base
+  faceOne: BRepFace
+  tangentFaces: Base
+
+TessellateFeatureInput : Base
+  aspectRatio: ValueInput
+  createQuads: bool
+  inputBodies: BRepBody]
+  maximumEdgeLength: ValueInput
+  normalDeviation: ValueInput
+  surfaceDeviation: ValueInput
+  targetBaseFeature: BaseFeature
+  tessellateRefinementType: TessellateRefinementTypes
+
+TextBoxCommandInput : CommandInput
+  # Provides a command input to interact with a text box.
+  formattedText: str
+  isReadOnly: bool
+  numRows: int
+  text: str
+  deleteMe() -> bool
+
+ThickenFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of a Thicken feature.
+  creationOccurrence: Occurrence
+  inputFaces: ObjectCollection
+  isChainSelection: bool
+  isSymmetric: bool
+  operation: FeatureOperations
+  targetBaseFeature: BaseFeature
+  thickenType: ThickenTypes
+  thickness: ValueInput
+
+ThreadFeatureInput : Base
+  inputCylindricalFace: BRepFace
+  inputCylindricalFaces: ObjectCollection
+  isFullLength: bool
+  isModeled: bool
+  isRightHanded: bool
+  targetBaseFeature: BaseFeature
+  threadInfo: ThreadInfo
+  threadLength: ValueInput
+  threadLocation: ThreadLocations
+  threadOffset: ValueInput
+
+ToolingCapabilitiesMachineElementInput : MachineElementInput
+  # Input class for creating ToolingCapabilitiesMachineElement objects.
+
+TriadCommandInput : CommandInput
+  isFlippedHorizontal: bool
+  isFlippedVertical: bool
+  isHorizontalFlipVisible: bool
+  isOriginTranslationVisible: bool
+  isUnifiedScalingVisible: bool
+  isValidExpressions: bool
+  isVerticalFlipVisible: bool
+  isXRotationVisible: bool
+  isXScalingInXYVisible: bool
+  isXScalingInXZVisible: bool
+  isXTranslationVisible: bool
+  isXYPlaneScalingVisible: bool
+  isXYPlaneTranslationVisible: bool
+  isXZPlaneScalingVisible: bool
+  isXZPlaneTranslationVisible: bool
+  isYRotationVisible: bool
+  isYScalingInXYVisible: bool
+  isYScalingInYZVisible: bool
+  isYTranslationVisible: bool
+  isYZPlaneScalingVisible: bool
+  isYZPlaneTranslationVisible: bool
+  isZRotationVisible: bool
+  isZScalingInXZVisible: bool
+  isZScalingInYZVisible: bool
+  isZTranslationVisible: bool
+  lastChangeMade: TriadChanges
+  lastTransform: Matrix3D
+  positionTransform: Matrix3D
+  transform: Matrix3D
+  unifiedScaleFactorExpression: str
+  unifiedeScaleFactor: float
+  xRotation: float
+  xRotationExpression: str
+  xScaleFactor: float
+  xScaleFactorExpression: str
+  xTranslation: float
+  xTranslationExpression: str
+  xYPlaneScaleFactor: float
+  xYPlaneScaleFactorExpression: str
+  yRotation: float
+  yRotationExpression: str
+  yScaleFactor: float
+  yScaleFactorExpression: str
+  yTranslation: float
+  yTranslationExpression: str
+  yZPlaneScaleFactor: float
+  yZPlaneScaleFactorExpression: str
+  zRotation: float
+  zRotationExpression: str
+  zScaleFactor: float
+  zScaleFactorExpression: str
+  zTranslation: float
+  zTranslationExpression: str
+  zXPlaneScaleFactor: float
+  zXPlaneScaleFactorExpression: str
+  deleteMe() -> bool
+  hideAll() -> bool
+  hideAllRotations() -> bool
+  hideAllScaling() -> bool
+  setFlipVisibility(isVisible: bool) -> bool
+  setFullVisibility(isVisible: bool) -> bool
+  setPlanarMoveVisibility(isVisible: bool) -> bool
+  setRotateVisibility(isVisible: bool) -> bool
+  setScaleVisibility(isVisible: bool) -> bool
+  setTranslateVisibility(isVisible: bool) -> bool
+
+TrimFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of a TrimFeatureInput.
+  bRepCells: BRepCells
+  targetBaseFeature: BaseFeature
+  trimTool: Base
+  cancel() -> bool
+
+UntrimFeatureInput : Base
+  # This class defines the methods and properties that pertain to the definition of an Untrim feature.
+  extensionDistance: ValueInput
+  facesToUntrim: BRepFace]
+  loopsToUntrim: BRepLoop]
+  untrimLoopType: UntrimLoopTypes
+  setLoops(loops: list[BRepLoop]) -> bool
+  setLoopsFromFaces(faces: list[BRepFace], untrimLoopType: UntrimLoopTypes) -> bool
+
+ValueCommandInput : CommandInput
+  # Provides a command input to get a unit based value from the user.
+  expression: str
+  isMaximumInclusive: bool
+  isMaximumLimited: bool
+  isMinimumInclusive: bool
+  isMinimumLimited: bool
+  isValidExpression: bool
+  maximumValue: float
+  minimumValue: float
+  unitType: str
+  value: float
+  deleteMe() -> bool
+
+ValueInput : Base
+  booleanValue: bool
+  objectReference: Base
+  realValue: float
+  stringValue: str
+  valueType: ValueTypes
+  @static createByBoolean(booleanValue: bool) -> ValueInput
+  @static createByObject(objectReference: Base) -> ValueInput
+  @static createByReal(realValue: float) -> ValueInput
+  @static createByString(stringValue: str) -> ValueInput
+
+VariableRadiusFilletEdgeSetInput : FilletEdgeSetInput
+  # Provides access to the edges and the parameters associated with a variable radius fillet.
+  endRadius: ValueInput
+  startRadius: ValueInput
+  setMidRadii(radii: list[ValueInput], positions: list[ValueInput]) -> bool
+
+Vector2D : Base
+  length: float
+  x: float
+  y: float
+  add(vector: Vector2D) -> bool
+  angleTo(vector: Vector2D) -> float
+  asArray() -> list[float]
+  asPoint() -> Point2D
+  copy() -> Vector2D
+  @static create(x: float, y: float) -> Vector2D
+  dotProduct(vector: Vector2D) -> float
+  isEqualTo(vector: Vector2D) -> bool
+  isParallelTo(vector: Vector2D) -> bool
+  isPerpendicularTo(vector: Vector2D) -> bool
+  normalize() -> bool
+  scaleBy(scale: float) -> bool
+  setWithArray(coordinates: list[float]) -> bool
+  subtract(vector: Vector2D) -> bool
+  transformBy(matrix: Matrix2D) -> bool
+
+Vector2DVector
+  append(x: Vector2D) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::core::Vector2D > >::size_type, x: Vector2D) -> void
+  back() -> Vector2D >::value_type
+  begin() -> Vector2D >::iterator
+  capacity() -> Vector2D >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> Vector2D >::iterator
+  erase() -> Vector2D >::iterator
+  front() -> Vector2D >::value_type
+  get_allocator() -> Vector2D >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> Vector2D >::value_type
+  pop_back() -> void
+  push_back(x: Vector2D) -> void
+  rbegin() -> Vector2D >::reverse_iterator
+  rend() -> Vector2D >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::core::Vector2D > >::size_type) -> void
+  resize() -> void
+  size() -> Vector2D >::size_type
+  swap(v: list[Vector2D]) -> void
+
+Vector3D : Base
+  length: float
+  x: float
+  y: float
+  z: float
+  add(vector: Vector3D) -> bool
+  angleTo(vector: Vector3D) -> float
+  asArray() -> list[float]
+  asPoint() -> Point3D
+  copy() -> Vector3D
+  @static create(x: float, y: float, z: float) -> Vector3D
+  crossProduct(vector: Vector3D) -> Vector3D
+  dotProduct(vector: Vector3D) -> float
+  isEqualTo(vector: Vector3D) -> bool
+  isParallelTo(vector: Vector3D) -> bool
+  isPerpendicularTo(vector: Vector3D) -> bool
+  normalize() -> bool
+  scaleBy(scale: float) -> bool
+  setWithArray(coordinates: list[float]) -> bool
+  subtract(vector: Vector3D) -> bool
+  transformBy(matrix: Matrix3D) -> bool
+
+Vector3DGraphNodeProperty : GraphNodeProperty
+  # A property value that is a 3D vector.
+  value: Vector3D
+
+Vector3DVector
+  append(x: Vector3D) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::core::Vector3D > >::size_type, x: Vector3D) -> void
+  back() -> Vector3D >::value_type
+  begin() -> Vector3D >::iterator
+  capacity() -> Vector3D >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> Vector3D >::iterator
+  erase() -> Vector3D >::iterator
+  front() -> Vector3D >::value_type
+  get_allocator() -> Vector3D >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> Vector3D >::value_type
+  pop_back() -> void
+  push_back(x: Vector3D) -> void
+  rbegin() -> Vector3D >::reverse_iterator
+  rend() -> Vector3D >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::core::Vector3D > >::size_type) -> void
+  resize() -> void
+  size() -> Vector3D >::size_type
+  swap(v: list[Vector3D]) -> void
+
+Viewport : Base
+  # A viewport within Fusion. A viewport is the window where the model is displayed.
+  camera: Camera
+  frontEyeDirection: Vector3D
+  frontUpDirection: Vector3D
+  height: int
+  isFullScreen: bool
+  modelToViewSpaceTransform: Matrix3D
+  parentDocument: Document
+  visualStyle: VisualStyles
+  width: int
+  fit() -> bool
+  goHome(transition: bool) -> bool
+  modelToViewSpace(modelCoordinate: Point3D) -> Point2D
+  refresh() -> bool
+  resetFront() -> bool
+  saveAsImageFile(filename: str, width: int, height: int) -> bool
+  saveAsImageFileWithOptions(options: SaveImageFileOptions) -> bool
+  screenToView(screenCoordinate: Point2D) -> Point2D
+  setCurrentAsFront() -> bool
+  setCurrentAsHome(isFitToView: bool) -> bool
+  setCurrentAsTop() -> bool
+  viewToModelSpace(viewCoordinate: Point2D) -> Point3D
+  viewToScreen(viewCoordinate: Point2D) -> Point2D
+
+VolumetricCustomFeatureInput : Base
+  # An input object for creating a volumetric custom feature.
+  boundaryBody: Base
+
+VolumetricModelToMeshFeatureInput : Base
+  # An input object for creating a volumetric model to mesh feature.
+  elementSize: ValueInput
+  isComputeSuspended: bool
+  isSmallShellsRemoved: bool
+  isVolumetricModelRemoved: bool
+  meshingApproach: VolumetricMeshingApproachTypes
+  refinementType: VolumetricMeshRefinementTypes
+  smallShellThreshold: ValueInput
+  volumetricModel: Base

@@ -1,1 +1,535 @@
 # fusion-assembly.lap
+
+[types]
+JointDirections: XAxisJointDirection | YAxisJointDirection | ZAxisJointDirection | CustomJointDirection
+JointGeometryTypes: JointConstructionPointGeometry | JointSketchPointGeometry | JointBRepVertexGeometry | JointBRepEdgeGeometry | JointSketchCurveGeometry | JointProfileGeometry | JointPlanarBRepFaceGeometry | JointNonPlanarBRepFaceGeometry | JointBetweenTwoPlanesGeometry | JointByTwoEdgeIntersectionGeometry | JointTangentBRepFaceGeometry | JointTangentBRepFaceEdgeGeometry
+JointKeyPointTypes: StartKeyPoint | MiddleKeyPoint | EndKeyPoint | CenterKeyPoint
+JointMotionTypes: BallJointPitchMotionType | BallJointRollMotionType | BallJointYawMotionType | CylindricalJointRotateMotionType | CylindricalJointSlideMotionType | PinSlotJointRotateMotionType | PinSlotJointSlideMotionType | PlanarJointRotateMotionType | PlanarJointSlideOneMotionType | PlanarJointSlideTwoMotionType | RevoluteJointRotateMotionType | SliderJointSlideMotionType
+JointQuadrantAngleTypes: StartJointQuadrantAngleType | QuarterJointQuadrantAngleType | MiddleJointQuadrantAngleType | ThirdQuarterJointQuadrantAngleType
+JointTangentFaceEdgePointTypes: StartJointTangentFaceEdgePointType | QuarterJointTangentFaceEdgePointType | MiddleJointTangentFaceEdgePointType | ThirdQuarterJointTangentFaceEdgePointType | EndJointTangentFaceEdgePointType
+JointTangentFaceTypes: NoneJointTangentFaceType | CylinderOrConeJointTangentFaceType | SphereJointTangentFaceType | TorusJointTangentFaceType | SplineJointTangentFaceType
+JointTypes: RigidJointType | RevoluteJointType | SliderJointType | CylindricalJointType | PinSlotJointType | PlanarJointType | BallJointType | InferredJointType
+
+[classes]
+AsBuiltJoint : Base
+  # Represent an as-built joint.
+  assemblyContext: Occurrence
+  attributes: Attributes
+  entityToken: str
+  geometry: JointGeometry
+  isLightBulbOn: bool
+  isSuppressed: bool
+  isVisible: bool
+  jointMotion: JointMotion
+  motionLinks: MotionLink]
+  name: str
+  nativeObject: AsBuiltJoint
+  occurrenceOne: Occurrence
+  occurrenceTwo: Occurrence
+  parentComponent: Component
+  timelineObject: TimelineObject
+  transform: Matrix3D
+  createForAssemblyContext(occurrence: Occurrence) -> AsBuiltJoint
+  deleteMe() -> bool
+  setAsBallJointMotion() -> bool
+  setAsCylindricalJointMotion() -> bool
+  setAsPinSlotJointMotion() -> bool
+  setAsPlanarJointMotion() -> bool
+  setAsRevoluteJointMotion() -> bool
+  setAsRigidJointMotion() -> bool
+  setAsSliderJointMotion() -> bool
+
+AsBuiltJointInput : Base
+  # Defines all of the information needed to create an as-built joint.
+  geometry: JointGeometry
+  jointMotion: JointMotion
+  occurrenceOne: Occurrence
+  occurrenceTwo: Occurrence
+  setAsBallJointMotion() -> bool
+  setAsCylindricalJointMotion() -> bool
+  setAsPinSlotJointMotion() -> bool
+  setAsPlanarJointMotion() -> bool
+  setAsRevoluteJointMotion() -> bool
+  setAsRigidJointMotion() -> bool
+  setAsSliderJointMotion() -> bool
+
+AsBuiltJointList *collection<AsBuiltJoint>
+  # A list of as-built joints.
+  count: int
+  itemByName(name: str) -> AsBuiltJoint
+
+AsBuiltJointVector
+  append(x: AsBuiltJoint) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::AsBuiltJoint > >::size_type, x: AsBuiltJoint) -> void
+  back() -> AsBuiltJoint >::value_type
+  begin() -> AsBuiltJoint >::iterator
+  capacity() -> AsBuiltJoint >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> AsBuiltJoint >::iterator
+  erase() -> AsBuiltJoint >::iterator
+  front() -> AsBuiltJoint >::value_type
+  get_allocator() -> AsBuiltJoint >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> AsBuiltJoint >::value_type
+  pop_back() -> void
+  push_back(x: AsBuiltJoint) -> void
+  rbegin() -> AsBuiltJoint >::reverse_iterator
+  rend() -> AsBuiltJoint >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::AsBuiltJoint > >::size_type) -> void
+  resize() -> void
+  size() -> AsBuiltJoint >::size_type
+  swap(v: list[AsBuiltJoint]) -> void
+
+AsBuiltJoints *collection<AsBuiltJoint>
+  count: int
+  add(input: AsBuiltJointInput) -> AsBuiltJoint
+  createInput(occurrenceOne: Occurrence, occurrenceTwo: Occurrence, geometry: JointGeometry) -> AsBuiltJointInput
+  itemByName(name: str) -> AsBuiltJoint
+
+BallJointMotion : JointMotion
+  # Represents the set of information specific to a ball joint.
+  customPitchDirectionEntity: Base
+  customYawDirectionEntity: Base
+  pitchDirection: JointDirections
+  pitchDirectionVector: Vector3D
+  pitchLimits: JointLimits
+  pitchValue: float
+  rollDirectionVector: Vector3D
+  rollLimits: JointLimits
+  rollValue: float
+  yawDirection: JointDirections
+  yawDirectionVector: Vector3D
+  yawLimits: JointLimits
+  yawValue: float
+
+Component : BaseComponent
+  activeSheetMetalRule: SheetMetalRule
+  allAsBuiltJoints: AsBuiltJoint]
+  allAssemblyConstraints: AssemblyConstraint]
+  allJointOrigins: JointOrigin]
+  allJoints: Joint]
+  allRigidGroups: RigidGroup]
+  allTangentRelationships: TangentRelationship]
+  asBuiltJoints: AsBuiltJoints
+  assemblyConstraints: AssemblyConstraints
+  attributes: Attributes
+  boundingBox: BoundingBox3D
+  componentColor: Color
+  customGraphicsGroups: CustomGraphicsGroups
+  description: str
+  entityToken: str
+  features: Features
+  flatPattern: FlatPattern
+  id: str
+  isBodiesFolderLightBulbOn: bool
+  isCanvasFolderLightBulbOn: bool
+  isConstructionFolderLightBulbOn: bool
+  isDecalFolderLightBulbOn: bool
+  isJointOriginsFolderLightBulbOn: bool
+  isJointsFolderLightBulbOn: bool
+  isLibraryItem: bool
+  isOriginFolderLightBulbOn: bool
+  isSketchFolderLightBulbOn: bool
+  jointOrgins: JointOrigins
+  jointOrigins: JointOrigins
+  joints: Joints
+  material: Material
+  meshBodies: MeshBodies
+  mfgdmModelId: str
+  modelParameters: ModelParameters
+  motionLinks: MotionLinks
+  opacity: float
+  orientedMinimumBoundingBox: OrientedBoundingBox3D
+  originConstructionPoint: ConstructionPoint
+  partNumber: str
+  physicalProperties: PhysicalProperties
+  preciseBoundingBox: BoundingBox3D
+  revisionId: str
+  rigidGroups: RigidGroups
+  sketches: Sketches
+  tangentRelationships: TangentRelationships
+  xConstructionAxis: ConstructionAxis
+  xYConstructionPlane: ConstructionPlane
+  xZConstructionPlane: ConstructionPlane
+  yConstructionAxis: ConstructionAxis
+  yZConstructionPlane: ConstructionPlane
+  zConstructionAxis: ConstructionAxis
+  allOccurrencesByComponent(component: Component) -> OccurrenceList
+  boundingBox2(entityTypes: BoundingBoxEntityTypes) -> BoundingBox3D
+  createBRepEdgeProfile(edges: Base, chainEdges: bool) -> Profile
+  createFlatPattern(stationaryFace: BRepFace) -> FlatPattern
+  createOpenProfile(curves: Base, chainCurves: bool) -> Profile
+  createThumbnail() -> DataObject
+  findBRepUsingPoint(point: Point3D, entityType: BRepEntityTypes, proximityTolerance: float, visibleEntitiesOnly: bool) -> ObjectCollection
+  findBRepUsingRay() -> ObjectCollection
+  getPhysicalProperties() -> PhysicalProperties
+  internalCommand(commandName: str, commandArgs: list[str]) -> str
+  occurrencesByComponent(component: Component) -> OccurrenceList
+  saveCopyAs(name: str, dataFolder: DataFolder, description: str, tag: str) -> DataFileFuture
+  transformOccurrences(occurrences: list[Occurrence], transforms: list[Matrix3D], ignoreJoints: bool) -> bool
+
+ConfigurationJointSnap : Base
+  jointGeometry: Base
+  name: str
+  deleteMe() -> bool
+
+ConfigurationJointSnapCell : ConfigurationCell
+  parentColumn: ConfigurationJointSnapColumn
+  snap: ConfigurationJointSnap
+
+ConfigurationJointSnapColumn : ConfigurationFeatureAspectColumn
+  joint: Base
+  snaps: ConfigurationJointSnaps
+  deleteMe() -> bool
+  getCell(rowIndex: int) -> ConfigurationCell
+  getCellByRowId(rowId: str) -> ConfigurationCell
+  getCellByRowName(rowName: str) -> ConfigurationCell
+
+ConfigurationJointSnaps *collection<ConfigurationJointSnap>
+  count: int
+  add(name: str, jointGeometry: Base) -> ConfigurationJointSnap
+  itemByName(name: str) -> ConfigurationJointSnap
+
+ContactSet : Base
+  # Represents a contact set in a design.
+  isSuppressed: bool
+  name: str
+  occurencesAndBodies: Base]
+  deleteMe() -> bool
+
+CylindricalJointMotion : JointMotion
+  # Represents the set of information specific to a cylindrical joint.
+  customRotationAxisEntity: Base
+  rotationAxis: JointDirections
+  rotationAxisVector: Vector3D
+  rotationLimits: JointLimits
+  rotationValue: float
+  slideLimits: JointLimits
+  slideValue: float
+
+InferredJointInput : Base
+  geometricRelationships: GeometricRelationships
+
+Joint : Base
+  # A joint in a design.
+  angle: ModelParameter
+  assemblyContext: Occurrence
+  attributes: Attributes
+  entityToken: str
+  errorOrWarningMessage: str
+  geometricRelationships: GeometricRelationships
+  geometryOneTransform: Matrix3D
+  geometryOrOriginOne: Base
+  geometryOrOriginTwo: Base
+  geometryTwoTransform: Matrix3D
+  healthState: FeatureHealthStates
+  isFlipped: bool
+  isLightBulbOn: bool
+  isLocked: bool
+  isSuppressed: bool
+  isVisible: bool
+  jointMotion: JointMotion
+  motionLinks: MotionLink]
+  name: str
+  nativeObject: Joint
+  occurrenceOne: Occurrence
+  occurrenceTwo: Occurrence
+  offset: ModelParameter
+  offsetX: ModelParameter
+  offsetY: ModelParameter
+  parentComponent: Component
+  timelineObject: TimelineObject
+  createForAssemblyContext(occurrence: Occurrence) -> Joint
+  deleteMe() -> bool
+  setAsBallJointMotion() -> bool
+  setAsCylindricalJointMotion() -> bool
+  setAsPinSlotJointMotion() -> bool
+  setAsPlanarJointMotion() -> bool
+  setAsRevoluteJointMotion() -> bool
+  setAsRigidJointMotion() -> bool
+  setAsSliderJointMotion() -> bool
+
+JointGeometry : Base
+  entityOne: Base
+  entityTwo: Base
+  geometryType: JointGeometryTypes
+  keyPointType: JointKeyPointTypes
+  origin: Point3D
+  planeOne: Base
+  planeTwo: Base
+  primaryAxisVector: Vector3D
+  secondaryAxisVector: Vector3D
+  tangentFaceParamOne: float
+  tangentFaceParamTwo: float
+  tangentFaceType: JointTangentFaceTypes
+  thirdAxisVector: Vector3D
+  @static createByBetweenTwoPlanes(planeOne: Base, planeTwo: Base, entityOne: Base, entityTwo: Base, keyPointType: JointKeyPointTypes) -> JointGeometry
+  @static createByCurve(curve: Base, keyPointType: JointKeyPointTypes) -> JointGeometry
+  @static createByCylinderOrConeFace(face: BRepFace, angle: JointQuadrantAngleTypes, height: JointKeyPointTypes) -> BRepFace
+  @static createByNonPlanarFace(face: BRepFace, keyPointType: JointKeyPointTypes) -> BRepFace
+  @static createByPlanarFace(face: BRepFace, edge: BRepEdge, keyPointType: JointKeyPointTypes) -> BRepEdge
+  @static createByPoint(point: Base) -> JointGeometry
+  @static createByProfile(profile: Profile, sketchCurve: SketchCurve, keyPointType: JointKeyPointTypes) -> SketchCurve
+  @static createBySphereFace(face: BRepFace, azimuthAngle: JointQuadrantAngleTypes, polarAngle: JointKeyPointTypes) -> BRepFace
+  @static createBySplineFace(face: BRepFace, paramU: JointKeyPointTypes, paramV: JointKeyPointTypes) -> BRepFace
+  @static createByTangentFaceEdge(face: BRepFace, edge: BRepEdge, edgePointType: JointTangentFaceEdgePointTypes) -> BRepEdge
+  @static createByTorusFace(face: BRepFace, azimuthAngle: JointQuadrantAngleTypes, sectionAngle: JointQuadrantAngleTypes) -> BRepFace
+  @static createByTwoEdgeIntersection(edgeOne: BRepEdge, edgeTwo: BRepEdge) -> BRepEdge
+
+JointInput : Base
+  angle: ValueInput
+  geometryOrOriginOne: Base
+  geometryOrOriginTwo: Base
+  isFlipped: bool
+  jointMotion: JointMotion
+  offset: ValueInput
+  setAsBallJointMotion() -> bool
+  setAsCylindricalJointMotion() -> bool
+  setAsPinSlotJointMotion() -> bool
+  setAsPlanarJointMotion() -> bool
+  setAsRevoluteJointMotion() -> bool
+  setAsRigidJointMotion() -> bool
+  setAsSliderJointMotion() -> bool
+
+JointLimits : Base
+  # Used to define limits for the range of motion of a joint.
+  isMaximumValueEnabled: bool
+  isMinimumValueEnabled: bool
+  isRestValueEnabled: bool
+  maximumValue: float
+  minimumValue: float
+  restValue: float
+
+JointList *collection<Joint>
+  # A list of joints.
+  count: int
+  itemByName(name: str) -> Joint
+
+JointMotion : Base
+  # The base class for the classes that represent all of the
+    various joint types.
+  jointType: JointTypes
+
+JointOrigin : Base
+  # Represents an existing joint origin in a design.
+  angle: ModelParameter
+  assemblyContext: Occurrence
+  attributes: Attributes
+  entityToken: str
+  geometry: JointGeometry
+  isFlipped: bool
+  isLightBulbOn: bool
+  name: str
+  nativeObject: JointOrigin
+  offsetX: ModelParameter
+  offsetY: ModelParameter
+  offsetZ: ModelParameter
+  parentComponent: Component
+  primaryAxisVector: Vector3D
+  secondaryAxisVector: Vector3D
+  thirdAxisVector: Vector3D
+  timelineObject: TimelineObject
+  transform: Matrix3D
+  xAxisEntity: Base
+  zAxisEntity: Base
+  createForAssemblyContext(occurrence: Occurrence) -> JointOrigin
+  deleteMe() -> bool
+
+JointOriginInput : Base
+  angle: ValueInput
+  geometry: JointGeometry
+  globalOrientParamOne: ValueInput
+  globalOrientParamTwo: ValueInput
+  isFlipped: bool
+  offsetX: ValueInput
+  offsetY: ValueInput
+  offsetZ: ValueInput
+  primaryAxisVector: Vector3D
+  secondaryAxisVector: Vector3D
+  thirdAxisVector: Vector3D
+  xAxisEntity: Base
+  zAxisEntity: Base
+
+JointOriginList *collection<JointOrigin>
+  # A list of joint origins.
+  count: int
+  itemByName(name: str) -> JointOrigin
+
+JointOriginVector
+  append(x: JointOrigin) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::JointOrigin > >::size_type, x: JointOrigin) -> void
+  back() -> JointOrigin >::value_type
+  begin() -> JointOrigin >::iterator
+  capacity() -> JointOrigin >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> JointOrigin >::iterator
+  erase() -> JointOrigin >::iterator
+  front() -> JointOrigin >::value_type
+  get_allocator() -> JointOrigin >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> JointOrigin >::value_type
+  pop_back() -> void
+  push_back(x: JointOrigin) -> void
+  rbegin() -> JointOrigin >::reverse_iterator
+  rend() -> JointOrigin >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::JointOrigin > >::size_type) -> void
+  resize() -> void
+  size() -> JointOrigin >::size_type
+  swap(v: list[JointOrigin]) -> void
+
+JointOrigins *collection<JointOrigin>
+  count: int
+  add(input: JointOriginInput) -> JointOrigin
+  createInput(geometry: JointGeometry) -> JointOriginInput
+  itemByName(name: str) -> JointOrigin
+
+JointVector
+  append(x: Joint) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::Joint > >::size_type, x: Joint) -> void
+  back() -> Joint >::value_type
+  begin() -> Joint >::iterator
+  capacity() -> Joint >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> Joint >::iterator
+  erase() -> Joint >::iterator
+  front() -> Joint >::value_type
+  get_allocator() -> Joint >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> Joint >::value_type
+  pop_back() -> void
+  push_back(x: Joint) -> void
+  rbegin() -> Joint >::reverse_iterator
+  rend() -> Joint >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::Joint > >::size_type) -> void
+  resize() -> void
+  size() -> Joint >::size_type
+  swap(v: list[Joint]) -> void
+
+Joints *collection<Joint>
+  count: int
+  add(input: JointInput) -> Joint
+  addInferredJoint(input: InferredJointInput) -> Joint
+  createInferredJointInput() -> InferredJointInput
+  createInput(geometryOrOriginOne: Base, geometryOrOriginTwo: Base) -> JointInput
+  itemByName(name: str) -> Joint
+
+Occurrence : Base
+  # Represents an occurrence of a component at any level within a subassembly.
+  appearance: Appearance
+  asBuiltJoints: AsBuiltJointList
+  assemblyContext: Occurrence
+  attributes: Attributes
+  bRepBodies: BRepBodies
+  boundingBox: BoundingBox3D
+  childOccurrences: OccurrenceList
+  component: Component
+  configurationRow: ConfigurationRow
+  configuredDataFile: DataFile
+  dataComponent: DataComponent
+  deriveFeature: DeriveFeature
+  documentReference: DocumentReference
+  entityToken: str
+  fullPathName: str
+  initialTransform: Matrix3D
+  isActive: bool
+  isConfiguration: bool
+  isDerived: bool
+  isGroundToParent: bool
+  isGrounded: bool
+  isIsolated: bool
+  isLightBulbOn: bool
+  isReferencedComponent: bool
+  isSelectable: bool
+  isVaildForEditInitialPosition: bool
+  isVisible: bool
+  joints: JointList
+  meshBodies: MeshBody]
+  name: str
+  nativeObject: Occurrence
+  orientedMinimumBoundingBox: OrientedBoundingBox3D
+  physicalProperties: PhysicalProperties
+  preciseBoundingBox: BoundingBox3D
+  rigidGroups: RigidGroupList
+  sourceComponent: Component
+  timelineObject: TimelineObject
+  transform: Matrix3D
+  transform2: Matrix3D
+  visibleOpacity: float
+  activate() -> bool
+  boundingBox2(entityTypes: BoundingBoxEntityTypes) -> BoundingBox3D
+  breakLink() -> bool
+  createForAssemblyContext(occurrence: Occurrence) -> Occurrence
+  deleteMe() -> bool
+  getPhysicalProperties() -> PhysicalProperties
+  moveToComponent(targetOccurrence: Occurrence) -> Occurrence
+  replace(newFile: DataFile, replaceAll: bool) -> bool
+  switchConfiguration(newRow: ConfigurationRow) -> bool
+
+PinSlotJointMotion : JointMotion
+  # Represents the set of information specific to a pin slot joint.
+  customRotationAxisEntity: Base
+  customSlideDirectionEntity: Base
+  rotationAxis: JointDirections
+  rotationAxisVector: Vector3D
+  rotationLimits: JointLimits
+  rotationValue: float
+  slideDirection: JointDirections
+  slideDirectionVector: Vector3D
+  slideLimits: JointLimits
+  slideValue: float
+
+PlanarJointMotion : JointMotion
+  # Represents the set of information specific to a planar joint.
+  customNormalDirectionEntity: Base
+  customPrimarySlideDirectionEntity: Base
+  normalDirection: JointDirections
+  normalDirectionVector: Vector3D
+  primarySlideDirection: JointDirections
+  primarySlideDirectionVector: Vector3D
+  primarySlideLimits: JointLimits
+  primarySlideValue: float
+  rotationLimits: JointLimits
+  rotationValue: float
+  secondarySlideDirectionVector: Vector3D
+  secondarySlideLimits: JointLimits
+  secondarySlideValue: float
+
+RevoluteJointMotion : JointMotion
+  # Represents the set of information specific to a revolute joint.
+  customRotationAxisEntity: Base
+  rotationAxis: JointDirections
+  rotationAxisVector: Vector3D
+  rotationLimits: JointLimits
+  rotationValue: float
+
+RigidGroup : Base
+  # Represents a rigid group within an assembly.
+  assemblyContext: Occurrence
+  attributes: Attributes
+  entityToken: str
+  isSuppressed: bool
+  isVisible: bool
+  name: str
+  nativeObject: RigidGroup
+  occurrences: OccurrenceList
+  parentComponent: Component
+  timelineObject: TimelineObject
+  createForAssemblyContext(occurrence: Occurrence) -> RigidGroup
+  deleteMe() -> bool
+  setOccurrences(occurrences: ObjectCollection, includeChildren: bool) -> bool
+
+RigidJointMotion : JointMotion
+
+SliderJointMotion : JointMotion
+  # Represents the set of information specific to a slider joint.
+  customSlideDirectionEntity: Base
+  slideDirection: JointDirections
+  slideDirectionVector: Vector3D
+  slideLimits: JointLimits
+  slideValue: float
