@@ -1,0 +1,26 @@
+[meta]
+api: Autodesk Fusion
+lang: python
+namespace: adsk.core, adsk.fusion, adsk.cam
+import: import adsk.core, adsk.fusion, adsk.cam
+
+# fusion-core.lap
+
+[classes]
+Base
+  isValid: bool
+  objectType: str
+  classType() -> str
+
+Color : Base
+  blue: int
+  green: int
+  opacity: int
+  red: int
+  @static create(red: int, green: int, blue: int, opacity: int) -> Color
+
+Point3D : Base
+  x: float
+  y: float
+  z: float
+  @static create(x: float, y: float, z: float) -> Point3D

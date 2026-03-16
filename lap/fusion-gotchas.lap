@@ -1,0 +1,10 @@
+# fusion-gotchas.lap
+
+[gotchas]
+- Units are always centimeters internally, regardless of UI settings
+- Always check return values for None -- operations fail silently
+- Use design.designType = ParametricDesignType before parametric features
+- Input objects must be fully configured before calling .add()
+- Sketch profiles only available after geometry is fully closed
+- Point3D.create() takes cm, not mm or inches
+- Collections are 0-indexed, use .item(i) or [i]

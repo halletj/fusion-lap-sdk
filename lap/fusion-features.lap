@@ -1,0 +1,17 @@
+# fusion-features.lap
+
+[classes]
+ExtrudeFeature : Feature
+  operation: FeatureOperations
+  profile: Base
+  setOneSideExtent(extent: ExtentDefinition, direction: ExtentDirections) -> bool
+
+ExtrudeFeatures *collection<ExtrudeFeature>
+  count: int
+  addSimple(profile: Base, distance: Base, operation: FeatureOperations) -> ExtrudeFeature
+
+Feature : Base
+  bodies: BRepBodies
+  isValid: bool
+  name: str
+  deleteMe() -> bool

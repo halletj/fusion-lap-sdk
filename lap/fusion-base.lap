@@ -1,0 +1,42 @@
+# fusion-graph.lap
+
+[graph]
+# Application class not found in IR
+
+# fusion-gotchas.lap
+
+[gotchas]
+- Units are always centimeters internally, regardless of UI settings
+- Always check return values for None -- operations fail silently
+- Use design.designType = ParametricDesignType before parametric features
+- Input objects must be fully configured before calling .add()
+- Sketch profiles only available after geometry is fully closed
+- Point3D.create() takes cm, not mm or inches
+- Collections are 0-indexed, use .item(i) or [i]
+
+[meta]
+api: Autodesk Fusion
+lang: python
+namespace: adsk.core, adsk.fusion, adsk.cam
+import: import adsk.core, adsk.fusion, adsk.cam
+
+# fusion-core.lap
+
+[classes]
+Base
+  isValid: bool
+  objectType: str
+  classType() -> str
+
+Color : Base
+  blue: int
+  green: int
+  opacity: int
+  red: int
+  @static create(red: int, green: int, blue: int, opacity: int) -> Color
+
+Point3D : Base
+  x: float
+  y: float
+  z: float
+  @static create(x: float, y: float, z: float) -> Point3D
