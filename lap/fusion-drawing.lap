@@ -1,5 +1,8 @@
 # fusion-drawing.lap
 
+[types]
+PDFSheetsExport: AllPDFSheetsExport | SelectedPDFSheetsExport | CurrentPDFSheetExport | RangePDFSheetsExport
+
 [classes]
 ConfigurationAppearanceTable : ConfigurationTable
   # Represents a configuration table that defines the appearances assigned to bodies and components.
@@ -31,6 +34,15 @@ ConfigurationCustomThemeTable : ConfigurationTable
   deleteMe(deleteColumns: bool) -> bool
   getCell(column: int, row: int) -> ConfigurationCell
   moveColumns(columns: list[ConfigurationColumn], targetTable: ConfigurationTable) -> ConfigurationColumn]
+
+ConfigurationCustomThemeTables *collection<ConfigurationCustomThemeTable>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(columns: list[ConfigurationColumn]) -> ConfigurationCustomThemeTable
+  classType()
 
 ConfigurationMaterialTable : ConfigurationTable
   # Represents a configuration table that defines materials assigned to bodies and components.
@@ -172,3 +184,23 @@ DrawingExportOptions : Base
   objectType
   Name()
   classType()
+
+PDFExportOptions : DrawingExportOptions
+  # Defines the inputs needed to export the drawing as PDF.
+  Name
+  filename
+  isValid
+  objectType
+  openPDF: bool
+  sheetRange: str
+  sheetsToExport: PDFSheetsExport
+  useLineWeights: bool
+  Name()
+  classType()
+
+PDFSheetsExport
+  AllPDFSheetsExport()
+  CurrentPDFSheetExport()
+  Name()
+  RangePDFSheetsExport()
+  SelectedPDFSheetsExport()

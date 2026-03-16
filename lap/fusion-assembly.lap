@@ -11,6 +11,59 @@ JointTangentFaceTypes: NoneJointTangentFaceType | CylinderOrConeJointTangentFace
 JointTypes: RigidJointType | RevoluteJointType | SliderJointType | CylindricalJointType | PinSlotJointType | PlanarJointType | BallJointType | InferredJointType
 
 [classes]
+ArrangeComponent : Base
+  Name
+  isDirectionFlipped: bool
+  isFiller: bool
+  isValid
+  objectType
+  occurrence: Occurrence
+  occurrenceOrFace: Base
+  parentArrangeFeature: ArrangeFeature
+  priority: ArrangePriorities
+  quantity: int
+  rotation: float
+  rotationType: ArrangeRotationTypes
+  upDirection: Vector3D
+  zeroDirection: Vector3D
+  Name()
+  classType()
+  deleteMe() -> bool
+  setRotationUsingEdge(edge: BRepEdge) -> bool
+
+ArrangeComponentVector
+  append(x: ArrangeComponent) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::ArrangeComponent > >::size_type, x: ArrangeComponent) -> void
+  back() -> ArrangeComponent >::value_type
+  begin() -> ArrangeComponent >::iterator
+  capacity() -> ArrangeComponent >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> ArrangeComponent >::iterator
+  erase() -> ArrangeComponent >::iterator
+  front() -> ArrangeComponent >::value_type
+  get_allocator() -> ArrangeComponent >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> ArrangeComponent >::value_type
+  pop_back() -> void
+  push_back(x: ArrangeComponent) -> void
+  rbegin() -> ArrangeComponent >::reverse_iterator
+  rend() -> ArrangeComponent >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::ArrangeComponent > >::size_type) -> void
+  resize() -> void
+  size() -> ArrangeComponent >::size_type
+  swap(v: list[ArrangeComponent]) -> void
+
+ArrangeComponents *collection<ArrangeComponent>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(occurrenceOrFace: Base) -> ArrangeComponent
+  classType()
+
 AsBuiltJoint : Base
   # Represent an as-built joint.
   Name
@@ -108,6 +161,72 @@ AsBuiltJoints *collection<AsBuiltJoint>
   createInput(occurrenceOne: Occurrence, occurrenceTwo: Occurrence, geometry: JointGeometry) -> AsBuiltJointInput
   itemByName(name: str) -> AsBuiltJoint
 
+AssemblyConstraint : Base
+  # Represents an assembly constraint.
+  Name
+  assemblyContext: Occurrence
+  attributes: Attributes
+  entityToken: str
+  errorOrWarningMessage: str
+  geometricRelationships: GeometricRelationships
+  healthState: FeatureHealthStates
+  isLightBulbOn: bool
+  isSuppressed: bool
+  isValid
+  isVisible: bool
+  name: str
+  nativeObject: AssemblyConstraint
+  objectType
+  parentComponent: Component
+  timelineObject: TimelineObject
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> AssemblyConstraint
+  deleteMe() -> bool
+
+AssemblyConstraintInput : Base
+  Name
+  geometricRelationships: GeometricRelationships
+  isValid
+  objectType
+  Name()
+  classType()
+
+AssemblyConstraintVector
+  append(x: AssemblyConstraint) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::AssemblyConstraint > >::size_type, x: AssemblyConstraint) -> void
+  back() -> AssemblyConstraint >::value_type
+  begin() -> AssemblyConstraint >::iterator
+  capacity() -> AssemblyConstraint >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> AssemblyConstraint >::iterator
+  erase() -> AssemblyConstraint >::iterator
+  front() -> AssemblyConstraint >::value_type
+  get_allocator() -> AssemblyConstraint >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> AssemblyConstraint >::value_type
+  pop_back() -> void
+  push_back(x: AssemblyConstraint) -> void
+  rbegin() -> AssemblyConstraint >::reverse_iterator
+  rend() -> AssemblyConstraint >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::AssemblyConstraint > >::size_type) -> void
+  resize() -> void
+  size() -> AssemblyConstraint >::size_type
+  swap(v: list[AssemblyConstraint]) -> void
+
+AssemblyConstraints *collection<AssemblyConstraint>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(input: AssemblyConstraintInput) -> AssemblyConstraint
+  classType()
+  createInput() -> AssemblyConstraintInput
+  itemByName(name: str) -> AssemblyConstraint
+
 BallJointMotion : JointMotion
   # Represents the set of information specific to a ball joint.
   Name
@@ -129,6 +248,29 @@ BallJointMotion : JointMotion
   yawValue: float
   Name()
   classType()
+
+BaseComponent : Base
+  Name
+  allOccurrences: OccurrenceList
+  bRepBodies: BRepBodies
+  canvases: Canvases
+  constructionAxes: ConstructionAxes
+  constructionPlanes: ConstructionPlanes
+  constructionPoints: ConstructionPoints
+  dataComponent: DataComponent
+  decals: Decals
+  isValid
+  name: str
+  objectType
+  occurrences: Occurrences
+  parentDesign: Design
+  propertyGroups: PropertyGroups
+  Name()
+  allOccurrencesByComponent(component: Component) -> OccurrenceList
+  classType()
+  findBRepUsingPoint(point: Point3D, entityType: BRepEntityTypes, proximityTolerance: float, visibleEntitiesOnly: bool) -> ObjectCollection
+  findBRepUsingRay() -> ObjectCollection
+  occurrencesByComponent(component: Component) -> OccurrenceList
 
 Component : BaseComponent
   Name
@@ -213,6 +355,26 @@ Component : BaseComponent
   saveCopyAs(name: str, dataFolder: DataFolder, description: str, tag: str) -> DataFileFuture
   transformOccurrences(occurrences: list[Occurrence], transforms: list[Matrix3D], ignoreJoints: bool) -> bool
 
+ComponentList *collection<Component>
+  # Provides a list of components.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+
+Components *collection<Component>
+  # The Components collection object provides access to existing components in a design.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemById(id: str) -> Component
+  itemByName(name: str) -> Component
+
 ConfigurationJointSnap : Base
   Name
   isValid
@@ -275,6 +437,17 @@ ContactSet : Base
   classType()
   deleteMe() -> bool
 
+ContactSets *collection<ContactSet>
+  # Provides access to the existing contact sets in a design and supports creating new contact sets.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(occurrencesAndBodies: list[Base]) -> ContactSet
+  classType()
+  itemByName(name: str) -> ContactSet
+
 CylindricalJointMotion : JointMotion
   # Represents the set of information specific to a cylindrical joint.
   Name
@@ -290,6 +463,99 @@ CylindricalJointMotion : JointMotion
   slideValue: float
   Name()
   classType()
+
+DataComponent : Base
+  Name
+  component: Base
+  id: str
+  isValid
+  mfgdmModelId: str
+  objectType
+  timestamp: str
+  versionId: str
+  Name()
+  classType()
+
+FlatPatternComponent : Component
+  Name
+  activeSheetMetalRule
+  allAsBuiltJoints
+  allAssemblyConstraints
+  allJointOrigins
+  allJoints
+  allOccurrences
+  allRigidGroups
+  allTangentRelationships
+  asBuiltJoints
+  assemblyConstraints
+  attributes
+  bRepBodies
+  boundingBox
+  canvases
+  componentColor
+  constructionAxes
+  constructionPlanes
+  constructionPoints
+  customGraphicsGroups
+  dataComponent
+  decals
+  description
+  entityToken
+  features
+  flatPattern
+  id
+  isBodiesFolderLightBulbOn
+  isCanvasFolderLightBulbOn
+  isConstructionFolderLightBulbOn
+  isDecalFolderLightBulbOn
+  isJointOriginsFolderLightBulbOn
+  isJointsFolderLightBulbOn
+  isLibraryItem
+  isOriginFolderLightBulbOn
+  isSketchFolderLightBulbOn
+  isValid
+  jointOrigins
+  joints
+  material
+  meshBodies
+  mfgdmModelId
+  modelParameters
+  name
+  objectType
+  occurrences
+  opacity
+  orientedMinimumBoundingBox
+  originConstructionPoint
+  parentDesign
+  partNumber
+  physicalProperties
+  preciseBoundingBox
+  propertyGroups
+  revisionId
+  rigidGroups
+  sketches
+  tangentRelationships
+  xConstructionAxis
+  xYConstructionPlane
+  xZConstructionPlane
+  yConstructionAxis
+  yZConstructionPlane
+  zConstructionAxis
+  Name()
+  allOccurrencesByComponent(component: Component) -> OccurrenceList
+  boundingBox2(entityTypes: BoundingBoxEntityTypes) -> BoundingBox3D
+  classType()
+  createBRepEdgeProfile(edges: Base, chainEdges: bool) -> Profile
+  createFlatPattern(stationaryFace: BRepFace) -> FlatPattern
+  createOpenProfile(curves: Base, chainCurves: bool) -> Profile
+  createThumbnail() -> DataObject
+  findBRepUsingPoint(point: Point3D, entityType: BRepEntityTypes, proximityTolerance: float, visibleEntitiesOnly: bool) -> ObjectCollection
+  findBRepUsingRay() -> ObjectCollection
+  getPhysicalProperties() -> PhysicalProperties
+  internalCommand(commandName: str, commandArgs: list[str]) -> str
+  occurrencesByComponent(component: Component) -> OccurrenceList
+  saveCopyAs(name: str, dataFolder: DataFolder, description: str, tag: str) -> DataFileFuture
+  transformOccurrences(occurrences: list[Occurrence], transforms: list[Matrix3D], ignoreJoints: bool) -> bool
 
 InferredJointInput : Base
   Name
@@ -624,6 +890,68 @@ Joints *collection<Joint>
   createInput(geometryOrOriginOne: Base, geometryOrOriginTwo: Base) -> JointInput
   itemByName(name: str) -> Joint
 
+MotionLink : Base
+  # A MotionLink in a design.
+  assemblyContext: Occurrence
+  attributes: Attributes
+  entityToken: str
+  errorOrWarningMessage: str
+  healthState: FeatureHealthStates
+  isReversed: bool
+  isSuppressed: bool
+  jointOne: Base
+  jointTwo: Base
+  motionOne: JointMotionTypes
+  motionTwo: JointMotionTypes
+  name: str
+  nativeObject: MotionLink
+  parentComponent: Component
+  timelineObject: TimelineObject
+  valueOne: ModelParameter
+  valueTwo: ModelParameter
+  createForAssemblyContext(occurrence: Occurrence) -> MotionLink
+  deleteMe() -> bool
+  setMotionData(motionOne: JointMotionTypes, valueOne: ValueInput, motionTwo: JointMotionTypes, valueTwo: ValueInput, isReversed: bool) -> bool
+
+MotionLinkInput : Base
+  isReversed: bool
+  jointOne: Base
+  jointTwo: Base
+  motionOne: JointMotionTypes
+  motionTwo: JointMotionTypes
+  valueOne: ValueInput
+  valueTwo: ValueInput
+
+MotionLinkVector
+  append(x: MotionLink) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::MotionLink > >::size_type, x: MotionLink) -> void
+  back() -> MotionLink >::value_type
+  begin() -> MotionLink >::iterator
+  capacity() -> MotionLink >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> MotionLink >::iterator
+  erase() -> MotionLink >::iterator
+  front() -> MotionLink >::value_type
+  get_allocator() -> MotionLink >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> MotionLink >::value_type
+  pop_back() -> void
+  push_back(x: MotionLink) -> void
+  rbegin() -> MotionLink >::reverse_iterator
+  rend() -> MotionLink >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::MotionLink > >::size_type) -> void
+  resize() -> void
+  size() -> MotionLink >::size_type
+  swap(v: list[MotionLink]) -> void
+
+MotionLinks *collection<MotionLink>
+  count: int
+  add(input: MotionLinkInput) -> MotionLink
+  createInput() -> MotionLinkInput
+  itemByName(name: str) -> MotionLink
+
 Occurrence : Base
   # Represents an occurrence of a component at any level within a subassembly.
   Name
@@ -680,6 +1008,76 @@ Occurrence : Base
   moveToComponent(targetOccurrence: Occurrence) -> Occurrence
   replace(newFile: DataFile, replaceAll: bool) -> bool
   switchConfiguration(newRow: ConfigurationRow) -> bool
+
+OccurrenceList *collection<Occurrence>
+  # Provides a list of occurrences.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemByName(name: str) -> Occurrence
+
+OccurrenceVector
+  append(x: Occurrence) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::Occurrence > >::size_type, x: Occurrence) -> void
+  back() -> Occurrence >::value_type
+  begin() -> Occurrence >::iterator
+  capacity() -> Occurrence >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> Occurrence >::iterator
+  erase() -> Occurrence >::iterator
+  front() -> Occurrence >::value_type
+  get_allocator() -> Occurrence >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> Occurrence >::value_type
+  pop_back() -> void
+  push_back(x: Occurrence) -> void
+  rbegin() -> Occurrence >::reverse_iterator
+  rend() -> Occurrence >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::Occurrence > >::size_type) -> void
+  resize() -> void
+  size() -> Occurrence >::size_type
+  swap(v: list[Occurrence]) -> void
+
+Occurrences *collection<Occurrence>
+  Name
+  asList: OccurrenceList
+  count: int
+  isValid
+  objectType
+  Name()
+  addByInsert(dataFile: DataFile, transform: Matrix3D, isReferencedComponent: bool) -> Occurrence
+  addExistingComponent(component: Component, transform: Matrix3D) -> Occurrence
+  addFromConfiguration(configurationRow: ConfigurationRow, transform: Matrix3D) -> Occurrence
+  addNewComponent(transform: Matrix3D) -> Occurrence
+  addNewComponentCopy(component: Component, transform: Matrix3D) -> Occurrence
+  addNewExternalComponent(componentName: str, targetFolder: DataFolder, transform: Matrix3D) -> Occurrence
+  asArray() -> Occurrence]
+  classType()
+  itemByName(name: str) -> Occurrence
+
+PhysicalProperties : Base
+  # The physical properties of a Component, Occurrence or BRepBody
+  Name
+  accuracy: CalculationAccuracy
+  area: float
+  centerOfMass: Point3D
+  density: float
+  isValid
+  mass: float
+  objectType
+  volume: float
+  Name()
+  classType()
+  getPrincipalAxes() -> bool
+  getPrincipalMomentsOfInertia() -> bool
+  getRadiusOfGyration() -> bool
+  getRotationToPrincipal() -> bool
+  getXYZMomentsOfInertia() -> bool
 
 PinSlotJointMotion : JointMotion
   # Represents the set of information specific to a pin slot joint.
@@ -756,6 +1154,50 @@ RigidGroup : Base
   createForAssemblyContext(occurrence: Occurrence) -> RigidGroup
   deleteMe() -> bool
   setOccurrences(occurrences: ObjectCollection, includeChildren: bool) -> bool
+
+RigidGroupList *collection<RigidGroup>
+  # A list of rigid groups.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemByName(name: str) -> RigidGroup
+
+RigidGroupVector
+  append(x: RigidGroup) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::RigidGroup > >::size_type, x: RigidGroup) -> void
+  back() -> RigidGroup >::value_type
+  begin() -> RigidGroup >::iterator
+  capacity() -> RigidGroup >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> RigidGroup >::iterator
+  erase() -> RigidGroup >::iterator
+  front() -> RigidGroup >::value_type
+  get_allocator() -> RigidGroup >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> RigidGroup >::value_type
+  pop_back() -> void
+  push_back(x: RigidGroup) -> void
+  rbegin() -> RigidGroup >::reverse_iterator
+  rend() -> RigidGroup >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::RigidGroup > >::size_type) -> void
+  resize() -> void
+  size() -> RigidGroup >::size_type
+  swap(v: list[RigidGroup]) -> void
+
+RigidGroups *collection<RigidGroup>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(occurrences: ObjectCollection, includeChildren: bool) -> RigidGroup
+  classType()
+  itemByName(name: str) -> RigidGroup
 
 RigidJointMotion : JointMotion
   Name

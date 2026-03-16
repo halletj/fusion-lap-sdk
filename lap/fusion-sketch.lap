@@ -3,6 +3,8 @@
 [types]
 SketchCurveConstructionStates: ToggleSketchCurveConstructionState | ConstructionSketchCurveConstructionState | NormalSketchCurveConstructionState
 SketchLineCenterlineStates: ToggleSketchLineCenterlineState | CenterlineSketchLineCenterlineState | NormalSketchLineCenterlineState
+SplineDegrees: SplineDegreeOne | SplineDegreeTwo | SplineDegreeThree | SplineDegreeFour | SplineDegreeFive | SplineDegreeSix | SplineDegreeSeven | SplineDegreeEight | SplineDegreeNine
+TextBoxKeyPoints: TopLeftTextBoxKeyPoint | TopMiddleTextBoxKeyPoint | TopRightTextBoxKeyPoint | MiddleLeftTextBoxKeyPoint | MiddleTextBoxKeyPoint | MiddleRightTextBoxKeyPoint | BottomLeftTextBoxKeyPoint | BottomMiddleTextBoxKeyPoint | BottomRightTextBoxKeyPoint
 
 [classes]
 AssemblyConstraint : Base
@@ -27,6 +29,17 @@ AssemblyConstraint : Base
   classType()
   createForAssemblyContext(occurrence: Occurrence) -> AssemblyConstraint
   deleteMe() -> bool
+
+AssemblyConstraints *collection<AssemblyConstraint>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(input: AssemblyConstraintInput) -> AssemblyConstraint
+  classType()
+  createInput() -> AssemblyConstraintInput
+  itemByName(name: str) -> AssemblyConstraint
 
 CircularPatternConstraint : GeometricConstraint
   # A circular pattern constraint in a sketch.
@@ -1834,6 +1847,18 @@ SmoothConstraint : GeometricConstraint
   createForAssemblyContext(occurrence: Occurrence) -> SmoothConstraint
   deleteMe() -> bool
 
+SplineDegrees
+  Name()
+  SplineDegreeEight()
+  SplineDegreeFive()
+  SplineDegreeFour()
+  SplineDegreeNine()
+  SplineDegreeOne()
+  SplineDegreeSeven()
+  SplineDegreeSix()
+  SplineDegreeThree()
+  SplineDegreeTwo()
+
 StructuralConstraint : SimAttribute
   # Object that represents a structural constraint.
   displacement: Vector3D
@@ -1877,6 +1902,42 @@ TangentConstraint : GeometricConstraint
   classType()
   createForAssemblyContext(occurrence: Occurrence) -> TangentConstraint
   deleteMe() -> bool
+
+TextBoxCommandInput : CommandInput
+  # Provides a command input to interact with a text box.
+  Name
+  commandInputs
+  formattedText: str
+  id
+  isEnabled
+  isFullWidth
+  isReadOnly: bool
+  isValid
+  isVisible
+  name
+  numRows: int
+  objectType
+  parentCommand
+  parentCommandInput
+  text: str
+  toolClipFilename
+  tooltip
+  tooltipDescription
+  Name()
+  classType()
+  deleteMe() -> bool
+
+TextBoxKeyPoints
+  BottomLeftTextBoxKeyPoint()
+  BottomMiddleTextBoxKeyPoint()
+  BottomRightTextBoxKeyPoint()
+  MiddleLeftTextBoxKeyPoint()
+  MiddleRightTextBoxKeyPoint()
+  MiddleTextBoxKeyPoint()
+  Name()
+  TopLeftTextBoxKeyPoint()
+  TopMiddleTextBoxKeyPoint()
+  TopRightTextBoxKeyPoint()
 
 VerticalConstraint : GeometricConstraint
   # A vertical constraint in a sketch.

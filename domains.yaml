@@ -1,9 +1,12 @@
-# Maps Fusion API classes to domain files via glob patterns.
+# Maps Autodesk Fusion API classes to domain .lap files via glob patterns.
 # Classes not matching any pattern go to fusion-misc.lap.
+# Order matters: first match wins.
 
 core:
   - Application
   - Document
+  - Documents
+  - DocumentReference*
   - Base
   - "*Input"
   - "Point*"
@@ -12,56 +15,217 @@ core:
   - ObjectCollection
   - Color
   - Viewport
-  - Camera
+  - Camera*
+  - "*Bounding*"
+  - "*Line*"
+  - "*Arc*"
+  - "*Circle*"
+  - "*Ellips*"
+  - Plane
+  - "Infinite*"
+  - "*Curve*"
+  - "Nurbs*"
+  - "*Evaluator*"
+  - "*Properties"
+  - "*Tolerance*"
+  - Preferences
+  - "*Preferences"
+  - Data
+  - DataFile
+  - DataFolder
+  - DataComponent
+  - User
+  - Import*
+  - Export*
+  - Save*
+  - "*Units"
+  - Unit*
+  - Attribute*
+  - NamedValue*
+  - CustomNamedValue*
+  - TimelineObject
+  - Timeline
+  - Product
+  - Products
+  - Design
+  - FavoriteAppearance*
+  - FavoriteMaterial*
+  - Material*
+  - Appearance*
+  - StockMaterial*
+  - HttpResponse
+  - "*Parameter"
+  - "*Parameters"
+  - ParameterValue*
+  - Expression*
+  - FutureStates
+  - "*Error"
+  - "*Error*"
+  - ScriptSourceLocations
+  - Scripts
+  - ProgrammingLanguages
+  - IAddIn
 
 sketch:
   - "Sketch*"
   - "*Constraint"
+  - "*Constraints"
   - "*Dimension"
+  - "*Dimensions"
   - "Profile*"
   - "GeometricConstraint*"
   - "DimensionConstraint*"
+  - "Spline*"
+  - TextBox*
+  - Text*Key*
 
 features:
   - "*Feature"
+  - "*Feature?"
   - "*Features"
   - "*FeatureInput"
-  - ExtentDefinition
-  - "*Extent"
+  - "*FeatureDefinition*"
+  - "*Definition"
+  - "*Definitions"
+  - "Extent*"
+  - "*Extent*"
+  - "*Thread*"
+  - "*Hole*"
+  - "*Tap*"
+  - "*Boss*"
+  - "*Rib*"
+  - "*Pipe*"
+  - "*Coil*"
+  - "*Loft*"
+  - "*Sweep*"
+  - "*Fillet*"
+  - "*Chamfer*"
+  - "*Shell*"
+  - "*Draft*"
+  - "*Pattern*"
+  - "*Mirror*"
+  - "*Split*"
+  - "*Thicken*"
+  - "*Hem*"
+  - "*Flange*"
+  - "*Bend*"
+  - "*Rip*"
+  - "*Corner*"
+  - "*Ruled*"
+  - "*Offset*"
+  - "Boolean*"
+  - "Silhouette*"
+  - "FlatPattern*"
+  - "SheetMetal*"
+  - Configuration*
+  - Clearance*
+  - "Side*"
+  - "Loop*"
 
 bodies:
   - "BRep*"
   - "Mesh*"
   - "TSpline*"
-  - SurfaceBody
+  - "Surface*"
+  - "Tessellat*"
+  - "Triangle*"
+  - "Polygon*"
+  - "*Mesh*"
+  - "Face*"
+  - FaceGroup*
+  - "*Body"
+  - "*Bodies"
+  - "Volumetric*"
 
 assembly:
   - Component
+  - Components
+  - "*Component*"
   - Occurrence
+  - Occurrence*
   - "*Joint*"
-  - RigidGroup
-  - ContactSet
+  - "Rigid*"
+  - "Motion*"
+  - "*Assembly*"
+  - ContactSet*
+  - Physical*
 
 cam:
   - "CAM*"
-  - Operation
-  - Toolpath
-  - Tool
+  - "Operation"
+  - "Operation?"
+  - "Operations"
+  - "Operation*"
+  - "Toolpath*"
+  - "Tool"
+  - "Tool?"
+  - "Tools"
+  - "ToolPreset*"
+  - "ToolLibrar*"
   - "*Post*"
-  - NCProgram
-  - Setup
+  - "NC*"
+  - "Setup"
+  - "Setup?"
+  - "Setups"
+  - "SetupGroup*"
+  - "Setup*"
+  - "Machine*"
+  - "Arrange*"
+  - "Additive*"
+  - "Strategy*"
+  - "Manufactur*"
+  - "*Machining*"
+  - "MultiAxis*"
+  - "Print*"
+  - ChildOperationList
+  - FeatureList
+  - "Recognized*"
+  - Inspection*
+  - GeneratedData*
 
 drawing:
   - "Drawing*"
   - "*Annotation*"
   - "*Table"
+  - "*Tables"
+  - PDF*
 
 ui:
   - Command
+  - Command?
+  - Commands
   - "*CommandInput*"
-  - Palette
-  - Toolbar
+  - "CommandDefinition*"
+  - Palette*
+  - Toolbar*
   - "*Event*"
-  - UserInterface
-  - ToolbarPanel
-  - ToolbarTab
+  - UserInterface*
+  - "*Handler"
+  - "*Handlers"
+  - "Selection*"
+  - "Keyboard*"
+  - "Mouse*"
+  - "*Triad*"
+  - "*Menu*"
+  - "List*"
+  - "DropDown*"
+  - "Progress*"
+  - "Dialog*"
+  - "StatusMessage*"
+  - Workspace*
+  - ViewOrientation*
+  - VisualStyle*
+  - "Render*"
+  - "CustomGraphics*"
+  - "Graph*"
+  - LightingEnvironment*
+  - Degraded*
+  - Transparency*
+  - "Hub*"
+  - UploadStates
+  - Snap*
+  - SandvikIntegration*
+  - SandvikPreIntegration*
+  - NetworkProxy*
+  - NodePin*
+  - WhatsNew

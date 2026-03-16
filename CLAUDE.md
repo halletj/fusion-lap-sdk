@@ -13,6 +13,7 @@ Compressed API reference for the Autodesk Fusion SDK in .lap format.
 - lap/fusion-cam.lap — CAM setup, toolpaths, operations
 - lap/fusion-drawing.lap — drawing views, dimensions, annotations
 - lap/fusion-ui.lap — commands, palettes, toolbars, events
+- lap/fusion-misc.lap — enums, settings types, and other uncategorized classes
 
 ## If files are not local, fetch from:
 - https://halletj.github.io/fusion-lap-sdk/lap/fusion-base.lap
@@ -23,6 +24,7 @@ Compressed API reference for the Autodesk Fusion SDK in .lap format.
 - https://halletj.github.io/fusion-lap-sdk/lap/fusion-cam.lap
 - https://halletj.github.io/fusion-lap-sdk/lap/fusion-drawing.lap
 - https://halletj.github.io/fusion-lap-sdk/lap/fusion-ui.lap
+- https://halletj.github.io/fusion-lap-sdk/lap/fusion-misc.lap
 
 ## When writing Autodesk Fusion scripts:
 - Always import: import adsk.core, adsk.fusion, adsk.cam

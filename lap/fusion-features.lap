@@ -1,6 +1,175 @@
 # fusion-features.lap
 
+[types]
+BendPositionTypes: LegacyBendPositionType | OutsideBendPositionType | InsideBendPositionType | StartEdgeBendPositionType | TangentToSideBendPositionType
+BendReliefShapes: StraightBendReliefShape | TearBendReliefShape | RoundBendReliefShape
+BooleanOptions: DefaultBooleanOption | TrueBooleanOption | FalseBooleanOption
+BooleanTypes: DifferenceBooleanType | IntersectionBooleanType | UnionBooleanType
+BossAlignmentTypes: BossAlignFlat | BossAlignStepOut | BossAlignStepIn
+BossHoleExtentTypes: BossHoleThrough | BossBlindFull | BossBlindDepth
+BossRibExtentTypes: RibSizeByLength | RibSizeToNext | RibSuppressed
+BossRibShapeTypes: BossRibShapeNone | BossRibShapeChamfer | BossRibShapeFillet
+BossShapeTypes: BossBlank | BossConstDiameter | BossConstThickness
+ChamferCornerTypes: ChamferCornerType | MiterCornerType | BlendCornertype
+ChamferTypes: EqualDistanceChamferType | TwoDistancesChamferType | DistanceAndAngleChamferType
+ClearanceHoleFits: CloseClearanceHoleFit | NormalClearanceHoleFit | LooseClearanceHoleFit
+CoilFeatureSectionPositions: InsideCoilFeatureSectionPosition | OnCenterCoilFeatureSectionPosition | OutsideCoilFeatureSectionPosition
+CoilFeatureSectionTypes: CircularCoilFeatureSectionType | SquareCoilFeatureSectionType | TriangularExternalCoilFeatureSectionType | TriangularInternalCoilFeatureSectionType
+CoilFeatureTypes: RevolutionsAndHeightCoilFeatureType | RevolutionsAndPitchCoilFeatureType | HeightAndPitchCoilFeatureType | SpiralCoilFeatureType
+ConfigurationClearanceHoleColumns: Standard_Type_Size_ClearanceHoleColumns | Type_Size_ClearanceHoleColumns | Size_ClearanceHoleColumns
+ConfigurationFeatureAspectTypes: ThreadTypeFeatureAspectType | ThreadSizeFeatureAspectType | ThreadDesignationFeatureAspectType | ThreadClassFeatureAspectType | ThreadModeledFeatureAspectType | ThreadFullLengthFeatureAspectType | ThreadIsRightHandedFeatureAspectType | JointFlipFeatureAspectType | JointSnapOneFeatureAspectType | JointSnapTwoFeatureAspectType | ClearanceHoleStandardFeatureAspectType | ClearanceHoleTypeFeatureAspectType | ClearanceHoleSizeFeatureAspectType | ClearanceHoleFitFeatureAspectType
+ConfigurationThreadColumns: ThreadType_Size_Designation_ClassColumns | ThreadSize_Designation_ClassColumns | ThreadDesignation_ClassColumns | ThreadClassColumns | TaperedThreadType_Size_DesignationColumns | TaperedSize_DesignationColumns | TaperedDesignationColumns
+CornerBendTransitionTypes: SmoothCornerBendTransitionType | StraightLineCornerBendTransitionType | TrimToBendCornerBendTransitionType
+CornerClosureFeatureDefinitionTypes: UndefinedCornerClosureFeatureDefinitionType | TwoBendCornerClosureFeatureDefinitionType | ThreeBendCornerClosureFeatureDefinitionType
+CornerThreeBendReliefShapeTypes: NoReplacementCornerThreeBendReliefShapeType | IntersectionCornerThreeBendReliefShapeType | FullRoundCornerThreeBendReliefShapeType | RoundWithRadiusCornerThreeBendReliefShapeType
+CornerTwoBendReliefPlacementTypes: TangentCornerTwoBendReliefPlacementType | IntersectionCornerTwoBendReliefPlacementType | VertexCornerTwoBendReliefPlacementType
+CornerTwoBendReliefShapeTypes: RoundCornerTwoBendReliefShapeType | SquareCornerTwoBendReliefShapeType | TearCornerTwoBendReliefShapeType | TrimToBendCornerTwoBendReliefShapeType | LinearWeldCornerTwoBendReliefShapeType | ArcWeldCornerTwoBendReliefShapeType | LaserWeldCornerTwoBendReliefShapeType
+ExtentDirections: PositiveExtentDirection | NegativeExtentDirection | SymmetricExtentDirection
+FeatureExtentTypes: OneSideFeatureExtentType | TwoSidesFeatureExtentType | SymmetricFeatureExtentType
+FilletFeatureTypes: FilletFeatureType | RuleFilletFeatureType | FullRoundFilletFeatureType
+HemFeatureDefinitionTypes: UndefinedHemFeatureDefinitionType | FlatHemFeatureDefinitionType | OpenHemFeatureDefinitionType | RolledHemFeatureDefinitionType | TeardropHemFeatureDefinitionType | RopeHemFeatureDefinitionType | DoubleHemFeatureDefinitionType
+HoleEdgePositions: EdgeStartPointPosition | EdgeMidPointPosition | EdgeEndPointPosition
+HoleSegmentType: HoleSegmentTypeCylinder | HoleSegmentTypeCone | HoleSegmentTypeFlat | HoleSegmentTypeTorus
+HoleTapTypes: SimpleHoleTapType | ClearanceHoleTapType | TappedHoleTapType | TaperTappedHoleTapType
+HoleTypes: SimpleHoleType | CounterboreHoleType | CountersinkHoleType
+LineStylePatterns: continuousLineStylePattern | centerLineStylePattern | dashedLineStylePattern | dotLineStylePattern | hiddenLineStylePattern | phantomLineStylePattern | tracksLineStylePattern | zigzagLineStylePattern
+LoftEdgeAlignments: FreeEdgesLoftEdgeAlignment | AlignEdgesLoftEdgeAlignment | AlignToSurfaceLoftEdgeAlignment
+LoftRailEdgeConditions: G0LoftRailEdgeCondition | G1LoftRailEdgeCondition | G2LoftRailEdgeCondition
+LoopTypes: AllLoops | OnlyOutsideLoops | OnlyInsideLoops
+OffsetCornerTypes: CircularOffsetCornerType | LinearOffsetCornerType | ExtendedOffsetCornerType
+PatternComputeOptions: OptimizedPatternCompute | IdenticalPatternCompute | AdjustPatternCompute
+PatternDistanceType: ExtentPatternDistanceType | SpacingPatternDistanceType
+PatternEntityTypes: FacesPatternType | FeaturesPatternType | BodiesPatternType | OccurrencesPatternType
+PipeSectionTypes: CircularPipeSectionType | SquarePipeSectionType | TriangularPipeSectionType
+RipFeatureDefinitionTypes: UndefinedRipFeatureDefinitionType | FaceRipFeatureDefinitionType | AlongEdgeRipFeatureDefinitionType | BetweenPointsRipFeatureDefinitionType
+RuleFilletRuleTypes: AllEdgesRuleFilletRuleType | BetweenFacesOrFeaturesRuleFilletRuleType
+RuleFilletTopologyTypes: RoundsAndFilletsRuleFilletTopologyType | RoundsOnlyRuleFilletTopologyType | FilletsOnlyRuleFilletTopologyType
+RuledSurfaceCornerTypes: RoundedRuledSurfaceCornerType | MiteredRuledSurfaceCornerType
+RuledSurfaceTypes: TangentRuledSurfaceType | NormalRuledSurfaceType | DirectionRuledSurfaceType
+ShellTypes: SharpOffsetShellType | RoundedOffsetShellType
+SideTypes: AlwaysOutsideSideType | AlwaysInsideSideType | StartOutsideSideType | StartInsideSideType
+SilhouetteSplitOperations: SilhouetteSplitFacesOnlyOperation | SilhouetteSplitShelledBodyOperation | SilhouetteSplitSolidBodyOperation
+SplitFaceSplitTypes: surfaceIntersectionSplitType | alongVectorSplitType | closestPointSplitType
+SplitSupportTypes: SolidOpenMergedSplitSupportType | SolidOpenSeparateSplitSupportType
+SweepExtentTypes: PerpendicularToPathExtentType | FullExtentsExtentType
+SweepOrientationTypes: ParallelOrientationType | PerpendicularOrientationType
+SweepProfileScalingOptions: SweepProfileScaleOption | SweepProfileStretchOption | SweepProfileNoScalingOption
+SweepSolidOrientationTypes: PerpendicularSolidOrientationType | RigidSolidOrientationType | AlignedSolidOrientationType
+ThickenTypes: SharpThickenType | RoundedThickenType
+ThreadLocations: HighEndThreadLocation | LowEndThreadLocation
+ThreeBendReliefShapes: NoReplacementThreeBendReliefShape | IntersectionThreeBendReliefShape | FullRoundThreeBendReliefShape | RoundWithRadiusThreeBendReliefShape
+TwoBendReliefPlacements: NoTwoBendReliefPlacement | IntersectionTwoBendReliefPlacement | TangentTwoBendReliefPlacement | VertexTwoBendReliefPlacement
+TwoBendReliefShapes: RoundTwoBendReliefShape | SquareTwoBendReliefShape | TearTwoBendReliefShape | TrimToBendTwoBendReliefShape | LinearWeldTwoBendReliefShape | ArcWeldTwoBendReliefShape | LaserWeldTwoBendReliefShape
+ViewCorners: upperLeftViewCorner | upperRightViewCorner | lowerLeftViewCorner | lowerRightViewCorner
+
 [classes]
+AllExtentDefinition : ExtentDefinition
+  Name
+  direction: ExtentDirections
+  isValid
+  objectType
+  parentFeature
+  Name()
+  classType()
+
+AlongEdgeRipFeatureDefinition : RipFeatureDefinition
+  # The definition for an along edge rip.
+  Name
+  gapDistance: ModelParameter
+  isValid
+  objectType
+  ripEdge: BRepEdge
+  Name()
+  classType()
+
+AlongPathTextDefinition : SketchTextDefinition
+  # Defines the information for text that follows along a path.
+  Name
+  characterSpacing: float
+  horizontalAlignment: HorizontalAlignments
+  isAbovePath: bool
+  isValid
+  objectType
+  parentSketchText
+  path: Base
+  Name()
+  classType()
+
+AngleExtentDefinition : ExtentDefinition
+  Name
+  angle: ModelParameter
+  isSymmetric: bool
+  isValid
+  objectType
+  parentFeature
+  Name()
+  classType()
+
+Arrange2DDefinition : ArrangeDefinition
+  Name
+  globalQuantity: ModelParameter
+  globalRotation: ArrangeRotationTypes
+  grainDirection: ModelParameter
+  isCreateCopies
+  isGlobalDirectionFaceUp: bool
+  isPartInPartAllowed: bool
+  isValid
+  objectType
+  solverType
+  Name()
+  classType()
+
+Arrange3DDefinition : ArrangeDefinition
+  # This object defines all of the settings associated with a 3D arrangement.
+  Name
+  isCreateCopies
+  isValid
+  objectType
+  solverType
+  Name()
+  classType()
+
+Arrange3DEnvelopeDefinition : ArrangeEnvelopeDefinition
+  # The Arrange3DEnvelope object represents an 3D arrange envelope.
+  Name
+  ceilingClearance: ModelParameter
+  frameWidth
+  height: ModelParameter
+  isPartialArrangeAllowed
+  isValid
+  length: ModelParameter
+  objectSpacing
+  objectType
+  originXOffset: ModelParameter
+  originYOffset: ModelParameter
+  parentArrange
+  placementClearance
+  plane: ConstructionPlane
+  width: ModelParameter
+  Name()
+  classType()
+
+ArrangeDefinition : Base
+  Name
+  isCreateCopies: bool
+  isValid
+  objectType
+  solverType: ArrangeSolverTypes
+  Name()
+  classType()
+
+ArrangeEnvelopeDefinition : Base
+  Name
+  frameWidth: ModelParameter
+  isPartialArrangeAllowed: bool
+  isValid
+  objectSpacing: ModelParameter
+  objectType
+  parentArrange: ArrangeFeature
+  placementClearance: ModelParameter
+  Name()
+  classType()
+
 ArrangeFeature : Feature
   # Represents an Arrange feature within a component.
   Name
@@ -57,6 +226,249 @@ ArrangeFeatures *collection<ArrangeFeature>
   createInput(solverType: ArrangeSolverTypes) -> ArrangeFeatureInput
   itemByName(name: str) -> ArrangeFeature
 
+ArrangePlaneEnvelopeDefinition : ArrangeEnvelopeDefinition
+  Name
+  envelopeSpacing: ModelParameter
+  frameWidth
+  isPartialArrangeAllowed
+  isValid
+  length: ModelParameter
+  objectSpacing
+  objectType
+  originXOffset: ModelParameter
+  originYOffset: ModelParameter
+  parentArrange
+  placementClearance
+  plane: ConstructionPlane
+  quantity: ModelParameter
+  width: ModelParameter
+  Name()
+  classType()
+
+ArrangeProfileOrFaceEnvelopeDefinition : ArrangeEnvelopeDefinition
+  Name
+  frameWidth
+  isPartialArrangeAllowed
+  isValid
+  objectSpacing
+  objectType
+  parentArrange
+  placementClearance
+  profilesAndFaces: Base]
+  Name()
+  classType()
+
+AsymmetricFilletEdgeSet : FilletEdgeSet
+  # Provides access to the edges and the parameters associated with an asymmetric fillet.
+  edges: ObjectCollection
+  isFlipped: bool
+  offsetOne: ModelParameter
+  offsetTwo: ModelParameter
+  deleteMe() -> bool
+
+AsymmetricFilletEdgeSetInput : FilletEdgeSetInput
+  # Provides access to the edges and the parameters associated with an asymmetric fillet.
+  isFlipped: bool
+  offsetOne: ValueInput
+  offsetTwo: ValueInput
+
+AtCenterHolePositionDefinition : HolePositionDefinition
+  Name
+  centerEdge: BRepEdge
+  isValid
+  objectType
+  planarEntity: Base
+  Name()
+  classType()
+
+BRepBodyDefinition : Base
+  Name
+  doFullHealing: bool
+  isValid
+  lumpDefinitions: BRepLumpDefinitions
+  objectType
+  outcomeInfo: list[str]
+  Name()
+  classType()
+  @static create() -> BRepBodyDefinition
+  createBody() -> BRepBody
+  createEdgeDefinitionByCurve(startVertex: BRepVertexDefinition, endVertex: BRepVertexDefinition, modelSpaceCurve: Curve3D) -> BRepEdgeDefinition
+  createVertexDefinition(position: Point3D) -> BRepVertexDefinition
+
+BRepCoEdgeDefinition : Base
+  Name
+  edgeDefinition: BRepEdgeDefinition
+  isOpposedToEdge: bool
+  isValid
+  objectType
+  Name()
+  classType()
+
+BRepCoEdgeDefinitions *collection<BRepCoEdgeDefinition>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(edgeDefinition: BRepEdgeDefinition, isOpposedToEdge: bool) -> BRepCoEdgeDefinition
+  classType()
+
+BRepEdgeDefinition : Base
+  # Represents the definition of a B-Rep edge that can be used as input to create a BRepBody.
+  Name
+  associativeID: int
+  endVertex: BRepVertexDefinition
+  isMergeable: bool
+  isValid
+  modelSpaceCurve: Curve3D
+  objectType
+  startVertex: BRepVertexDefinition
+  Name()
+  classType()
+
+BRepFaceDefinition : Base
+  Name
+  associativeID: int
+  isParamReversed: bool
+  isValid
+  loopDefinitions: BRepLoopDefinitions
+  objectType
+  surfaceGeometry: Surface
+  Name()
+  classType()
+
+BRepFaceDefinitions *collection<BRepFaceDefinition>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(surfaceGeometry: Surface, isParamReversed: bool) -> BRepFaceDefinition
+  classType()
+
+BRepLoopDefinition : Base
+  Name
+  bRepCoEdgeDefinitions: BRepCoEdgeDefinitions
+  isValid
+  objectType
+  Name()
+  classType()
+
+BRepLoopDefinitions *collection<BRepLoopDefinition>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add() -> BRepLoopDefinition
+  classType()
+
+BRepLumpDefinition : Base
+  # Represents the definition of a B-Rep lump which is used in defining the topology of a B-Rep body.
+  Name
+  isValid
+  objectType
+  shellDefinitions: BRepShellDefinitions
+  Name()
+  classType()
+
+BRepLumpDefinitions *collection<BRepLumpDefinition>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add() -> BRepLumpDefinition
+  classType()
+
+BRepShell : Base
+  # Represents an entirely connected set of BRepFaces. A BRepLump may contain multiple BRepShells.
+  Name
+  area: float
+  assemblyContext: Occurrence
+  body: BRepBody
+  boundingBox: BoundingBox3D
+  edges: BRepEdges
+  entityToken: str
+  faces: BRepFaces
+  isClosed: bool
+  isValid
+  isVoid: bool
+  lump: BRepLump
+  meshManager: MeshManager
+  nativeObject: BRepShell
+  objectType
+  vertices: BRepVertices
+  volume: float
+  wire: BRepWire
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> BRepShell
+  pointContainment(point: Point3D) -> PointContainment
+
+BRepShellDefinition : Base
+  Name
+  faceDefinitions: BRepFaceDefinitions
+  isValid
+  objectType
+  wireDefinition: BRepWireDefinition
+  Name()
+  classType()
+
+BRepShellDefinitions *collection<BRepShellDefinition>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add() -> BRepShellDefinition
+  classType()
+
+BRepShells *collection<BRepShell>
+  # BRepShell collection.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+
+BRepVertexDefinition : Base
+  Name
+  isValid
+  objectType
+  position: Point3D
+  Name()
+  classType()
+
+BRepWireDefinition : Base
+  Name
+  isValid
+  objectType
+  wireEdgeDefinitions: BRepWireEdgeDefinitions
+  Name()
+  classType()
+
+BRepWireEdgeDefinition : Base
+  Name
+  associativeID: int
+  endVertex: BRepVertexDefinition
+  isValid
+  modelSpaceCurve: Curve3D
+  objectType
+  startVertex: BRepVertexDefinition
+  Name()
+  classType()
+
+BRepWireEdgeDefinitions *collection<BRepWireEdgeDefinition>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(startVertex: BRepVertexDefinition, endVertex: BRepVertexDefinition, modelSpaceCurve: Curve3D) -> BRepWireEdgeDefinition
+  classType()
+
 BaseFeature : Feature
   # The BaseFeature class represents a direct edit feature within a parametric design.
   Name
@@ -102,6 +514,85 @@ BaseFeatures *collection<BaseFeature>
   add() -> BaseFeature
   classType()
   itemByName(name: str) -> BaseFeature
+
+BendPositionTypes
+  InsideBendPositionType()
+  LegacyBendPositionType()
+  Name()
+  OutsideBendPositionType()
+  StartEdgeBendPositionType()
+  TangentToSideBendPositionType()
+
+BendReliefShapes
+  Name()
+  RoundBendReliefShape()
+  StraightBendReliefShape()
+  TearBendReliefShape()
+
+BetweenPointsRipFeatureDefinition : RipFeatureDefinition
+  # The definition for an along edge rip.
+  Name
+  gapDistance: ModelParameter
+  isValid
+  objectType
+  pointOneEntity: Base
+  pointOneOffset: ModelParameter
+  pointTwoEntity: Base
+  pointTwoOffset: ModelParameter
+  Name()
+  classType()
+
+BooleanGraphNodeProperty : GraphNodeProperty
+  # A property value that is a boolean.
+  Name
+  description
+  isValid
+  name
+  objectType
+  value: bool
+  Name()
+  classType()
+
+BooleanOptions
+  DefaultBooleanOption()
+  FalseBooleanOption()
+  Name()
+  TrueBooleanOption()
+
+BooleanParameterValue : ParameterValue
+  # A parameter value that is a boolean.
+  Name
+  isValid
+  objectType
+  parent
+  value: bool
+  Name()
+  classType()
+
+BooleanProperty : Property
+  # A property that is a Boolean value.
+  Name
+  id
+  isReadOnly
+  isValid
+  name
+  objectType
+  parent
+  value: bool
+  Name()
+  classType()
+
+BooleanTypes
+  DifferenceBooleanType()
+  IntersectionBooleanType()
+  Name()
+  UnionBooleanType()
+
+BossAlignmentTypes
+  BossAlignFlat()
+  BossAlignStepIn()
+  BossAlignStepOut()
+  Name()
 
 BossFeature : Feature
   Name
@@ -195,6 +686,79 @@ BossFeatureInput : Base
   createSideInput() -> BossFeatureSideInput
   setPositionBySketchPoints(pointOrPoints: Base) -> bool
 
+BossFeatureSideInput : Base
+  Name
+  alignmentDepth: ValueInput
+  alignmentDiameter: ValueInput
+  alignmentDraftAngle: ValueInput
+  alignmentRootRadius: ValueInput
+  alignmentTipRadius: ValueInput
+  alignmentType: BossAlignmentTypes
+  diameter: ValueInput
+  draftAngle: ValueInput
+  holeCountersinkAngle: ValueInput
+  holeDepth: ValueInput
+  holeDiameter: ValueInput
+  holeDraftAngle: ValueInput
+  holeEndRadius: ValueInput
+  holeExtentType: BossHoleExtentTypes
+  holeMajorDepth: ValueInput
+  holeMajorDiameter: ValueInput
+  holeMajorDraftAngle: ValueInput
+  holeMajorRootRadius: ValueInput
+  holeMajorTipRadius: ValueInput
+  holeStartRadius: ValueInput
+  isValid
+  objectType
+  offsetClearance: ValueInput
+  ribChamferAngle: ValueInput
+  ribCount: ValueInput
+  ribCutSize: ValueInput
+  ribDraftAngle: ValueInput
+  ribLength: ValueInput
+  ribOffset: ValueInput
+  ribOuterDraftAngle: ValueInput
+  ribRootRadius: ValueInput
+  ribRotation: ValueInput
+  ribThickness: ValueInput
+  ribTipRadius: ValueInput
+  ribTotalAngle: ValueInput
+  ribType: BossRibShapeTypes
+  rootRadius: ValueInput
+  tipRadius: ValueInput
+  Name()
+  classType()
+  clearRibExtent() -> void
+  setBlank(diameter: ValueInput) -> void
+  setCounterbore(diameter: ValueInput, holeDiameter: ValueInput, holeMajorDiameter: ValueInput, depth: ValueInput) -> void
+  setCountersink() -> void
+  setRibExtent(position: Base, ribExtentTypes: list[int]) -> void
+  setSimple(diameter: ValueInput, holeDiameter: ValueInput) -> void
+
+BossFeatureVector
+  append(x: BossFeature) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::BossFeature > >::size_type, x: BossFeature) -> void
+  back() -> BossFeature >::value_type
+  begin() -> BossFeature >::iterator
+  capacity() -> BossFeature >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> BossFeature >::iterator
+  erase() -> BossFeature >::iterator
+  front() -> BossFeature >::value_type
+  get_allocator() -> BossFeature >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> BossFeature >::value_type
+  pop_back() -> void
+  push_back(x: BossFeature) -> void
+  rbegin() -> BossFeature >::reverse_iterator
+  rend() -> BossFeature >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::BossFeature > >::size_type) -> void
+  resize() -> void
+  size() -> BossFeature >::size_type
+  swap(v: list[BossFeature]) -> void
+
 BossFeatures *collection<BossFeature>
   # Collection that provides access to all of the existing boss features in a design.
   Name
@@ -206,6 +770,38 @@ BossFeatures *collection<BossFeature>
   classType()
   createInput() -> BossFeatureInput
   itemByName(name: str) -> BossFeature
+
+BossHoleExtentTypes
+  BossBlindDepth()
+  BossBlindFull()
+  BossHoleThrough()
+  Name()
+
+BossPositionDefinition : Base
+  # The base class for the classes that define how a boss feature can be positioned.
+  Name
+  isValid
+  objectType
+  Name()
+  classType()
+
+BossRibExtentTypes
+  Name()
+  RibSizeByLength()
+  RibSizeToNext()
+  RibSuppressed()
+
+BossRibShapeTypes
+  BossRibShapeChamfer()
+  BossRibShapeFillet()
+  BossRibShapeNone()
+  Name()
+
+BossShapeTypes
+  BossBlank()
+  BossConstDiameter()
+  BossConstThickness()
+  Name()
 
 BoundaryFillFeature : Feature
   # Object that represents an existing boundary fill feature in a design.
@@ -297,6 +893,147 @@ BoxFeatures *collection<BoxFeature>
   classType()
   itemByName(name: str) -> BoxFeature
 
+ButtonControlDefinition : ControlDefinition
+  Name
+  isEnabled
+  isValid
+  isVisible
+  name
+  objectType
+  Name()
+  classType()
+
+CAMHoleRecognition : OperationBase
+  # Object that represents a hole recognition object in an existing Setup, Folder or Pattern.
+  Name
+  allOperations: OperationBase]
+  attributes
+  children: ChildOperationList
+  error
+  folders: CAMFolders
+  generatedDataCollection
+  hasError
+  hasWarning
+  isActive: bool
+  isLightBulbOn
+  isOptional
+  isProtected
+  isSelected
+  isSuppressed
+  isValid
+  isVisible
+  name
+  notes
+  objectType
+  operationId
+  operations: Operations
+  parameters
+  parent: Base
+  parentSetup
+  strategy
+  warning
+  Name()
+  activate() -> bool
+  classType()
+  copyAfter(operation: OperationBase) -> bool
+  copyBefore(operation: OperationBase) -> bool
+  copyInto(container: OperationBase) -> bool
+  deleteMe() -> bool
+  duplicate() -> bool
+  hasMissingReferences() -> bool
+  modifyUtility(utility: ModifyUtilityTypes) -> ModifyUtility
+  moveAfter(operation: OperationBase) -> bool
+  moveBefore(operation: OperationBase) -> bool
+  moveInto(container: OperationBase) -> bool
+  removeReferences(entity: Base, removeFromChildren: bool) -> bool
+
+CAMPattern : CAMFolder
+  # Object that represents a pattern in an existing Setup, Folder or Pattern.
+  Name
+  allOperations
+  attributes
+  children
+  error
+  folders
+  generatedDataCollection
+  hasError
+  hasWarning
+  isActive
+  isLightBulbOn
+  isOptional
+  isProtected
+  isSelected
+  isSuppressed
+  isValid
+  isVisible
+  name
+  notes
+  objectType
+  operationId
+  operations
+  parameters
+  parent
+  parentSetup
+  patterns
+  strategy
+  warning
+  Name()
+  activate() -> bool
+  classType()
+  copyAfter(operation: OperationBase) -> bool
+  copyBefore(operation: OperationBase) -> bool
+  copyInto(container: OperationBase) -> bool
+  createFromCAMTemplate(camTemplate: CAMTemplate) -> OperationBase]
+  createFromCAMTemplate2(input: CreateFromCAMTemplateInput) -> OperationBase]
+  createFromTemplate(templateFilePath: str) -> ObjectCollection
+  createFromTemplateXML(templateXML: str) -> OperationBase]
+  deleteMe() -> bool
+  duplicate() -> bool
+  hasMissingReferences() -> bool
+  modifyUtility(utility: ModifyUtilityTypes) -> ModifyUtility
+  moveAfter(operation: OperationBase) -> bool
+  moveBefore(operation: OperationBase) -> bool
+  moveInto(container: OperationBase) -> bool
+  removeReferences(entity: Base, removeFromChildren: bool) -> bool
+
+CAMPatterns *collection<CAMPattern>
+  # Collection that provides access to the patterns within an existing setup, folder or pattern.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemByName(name: str) -> CAMPattern
+  itemByOperationId(id: int) -> CAMPattern
+
+ChamferCornerTypes
+  BlendCornertype()
+  ChamferCornerType()
+  MiterCornerType()
+  Name()
+
+ChamferEdgeSet : Base
+  # The base class for the classes that define the different types of chamfer edge sets.
+  Name
+  isTangentChain: bool
+  isValid
+  objectType
+  Name()
+  classType()
+  deleteMe() -> bool
+
+ChamferEdgeSets *collection<ChamferEdgeSet>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  addDistanceAndAngleChamferEdgeSet(edges: ObjectCollection, distance: ValueInput, angle: ValueInput, isFlipped: bool, isTangentChain: bool) -> bool
+  addEqualDistanceChamferEdgeSet(edges: ObjectCollection, distance: ValueInput, isTangentChain: bool) -> bool
+  addTwoDistancesChamferEdgeSet(edges: ObjectCollection, distanceOne: ValueInput, distanceTwo: ValueInput, isFlipped: bool, isTangentChain: bool) -> bool
+  classType()
+
 ChamferFeature : Feature
   # Object that represents an existing chamfer feature in a design.
   Name
@@ -359,6 +1096,94 @@ ChamferFeatures *collection<ChamferFeature>
   createInput2() -> ChamferFeatureInput
   itemByName(name: str) -> ChamferFeature
 
+ChamferTypeDefinition : Base
+  # The base class for the classes that define how a chamfer can be defined.
+  Name
+  isValid
+  objectType
+  parentFeature: ChamferFeature
+  Name()
+  classType()
+
+ChamferTypes
+  DistanceAndAngleChamferType()
+  EqualDistanceChamferType()
+  Name()
+  TwoDistancesChamferType()
+
+CheckBoxControlDefinition : ControlDefinition
+  Name
+  isChecked: bool
+  isEnabled
+  isValid
+  isVisible
+  name
+  objectType
+  Name()
+  classType()
+
+ChordLengthFilletEdgeSet : FilletEdgeSet
+  # Provides access to the edges and the parameter associated with a chord length fillet.
+  Name
+  chordLength: ModelParameter
+  continuity
+  edges: ObjectCollection
+  isTangentChain
+  isValid
+  objectType
+  tangencyWeight
+  Name()
+  classType()
+  deleteMe() -> bool
+
+ChordLengthFilletEdgeSetInput : FilletEdgeSetInput
+  # Provides access to the edges and the parameter associated with a chord length fillet.
+  Name
+  chordLength: ValueInput
+  continuity
+  entities
+  isValid
+  objectType
+  tangencyWeight
+  Name()
+  classType()
+
+CircularPatternConstraint : GeometricConstraint
+  # A circular pattern constraint in a sketch.
+  Name
+  assemblyContext
+  attributes
+  centerPoint: SketchPoint
+  createdEntities: SketchEntity]
+  entities: SketchEntity]
+  entityToken
+  isDeletable
+  isSuppressed: list[bool]
+  isSymmetric: bool
+  isValid
+  nativeObject: CircularPatternConstraint
+  objectType
+  parentSketch
+  quantity: ModelParameter
+  totalAngle: ModelParameter
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> CircularPatternConstraint
+  deleteMe() -> bool
+
+CircularPatternConstraintInput : Base
+  Name
+  centerPoint: SketchPoint
+  entities: SketchEntity]
+  isSuppressed: list[bool]
+  isSymmetric: bool
+  isValid
+  objectType
+  quantity: ValueInput
+  totalAngle: ValueInput
+  Name()
+  classType()
+
 CircularPatternFeature : Feature
   # Object that represents an existing circular pattern feature in a design.
   Name
@@ -420,6 +1245,37 @@ CircularPatternFeatures *collection<CircularPatternFeature>
   createInput(inputEntities: ObjectCollection, axis: Base) -> CircularPatternFeatureInput
   itemByName(name: str) -> CircularPatternFeature
 
+ClearanceHoleDataQuery : Base
+  Name
+  allStandards: list[str]
+  isValid
+  objectType
+  Name()
+  allFastenerTypes(standard: str) -> list[str]
+  allSizes(standard: str, fastenerType: str) -> list[str]
+  classType()
+  @static create() -> ClearanceHoleDataQuery
+  standardCustomName(standard: str) -> str
+
+ClearanceHoleFits
+  CloseClearanceHoleFit()
+  LooseClearanceHoleFit()
+  Name()
+  NormalClearanceHoleFit()
+
+ClearanceHoleInfo : Base
+  Name
+  fastenerType: str
+  fit: ClearanceHoleFits
+  isValid
+  objectType
+  size: str
+  standard: str
+  Name()
+  classType()
+  @static create(standard: str, fastenerType: str, size: str, fit: ClearanceHoleFits) -> ClearanceHoleInfo
+  redefine(standard: str, fastenerType: str, size: str, fit: ClearanceHoleFits) -> bool
+
 CoilFeature : Feature
   # Object that represents an existing coil primitive feature in a design.
   Name
@@ -469,6 +1325,26 @@ CoilFeatureInput : Base
   setToRevolutionAndHeight(revolutions: ValueInput, height: ValueInput, angle: ValueInput) -> bool
   setToRevolutionsAndPitch(revolutions: ValueInput, pitch: ValueInput, angle: ValueInput) -> bool
   setToSpiral(revolutions: ValueInput, pitch: ValueInput) -> bool
+
+CoilFeatureSectionPositions
+  InsideCoilFeatureSectionPosition()
+  Name()
+  OnCenterCoilFeatureSectionPosition()
+  OutsideCoilFeatureSectionPosition()
+
+CoilFeatureSectionTypes
+  CircularCoilFeatureSectionType()
+  Name()
+  SquareCoilFeatureSectionType()
+  TriangularExternalCoilFeatureSectionType()
+  TriangularInternalCoilFeatureSectionType()
+
+CoilFeatureTypes
+  HeightAndPitchCoilFeatureType()
+  Name()
+  RevolutionsAndHeightCoilFeatureType()
+  RevolutionsAndPitchCoilFeatureType()
+  SpiralCoilFeatureType()
 
 CoilFeatures *collection<CoilFeature>
   Name
@@ -533,6 +1409,1085 @@ CombineFeatures *collection<CombineFeature>
   createInput(targetBody: BRepBody, toolBodies: ObjectCollection) -> CombineFeatureInput
   itemByName(name: str) -> CombineFeature
 
+CommandDefinition : Base
+  Name
+  allowedParentCommandDefinitions: list[str]
+  commandCreated: CommandCreatedEvent
+  controlDefinition: ControlDefinition
+  id: str
+  isApplicable: bool
+  isNative: bool
+  isSubCommandDefinition: bool
+  isValid
+  name: str
+  objectType
+  resourceFolder: str
+  toolClipFilename: str
+  tooltip: str
+  Name()
+  classType()
+  deleteMe() -> bool
+  execute() -> bool
+
+CommandDefinitions *collection<CommandDefinition>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  addButtonDefinition() -> CommandDefinition
+  addCheckBoxDefinition(id: str, name: str, tooltip: str, isChecked: bool) -> CommandDefinition
+  addListDefinition() -> CommandDefinition
+  classType()
+  itemById(id: str) -> CommandDefinition
+
+ConfigurationAppearanceCell : ConfigurationCell
+  Name
+  appearance: Appearance
+  isValid
+  objectType
+  parentColumn: ConfigurationAppearanceColumn
+  parentRow
+  Name()
+  classType()
+
+ConfigurationAppearanceColumn : ConfigurationColumn
+  Name
+  entity: Base
+  id
+  index
+  isValid
+  objectType
+  parentAppearanceTable: ConfigurationAppearanceTable
+  rowCount
+  title
+  Name()
+  classType()
+  deleteMe() -> bool
+  getCell(rowIndex: int) -> ConfigurationAppearanceCell
+  getCellByRowId(rowId: str) -> ConfigurationAppearanceCell
+  getCellByRowName(rowName: str) -> ConfigurationAppearanceCell
+
+ConfigurationAppearanceColumns *collection<ConfigurationAppearanceColumn>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(entity: Base) -> ConfigurationAppearanceColumn
+  classType()
+  itemById(id: str) -> ConfigurationAppearanceColumn
+
+ConfigurationAppearanceTable : ConfigurationTable
+  # Represents a configuration table that defines the appearances assigned to bodies and components.
+  Name
+  columns: ConfigurationAppearanceColumns
+  id
+  isValid
+  name: str
+  objectType
+  parentTableColumn: ConfigurationThemeColumn
+  rows
+  Name()
+  classType()
+  clear() -> bool
+  getCell(column: int, row: int) -> ConfigurationCell
+
+ConfigurationCell : Base
+  Name
+  isValid
+  objectType
+  parentRow: ConfigurationRow
+  Name()
+  classType()
+
+ConfigurationClearanceHoleColumns
+  Name()
+  Size_ClearanceHoleColumns()
+  Standard_Type_Size_ClearanceHoleColumns()
+  Type_Size_ClearanceHoleColumns()
+
+ConfigurationColumn : Base
+  Name
+  id: str
+  index: int
+  isValid
+  objectType
+  rowCount: int
+  title: str
+  Name()
+  classType()
+  deleteMe() -> bool
+
+ConfigurationColumnVector
+  append(x: ConfigurationColumn) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::ConfigurationColumn > >::size_type, x: ConfigurationColumn) -> void
+  back() -> ConfigurationColumn >::value_type
+  begin() -> ConfigurationColumn >::iterator
+  capacity() -> ConfigurationColumn >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> ConfigurationColumn >::iterator
+  erase() -> ConfigurationColumn >::iterator
+  front() -> ConfigurationColumn >::value_type
+  get_allocator() -> ConfigurationColumn >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> ConfigurationColumn >::value_type
+  pop_back() -> void
+  push_back(x: ConfigurationColumn) -> void
+  rbegin() -> ConfigurationColumn >::reverse_iterator
+  rend() -> ConfigurationColumn >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::ConfigurationColumn > >::size_type) -> void
+  resize() -> void
+  size() -> ConfigurationColumn >::size_type
+  swap(v: list[ConfigurationColumn]) -> void
+
+ConfigurationColumns *collection<ConfigurationColumn>
+  # Returns a collection of the columns in the table. The Name column is not included in this list.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  addClearanceTypeColumns(holeFeature: HoleFeature, holeClearanceColumns: ConfigurationClearanceHoleColumns) -> ConfigurationFeatureAspectColumn]
+  addFeatureAspectColumn(feature: Base, aspectType: ConfigurationFeatureAspectTypes) -> ConfigurationFeatureAspectColumn
+  addInsertColumn(occurrence: Occurrence) -> ConfigurationInsertColumn
+  addInsertStandardDesignColumn(occurrence: Occurrence) -> ConfigurationInsertStandardDesignColumn
+  addParameterColumn(parameter: Parameter) -> ConfigurationParameterColumn
+  addPropertyColumn(property: Property) -> ConfigurationPropertyColumn
+  addSuppressColumn(feature: Base) -> ConfigurationSuppressColumn
+  addThreadTypeColumns(threadFeature: Feature, threadColumns: ConfigurationThreadColumns) -> ConfigurationFeatureAspectColumn]
+  addVisibilityColumn(entity: Base) -> ConfigurationVisibilityColumn
+  classType()
+  itemById(id: str) -> ConfigurationColumn
+
+ConfigurationCustomThemeTable : ConfigurationTable
+  # API object representing a custom theme configuration table associated with a top table.
+  Name
+  columns: ConfigurationColumns
+  id
+  isValid
+  name: str
+  objectType
+  parentTableColumn: ConfigurationThemeColumn
+  rows
+  Name()
+  classType()
+  deleteMe(deleteColumns: bool) -> bool
+  getCell(column: int, row: int) -> ConfigurationCell
+  moveColumns(columns: list[ConfigurationColumn], targetTable: ConfigurationTable) -> ConfigurationColumn]
+
+ConfigurationCustomThemeTables *collection<ConfigurationCustomThemeTable>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(columns: list[ConfigurationColumn]) -> ConfigurationCustomThemeTable
+  classType()
+
+ConfigurationFeatureAspectBooleanCell : ConfigurationCell
+  Name
+  isValid
+  objectType
+  parentColumn: ConfigurationFeatureAspectColumn
+  parentRow
+  value: bool
+  Name()
+  classType()
+
+ConfigurationFeatureAspectColumn : ConfigurationColumn
+  Name
+  aspectType: ConfigurationFeatureAspectTypes
+  feature: Base
+  id
+  index
+  isValid
+  objectType
+  parentTable: ConfigurationTable
+  rowCount
+  title
+  Name()
+  classType()
+  deleteMe() -> bool
+  getCell(rowIndex: int) -> ConfigurationCell
+  getCellByRowId(rowId: str) -> ConfigurationCell
+  getCellByRowName(rowName: str) -> ConfigurationCell
+
+ConfigurationFeatureAspectColumnVector
+  append(x: ConfigurationFeatureAspectColumn) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::ConfigurationFeatureAspectColumn > >::size_type, x: ConfigurationFeatureAspectColumn) -> void
+  back() -> ConfigurationFeatureAspectColumn >::value_type
+  begin() -> ConfigurationFeatureAspectColumn >::iterator
+  capacity() -> ConfigurationFeatureAspectColumn >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> ConfigurationFeatureAspectColumn >::iterator
+  erase() -> ConfigurationFeatureAspectColumn >::iterator
+  front() -> ConfigurationFeatureAspectColumn >::value_type
+  get_allocator() -> ConfigurationFeatureAspectColumn >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> ConfigurationFeatureAspectColumn >::value_type
+  pop_back() -> void
+  push_back(x: ConfigurationFeatureAspectColumn) -> void
+  rbegin() -> ConfigurationFeatureAspectColumn >::reverse_iterator
+  rend() -> ConfigurationFeatureAspectColumn >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::ConfigurationFeatureAspectColumn > >::size_type) -> void
+  resize() -> void
+  size() -> ConfigurationFeatureAspectColumn >::size_type
+  swap(v: list[ConfigurationFeatureAspectColumn]) -> void
+
+ConfigurationFeatureAspectStringCell : ConfigurationCell
+  Name
+  isValid
+  objectType
+  parentColumn: ConfigurationFeatureAspectColumn
+  parentRow
+  value: str
+  Name()
+  classType()
+
+ConfigurationFeatureAspectTypes
+  ClearanceHoleFitFeatureAspectType()
+  ClearanceHoleSizeFeatureAspectType()
+  ClearanceHoleStandardFeatureAspectType()
+  ClearanceHoleTypeFeatureAspectType()
+  JointFlipFeatureAspectType()
+  JointSnapOneFeatureAspectType()
+  JointSnapTwoFeatureAspectType()
+  Name()
+  ThreadClassFeatureAspectType()
+  ThreadDesignationFeatureAspectType()
+  ThreadFullLengthFeatureAspectType()
+  ThreadIsRightHandedFeatureAspectType()
+  ThreadModeledFeatureAspectType()
+  ThreadSizeFeatureAspectType()
+  ThreadTypeFeatureAspectType()
+
+ConfigurationFuture : Future
+  # Used to check the state of the asynchronous configuration operation
+  Name
+  isValid
+  objectType
+  state
+  Name()
+  classType()
+
+ConfigurationInsertCell : ConfigurationCell
+  Name
+  isValid
+  objectType
+  parentColumn: ConfigurationInsertColumn
+  parentRow
+  row: ConfigurationRow
+  Name()
+  classType()
+
+ConfigurationInsertColumn : ConfigurationColumn
+  # Represents a column where a configured design has been inserted in this design.
+  Name
+  id
+  index
+  isValid
+  objectType
+  occurrence: Occurrence
+  parentTable: ConfigurationTable
+  rowCount
+  title
+  Name()
+  classType()
+  deleteMe() -> bool
+  getCell(rowIndex: int) -> ConfigurationInsertCell
+  getCellByRowId(rowId: str) -> ConfigurationInsertCell
+  getCellByRowName(rowName: str) -> ConfigurationInsertCell
+
+ConfigurationInsertStandardDesignCell : ConfigurationCell
+  Name
+  isValid
+  objectType
+  parentColumn: ConfigurationInsertStandardDesignColumn
+  parentRow
+  replaceDesign: ConfigurationReplaceDesign
+  Name()
+  classType()
+
+ConfigurationInsertStandardDesignColumn : ConfigurationColumn
+  Name
+  id
+  index
+  isValid
+  objectType
+  occurrence: Occurrence
+  parentTable: ConfigurationTable
+  replaceDesigns: ConfigurationReplaceDesigns
+  rowCount
+  title
+  Name()
+  classType()
+  deleteMe() -> bool
+  getCell(rowIndex: int) -> ConfigurationInsertStandardDesignCell
+  getCellByRowId(rowId: str) -> ConfigurationInsertStandardDesignCell
+  getCellByRowName(rowName: str) -> ConfigurationInsertStandardDesignCell
+
+ConfigurationJointSnap : Base
+  Name
+  isValid
+  jointGeometry: Base
+  name: str
+  objectType
+  Name()
+  classType()
+  deleteMe() -> bool
+
+ConfigurationJointSnapCell : ConfigurationCell
+  Name
+  isValid
+  objectType
+  parentColumn: ConfigurationJointSnapColumn
+  parentRow
+  snap: ConfigurationJointSnap
+  Name()
+  classType()
+
+ConfigurationJointSnapColumn : ConfigurationFeatureAspectColumn
+  Name
+  aspectType
+  feature
+  id
+  index
+  isValid
+  joint: Base
+  objectType
+  parentTable
+  rowCount
+  snaps: ConfigurationJointSnaps
+  title
+  Name()
+  classType()
+  deleteMe() -> bool
+  getCell(rowIndex: int) -> ConfigurationCell
+  getCellByRowId(rowId: str) -> ConfigurationCell
+  getCellByRowName(rowName: str) -> ConfigurationCell
+
+ConfigurationJointSnaps *collection<ConfigurationJointSnap>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(name: str, jointGeometry: Base) -> ConfigurationJointSnap
+  classType()
+  itemByName(name: str) -> ConfigurationJointSnap
+
+ConfigurationMaterialCell : ConfigurationCell
+  Name
+  isValid
+  material: Material
+  objectType
+  parentColumn: ConfigurationMaterialColumn
+  parentRow
+  Name()
+  classType()
+
+ConfigurationMaterialColumn : ConfigurationColumn
+  Name
+  entity: Base
+  id
+  index
+  isValid
+  objectType
+  parentMaterialTable: ConfigurationMaterialTable
+  rowCount
+  title
+  Name()
+  classType()
+  deleteMe() -> bool
+  getCell(rowIndex: int) -> ConfigurationMaterialCell
+  getCellByRowId(rowId: str) -> ConfigurationMaterialCell
+  getCellByRowName(rowName: str) -> ConfigurationMaterialCell
+
+ConfigurationMaterialColumns *collection<ConfigurationMaterialColumn>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(entity: Base) -> ConfigurationMaterialColumn
+  classType()
+  itemById(id: str) -> ConfigurationMaterialColumn
+
+ConfigurationMaterialTable : ConfigurationTable
+  # Represents a configuration table that defines materials assigned to bodies and components.
+  Name
+  columns: ConfigurationMaterialColumns
+  id
+  isValid
+  name: str
+  objectType
+  parentTableColumn: ConfigurationThemeColumn
+  rows
+  Name()
+  classType()
+  clear() -> bool
+  getCell(column: int, row: int) -> ConfigurationCell
+
+ConfigurationParameterCell : ConfigurationCell
+  Name
+  expression: str
+  isValid
+  objectType
+  parentColumn: ConfigurationParameterColumn
+  parentRow
+  textValue: str
+  value: float
+  valueType: ParameterValueTypes
+  Name()
+  classType()
+
+ConfigurationParameterColumn : ConfigurationColumn
+  # Represents a parameter column in a top or custom theme configuration table.
+  Name
+  id
+  index
+  isValid
+  objectType
+  parameter: Parameter
+  parentTable: ConfigurationTable
+  rowCount
+  title
+  Name()
+  classType()
+  deleteMe() -> bool
+  getCell(rowIndex: int) -> ConfigurationParameterCell
+  getCellByRowId(rowId: str) -> ConfigurationParameterCell
+  getCellByRowName(rowName: str) -> ConfigurationParameterCell
+
+ConfigurationPlasticRuleCell : ConfigurationCell
+  Name
+  isValid
+  objectType
+  parentColumn: ConfigurationPlasticRuleColumn
+  parentRow
+  plasticRule: PlasticRule
+  Name()
+  classType()
+
+ConfigurationPlasticRuleColumn : ConfigurationColumn
+  Name
+  component: Component
+  id
+  index
+  isValid
+  objectType
+  parentPlasticRuleTable: ConfigurationPlasticRuleTable
+  rowCount
+  title
+  Name()
+  classType()
+  deleteMe() -> bool
+  getCell(rowIndex: int) -> ConfigurationPlasticRuleCell
+  getCellByRowId(rowId: str) -> ConfigurationPlasticRuleCell
+  getCellByRowName(rowName: str) -> ConfigurationPlasticRuleCell
+
+ConfigurationPlasticRuleColumns *collection<ConfigurationPlasticRuleColumn>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(component: Component) -> ConfigurationPlasticRuleColumn
+  classType()
+  itemById(id: str) -> ConfigurationPlasticRuleColumn
+
+ConfigurationPlasticRuleTable : ConfigurationTable
+  # Represents a configuration table that defines different plastic rules.
+  Name
+  columns: ConfigurationPlasticRuleColumns
+  id
+  isValid
+  name: str
+  objectType
+  parentTableColumn: ConfigurationThemeColumn
+  rows
+  Name()
+  classType()
+  clear() -> bool
+  getCell(column: int, row: int) -> ConfigurationCell
+
+ConfigurationPropertyCell : ConfigurationCell
+  Name
+  isValid
+  objectType
+  parentColumn: ConfigurationPropertyColumn
+  parentRow
+  value: str
+  Name()
+  classType()
+
+ConfigurationPropertyColumn : ConfigurationColumn
+  # Represents a property column in a configuration table.
+  Name
+  id
+  index
+  isValid
+  objectType
+  parentProperty: Property
+  parentTable: ConfigurationTable
+  rowCount
+  title
+  Name()
+  classType()
+  deleteMe() -> bool
+  getCell(rowIndex: int) -> ConfigurationPropertyCell
+  getCellByRowId(rowId: str) -> ConfigurationPropertyCell
+  getCellByRowName(rowName: str) -> ConfigurationPropertyCell
+
+ConfigurationReplaceDesign : Base
+  Name
+  dataFile: DataFile
+  isValid
+  name: str
+  objectType
+  Name()
+  classType()
+  deleteMe() -> bool
+
+ConfigurationReplaceDesigns *collection<ConfigurationReplaceDesign>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(name: str, dataFile: DataFile) -> ConfigurationReplaceDesign
+  classType()
+  itemByName(name: str) -> ConfigurationReplaceDesign
+
+ConfigurationRow : Base
+  Name
+  id: str
+  index: int
+  isValid
+  name: str
+  objectType
+  parentTable: ConfigurationTable
+  Name()
+  activate() -> bool
+  classType()
+  copy(name: str) -> ConfigurationRow
+  deleteMe() -> bool
+  generate() -> ConfigurationFuture
+  getCellByColumnId(columnId: str) -> ConfigurationCell
+  getCellByColumnIndex(columnIndex: int) -> ConfigurationCell
+
+ConfigurationRows *collection<ConfigurationRow>
+  # Returns a collection of the rows in the table. The header row is not included in this list.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(name: str) -> ConfigurationRow
+  classType()
+  itemById(id: str) -> ConfigurationRow
+  itemByName(name: str) -> ConfigurationRow
+
+ConfigurationSheetMetalRuleCell : ConfigurationCell
+  Name
+  isValid
+  objectType
+  parentColumn: ConfigurationSheetMetalRuleColumn
+  parentRow
+  sheetMetalRule: SheetMetalRule
+  Name()
+  classType()
+
+ConfigurationSheetMetalRuleColumn : ConfigurationColumn
+  Name
+  component: Component
+  componentName: str
+  id
+  index
+  isValid
+  objectType
+  parentSheetMetalRuleTable: ConfigurationSheetMetalRuleTable
+  rowCount
+  title
+  Name()
+  classType()
+  deleteMe() -> bool
+  getCell(rowIndex: int) -> ConfigurationSheetMetalRuleCell
+  getCellByRowId(rowId: str) -> ConfigurationSheetMetalRuleCell
+  getCellByRowName(rowName: str) -> ConfigurationSheetMetalRuleCell
+
+ConfigurationSheetMetalRuleColumns *collection<ConfigurationSheetMetalRuleColumn>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(component: Component) -> ConfigurationSheetMetalRuleColumn
+  classType()
+  itemById(id: str) -> ConfigurationSheetMetalRuleColumn
+
+ConfigurationSheetMetalRuleTable : ConfigurationTable
+  # Represents a configuration table that defines different sheet metal rules.
+  Name
+  columns: ConfigurationSheetMetalRuleColumns
+  id
+  isValid
+  name: str
+  objectType
+  parentTableColumn: ConfigurationThemeColumn
+  rows
+  Name()
+  classType()
+  clear() -> bool
+  getCell(column: int, row: int) -> ConfigurationCell
+
+ConfigurationSuppressCell : ConfigurationCell
+  Name
+  isSuppressed: bool
+  isValid
+  objectType
+  parentColumn: ConfigurationSuppressColumn
+  parentRow
+  Name()
+  classType()
+
+ConfigurationSuppressColumn : ConfigurationColumn
+  # Represents a suppress column in a top or custom theme configuration table.
+  Name
+  feature: Base
+  id
+  index
+  isValid
+  objectType
+  parentTable: ConfigurationTable
+  rowCount
+  title
+  Name()
+  classType()
+  deleteMe() -> bool
+  getCell(rowIndex: int) -> ConfigurationSuppressCell
+  getCellByRowId(rowId: str) -> ConfigurationSuppressCell
+  getCellByRowName(rowName: str) -> ConfigurationSuppressCell
+
+ConfigurationTable : Base
+  # The base class of all configuration tables.
+  Name
+  id: str
+  isValid
+  objectType
+  rows: ConfigurationRows
+  Name()
+  classType()
+  getCell(column: int, row: int) -> ConfigurationCell
+
+ConfigurationThemeCell : ConfigurationCell
+  Name
+  isValid
+  objectType
+  parentColumn: ConfigurationThemeColumn
+  parentRow
+  referencedTableRow: ConfigurationRow
+  Name()
+  classType()
+
+ConfigurationThemeColumn : ConfigurationColumn
+  # Represents a theme table column in a top configuration table.
+  Name
+  id
+  index
+  isValid
+  objectType
+  parentTable: ConfigurationTable
+  referencedTable: ConfigurationTable
+  rowCount
+  title
+  Name()
+  classType()
+  deleteMe() -> bool
+  getCell(rowIndex: int) -> ConfigurationThemeCell
+  getCellByRowId(rowId: str) -> ConfigurationThemeCell
+  getCellByRowName(rowName: str) -> ConfigurationThemeCell
+
+ConfigurationThreadColumns
+  Name()
+  TaperedDesignationColumns()
+  TaperedSize_DesignationColumns()
+  TaperedThreadType_Size_DesignationColumns()
+  ThreadClassColumns()
+  ThreadDesignation_ClassColumns()
+  ThreadSize_Designation_ClassColumns()
+  ThreadType_Size_Designation_ClassColumns()
+
+ConfigurationTopTable : ConfigurationTable
+  Name
+  activeRow: ConfigurationRow
+  appearanceTable: ConfigurationAppearanceTable
+  columns: ConfigurationColumns
+  customThemeTables: ConfigurationCustomThemeTables
+  id
+  isValid
+  materialTable: ConfigurationMaterialTable
+  name: str
+  objectType
+  plasticRuleTable: ConfigurationPlasticRuleTable
+  rows
+  sheetMetalRuleTable: ConfigurationSheetMetalRuleTable
+  Name()
+  classType()
+  getCell(column: int, row: int) -> ConfigurationCell
+  moveColumns(columns: list[ConfigurationColumn], targetTable: ConfigurationCustomThemeTable) -> ConfigurationColumn]
+
+ConfigurationVisibilityCell : ConfigurationCell
+  Name
+  isValid
+  isVisible: bool
+  objectType
+  parentColumn: ConfigurationVisibilityColumn
+  parentRow
+  Name()
+  classType()
+
+ConfigurationVisibilityColumn : ConfigurationColumn
+  # Represents a visibility column in a top or custom theme configuration table.
+  Name
+  entity: Base
+  id
+  index
+  isValid
+  objectType
+  parentTable: ConfigurationTable
+  rowCount
+  title
+  Name()
+  classType()
+  deleteMe() -> bool
+  getCell(rowIndex: int) -> ConfigurationVisibilityCell
+  getCellByRowId(rowId: str) -> ConfigurationVisibilityCell
+  getCellByRowName(rowName: str) -> ConfigurationVisibilityCell
+
+ConstantRadiusFilletEdgeSet : FilletEdgeSet
+  # Provides access to the edges and the parameter associated with a constant radius fillet.
+  Name
+  continuity
+  edges: ObjectCollection
+  isTangentChain
+  isValid
+  objectType
+  radius: ModelParameter
+  tangencyWeight
+  Name()
+  classType()
+  deleteMe() -> bool
+
+ConstantRadiusFilletEdgeSetInput : FilletEdgeSetInput
+  # Provides access to the edges and the parameter associated with a constant radius fillet.
+  Name
+  continuity
+  entities
+  isValid
+  objectType
+  radius: ValueInput
+  tangencyWeight
+  Name()
+  classType()
+
+ConstraintMaskDefinition : Base
+  # Object that represents a structural constraint mask.
+  isConstrainedAxial: bool
+  isConstrainedRadial: bool
+  isConstrainedTangential: bool
+  isDisplacementConstrainedX: bool
+  isDisplacementConstrainedY: bool
+  isDisplacementConstrainedZ: bool
+  isRotationConstrainedX: bool
+  isRotationConstrainedY: bool
+  isRotationConstrainedZ: bool
+
+ConstructionAxisByLineDefinition : ConstructionAxisDefinition
+  Name
+  axis: InfiniteLine3D
+  isValid
+  objectType
+  parentConstructionAxis
+  Name()
+  classType()
+
+ConstructionAxisCircularFaceDefinition : ConstructionAxisDefinition
+  # The definition for a parametric construction axis created using the SetbyCircularFace method
+  Name
+  circularFace: BRepFace
+  isValid
+  objectType
+  parentConstructionAxis
+  Name()
+  classType()
+
+ConstructionAxisDefinition : Base
+  # A Base class to return the information (possibly parametric) used to
+    define a ConstructionAxis.
+  Name
+  isValid
+  objectType
+  parentConstructionAxis: ConstructionAxis
+  Name()
+  classType()
+
+ConstructionAxisEdgeDefinition : ConstructionAxisDefinition
+  # The definition for a parametric construction axis created using the SetbyEdge method
+  Name
+  edgeEntity: Base
+  isValid
+  objectType
+  parentConstructionAxis
+  Name()
+  classType()
+
+ConstructionAxisNormalToFaceAtPointDefinition : ConstructionAxisDefinition
+  Name
+  face: Base
+  isValid
+  objectType
+  parentConstructionAxis
+  pointEntity: Base
+  Name()
+  classType()
+  redefine(face: Base, pointEntity: Base) -> bool
+
+ConstructionAxisPerpendicularAtPointDefinition : ConstructionAxisDefinition
+  Name
+  face: BRepFace
+  isValid
+  objectType
+  parentConstructionAxis
+  point: Base
+  Name()
+  classType()
+  redefine(face: BRepFace, pointEntity: Base) -> bool
+
+ConstructionAxisTwoPlaneDefinition : ConstructionAxisDefinition
+  # The definition for a parametric construction axis created using the SetByTwoPlanes method
+  Name
+  isValid
+  objectType
+  parentConstructionAxis
+  planarEntityOne: Base
+  planarEntityTwo: Base
+  Name()
+  classType()
+  redefine(planarEntityOne: Base, planarEntityTwo: Base) -> bool
+
+ConstructionAxisTwoPointDefinition : ConstructionAxisDefinition
+  # The definition for a parametric construction axis created using the SetbyTwoPoints method
+  Name
+  isValid
+  objectType
+  parentConstructionAxis
+  pointEntityOne: Base
+  pointEntityTwo: Base
+  Name()
+  classType()
+  redefine(pointEntityOne: Base, pointEntityTwo: Base) -> bool
+
+ConstructionPlaneAtAngleDefinition : ConstructionPlaneDefinition
+  Name
+  angle: Parameter
+  isValid
+  linearEntity: Base
+  objectType
+  parentConstructionPlane
+  planarEntity: Base
+  Name()
+  classType()
+  redefine(angle: ValueInput, linearEntity: Base, planarEntity: Base) -> bool
+
+ConstructionPlaneByPlaneDefinition : ConstructionPlaneDefinition
+  Name
+  isValid
+  objectType
+  parentConstructionPlane
+  plane: Plane
+  Name()
+  classType()
+
+ConstructionPlaneDefinition : Base
+  # A Base class to return the information, possibly parametric, used to define the ConstructionPlane.
+  Name
+  isValid
+  objectType
+  parentConstructionPlane: ConstructionPlane
+  Name()
+  classType()
+
+ConstructionPlaneDistanceOnPathDefinition : ConstructionPlaneDefinition
+  Name
+  distance: Parameter
+  isValid
+  objectType
+  parentConstructionPlane
+  pathEntity: Base
+  Name()
+  classType()
+  redefine(pathEntity: Base, distance: ValueInput) -> bool
+
+ConstructionPlaneMidplaneDefinition : ConstructionPlaneDefinition
+  # ConstructionPlaneMidplaneDefinition defines a ConstructionPlane by...
+  Name
+  isValid
+  objectType
+  parentConstructionPlane
+  planarEntityOne: Base
+  planarEntityTwo: Base
+  Name()
+  classType()
+  redefine(planarEntityOne: Base, planarEntityTwo: Base) -> bool
+
+ConstructionPlaneOffsetDefinition : ConstructionPlaneDefinition
+  Name
+  isValid
+  objectType
+  offset: Parameter
+  parentConstructionPlane
+  planarEntity: Base
+  Name()
+  classType()
+  redefine(offset: ValueInput, planarEntity: Base) -> bool
+
+ConstructionPlaneOffsetThroughPointDefinition : ConstructionPlaneDefinition
+  Name
+  isValid
+  objectType
+  parentConstructionPlane
+  planarEntity: Base
+  point: Base
+  Name()
+  classType()
+  redefine(planarEntity: Base, point: Base) -> bool
+
+ConstructionPlaneTangentAtPointDefinition : ConstructionPlaneDefinition
+  Name
+  isValid
+  objectType
+  parentConstructionPlane
+  pointEntity: Base
+  tangentFace: BRepFace
+  Name()
+  classType()
+  redefine(tangentFace: Base, pointEntity: Base) -> bool
+
+ConstructionPlaneTangentDefinition : ConstructionPlaneDefinition
+  Name
+  angle: Parameter
+  isValid
+  objectType
+  parentConstructionPlane
+  planarEntity: Base
+  tangentFace: Base
+  Name()
+  classType()
+  redefine(angle: ValueInput, tangentFace: Base, planarEntity: Base) -> bool
+
+ConstructionPlaneThreePointsDefinition : ConstructionPlaneDefinition
+  Name
+  isValid
+  objectType
+  parentConstructionPlane
+  pointEntityOne: Base
+  pointEntityThree: Base
+  pointEntityTwo: Base
+  Name()
+  classType()
+  redefine(pointEntityOne: Base, pointEntityTwo: Base, pointEntityThree: Base) -> bool
+
+ConstructionPlaneTwoEdgesDefinition : ConstructionPlaneDefinition
+  Name
+  isValid
+  linearEntityOne: Base
+  linearEntityTwo: Base
+  objectType
+  parentConstructionPlane
+  Name()
+  classType()
+  redefine(linearEntityOne: Base, linearEntityTwo: Base) -> bool
+
+ConstructionPointCenterDefinition : ConstructionPointDefinition
+  # The definition for a parametric construction point created using the SetbyCenter method
+  Name
+  circularEntity: Base
+  isValid
+  objectType
+  parentConstructionPoint
+  Name()
+  classType()
+
+ConstructionPointDefinition : Base
+  Name
+  isValid
+  objectType
+  parentConstructionPoint: ConstructionPoint
+  Name()
+  classType()
+
+ConstructionPointEdgePlaneDefinition : ConstructionPointDefinition
+  # The definition for a parametric construction point created using the SetbyEdgePlane method
+  Name
+  edge: Base
+  isValid
+  objectType
+  parentConstructionPoint
+  plane: Base
+  Name()
+  classType()
+  redefine(edge: Base, plane: Base) -> bool
+
+ConstructionPointPointDefinition : ConstructionPointDefinition
+  Name
+  isValid
+  objectType
+  parentConstructionPoint
+  pointEntity: Base
+  Name()
+  classType()
+
+ConstructionPointThreePlanesDefinition : ConstructionPointDefinition
+  # The definition for a parametric construction point created using the SetbyThreePlanes method
+  Name
+  isValid
+  objectType
+  parentConstructionPoint
+  planeOne: Base
+  planeThree: Base
+  planeTwo: Base
+  Name()
+  classType()
+  redefine(planeOne: Base, planeTwo: Base, planeThree: Base) -> bool
+
+ConstructionPointTwoEdgesDefinition : ConstructionPointDefinition
+  # The definition for a parametric construction point created using the SetbyTwoEdges method
+  Name
+  edgeOne: Base
+  edgeTwo: Base
+  isValid
+  objectType
+  parentConstructionPoint
+  Name()
+  classType()
+  redefine(edgeOne: Base, edgeTwo: Base) -> bool
+
+ControlDefinition : Base
+  Name
+  isEnabled: bool
+  isValid
+  isVisible: bool
+  name: str
+  objectType
+  Name()
+  classType()
+
 CornerClosureFeature : Feature
   # Defines a corner closure feature, providing methods to redefine the type of corner closure.
   definition: CornerClosureFeatureDefinition
@@ -541,6 +2496,14 @@ CornerClosureFeature : Feature
   createForAssemblyContext(occurrence: Occurrence) -> CornerClosureFeature
   deleteMe() -> bool
   dissolve() -> bool
+
+CornerClosureFeatureDefinition : Base
+  # A Base class to return the information used to define the CornerClosureFeature.
+  bendTransition: CornerBendTransitionTypes
+  dominantEdge: BRepEdge
+  isExtendAligned: bool
+  miterGap: ModelParameter
+  submissiveEdge: BRepEdge
 
 CornerClosureFeatureInput : Base
   definitionType: CornerClosureFeatureDefinitionTypes
@@ -554,6 +2517,12 @@ CornerClosureFeatures *collection<CornerClosureFeature>
   add(input: CornerClosureFeatureInput) -> CornerClosureFeature
   createInput(dominantEdge: BRepEdge, submissiveEdge: BRepEdge) -> CornerClosureFeatureInput
   itemByName(name: str) -> CornerClosureFeature
+
+CornerClosureInputDefinition : Base
+  bendTransition: CornerBendTransitionTypes
+  isExtendAligned: bool
+  isUseSheetMetalRuleMiterGap: bool
+  miterGap: ValueInput
 
 CustomFeature : Feature
   # Object that represents an existing CustomFeature feature in a design.
@@ -586,6 +2555,19 @@ CustomFeature : Feature
   deleteMe() -> bool
   dissolve() -> bool
   setStartAndEndFeatures(startFeature: Base, endFeature: Base) -> bool
+
+CustomFeatureDefinition : Base
+  Name
+  customFeatureCompute: CustomFeatureEvent
+  defaultName: str
+  editCommandId: str
+  iconFolder: str
+  id: str
+  isValid
+  objectType
+  Name()
+  classType()
+  @static create(id: str, defaultName: str, iconFolder: str) -> CustomFeatureDefinition
 
 CustomFeatureInput : Base
   Name
@@ -642,6 +2624,21 @@ CylinderFeatures *collection<CylinderFeature>
   Name()
   classType()
   itemByName(name: str) -> CylinderFeature
+
+DXFFlatPatternExportOptions : ExportOptions
+  # Defines that a DXF export of a flat pattern is to be done and specifies the various options.
+  Name
+  convertToPolylineTolerance: float
+  filename
+  geometry
+  isCenterLinesExported: bool
+  isExtentLinesExported: bool
+  isSplineConvertedToPolyline: bool
+  isValid
+  objectType
+  units: DistanceUnits
+  Name()
+  classType()
 
 DeleteFaceFeature : Feature
   Name
@@ -711,6 +2708,80 @@ DeriveFeatures *collection<DeriveFeature>
   add(input: DeriveFeatureInput) -> DeriveFeature
   createInput(sourceDesign: Design) -> DeriveFeatureInput
   itemByName(name: str) -> DeriveFeature
+
+DistanceAndAngleChamferEdgeSet : ChamferEdgeSet
+  # Provides access to the edges and the parameter associated with a chord length fillet.
+  Name
+  angle: ModelParameter
+  distance: ModelParameter
+  edges: ObjectCollection
+  isFlipped: bool
+  isTangentChain
+  isValid
+  objectType
+  Name()
+  classType()
+  deleteMe() -> bool
+
+DistanceAndAngleChamferTypeDefinition : ChamferTypeDefinition
+  # Provides information to create a chamfer that is defined by a distance from the edge and an angle.
+  Name
+  angle: ModelParameter
+  distance: ModelParameter
+  isValid
+  objectType
+  parentFeature
+  Name()
+  classType()
+
+DistanceExtentDefinition : ExtentDefinition
+  Name
+  distance: ModelParameter
+  isSymmetric: bool
+  isValid
+  objectType
+  parentFeature
+  Name()
+  classType()
+  @static create(distance: ValueInput) -> ValueInput
+
+DoubleHemFeatureDefinition : HemFeatureDefinition
+  # The definition for a double hem.
+  Name
+  bendPositionType
+  gap: ModelParameter
+  hemEdge
+  isFlipped
+  isValid
+  length: ModelParameter
+  objectType
+  setback: ModelParameter
+  Name()
+  classType()
+
+DraftAnalyses *collection<DraftAnalysis>
+  # Provides access to any draft analyses results in the design.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemByName(name: str) -> DraftAnalysis
+
+DraftAnalysis : Analysis
+  # Represents any existing Draft Analysis that exist in the design.
+  Name
+  attributes
+  entityToken
+  isLightBulbOn
+  isValid
+  isVisible
+  name
+  objectType
+  Name()
+  classType()
+  deleteMe() -> bool
 
 DraftFeature : Feature
   # Object that represents an existing draft feature in a design.
@@ -834,6 +2905,27 @@ EmbossFeatures *collection<EmbossFeature>
   createInput(profiles: list[Base], faces: list[BRepFace], depth: ValueInput) -> EmbossFeatureInput
   itemByName(name: str) -> EmbossFeature
 
+EqualDistanceChamferEdgeSet : ChamferEdgeSet
+  # Provides access to the edges and the parameter associated with a equal distance offset chamfer.
+  Name
+  distance: ModelParameter
+  edges: ObjectCollection
+  isTangentChain
+  isValid
+  objectType
+  Name()
+  classType()
+  deleteMe() -> bool
+
+EqualDistanceChamferTypeDefinition : ChamferTypeDefinition
+  Name
+  distance: ModelParameter
+  isValid
+  objectType
+  parentFeature
+  Name()
+  classType()
+
 ExtendFeature : Feature
   # Object that represents an existing extend feature in a design.
   Name
@@ -899,6 +2991,12 @@ ExtentDefinition : Base
   parentFeature: Feature
   Name()
   classType()
+
+ExtentDirections
+  Name()
+  NegativeExtentDirection()
+  PositiveExtentDirection()
+  SymmetricExtentDirection()
 
 ExtrudeFeature : Feature
   # Object that represents an existing extrude feature in a design.
@@ -1003,6 +3101,15 @@ ExtrudeFeatures *collection<ExtrudeFeature>
   createInput(profile: Base, operation: FeatureOperations) -> ExtrudeFeatureInput
   itemByName(name: str) -> ExtrudeFeature
 
+FaceRipFeatureDefinition : RipFeatureDefinition
+  # The definition for a face rip.
+  Name
+  isValid
+  objectType
+  ripFace: BRepFace
+  Name()
+  classType()
+
 Feature : Base
   # Base class object representing all features.
   Name
@@ -1026,6 +3133,12 @@ Feature : Base
   classType()
   deleteMe() -> bool
   dissolve() -> bool
+
+FeatureExtentTypes
+  Name()
+  OneSideFeatureExtentType()
+  SymmetricFeatureExtentType()
+  TwoSidesFeatureExtentType()
 
 Features *collection<Feature>
   Name
@@ -1114,6 +3227,53 @@ Features *collection<Feature>
   createPath(curve: Base, isChain: bool) -> Path
   itemByName(name: str) -> Feature
 
+FilletEdgeSet : Base
+  # The base class for the classes that define the different types of fillet edge sets.
+  Name
+  continuity: SurfaceContinuityTypes
+  isTangentChain: bool
+  isValid
+  objectType
+  tangencyWeight: ModelParameter
+  Name()
+  classType()
+  deleteMe() -> bool
+
+FilletEdgeSetInput : Base
+  # Represents the input to define a fillet edge set.
+  Name
+  continuity: SurfaceContinuityTypes
+  entities: ObjectCollection
+  isValid
+  objectType
+  tangencyWeight: ValueInput
+  Name()
+  classType()
+
+FilletEdgeSetInputs *collection<FilletEdgeSetInput>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  addAsymmetricRadiusEdgeSet(entities: ObjectCollection, offsetOne: ValueInput, offsetTwo: ValueInput, isTangentChain: bool) -> AsymmetricFilletEdgeSetInput
+  addChordLengthEdgeSet(entities: ObjectCollection, chordLength: ValueInput, isTangentChain: bool) -> ChordLengthFilletEdgeSetInput
+  addConstantRadiusEdgeSet(entities: ObjectCollection, radius: ValueInput, isTangentChain: bool) -> ConstantRadiusFilletEdgeSetInput
+  addVariableRadiusEdgeSet(tangentEdges: ObjectCollection, startRadius: ValueInput, endRadius: ValueInput, isTangentChain: bool) -> VariableRadiusFilletEdgeSetInput
+  classType()
+
+FilletEdgeSets *collection<FilletEdgeSet>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  addAsymmetricRadiusEdgeSet(entities: ObjectCollection, offsetOne: ValueInput, offsetTwo: ValueInput, isTangentChain: bool) -> AsymmetricFilletEdgeSet
+  addChordLengthEdgeSet(entities: ObjectCollection, chordLength: ValueInput, isTangentChain: bool) -> ChordLengthFilletEdgeSet
+  addConstantRadiusEdgeSet(entities: ObjectCollection, radius: ValueInput, isTangentChain: bool) -> ConstantRadiusFilletEdgeSet
+  addVariableRadiusEdgeSet(tangentEdges: ObjectCollection, startRadius: ValueInput, endRadius: ValueInput, positions: list[ValueInput], radii: list[ValueInput], isTangentChain: bool) -> VariableRadiusFilletEdgeSet
+  classType()
+
 FilletFeature : Feature
   # Object that represents an existing fillet feature in a design.
   Name
@@ -1162,6 +3322,12 @@ FilletFeatureInput : Base
   addConstantRadiusEdgeSet(edges: ObjectCollection, radius: ValueInput, isTangentChain: bool) -> bool
   addVariableRadiusEdgeSet(tangentEdges: ObjectCollection, startRadius: ValueInput, endRadius: ValueInput, positions: list[ValueInput], radii: list[ValueInput]) -> bool
   classType()
+
+FilletFeatureTypes
+  FilletFeatureType()
+  FullRoundFilletFeatureType()
+  Name()
+  RuleFilletFeatureType()
 
 FilletFeatures *collection<FilletFeature>
   Name
@@ -1212,6 +3378,187 @@ FlangeFeatures *collection<FlangeFeature>
   classType()
   itemByName(name: str) -> FlangeFeature
 
+FlatHemFeatureDefinition : HemFeatureDefinition
+  # The definition for a flat hem.
+  Name
+  bendPositionType
+  hemEdge
+  isFlipped
+  isValid
+  length: ModelParameter
+  objectType
+  Name()
+  classType()
+
+FlatPattern : Feature
+  Name
+  assemblyContext
+  attributes
+  baseFeature
+  bendLinesBody: BRepBody
+  bodies
+  bottomFace: BRepFace
+  entityToken
+  errorOrWarningMessage
+  extentLinesBody: BRepBody
+  faces
+  flatBody: BRepBody
+  foldedBody: BRepBody
+  healthState
+  isParametric
+  isSuppressed
+  isValid
+  linkedFeatures
+  name
+  objectType
+  parentComponent
+  sideFaces: BRepFaces
+  timelineObject
+  topFace: BRepFace
+  Name()
+  classType()
+  deleteMe() -> bool
+  dissolve() -> bool
+  getBendInfo(bendEdge: BRepEdge) -> bool
+
+FlatPatternComponent : Component
+  Name
+  activeSheetMetalRule
+  allAsBuiltJoints
+  allAssemblyConstraints
+  allJointOrigins
+  allJoints
+  allOccurrences
+  allRigidGroups
+  allTangentRelationships
+  asBuiltJoints
+  assemblyConstraints
+  attributes
+  bRepBodies
+  boundingBox
+  canvases
+  componentColor
+  constructionAxes
+  constructionPlanes
+  constructionPoints
+  customGraphicsGroups
+  dataComponent
+  decals
+  description
+  entityToken
+  features
+  flatPattern
+  id
+  isBodiesFolderLightBulbOn
+  isCanvasFolderLightBulbOn
+  isConstructionFolderLightBulbOn
+  isDecalFolderLightBulbOn
+  isJointOriginsFolderLightBulbOn
+  isJointsFolderLightBulbOn
+  isLibraryItem
+  isOriginFolderLightBulbOn
+  isSketchFolderLightBulbOn
+  isValid
+  jointOrigins
+  joints
+  material
+  meshBodies
+  mfgdmModelId
+  modelParameters
+  name
+  objectType
+  occurrences
+  opacity
+  orientedMinimumBoundingBox
+  originConstructionPoint
+  parentDesign
+  partNumber
+  physicalProperties
+  preciseBoundingBox
+  propertyGroups
+  revisionId
+  rigidGroups
+  sketches
+  tangentRelationships
+  xConstructionAxis
+  xYConstructionPlane
+  xZConstructionPlane
+  yConstructionAxis
+  yZConstructionPlane
+  zConstructionAxis
+  Name()
+  allOccurrencesByComponent(component: Component) -> OccurrenceList
+  boundingBox2(entityTypes: BoundingBoxEntityTypes) -> BoundingBox3D
+  classType()
+  createBRepEdgeProfile(edges: Base, chainEdges: bool) -> Profile
+  createFlatPattern(stationaryFace: BRepFace) -> FlatPattern
+  createOpenProfile(curves: Base, chainCurves: bool) -> Profile
+  createThumbnail() -> DataObject
+  findBRepUsingPoint(point: Point3D, entityType: BRepEntityTypes, proximityTolerance: float, visibleEntitiesOnly: bool) -> ObjectCollection
+  findBRepUsingRay() -> ObjectCollection
+  getPhysicalProperties() -> PhysicalProperties
+  internalCommand(commandName: str, commandArgs: list[str]) -> str
+  occurrencesByComponent(component: Component) -> OccurrenceList
+  saveCopyAs(name: str, dataFolder: DataFolder, description: str, tag: str) -> DataFileFuture
+  transformOccurrences(occurrences: list[Occurrence], transforms: list[Matrix3D], ignoreJoints: bool) -> bool
+
+FlatPatternProduct : Design
+  Name
+  activeComponent
+  activeEditObject
+  activeOccurrence
+  allComponents
+  allParameters
+  analyses
+  appearances
+  attributes
+  configurationRowId
+  configurationTopTable
+  contactSets
+  designPlasticRules
+  designSheetMetalRules
+  designType
+  exportManager
+  flatPattern: FlatPattern
+  fusionUnitsManager
+  isConfiguration
+  isConfiguredDesign
+  isContactAnalysisEnabled
+  isContactSetAnalysis
+  isRootComponentActive
+  isValid
+  libraryPlasticRules
+  librarySheetMetalRules
+  materials
+  namedViews
+  objectType
+  parentDocument
+  productType
+  renderManager
+  rootComponent
+  rootDataComponent
+  selectionSets
+  snapshots
+  timeline
+  unitsManager
+  userParameters
+  workspaces
+  Name()
+  activateRootComponent() -> bool
+  analyzeInterference(input: InterferenceInput) -> InterferenceResults
+  areaProperties() -> AreaProperties
+  classType()
+  computeAll() -> bool
+  createConfiguredDesign() -> ConfigurationTopTable
+  createInterferenceInput(entities: ObjectCollection) -> InterferenceInput
+  deleteEntities(entities: ObjectCollection) -> bool
+  deleteMe() -> bool
+  findAttributes(groupName: str, attributeName: str) -> Attribute]
+  findEntityByToken(entityToken: str) -> Base]
+  modifyParameters(parameters: list[Parameter], values: list[ValueInput]) -> bool
+  physicalProperties() -> PhysicalProperties
+  setGroundPlaneOffset(offset: float) -> bool
+
 FormFeature : Feature
   # Object that represents an existing Form feature in a design.
   Name
@@ -1249,6 +3596,39 @@ FormFeatures *collection<FormFeature>
   add() -> FormFeature
   classType()
   itemByName(name: str) -> FormFeature
+
+FromEntityStartDefinition : ExtentDefinition
+  Name
+  entity: Base
+  isValid
+  objectType
+  offset: Base
+  parentFeature
+  Name()
+  classType()
+  @static create(entity: Base, offset: ValueInput) -> ValueInput
+
+FullRoundFilletFaceSet : Base
+  # The class for the full round fillet face set.
+  Name
+  areAutomaticSideFaces: bool
+  centerFace: BRepFace
+  isValid
+  objectType
+  sideOneFaces: BRepFace]
+  sideTwoFaces: BRepFace]
+  Name()
+  classType()
+  deleteMe() -> bool
+
+FullRoundFilletFaceSets *collection<FullRoundFilletFaceSet>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(centerFace: BRepFace, sideOneFaces: list[BRepFace], sideTwoFaces: list[BRepFace], areAutomaticSideFaces: bool) -> FullRoundFilletFaceSet
+  classType()
 
 FullRoundFilletFeatureInput : Base
   Name
@@ -1293,6 +3673,27 @@ HemFeature : FlangeFeature
   redefineAsRopeHem(length: ValueInput, gap: ValueInput, radius: ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool
   redefineAsTeardropHem(radius: ValueInput, length: ValueInput, gap: ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool
 
+HemFeatureDefinition : Base
+  # A Base class to return the information used to define the HemFeature.
+  Name
+  bendPositionType: BendPositionTypes
+  hemEdge: BRepEdge
+  isFlipped: bool
+  isValid
+  objectType
+  Name()
+  classType()
+
+HemFeatureDefinitionTypes
+  DoubleHemFeatureDefinitionType()
+  FlatHemFeatureDefinitionType()
+  Name()
+  OpenHemFeatureDefinitionType()
+  RolledHemFeatureDefinitionType()
+  RopeHemFeatureDefinitionType()
+  TeardropHemFeatureDefinitionType()
+  UndefinedHemFeatureDefinitionType()
+
 HemFeatureInput : Base
   # This class defines the methods and properties that pertain to the definition of a hem feature.
   Name
@@ -1317,6 +3718,12 @@ HemFeatures *collection<HemFeature>
   classType()
   createHemFeatureInput() -> HemFeatureInput
   itemByName(name: str) -> HemFeature
+
+HoleEdgePositions
+  EdgeEndPointPosition()
+  EdgeMidPointPosition()
+  EdgeStartPointPosition()
+  Name()
 
 HoleFeature : Feature
   # Object that represents an existing hole feature in a design.
@@ -1423,6 +3830,108 @@ HoleFeatures *collection<HoleFeature>
   createSimpleInput(holeDiameter: ValueInput) -> HoleFeatureInput
   itemByName(name: str) -> HoleFeature
 
+HolePositionDefinition : Base
+  # The base class for the classes that define how a hole can be positioned.
+  Name
+  isValid
+  objectType
+  Name()
+  classType()
+
+HoleSegmentType
+  HoleSegmentTypeCone()
+  HoleSegmentTypeCylinder()
+  HoleSegmentTypeFlat()
+  HoleSegmentTypeTorus()
+  Name()
+
+HoleTapTypes
+  ClearanceHoleTapType()
+  Name()
+  SimpleHoleTapType()
+  TaperTappedHoleTapType()
+  TappedHoleTapType()
+
+HoleTypes
+  CounterboreHoleType()
+  CountersinkHoleType()
+  Name()
+  SimpleHoleType()
+
+LineStylePatterns
+  Name()
+  centerLineStylePattern()
+  continuousLineStylePattern()
+  dashedLineStylePattern()
+  dotLineStylePattern()
+  hiddenLineStylePattern()
+  phantomLineStylePattern()
+  tracksLineStylePattern()
+  zigzagLineStylePattern()
+
+ListControlDefinition : ControlDefinition
+  Name
+  isEnabled
+  isValid
+  isVisible
+  lastSelected: ListItem
+  listControlDisplayType: ListControlDisplayTypes
+  listItems: ListItems
+  name
+  objectType
+  Name()
+  classType()
+
+LoftCenterLineOrRail : Base
+  # Represent a centerline or a single rail used by a loft feature.
+  Name
+  edgeCondition: LoftRailEdgeConditions
+  entity: Base
+  isCenterLine: bool
+  isValid
+  objectType
+  Name()
+  classType()
+  deleteMe() -> bool
+
+LoftCenterLineOrRails *collection<LoftCenterLineOrRail>
+  # Defines a single centerline or one or more rails for a loft feature.
+  Name
+  count: int
+  isCenterLine: bool
+  isValid
+  objectType
+  Name()
+  addCenterLine(entity: Base) -> LoftCenterLineOrRail
+  addRail(entity: Base) -> LoftCenterLineOrRail
+  classType()
+
+LoftDirectionEndCondition : LoftEndCondition
+  # Represents a 'Direction' loft end condition.
+  Name
+  angle: Base
+  isValid
+  objectType
+  parentLoftSection
+  weight: Base
+  Name()
+  classType()
+
+LoftEdgeAlignments
+  AlignEdgesLoftEdgeAlignment()
+  AlignToSurfaceLoftEdgeAlignment()
+  FreeEdgesLoftEdgeAlignment()
+  Name()
+
+LoftEndCondition : Base
+  # The base class for all loft end conditions.
+  Name
+  isValid
+  objectType
+  parentLoftSection: LoftSection
+  Name()
+  classType()
+
 LoftFeature : Feature
   # Object that represents an existing loft feature in a design.
   Name
@@ -1490,6 +3999,95 @@ LoftFeatures *collection<LoftFeature>
   classType()
   createInput(operation: FeatureOperations) -> LoftFeatureInput
   itemByName(name: str) -> LoftFeature
+
+LoftFreeEndCondition : LoftEndCondition
+  # Represents a 'Free' loft end condition.
+  Name
+  isValid
+  objectType
+  parentLoftSection
+  Name()
+  classType()
+
+LoftPointSharpEndCondition : LoftEndCondition
+  # Represents a 'Point Sharp' loft end condition.
+  Name
+  isValid
+  objectType
+  parentLoftSection
+  Name()
+  classType()
+
+LoftPointTangentEndCondition : LoftEndCondition
+  # Represents a 'Point Tangent' loft end condition.
+  Name
+  isValid
+  objectType
+  parentLoftSection
+  weight: Base
+  Name()
+  classType()
+
+LoftRailEdgeConditions
+  G0LoftRailEdgeCondition()
+  G1LoftRailEdgeCondition()
+  G2LoftRailEdgeCondition()
+  Name()
+
+LoftSection : Base
+  # A single loft section.
+  Name
+  endCondition: LoftEndCondition
+  entity: Base
+  index: int
+  isValid
+  objectType
+  Name()
+  classType()
+  deleteMe() -> bool
+  reorder(newIndex: int) -> bool
+  setDirectionEndCondition() -> bool
+  setFreeEndCondition() -> bool
+  setPointSharpEndCondition() -> bool
+  setPointTangentEndCondition(weight: ValueInput) -> bool
+  setSmoothEndCondition(weight: ValueInput) -> bool
+  setTangentEndCondition(weight: ValueInput) -> bool
+
+LoftSections *collection<LoftSection>
+  # The set of two or more sections used to define the shape of the loft.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(entity: Base) -> LoftSection
+  classType()
+
+LoftSmoothEndCondition : LoftEndCondition
+  # Represents a 'Smooth' loft end condition.
+  Name
+  isValid
+  objectType
+  parentLoftSection
+  weight: Base
+  Name()
+  classType()
+
+LoftTangentEndCondition : LoftEndCondition
+  # Represents a 'Tangent' loft end condition.
+  Name
+  isValid
+  objectType
+  parentLoftSection
+  weight: Base
+  Name()
+  classType()
+
+LoopTypes
+  AllLoops()
+  Name()
+  OnlyInsideLoops()
+  OnlyOutsideLoops()
 
 MergeFacesFeatureInput : Base
   Name
@@ -2244,6 +4842,24 @@ MoveFeature : Feature
   redefineAsTranslateAlongEntity(linearEntity: Base, distance: ValueInput) -> bool
   redefineAsTranslateXYZ(xDistance: ValueInput, yDistance: ValueInput, zDistance: ValueInput, isDesignSpace: bool) -> bool
 
+MoveFeatureDefinition : Base
+  # A Base class to return the information used to define a Move feature.
+  Name
+  isValid
+  objectType
+  parentMoveFeature: MoveFeature
+  Name()
+  classType()
+
+MoveFeatureFreeMoveDefinition : MoveFeatureDefinition
+  Name
+  isValid
+  objectType
+  parentMoveFeature
+  transform: Matrix3D
+  Name()
+  classType()
+
 MoveFeatureInput : Base
   # This class defines the methods and properties that pertain to the definition of a move feature.
   Name
@@ -2261,6 +4877,61 @@ MoveFeatureInput : Base
   defineAsTranslateAlongEntity(linearEntity: Base, distance: ValueInput) -> bool
   defineAsTranslateXYZ(xDistance: ValueInput, yDistance: ValueInput, zDistance: ValueInput, isDesignSpace: bool) -> bool
 
+MoveFeaturePointToPointDefinition : MoveFeatureDefinition
+  Name
+  isValid
+  objectType
+  originPoint: Base
+  parentMoveFeature
+  targetPoint: Base
+  Name()
+  classType()
+
+MoveFeaturePointToPositionDefinition : MoveFeatureDefinition
+  Name
+  isDesignSpace: bool
+  isValid
+  objectType
+  parentMoveFeature
+  point: Base
+  xDistance: ModelParameter
+  yDistance: ModelParameter
+  zDistance: ModelParameter
+  Name()
+  classType()
+
+MoveFeatureRotateDefinition : MoveFeatureDefinition
+  Name
+  angle: ModelParameter
+  axisEntity: Base
+  isValid
+  objectType
+  parentMoveFeature
+  Name()
+  classType()
+
+MoveFeatureTranslateAlongEntityDefinition : MoveFeatureDefinition
+  Name
+  distance: ModelParameter
+  isValid
+  linearEntity: Base
+  objectType
+  parentMoveFeature
+  Name()
+  classType()
+
+MoveFeatureTranslateXYZDefinition : MoveFeatureDefinition
+  Name
+  isDesignSpace: bool
+  isValid
+  objectType
+  parentMoveFeature
+  xDistance: ModelParameter
+  yDistance: ModelParameter
+  zDistance: ModelParameter
+  Name()
+  classType()
+
 MoveFeatures *collection<MoveFeature>
   Name
   count: int
@@ -2272,6 +4943,83 @@ MoveFeatures *collection<MoveFeature>
   createInput(inputEntities: ObjectCollection, transform: Matrix3D) -> MoveFeatureInput
   createInput2(inputEntities: ObjectCollection) -> MoveFeatureInput
   itemByName(name: str) -> MoveFeature
+
+MultiLineTextDefinition : SketchTextDefinition
+  # Defines the information for multi-line text.
+  Name
+  characterSpacing: float
+  horizontalAlignment: HorizontalAlignments
+  isValid
+  objectType
+  parentSketchText
+  rectangleLines: SketchLine]
+  verticalAlignment: VerticalAlignments
+  Name()
+  classType()
+  rotate() -> bool
+
+OffsetConstraint : GeometricConstraint
+  # An offset constraint in a sketch.
+  Name
+  assemblyContext
+  attributes
+  childCurves: SketchCurve]
+  dimension: SketchDimension
+  distance: float
+  entityToken
+  isDeletable
+  isTopologyMatched: bool
+  isValid
+  nativeObject: OffsetConstraint
+  objectType
+  parentCurves: SketchCurve]
+  parentSketch
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> OffsetConstraint
+  deleteMe() -> bool
+
+OffsetConstraintInput : Base
+  # Used to define the inputs needed to create an offset constraint.
+  Name
+  curves: SketchCurve]
+  dimensionPoint: Point3D
+  isTopologyMatched: bool
+  isValid
+  objectType
+  offset: ValueInput
+  Name()
+  classType()
+
+OffsetConstraintVector
+  append(x: OffsetConstraint) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::OffsetConstraint > >::size_type, x: OffsetConstraint) -> void
+  back() -> OffsetConstraint >::value_type
+  begin() -> OffsetConstraint >::iterator
+  capacity() -> OffsetConstraint >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> OffsetConstraint >::iterator
+  erase() -> OffsetConstraint >::iterator
+  front() -> OffsetConstraint >::value_type
+  get_allocator() -> OffsetConstraint >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> OffsetConstraint >::value_type
+  pop_back() -> void
+  push_back(x: OffsetConstraint) -> void
+  rbegin() -> OffsetConstraint >::reverse_iterator
+  rend() -> OffsetConstraint >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::OffsetConstraint > >::size_type) -> void
+  resize() -> void
+  size() -> OffsetConstraint >::size_type
+  swap(v: list[OffsetConstraint]) -> void
+
+OffsetCornerTypes
+  CircularOffsetCornerType()
+  ExtendedOffsetCornerType()
+  LinearOffsetCornerType()
+  Name()
 
 OffsetFacesFeature : Feature
   Name
@@ -2370,6 +5118,50 @@ OffsetFeatures *collection<OffsetFeature>
   classType()
   createInput(entities: ObjectCollection, distance: ValueInput, operation: FeatureOperations, isChainSelection: bool) -> OffsetFeatureInput
   itemByName(name: str) -> OffsetFeature
+
+OffsetStartDefinition : ExtentDefinition
+  Name
+  isValid
+  objectType
+  offset: Base
+  parentFeature
+  profilePlane: Plane
+  Name()
+  classType()
+  @static create(offset: ValueInput) -> ValueInput
+
+OnEdgeHolePositionDefinition : HolePositionDefinition
+  Name
+  edge: BRepEdge
+  isValid
+  objectType
+  planarEntity: Base
+  position: HoleEdgePositions
+  Name()
+  classType()
+
+OneSideToExtentDefinition : ExtentDefinition
+  Name
+  isValid
+  matchShape: bool
+  objectType
+  parentFeature
+  toEntity: Base
+  Name()
+  classType()
+
+OpenHemFeatureDefinition : HemFeatureDefinition
+  # The definition for an open hem.
+  Name
+  bendPositionType
+  gap: ModelParameter
+  hemEdge
+  isFlipped
+  isValid
+  length: ModelParameter
+  objectType
+  Name()
+  classType()
 
 PatchFeature : Feature
   # An object that represents an existing patch feature in a design.
@@ -2507,6 +5299,48 @@ PathPatternFeatures *collection<PathPatternFeature>
   createInput(inputEntities: ObjectCollection, path: Path, quantity: ValueInput, distance: ValueInput, patternDistanceType: PatternDistanceType) -> PathPatternFeatureInput
   itemByName(name: str) -> PathPatternFeature
 
+PatternComputeOptions
+  AdjustPatternCompute()
+  IdenticalPatternCompute()
+  Name()
+  OptimizedPatternCompute()
+
+PatternDistanceType
+  ExtentPatternDistanceType()
+  Name()
+  SpacingPatternDistanceType()
+
+PatternElement : Base
+  # This class defines the properties that pertain to the pattern element.
+  Name
+  faces: BRepFace]
+  id: int
+  isSuppressed: bool
+  isValid
+  name: str
+  objectType
+  occurrences: Occurrence]
+  parentFeature: Feature
+  transform: Matrix3D
+  Name()
+  classType()
+
+PatternElements *collection<PatternElement>
+  # Collection that provides access to pattern elements of mirror and pattern features.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+
+PatternEntityTypes
+  BodiesPatternType()
+  FacesPatternType()
+  FeaturesPatternType()
+  Name()
+  OccurrencesPatternType()
+
 PipeFeature : Feature
   # Object that represents an existing pipe feature in a design.
   Name
@@ -2577,6 +5411,174 @@ PipeFeatures *collection<PipeFeature>
   classType()
   createInput(path: Path, operation: FeatureOperations) -> PipeFeatureInput
   itemByName(name: str) -> PipeFeature
+
+PipeSectionTypes
+  CircularPipeSectionType()
+  Name()
+  SquarePipeSectionType()
+  TriangularPipeSectionType()
+
+PlaneAndOffsetsHolePositionDefinition : HolePositionDefinition
+  Name
+  edgeOne: BRepEdge
+  edgeTwo: BRepEdge
+  isValid
+  objectType
+  offsetOne: ModelParameter
+  offsetTwo: ModelParameter
+  planarEntity: Base
+  Name()
+  classType()
+
+PointHolePositionDefinition : HolePositionDefinition
+  Name
+  isValid
+  objectType
+  planarEntity: Base
+  point: Base
+  Name()
+  classType()
+
+ProfilePlaneStartDefinition : ExtentDefinition
+  Name
+  isValid
+  objectType
+  parentFeature
+  profilePlane: Plane
+  Name()
+  classType()
+  @static create() -> ProfilePlaneStartDefinition
+
+RecognizedHole : Base
+  # Object that represents a hole, a hole is made of one or more segments.
+  Name
+  axis: Vector3D
+  bottom: Point3D
+  bottomDiameter: float
+  hasErrors: bool
+  hasWarnings: bool
+  isThreaded: bool
+  isThrough: bool
+  isValid
+  objectType
+  segmentCount: int
+  top: Point3D
+  topDiameter: float
+  totalLength: float
+  Name()
+  classType()
+  getHoleSignatureXML() -> str
+  @static recognizeHoles(bodies: list[Base]) -> Base]
+  @static recognizeHolesWithInput(bodies: list[Base], input: RecognizedHolesInput) -> RecognizedHolesInput
+  segment(index: int) -> RecognizedHoleSegment
+
+RecognizedHoleGroup *collection<RecognizedHole>
+  Name
+  count: int
+  hasErrors: bool
+  hasWarnings: bool
+  isValid
+  objectType
+  Name()
+  classType()
+  @static recognizeHoleGroups(bodies: list[Base]) -> Base]
+  @static recognizeHoleGroupsWithInput(bodies: list[Base], input: RecognizedHolesInput) -> RecognizedHolesInput
+
+RecognizedHoleGroups *collection<RecognizedHoleGroup>
+  # Object that represents a collection of hole groups.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+
+RecognizedHoleSegment : Base
+  Name
+  axis: Vector3D
+  bottomDiameter: float
+  face: Base
+  faces: Base]
+  halfAngle: float
+  height: float
+  holeSegmentType: HoleSegmentType
+  isThreaded: bool
+  isValid
+  objectType
+  threadFeatures: ThreadFeature]
+  topDiameter: float
+  Name()
+  classType()
+
+RecognizedHoles *collection<RecognizedHole>
+  # Object that represents a collection of holes.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+
+RecognizedHolesInput : Base
+  # Object that contains the settings used by recognizedHoles and recognizedHoleGroups.
+  Name
+  filterPartialHoles: bool
+  isValid
+  objectType
+  Name()
+  classType()
+  @static create() -> RecognizedHolesInput
+
+RectangularPatternConstraint : GeometricConstraint
+  # A rectangular pattern constraint in a sketch.
+  Name
+  assemblyContext
+  attributes
+  createdEntities: SketchEntity]
+  directionOneEntity: SketchLine
+  directionTwoEntity: SketchLine
+  distanceOne: ModelParameter
+  distanceTwo: ModelParameter
+  distanceType: PatternDistanceType
+  entities: SketchEntity]
+  entityToken
+  isDeletable
+  isSuppressed: list[bool]
+  isSymmetricInDirectionOne: bool
+  isSymmetricInDirectionTwo: bool
+  isValid
+  nativeObject: RectangularPatternConstraint
+  objectType
+  parentSketch
+  quantityOne: ModelParameter
+  quantityTwo: ModelParameter
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> RectangularPatternConstraint
+  deleteMe() -> bool
+  setDirectionOne(directionOneEntity: SketchLine, quantityOne: ValueInput, distanceOne: ValueInput) -> bool
+  setDirectionTwo(directionTwoEntity: SketchLine, quantityTwo: ValueInput, distanceTwo: ValueInput) -> bool
+
+RectangularPatternConstraintInput : Base
+  # Used to define the inputs need to create a rectangular pattern in a sketch.
+  Name
+  directionOneEntity: SketchLine
+  directionTwoEntity: SketchLine
+  distanceOne: ValueInput
+  distanceTwo: ValueInput
+  distanceType: PatternDistanceType
+  entities: SketchEntity]
+  isSuppressed: list[bool]
+  isSymmetricInDirectionOne: bool
+  isSymmetricInDirectionTwo: bool
+  isValid
+  objectType
+  quantityOne: ValueInput
+  quantityTwo: ValueInput
+  Name()
+  classType()
+  setDirectionOne(directionOneEntity: SketchLine, quantityOne: ValueInput, distanceOne: ValueInput) -> bool
+  setDirectionTwo(directionTwoEntity: SketchLine, quantityTwo: ValueInput, distanceTwo: ValueInput) -> bool
 
 RectangularPatternFeature : Feature
   # Object that represents an existing rectangular pattern feature in a design.
@@ -2948,6 +5950,21 @@ RipFeature : Feature
   redefineToBetweenPoints() -> bool
   setByFace(face: BRepFace) -> bool
 
+RipFeatureDefinition : Base
+  # A Base class to return the information used to define the RipFeature.
+  Name
+  isValid
+  objectType
+  Name()
+  classType()
+
+RipFeatureDefinitionTypes
+  AlongEdgeRipFeatureDefinitionType()
+  BetweenPointsRipFeatureDefinitionType()
+  FaceRipFeatureDefinitionType()
+  Name()
+  UndefinedRipFeatureDefinitionType()
+
 RipFeatureInput : Base
   # This class defines the methods and properties that pertain to the definition of a Rip feature.
   Name
@@ -2970,6 +5987,33 @@ RipFeatures *collection<RipFeature>
   classType()
   createRipFeatureInput() -> RipFeatureInput
   itemByName(name: str) -> RipFeature
+
+RolledHemFeatureDefinition : HemFeatureDefinition
+  # The definition for a rolled hem.
+  Name
+  angle: ModelParameter
+  bendPositionType
+  hemEdge
+  isFlipped
+  isValid
+  objectType
+  radius: ModelParameter
+  Name()
+  classType()
+
+RopeHemFeatureDefinition : HemFeatureDefinition
+  # The definition for a rope hem.
+  Name
+  bendPositionType
+  gap: ModelParameter
+  hemEdge
+  isFlipped
+  isValid
+  length: ModelParameter
+  objectType
+  radius: ModelParameter
+  Name()
+  classType()
 
 RuleFilletFeature : Feature
   Name
@@ -3017,6 +6061,27 @@ RuleFilletFeatures *collection<RuleFilletFeature>
   Name()
   classType()
   itemByName(name: str) -> RuleFilletFeature
+
+RuleFilletSettings : Base
+  # The settings for the rule fillet feature.
+  asymmetricOffsetOne: ModelParameter
+  asymmetricOffsetTwo: ModelParameter
+  facesOrFeatures: Base]
+  facesOrFeaturesOne: Base]
+  facesOrFeaturesTwo: Base]
+  isConstantRadius: bool
+  radius: ModelParameter
+  ruleType: RuleFilletRuleTypes
+  topologyType: RuleFilletTopologyTypes
+  setByAllEdges(facesOrFeatures: list[Base]) -> bool
+  setByBetweenFacesOrFeatures(facesOrFeaturesOne: list[Base], facesOrFeaturesTwo: list[Base]) -> bool
+  setToAsymmetric(offsetOne: ValueInput, offsetTwo: ValueInput) -> bool
+  setToConstantRadius(radius: ValueInput) -> bool
+
+RuledSurfaceCornerTypes
+  MiteredRuledSurfaceCornerType()
+  Name()
+  RoundedRuledSurfaceCornerType()
 
 RuledSurfaceFeature : Feature
   # Object that represents an existing RuledSurface feature in a design.
@@ -3078,6 +6143,12 @@ RuledSurfaceFeatures *collection<RuledSurfaceFeature>
   classType()
   createInput() -> RuledSurfaceFeatureInput
   itemByName(name: str) -> RuledSurfaceFeature
+
+RuledSurfaceTypes
+  DirectionRuledSurfaceType()
+  Name()
+  NormalRuledSurfaceType()
+  TangentRuledSurfaceType()
 
 ScaleFeature : Feature
   # Object that represents an existing scale feature in a design.
@@ -3141,6 +6212,53 @@ ScaleFeatures *collection<ScaleFeature>
   createInput(inputEntities: ObjectCollection, point: Base, scaleFactor: ValueInput) -> ScaleFeatureInput
   itemByName(name: str) -> ScaleFeature
 
+SheetMetalRule : Base
+  # A sheet metal rule.
+  Name
+  bendRadius: SheetMetalRuleValue
+  gap: SheetMetalRuleValue
+  isDefault: bool
+  isUsed: bool
+  isValid
+  kFactor: float
+  name: str
+  objectType
+  parentDesign: Design
+  reliefDepth: SheetMetalRuleValue
+  reliefRemnant: SheetMetalRuleValue
+  reliefShape: BendReliefShapes
+  reliefWidth: SheetMetalRuleValue
+  thickness: SheetMetalRuleValue
+  threeBendReliefRadius: SheetMetalRuleValue
+  threeBendReliefShape: ThreeBendReliefShapes
+  twoBendReliefPlacement: TwoBendReliefPlacements
+  twoBendReliefShape: TwoBendReliefShapes
+  twoBendReliefSize: SheetMetalRuleValue
+  units: str
+  Name()
+  classType()
+  deleteMe() -> bool
+
+SheetMetalRuleValue : Base
+  Name
+  expression: str
+  isValid
+  objectType
+  value: float
+  Name()
+  classType()
+
+SheetMetalRules *collection<SheetMetalRule>
+  # A collection of sheet metal rules.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  addByCopy(existingSheetMetalRule: SheetMetalRule, name: str) -> SheetMetalRule
+  classType()
+  itemByName(name: str) -> SheetMetalRule
+
 ShellFeature : Feature
   # Object that represents an existing shell feature in a design.
   Name
@@ -3199,6 +6317,35 @@ ShellFeatures *collection<ShellFeature>
   createInput(inputEntities: ObjectCollection, isTangentChain: bool) -> ShellFeatureInput
   itemByName(name: str) -> ShellFeature
 
+ShellTypes
+  Name()
+  RoundedOffsetShellType()
+  SharpOffsetShellType()
+
+SideTypes
+  AlwaysInsideSideType()
+  AlwaysOutsideSideType()
+  Name()
+  StartInsideSideType()
+  StartOutsideSideType()
+
+SilhouetteSelection : CurveSelection
+  Name
+  error
+  hasError
+  hasWarning
+  inputGeometry
+  isSetupModelSelected: bool
+  isValid
+  loopType: LoopTypes
+  objectType
+  sideType: SideTypes
+  silhouetteTolerance: float
+  value
+  warning
+  Name()
+  classType()
+
 SilhouetteSplitFeature : Feature
   # Object that represents an existing silhouette split feature in a design.
   Name
@@ -3249,6 +6396,91 @@ SilhouetteSplitFeatures *collection<SilhouetteSplitFeature>
   classType()
   createInput(viewDirection: Base, targetBody: BRepBody, operation: SilhouetteSplitOperations) -> SilhouetteSplitFeatureInput
   itemByName(name: str) -> SilhouetteSplitFeature
+
+SilhouetteSplitOperations
+  Name()
+  SilhouetteSplitFacesOnlyOperation()
+  SilhouetteSplitShelledBodyOperation()
+  SilhouetteSplitSolidBodyOperation()
+
+SketchOffsetCurvesDimension : SketchDimension
+  # A SketchOffsetCurvesDimension object is created automatically whenever curves are offset.
+  Name
+  assemblyContext
+  attributes
+  entityToken
+  isDeletable
+  isDriving
+  isValid
+  nativeObject: SketchOffsetCurvesDimension
+  objectType
+  offsetConstraint: OffsetConstraint
+  parameter
+  parentSketch
+  textPosition
+  value
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> SketchOffsetCurvesDimension
+  deleteMe() -> bool
+
+SketchOffsetDimension : SketchDimension
+  # An offset dimension in a sketch.
+  Name
+  assemblyContext
+  attributes
+  entityToken
+  entityTwo: SketchEntity
+  isDeletable
+  isDriving
+  isValid
+  line: SketchLine
+  nativeObject: SketchOffsetDimension
+  objectType
+  parameter
+  parentSketch
+  textPosition
+  value
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> SketchOffsetDimension
+  deleteMe() -> bool
+
+SketchPointHolePositionDefinition : HolePositionDefinition
+  # Provides positioning information for a hole that is positioned by a sketch point.
+  Name
+  isValid
+  objectType
+  sketchPoint: SketchPoint
+  Name()
+  classType()
+
+SketchPointsBossPositionDefinition : BossPositionDefinition
+  # Provides positioning information for a boss feature that is positioned by a sketch point(s).
+  Name
+  isValid
+  objectType
+  sketchPoints: ObjectCollection
+  Name()
+  classType()
+
+SketchPointsHolePositionDefinition : HolePositionDefinition
+  # Provides positioning information for a hole that is positioned by a sketch point.
+  Name
+  isValid
+  objectType
+  sketchPoints: ObjectCollection
+  Name()
+  classType()
+
+SketchTextDefinition : Base
+  # The base class for the classes that define how text can be defined.
+  Name
+  isValid
+  objectType
+  parentSketchText: SketchText
+  Name()
+  classType()
 
 SphereFeature : Feature
   # Object that represents an existing sphere feature in a design.
@@ -3336,6 +6568,21 @@ SplitBodyFeatures *collection<SplitBodyFeature>
   createInput(splitBodies: Base, splittingTool: Base, isSplittingToolExtended: bool) -> SplitBodyFeatureInput
   itemByName(name: str) -> SplitBodyFeature
 
+SplitButtonControl : ToolbarControl
+  Name
+  additionalDefinitions: CommandDefinition]
+  defaultCommandDefinition: CommandDefinition
+  id
+  index
+  isLastUsedShown: bool
+  isValid
+  isVisible
+  objectType
+  parent
+  Name()
+  classType()
+  deleteMe() -> bool
+
 SplitFaceFeature : Feature
   # Object that represents an existing split face feature in a design.
   Name
@@ -3397,6 +6644,17 @@ SplitFaceFeatures *collection<SplitFaceFeature>
   createInput(facesToSplit: ObjectCollection, splittingTool: Base, isSplittingToolExtended: bool) -> SplitFaceFeatureInput
   itemByName(name: str) -> SplitFaceFeature
 
+SplitFaceSplitTypes
+  Name()
+  alongVectorSplitType()
+  closestPointSplitType()
+  surfaceIntersectionSplitType()
+
+SplitSupportTypes
+  Name()
+  SolidOpenMergedSplitSupportType()
+  SolidOpenSeparateSplitSupportType()
+
 StitchFeature : Feature
   # Object that represents an existing stitch feature in a design.
   Name
@@ -3449,6 +6707,13 @@ StitchFeatures *collection<StitchFeature>
   createInput() -> StitchFeatureInput
   itemByName(name: str) -> StitchFeature
 
+StrategyCommandDefinition : Base
+  # Holds the UI definitions of a custom strategy.
+  commandBefore: str
+  panelName: str
+  tabName: str
+  @static create() -> StrategyCommandDefinition
+
 SurfaceDeleteFaceFeature : Feature
   Name
   assemblyContext
@@ -3484,6 +6749,11 @@ SurfaceDeleteFaceFeatures *collection<SurfaceDeleteFaceFeature>
   add(facesToDelete: Base) -> SurfaceDeleteFaceFeature
   classType()
   itemByName(name: str) -> SurfaceDeleteFaceFeature
+
+SweepExtentTypes
+  FullExtentsExtentType()
+  Name()
+  PerpendicularToPathExtentType()
 
 SweepFeature : Feature
   # Object that represents an existing sweep feature in a design.
@@ -3574,6 +6844,50 @@ SweepFeatures *collection<SweepFeature>
   createInput(profile: Base, path: Path, operation: FeatureOperations) -> SweepFeatureInput
   createInputForSolid(solidBody: BRepBody, path: Path, operation: FeatureOperations) -> SweepFeatureInput
   itemByName(name: str) -> SweepFeature
+
+SweepOrientationTypes
+  Name()
+  ParallelOrientationType()
+  PerpendicularOrientationType()
+
+SweepProfileScalingOptions
+  Name()
+  SweepProfileNoScalingOption()
+  SweepProfileScaleOption()
+  SweepProfileStretchOption()
+
+SweepSolidOrientationTypes
+  AlignedSolidOrientationType()
+  Name()
+  PerpendicularSolidOrientationType()
+  RigidSolidOrientationType()
+
+SymmetricExtentDefinition : ExtentDefinition
+  # A definition object that is used to define the extents of a feature to be symmetric.
+  Name
+  distance: Base
+  isFullLength: bool
+  isValid
+  objectType
+  parentFeature
+  taperAngle: Base
+  Name()
+  classType()
+  @static create(distance: ValueInput, isFullLength: bool) -> ValueInput
+
+TeardropHemFeatureDefinition : HemFeatureDefinition
+  # The definition for a teardrop hem.
+  Name
+  bendPositionType
+  gap: ModelParameter
+  hemEdge
+  isFlipped
+  isValid
+  length: ModelParameter
+  objectType
+  radius: ModelParameter
+  Name()
+  classType()
 
 TessellateFeature : MeshFeature
   # Object that represents an existing tessellate feature in a design.
@@ -3694,6 +7008,29 @@ ThickenFeatures *collection<ThickenFeature>
   createInput(inputFaces: ObjectCollection, thickness: ValueInput, isSymmetric: bool, operation: FeatureOperations, isChainSelection: bool) -> ThickenFeatureInput
   itemByName(name: str) -> ThickenFeature
 
+ThickenTypes
+  Name()
+  RoundedThickenType()
+  SharpThickenType()
+
+ThreadDataQuery : Base
+  Name
+  allThreadTypes: list[str]
+  defaultInchThreadType: str
+  defaultMetricThreadType: str
+  isTapered: bool
+  isValid
+  objectType
+  Name()
+  allClasses(isInternal: bool, threadType: str, designation: str) -> list[str]
+  allDesignations(threadType: str, size: str) -> list[str]
+  allSizes(threadType: str) -> list[str]
+  classType()
+  @static create(isTapered: bool) -> ThreadDataQuery
+  recommendThreadData(modelDiameter: float, isInternal: bool, threadType: str) -> bool
+  threadTypeCustomName(threadType: str) -> str
+  threadTypeUnit(threadType: str) -> str
+
 ThreadFeature : Feature
   Name
   assemblyContext
@@ -3747,6 +7084,30 @@ ThreadFeatureInput : Base
   Name()
   classType()
 
+ThreadFeatureVector
+  append(x: std::vector< adsk::core::Ptr< adsk::fusion::ThreadFeature > >::value_type const) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::ThreadFeature > >::size_type, x: std::vector< adsk::core::Ptr< adsk::fusion::ThreadFeature > >::value_type const) -> void
+  back() -> ThreadFeature >::value_type
+  begin() -> ThreadFeature >::iterator
+  capacity() -> ThreadFeature >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> ThreadFeature >::iterator
+  erase() -> ThreadFeature >::iterator
+  front() -> ThreadFeature >::value_type
+  get_allocator() -> ThreadFeature >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> ThreadFeature >::value_type
+  pop_back() -> void
+  push_back(x: std::vector< adsk::core::Ptr< adsk::fusion::ThreadFeature > >::value_type const) -> void
+  rbegin() -> ThreadFeature >::reverse_iterator
+  rend() -> ThreadFeature >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::ThreadFeature > >::size_type) -> void
+  resize() -> void
+  size() -> ThreadFeature >::size_type
+  swap(v: list[ThreadFeature]) -> void
+
 ThreadFeatures *collection<ThreadFeature>
   Name
   count: int
@@ -3759,6 +7120,82 @@ ThreadFeatures *collection<ThreadFeature>
   createInput(inputCylindricalFaces: Base, threadInfo: ThreadInfo) -> ThreadFeatureInput
   createThreadInfo(isInternal: bool, threadType: str, threadDesignation: str, threadClass: str) -> ThreadInfo
   itemByName(name: str) -> ThreadFeature
+
+ThreadInfo : Base
+  Name
+  isInternal: bool
+  isRightHanded: bool
+  isTapered: bool
+  isValid
+  majorDiameter: float
+  minorDiameter: float
+  objectType
+  pitchDiameter: float
+  taperAngle: float
+  taperTapDrillDiameter: float
+  taperThreadHeight: float
+  taperUsefulThreadLength: float
+  taperWrenchMakeupInternalDiameter: float
+  threadAngle: float
+  threadClass: str
+  threadDesignation: str
+  threadPitch: float
+  threadSize: str
+  threadType: str
+  Name()
+  classType()
+  @static create(isTapered: bool, isInternal: bool, threadType: str, threadDesignation: str, threadClass: str, isRightHanded: bool) -> ThreadInfo
+  redefine(isTapered: bool, isInternal: bool, threadType: str, threadDesignation: str, threadClass: str, isRightHanded: bool) -> bool
+
+ThreadLocations
+  HighEndThreadLocation()
+  LowEndThreadLocation()
+  Name()
+
+ThreeBendCornerClosureFeatureDefinition : CornerClosureFeatureDefinition
+  # The definition for a three bend corner closure.
+  isUseSheetMetalRuleDefaults: bool
+  isUseSheetMetalRuleMiterGap: bool
+  threeBendReliefRadius: ModelParameter
+  threeBendReliefShape: CornerThreeBendReliefShapeTypes
+
+ThreeBendCornerClosureInputDefinition : CornerClosureInputDefinition
+  isUseSheetMetalRuleDefaults: bool
+  threeBendReliefRadius: ValueInput
+  threeBendReliefShape: CornerThreeBendReliefShapeTypes
+  @static create() -> ThreeBendCornerClosureInputDefinition
+
+ThreeBendReliefShapes
+  FullRoundThreeBendReliefShape()
+  IntersectionThreeBendReliefShape()
+  Name()
+  NoReplacementThreeBendReliefShape()
+  RoundWithRadiusThreeBendReliefShape()
+
+ThroughAllExtentDefinition : ExtentDefinition
+  # A definition object that is used to define the extents of a feature to be through all.
+  Name
+  isPositiveDirection: bool
+  isValid
+  objectType
+  parentFeature
+  Name()
+  classType()
+  @static create() -> ThroughAllExtentDefinition
+
+ToEntityExtentDefinition : ExtentDefinition
+  Name
+  directionHint: Vector3D
+  entity: Base
+  isChained: bool
+  isMinimumSolution: bool
+  isValid
+  objectType
+  offset: Base
+  parentFeature
+  Name()
+  classType()
+  @static create() -> ToEntityExtentDefinition
 
 TorusFeature : Feature
   # Object that represents an existing torus feature in a design.
@@ -3845,6 +7282,92 @@ TrimFeatures *collection<TrimFeature>
   classType()
   createInput(trimTool: Base) -> TrimFeatureInput
   itemByName(name: str) -> TrimFeature
+
+TwoBendCornerClosureFeatureDefinition : CornerClosureFeatureDefinition
+  # The definition for a two bend corner closure.
+  isUseSheetMetalRuleDefaults: bool
+  isUseSheetMetalRuleMiterGap: bool
+  twoBendReliefPlacement: CornerTwoBendReliefPlacementTypes
+  twoBendReliefShape: CornerTwoBendReliefShapeTypes
+  twoBendReliefSize: ModelParameter
+
+TwoBendCornerClosureInputDefinition : CornerClosureInputDefinition
+  isUseSheetMetalRuleDefaults: bool
+  twoBendReliefPlacement: CornerTwoBendReliefPlacementTypes
+  twoBendReliefShape: CornerTwoBendReliefShapeTypes
+  twoBendReliefSize: ValueInput
+  @static create() -> TwoBendCornerClosureInputDefinition
+
+TwoBendReliefPlacements
+  IntersectionTwoBendReliefPlacement()
+  Name()
+  NoTwoBendReliefPlacement()
+  TangentTwoBendReliefPlacement()
+
+TwoBendReliefShapes
+  ArcWeldTwoBendReliefShape()
+  LinearWeldTwoBendReliefShape()
+  Name()
+  RoundTwoBendReliefShape()
+  SquareTwoBendReliefShape()
+  TearTwoBendReliefShape()
+  TrimToBendTwoBendReliefShape()
+
+TwoDistancesChamferEdgeSet : ChamferEdgeSet
+  # Provides access to the edges and the parameters associated with a two distances chamfer.
+  Name
+  distanceOne: ModelParameter
+  distanceTwo: ModelParameter
+  edges: ObjectCollection
+  isFlipped: bool
+  isTangentChain
+  isValid
+  objectType
+  Name()
+  classType()
+  deleteMe() -> bool
+
+TwoDistancesChamferTypeDefinition : ChamferTypeDefinition
+  # Provides information to create a chamfer that is defined by a two distances from the edge.
+  Name
+  distanceOne: ModelParameter
+  distanceTwo: ModelParameter
+  isValid
+  objectType
+  parentFeature
+  Name()
+  classType()
+
+TwoSidesAngleExtentDefinition : ExtentDefinition
+  Name
+  angleOne: ModelParameter
+  angleTwo: ModelParameter
+  isValid
+  objectType
+  parentFeature
+  Name()
+  classType()
+
+TwoSidesDistanceExtentDefinition : ExtentDefinition
+  Name
+  distanceOne: ModelParameter
+  distanceTwo: ModelParameter
+  isValid
+  objectType
+  parentFeature
+  Name()
+  classType()
+
+TwoSidesToExtentDefinition : ExtentDefinition
+  Name
+  isValid
+  matchShape: bool
+  objectType
+  parentFeature
+  toEntityOne: Base
+  toEntityTwo: Base
+  Name()
+  classType()
 
 UnfoldFeature : Feature
   # Object that represents an existing unfold feature in a design.
@@ -3976,6 +7499,46 @@ UntrimFeatures *collection<UntrimFeature>
   createInputFromFaces() -> UntrimFeatureInput
   createInputFromLoops() -> UntrimFeatureInput
   itemByName(name: str) -> UntrimFeature
+
+VariableRadiusFilletEdgeSet : FilletEdgeSet
+  # Provides access to the edges and the parameters associated with a variable radius fillet.
+  Name
+  continuity
+  edges: ObjectCollection
+  endRadius: ModelParameter
+  isTangentChain
+  isValid
+  midPositions: ParameterList
+  midRadii: ParameterList
+  objectType
+  startRadius: ModelParameter
+  tangencyWeight
+  Name()
+  addMidPosition(position: ValueInput, radius: ValueInput) -> bool
+  classType()
+  deleteMe() -> bool
+  deleteMidPosition(positionIndex: int) -> bool
+
+VariableRadiusFilletEdgeSetInput : FilletEdgeSetInput
+  # Provides access to the edges and the parameters associated with a variable radius fillet.
+  Name
+  continuity
+  endRadius: ValueInput
+  entities
+  isValid
+  objectType
+  startRadius: ValueInput
+  tangencyWeight
+  Name()
+  classType()
+  setMidRadii(radii: list[ValueInput], positions: list[ValueInput]) -> bool
+
+ViewCorners
+  Name()
+  lowerLeftViewCorner()
+  lowerRightViewCorner()
+  upperLeftViewCorner()
+  upperRightViewCorner()
 
 VolumetricCustomFeature : Feature
   # Object that represents an existing volumetric custom feature in a design.

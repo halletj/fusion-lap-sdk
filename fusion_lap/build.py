@@ -8,7 +8,7 @@ import yaml
 from .discover import find_stubs
 from .enrich import enrich_ir
 from .ir import IR
-from .render import render_domain, render_gotchas, render_graph, render_meta
+from .render import render_domain, render_gotchas, render_graph, render_meta, render_remaining
 from .scraper import scrape_local_docs
 from .stubs import parse_stubs
 
@@ -69,6 +69,11 @@ def build_lap_files(
         filepath = out / f"fusion-{domain_name}.lap"
         filepath.write_text(content, encoding="utf-8")
         logger.info(f"Wrote {filepath}")
+
+    # Render misc (everything that didn't match any domain)
+    misc_content = render_remaining(ir, domains)
+    (out / "fusion-misc.lap").write_text(misc_content, encoding="utf-8")
+    logger.info(f"Wrote {out / 'fusion-misc.lap'}")
 
     # Render always-load files
     graph_content = render_graph(ir)

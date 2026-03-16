@@ -20,6 +20,15 @@ MeshRepairRebuildTypes: FastMeshRepairRebuildType | PreserveSharpEdgesMeshRepair
 MeshRepairTypes: CloseHolesMeshRepairType | StitchAndRemoveMeshRepairType | WrapMeshRepairType | RebuildMeshRepairType
 MeshSeparateTypes: ShellMeshSeparateType | FaceGroupMeshSeparateType
 MeshUnits: CentimeterMeshUnit | MillimeterMeshUnit | MeterMeshUnit | InchMeshUnit | FootMeshUnit
+SurfaceContinuityTypes: ConnectedSurfaceContinuityType | TangentSurfaceContinuityType | CurvatureSurfaceContinuityType
+SurfaceExtendAlignment: FreeEdges | AlignEdges
+SurfaceExtendTypes: NaturalSurfaceExtendType | TangentSurfaceExtendType | PerpendicularSurfaceExtendType
+SurfaceProjectTypes: ClosestPointSurfaceProjectType | AlongVectorSurfaceProjectType
+SurfaceTypes: PlaneSurfaceType | CylinderSurfaceType | ConeSurfaceType | SphereSurfaceType | TorusSurfaceType | EllipticalCylinderSurfaceType | EllipticalConeSurfaceType | NurbsSurfaceType
+TessellateRefinementTypes: HighTessellateRefinementType | MediumTessellateRefinementType | LowTessellateRefinementType | CustomTessellateRefinementType
+TriangleMeshQualityOptions: LowQualityTriangleMesh | NormalQualityTriangleMesh | HighQualityTriangleMesh | VeryHighQualityTriangleMesh
+VolumetricMeshRefinementTypes: VolumetricMeshRefinementHighType | VolumetricMeshRefinementMediumType | VolumetricMeshRefinementLowType | VolumetricMeshRefinementCustomType
+VolumetricMeshingApproachTypes: VolumetricMeshingAdvancedType | VolumetricMeshingOriginalType
 
 [classes]
 BRepBodies *collection<BRepBody>
@@ -653,6 +662,210 @@ BRepWires *collection<BRepWire>
   count: int
   isValid
   objectType
+  Name()
+  classType()
+
+CopyPasteBodies *collection<CopyPasteBody>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(sourceBody: Base) -> CopyPasteBody
+  classType()
+  itemByName(name: str) -> CopyPasteBody
+
+CopyPasteBody : Feature
+  # Object that represents an existing Copy/Paste Body feature in a design.
+  Name
+  assemblyContext
+  attributes
+  baseFeature
+  bodies
+  entityToken
+  errorOrWarningMessage
+  faces
+  healthState
+  isParametric
+  isSuppressed
+  isValid
+  linkedFeatures
+  name
+  objectType
+  parentComponent
+  sourceBody: ObjectCollection
+  timelineObject
+  Name()
+  classType()
+  deleteMe() -> bool
+  dissolve() -> bool
+
+CustomGraphicsBRepBody : CustomGraphicsEntity
+  # This represents custom graphics that are based on a BRepBody.
+  Name
+  bRepBody: BRepBody
+  billBoarding
+  boundingBox
+  color
+  cullMode
+  depthPriority
+  edges: CustomGraphicsBRepEdges
+  faces: CustomGraphicsBRepFaces
+  id
+  isSelectable
+  isValid
+  isVisible
+  name
+  objectType
+  parent
+  transform
+  vertices: CustomGraphicsBRepVertices
+  viewPlacement
+  viewScale
+  Name()
+  classType()
+  deleteMe() -> bool
+  getOpacity() -> bool
+  setOpacity(opacity: float, isOverride: bool) -> bool
+
+CustomGraphicsMesh : CustomGraphicsEntity
+  # Represents a custom triangle mesh drawn in the graphics window.
+  Name
+  billBoarding
+  boundingBox
+  color
+  coordinates: CustomGraphicsCoordinates
+  cullMode
+  depthPriority
+  id
+  isSelectable
+  isValid
+  isVisible
+  name
+  normalIndexList: list[int]
+  normalVectors: list[float]
+  objectType
+  parent
+  textureCoordinates: list[float]
+  transform
+  vertexIndexList: list[int]
+  viewPlacement
+  viewScale
+  Name()
+  classType()
+  deleteMe() -> bool
+  getOpacity() -> bool
+  setOpacity(opacity: float, isOverride: bool) -> bool
+
+CutPasteBodies *collection<CutPasteBody>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(sourceBody: Base) -> CutPasteBody
+  classType()
+  itemByName(name: str) -> CutPasteBody
+
+CutPasteBody : Feature
+  # Object that represents an existing Cut/Paste Body feature in a design.
+  Name
+  assemblyContext
+  attributes
+  baseFeature
+  bodies
+  entityToken
+  errorOrWarningMessage
+  faces
+  healthState
+  isParametric
+  isSuppressed
+  isValid
+  linkedFeatures
+  name
+  objectType
+  parentComponent
+  sourceBody: ObjectCollection
+  timelineObject
+  Name()
+  classType()
+  deleteMe() -> bool
+  dissolve() -> bool
+
+FaceContourSelection : CurveSelection
+  Name
+  error
+  hasError
+  hasWarning
+  inputGeometry
+  isSelectingSamePlaneFaces: bool
+  isValid
+  loopType: LoopTypes
+  objectType
+  sideType: SideTypes
+  value
+  warning
+  Name()
+  classType()
+
+FaceGroup : Base
+  # Represent a connected region on a single geometric surface.
+  Name
+  area: float
+  assemblyContext: Occurrence
+  attributes: Attributes
+  boundingBox: BoundingBox3D
+  centroid: Point3D
+  entityToken: str
+  isPlanar: bool
+  isValid
+  nativeObject: FaceGroup
+  objectType
+  parentBody: MeshBody
+  tempId: int
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> FaceGroup
+
+FaceGroupVector
+  append(x: FaceGroup) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::FaceGroup > >::size_type, x: FaceGroup) -> void
+  back() -> FaceGroup >::value_type
+  begin() -> FaceGroup >::iterator
+  capacity() -> FaceGroup >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> FaceGroup >::iterator
+  erase() -> FaceGroup >::iterator
+  front() -> FaceGroup >::value_type
+  get_allocator() -> FaceGroup >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> FaceGroup >::value_type
+  pop_back() -> void
+  push_back(x: FaceGroup) -> void
+  rbegin() -> FaceGroup >::reverse_iterator
+  rend() -> FaceGroup >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::FaceGroup > >::size_type) -> void
+  resize() -> void
+  size() -> FaceGroup >::size_type
+  swap(v: list[FaceGroup]) -> void
+
+FaceGroups *collection<FaceGroup>
+  # FaceGroup collection.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+
+FaceRipFeatureDefinition : RipFeatureDefinition
+  # The definition for a face rip.
+  Name
+  isValid
+  objectType
+  ripFace: BRepFace
   Name()
   classType()
 
@@ -1526,6 +1739,156 @@ MeshUnits
   MillimeterMeshUnit()
   Name()
 
+PolygonConstraint : GeometricConstraint
+  # A polygon constraint in a sketch.
+  Name
+  assemblyContext
+  attributes
+  centerPoint: SketchPoint
+  entityToken
+  isDeletable
+  isValid
+  lines: SketchLine]
+  objectType
+  parentSketch
+  points: SketchPoint]
+  Name()
+  classType()
+  deleteMe() -> bool
+
+PolygonMesh : Base
+  Name
+  isValid
+  nodeCoordinates: Point3D]
+  nodeCoordinatesAsDouble: list[float]
+  nodeCoordinatesAsFloat: list[float]
+  nodeCount: int
+  nodeCountPerPolygon: list[int]
+  normalVectors: Vector3D]
+  normalVectorsAsDouble: list[float]
+  normalVectorsAsFloat: list[float]
+  objectType
+  polygonCount: int
+  polygonNodeIndices: list[int]
+  quadCount: int
+  quadNodeIndices: list[int]
+  triangleCount: int
+  triangleFaceGroupTempIds: list[int]
+  triangleNodeIndices: list[int]
+  wallThickness: list[float]
+  Name()
+  classType()
+
+Surface : Base
+  Name
+  evaluator: SurfaceEvaluator
+  isValid
+  objectType
+  surfaceType: SurfaceTypes
+  Name()
+  classType()
+  transformBy(matrix: Matrix3D) -> bool
+
+SurfaceContinuityTypes
+  ConnectedSurfaceContinuityType()
+  CurvatureSurfaceContinuityType()
+  Name()
+  TangentSurfaceContinuityType()
+
+SurfaceDeleteFaceFeature : Feature
+  Name
+  assemblyContext
+  attributes
+  baseFeature
+  bodies
+  deletedFaces: BRepFace]
+  entityToken
+  errorOrWarningMessage
+  faces
+  healthState
+  isParametric
+  isSuppressed
+  isValid
+  linkedFeatures
+  name
+  nativeObject: SurfaceDeleteFaceFeature
+  objectType
+  parentComponent
+  timelineObject
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> SurfaceDeleteFaceFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+SurfaceDeleteFaceFeatures *collection<SurfaceDeleteFaceFeature>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(facesToDelete: Base) -> SurfaceDeleteFaceFeature
+  classType()
+  itemByName(name: str) -> SurfaceDeleteFaceFeature
+
+SurfaceEvaluator : Base
+  Name
+  area: float
+  isClosedInU: bool
+  isClosedInV: bool
+  isValid
+  objectType
+  Name()
+  classType()
+  getCurvature(parameter: Point2D) -> bool
+  getCurvatures(parameters: list[Point2D]) -> bool
+  getFirstDerivative(parameter: Point2D) -> bool
+  getFirstDerivatives(parameters: list[Point2D]) -> bool
+  getIsoCurve(parameter: float, isUDirection: bool) -> ObjectCollection
+  getModelCurveFromParametricCurve(parametricCurve: Curve2D) -> ObjectCollection
+  getNormalAtParameter(parameter: Point2D) -> bool
+  getNormalAtPoint(point: Point3D) -> bool
+  getNormalsAtParameters(parameters: list[Point2D]) -> bool
+  getNormalsAtPoints(points: list[Point3D]) -> bool
+  getParamAnomaly() -> bool
+  getParameterAtPoint(point: Point3D) -> bool
+  getParametersAtPoints(points: list[Point3D]) -> bool
+  getPointAtParameter(parameter: Point2D) -> bool
+  getPointsAtParameters(parameters: list[Point2D]) -> bool
+  getSecondDerivative(parameter: Point2D) -> bool
+  getSecondDerivatives(parameters: list[Point2D]) -> bool
+  getThirdDerivative(parameter: Point2D) -> bool
+  getThirdDerivatives(parameters: list[Point2D]) -> bool
+  isParameterOnFace(parameter: Point2D) -> bool
+  parametricRange() -> BoundingBox2D
+
+SurfaceExtendAlignment
+  AlignEdges()
+  FreeEdges()
+  Name()
+
+SurfaceExtendTypes
+  Name()
+  NaturalSurfaceExtendType()
+  PerpendicularSurfaceExtendType()
+  TangentSurfaceExtendType()
+
+SurfaceProjectTypes
+  AlongVectorSurfaceProjectType()
+  ClosestPointSurfaceProjectType()
+  Name()
+
+SurfaceTypes
+  ConeSurfaceType()
+  CylinderSurfaceType()
+  EllipticalConeSurfaceType()
+  EllipticalCylinderSurfaceType()
+  Name()
+  NurbsSurfaceType()
+  PlaneSurfaceType()
+  SphereSurfaceType()
+  TorusSurfaceType()
+
 TSplineBodies *collection<TSplineBody>
   # A collection of TSpline bodies.
   Name
@@ -1551,3 +1914,383 @@ TSplineBody : Base
   classType()
   getTSMDescription() -> str
   saveAsTSMFile(filename: str) -> bool
+
+TessellateFeature : MeshFeature
+  # Object that represents an existing tessellate feature in a design.
+  Name
+  aspectRatio: ModelParameter
+  assemblyContext
+  attributes
+  baseFeature
+  bodies
+  createQuads: bool
+  entityToken
+  errorOrWarningMessage
+  faces
+  healthState
+  inputBodies: BRepBody]
+  isParametric
+  isSuppressed
+  isValid
+  linkedFeatures
+  maximumEdgeLength: ModelParameter
+  name
+  nativeObject: TessellateFeature
+  normalDeviation: ModelParameter
+  objectType
+  parentComponent
+  surfaceDeviation: ModelParameter
+  tessellateRefinementType: TessellateRefinementTypes
+  timelineObject
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> TessellateFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+TessellateFeatureInput : Base
+  Name
+  aspectRatio: ValueInput
+  createQuads: bool
+  inputBodies: BRepBody]
+  isValid
+  maximumEdgeLength: ValueInput
+  normalDeviation: ValueInput
+  objectType
+  surfaceDeviation: ValueInput
+  targetBaseFeature: BaseFeature
+  tessellateRefinementType: TessellateRefinementTypes
+  Name()
+  classType()
+
+TessellateFeatures *collection<TessellateFeature>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(input: TessellateFeatureInput) -> TessellateFeature
+  classType()
+  createInput(bodies: list[BRepBody]) -> TessellateFeatureInput
+  itemByName(name: str) -> TessellateFeature
+
+TessellateRefinementTypes
+  CustomTessellateRefinementType()
+  HighTessellateRefinementType()
+  LowTessellateRefinementType()
+  MediumTessellateRefinementType()
+  Name()
+
+TriangleMesh : Base
+  # The TriangleMesh object represents all of the data defining
+    a triangular mesh.
+  Name
+  isValid
+  nodeCoordinates: Point3D]
+  nodeCoordinatesAsDouble: list[float]
+  nodeCoordinatesAsFloat: list[float]
+  nodeCount: int
+  nodeIndices: list[int]
+  normalVectors: Vector3D]
+  normalVectorsAsDouble: list[float]
+  normalVectorsAsFloat: list[float]
+  objectType
+  surfaceTolerance: float
+  textureCoordinates: Point2D]
+  textureCoordinatesAsDouble: list[float]
+  textureCoordinatesAsFloat: list[float]
+  triangleCount: int
+  Name()
+  classType()
+
+TriangleMeshCalculator : Base
+  # Used to calculate new meshes for a B-Rep or T-Spline using defined criteria.
+  Name
+  isValid
+  maxAspectRatio: float
+  maxNormalDeviation: float
+  maxSideLength: float
+  objectType
+  parentMeshManager: MeshManager
+  surfaceTolerance: float
+  Name()
+  calculate() -> TriangleMesh
+  classType()
+  setQuality(triangleMeshQuality: TriangleMeshQualityOptions) -> bool
+
+TriangleMeshList *collection<TriangleMesh>
+  # Provides access to a set of triangle meshes.
+  Name
+  bestMesh: TriangleMesh
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+
+TriangleMeshQualityOptions
+  HighQualityTriangleMesh()
+  LowQualityTriangleMesh()
+  Name()
+  NormalQualityTriangleMesh()
+  VeryHighQualityTriangleMesh()
+
+VolumetricColorSample : VolumetricSample
+  Name
+  isValid
+  objectType
+  point
+  value: Color
+  Name()
+  classType()
+
+VolumetricColorSampleVector
+  append(x: VolumetricColorSample) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::volume::VolumetricColorSample > >::size_type, x: VolumetricColorSample) -> void
+  back() -> VolumetricColorSample >::value_type
+  begin() -> VolumetricColorSample >::iterator
+  capacity() -> VolumetricColorSample >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> VolumetricColorSample >::iterator
+  erase() -> VolumetricColorSample >::iterator
+  front() -> VolumetricColorSample >::value_type
+  get_allocator() -> VolumetricColorSample >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> VolumetricColorSample >::value_type
+  pop_back() -> void
+  push_back(x: VolumetricColorSample) -> void
+  rbegin() -> VolumetricColorSample >::reverse_iterator
+  rend() -> VolumetricColorSample >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::volume::VolumetricColorSample > >::size_type) -> void
+  resize() -> void
+  size() -> VolumetricColorSample >::size_type
+  swap(v: list[VolumetricColorSample]) -> void
+
+VolumetricCustomFeature : Feature
+  # Object that represents an existing volumetric custom feature in a design.
+  Name
+  assemblyContext
+  attributes
+  baseFeature
+  bodies
+  entityToken
+  errorOrWarningMessage
+  faces
+  healthState
+  isParametric
+  isSuppressed
+  isValid
+  linkedFeatures
+  name
+  nativeObject: VolumetricCustomFeature
+  objectType
+  parentComponent
+  timelineObject
+  volumetricModel: Base
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> VolumetricCustomFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+VolumetricCustomFeatureInput : Base
+  # An input object for creating a volumetric custom feature.
+  Name
+  boundaryBody: Base
+  isValid
+  objectType
+  Name()
+  classType()
+
+VolumetricCustomFeatures *collection<VolumetricCustomFeature>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(input: VolumetricCustomFeatureInput) -> VolumetricCustomFeature
+  classType()
+  createInput(boundaryBody: Base) -> VolumetricCustomFeatureInput
+  itemByName(name: str) -> VolumetricCustomFeature
+
+VolumetricMeshRefinementTypes
+  Name()
+  VolumetricMeshRefinementCustomType()
+  VolumetricMeshRefinementHighType()
+  VolumetricMeshRefinementLowType()
+  VolumetricMeshRefinementMediumType()
+
+VolumetricMeshingApproachTypes
+  Name()
+  VolumetricMeshingAdvancedType()
+  VolumetricMeshingOriginalType()
+
+VolumetricModel : Base
+  Name
+  boundaryBody: Base
+  isLightBulbOn: bool
+  isValid
+  objectType
+  parentComponent: Component
+  Name()
+  classType()
+  createSampler() -> VolumetricSampler
+  getGraph(graphType: GraphTypes) -> Graph
+  registerCustomSDFCallback(id: str, callback: CustomSDFCallbackEventHandler) -> bool
+  removeCustomSDFCallback(id: str) -> bool
+
+VolumetricModelToMeshFeature : Feature
+  # Object that represents a model to mesh feature.
+  Name
+  assemblyContext
+  attributes
+  baseFeature
+  bodies
+  elementSize: ModelParameter
+  entityToken
+  errorOrWarningMessage
+  faces
+  healthState
+  isComputeSuspended: bool
+  isParametric
+  isSmallShellsRemoved: bool
+  isSuppressed
+  isValid
+  isVolumetricModelRemoved: bool
+  linkedFeatures
+  meshBody: MeshBody
+  meshingApproach: VolumetricMeshingApproachTypes
+  name
+  nativeObject: VolumetricModelToMeshFeature
+  objectType
+  parentComponent
+  refinementType: VolumetricMeshRefinementTypes
+  smallShellThreshold: ModelParameter
+  timelineObject
+  volumetricModel: Base
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> VolumetricModelToMeshFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+VolumetricModelToMeshFeatureInput : Base
+  # An input object for creating a volumetric model to mesh feature.
+  Name
+  elementSize: ValueInput
+  isComputeSuspended: bool
+  isSmallShellsRemoved: bool
+  isValid
+  isVolumetricModelRemoved: bool
+  meshingApproach: VolumetricMeshingApproachTypes
+  objectType
+  refinementType: VolumetricMeshRefinementTypes
+  smallShellThreshold: ValueInput
+  volumetricModel: Base
+  Name()
+  classType()
+
+VolumetricModelToMeshFeatures *collection<VolumetricModelToMeshFeature>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(input: VolumetricModelToMeshFeatureInput) -> VolumetricModelToMeshFeature
+  classType()
+  createInput(volumetricModel: Base) -> VolumetricModelToMeshFeatureInput
+  itemByName(name: str) -> VolumetricModelToMeshFeature
+
+VolumetricSample : Base
+  Name
+  isValid
+  objectType
+  point: Point3D
+  Name()
+  classType()
+
+VolumetricSampleVector
+  append(x: VolumetricSample) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::volume::VolumetricSample > >::size_type, x: VolumetricSample) -> void
+  back() -> VolumetricSample >::value_type
+  begin() -> VolumetricSample >::iterator
+  capacity() -> VolumetricSample >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> VolumetricSample >::iterator
+  erase() -> VolumetricSample >::iterator
+  front() -> VolumetricSample >::value_type
+  get_allocator() -> VolumetricSample >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> VolumetricSample >::value_type
+  pop_back() -> void
+  push_back(x: VolumetricSample) -> void
+  rbegin() -> VolumetricSample >::reverse_iterator
+  rend() -> VolumetricSample >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::volume::VolumetricSample > >::size_type) -> void
+  resize() -> void
+  size() -> VolumetricSample >::size_type
+  swap(v: list[VolumetricSample]) -> void
+
+VolumetricSampler : Base
+  # The VolumetricSampler object which is used for controled sampling of the volumetric model.
+  Name
+  isValid
+  objectType
+  Name()
+  addSamplePoints(samplePoints: list[Point3D]) -> bool
+  classType()
+  clearSamplePoints() -> bool
+  evaluate(graphNode: GraphNode, isOutput: bool, index: int) -> VolumetricSample]
+  evaluateColor() -> VolumetricColorSample]
+  evaluateDensity() -> VolumetricScalarSample]
+  evaluateLevelSet() -> VolumetricScalarSample]
+  samplePointCount() -> int
+  setBoundingBoxSampling(elementSize: float, boundingBox3d: BoundingBox3D) -> bool
+  setPlaneSampling(elementSize: float, plane: Plane, primaryAxis: Vector3D, primaryAxisSize: float, secondaryAxisSize: float) -> bool
+  setSamplePoints(samplePoints: list[Point3D]) -> bool
+
+VolumetricScalarSample : VolumetricSample
+  Name
+  isValid
+  objectType
+  point
+  value: float
+  Name()
+  classType()
+
+VolumetricScalarSampleVector
+  append(x: VolumetricScalarSample) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::volume::VolumetricScalarSample > >::size_type, x: VolumetricScalarSample) -> void
+  back() -> VolumetricScalarSample >::value_type
+  begin() -> VolumetricScalarSample >::iterator
+  capacity() -> VolumetricScalarSample >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> VolumetricScalarSample >::iterator
+  erase() -> VolumetricScalarSample >::iterator
+  front() -> VolumetricScalarSample >::value_type
+  get_allocator() -> VolumetricScalarSample >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> VolumetricScalarSample >::value_type
+  pop_back() -> void
+  push_back(x: VolumetricScalarSample) -> void
+  rbegin() -> VolumetricScalarSample >::reverse_iterator
+  rend() -> VolumetricScalarSample >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::volume::VolumetricScalarSample > >::size_type) -> void
+  resize() -> void
+  size() -> VolumetricScalarSample >::size_type
+  swap(v: list[VolumetricScalarSample]) -> void
+
+VolumetricVectorSample : VolumetricSample
+  Name
+  isValid
+  objectType
+  point
+  value: Vector3D
+  Name()
+  classType()

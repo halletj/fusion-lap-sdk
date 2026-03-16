@@ -79,6 +79,33 @@ import: import adsk.core, adsk.fusion, adsk.cam
 """
 
 
+def render_remaining(ir: IR, all_domain_patterns: dict[str, list[str]]) -> str:
+    """Render all classes/enums that don't match any domain pattern into fusion-misc.lap."""
+    # Collect all patterns across all domains
+    all_patterns = []
+    for patterns in all_domain_patterns.values():
+        all_patterns.extend(patterns)
+
+    unmatched_enums = [e for e in ir.all_enums() if not _matches_any(e.name, all_patterns)]
+    unmatched_classes = [c for c in ir.all_classes() if not _matches_any(c.name, all_patterns)]
+
+    lines = ["# fusion-misc.lap", ""]
+
+    if unmatched_enums:
+        lines.append("[types]")
+        for enum in sorted(unmatched_enums, key=lambda e: e.name):
+            lines.append(f"{enum.name}: {' | '.join(enum.values)}")
+        lines.append("")
+
+    if unmatched_classes:
+        lines.append("[classes]")
+        for cls in sorted(unmatched_classes, key=lambda c: c.name):
+            lines.extend(_render_class(cls))
+            lines.append("")
+
+    return "\n".join(lines)
+
+
 def _render_class(cls: ClassDef) -> list[str]:
     """Render a single class definition."""
     lines = []

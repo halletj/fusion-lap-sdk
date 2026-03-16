@@ -3,8 +3,39 @@
 [types]
 CAMEventChangeType: ErrorCAMEventChangeType | ToolCAMEventChangeType | ToolSwitchCAMEventChangeType | NameCAMEventChangeType | ParameterCAMEventChangeType
 CAMEventState: CAMEventStateSuccessful | CAMEventStateDeferred | CAMEventStateErrorMissingOperation | CAMEventStateErrorMissingDocument | CAMEventStateErrorOther
+CustomGraphicsBillBoardStyles: ScreenBillBoardStyle | AxialBillBoardStyle | RightReadingBillBoardStyle
+CustomGraphicsCullModes: CustomGraphicsCullFront | CustomGraphicsCullBack | CustomGraphicsCullNone
+CustomGraphicsPointTypes: UserDefinedCustomGraphicsPointType | PointCloudCustomGraphicsPointType
+DegradedSelectionDisplayStyles: NormalWithGlowDegradedSelectionStyle | SimpleWithoutGlowDegradedSelectionStyle
+DialogResults: DialogError | DialogOK | DialogCancel | DialogYes | DialogNo
+DropDownStyles: LabeledIconDropDownStyle | TextListDropDownStyle | CheckBoxDropDownStyle
+GraphOutputNodeTypes: BoundarySDFOutputNodeType | LatticeDensityOutputNodeType | ColorOutputNodeType | LatticeCoordinatesOutputNodeType | TextureDensityOutputNodeType | TextureCoordinatesOutputNodeType | CellLatticeShapeOutputNodeType | CellTextureShapeOutputNodeType
+GraphTypes: PrimaryGraphType | CellGraphType
+GraphicsDrivers: DirectX9GraphicsDriver | DirectX11GraphicsDriver | AutoSelectGraphicsDriver | OpenGLCoreProfileGraphicsDriver | OpenGLGraphicsDriver
+GraphicsPresets: PerformanceGraphicsPreset | QualityGraphicsPreset | CustomGraphicsPreset
+HubTypes: PersonalHubType | TeamHubType
+KeyboardModifiers: NoKeyboardModifier | ShiftKeyboardModifier | CtrlKeyboardModifier | AltKeyboardModifier | MetaKeyboardModifier
+LightingEnvironments: DarkSkyLightingEnvironment | GreyRoomLightingEnvironment | PhotoBoothLightingEnvironment | TranquilityBlueLightingEnvironment | InfinityPoolLightingEnvironment | RiverRubiconLightingEnvironment
+ListControlDisplayTypes: CheckBoxListType | RadioButtonlistType | StandardListType
+MouseButtons: NoMouseButton | LeftMouseButton | RightMouseButton | MiddleMouseButton
+NetworkProxySettings: AutomaticProxySettings | NoProxyProxySettings | WindowsDefaultProxySettings | OverrideProxySettings
+NodePinTypes: NoNodePinType | ScalarNodePinType | VectorNodePinType | ColorNodePinType
 OperationBaseEventTypes: ErrorOperationBaseEventType | CommandStartedOperationBaseEventType | GenerationStartedOperationBaseEventType | ChangeOperationBaseEventType | GenerationStartingOperationBaseEventType | CommandButtonPressedOperationBaseEventType
+PaletteDockingOptions: PaletteDockOptionsNone | PaletteDockOptionsToVerticalOnly | PaletteDockOptionsToHorizontalOnly | PaletteDockOptionsToVerticalAndHorizontal
+PaletteDockingStates: PaletteDockStateFloating | PaletteDockStateTop | PaletteDockStateBottom | PaletteDockStateLeft | PaletteDockStateRight
+PaletteSnapOptions: PaletteSnapOptionsTop | PaletteSnapOptionsLeft | PaletteSnapOptionsRight | PaletteSnapOptionsBottom
+RenderAspectRatios: CurrentViewportRenderAspectRatio | Square1to1RenderAspectRatio | Presentation4to3RenderAspectRatio | Widescreen16to9RenderAspectRatio | Landscape5to4RenderAspectRatio | Portrait4to5RenderAspectRatio | CustomRenderAspectRatio
+RenderResolutions: Web800x600RenderResolution | Web1024x768RenderResolution | Web1152x864RenderResolution | Web1280x1024RenderResolution | Web1600x1200RenderResolution | Mobile960x640RenderResolution | Mobile1136x640RenderResolution | Mobile1334x750RenderResolution | Mobile1920x1080RenderResolution | Mobile2048x1536RenderResolution | Print1800x1200RenderResolution | Print2100x1500RenderResolution | Print3000x2400RenderResolution | Print3300x2550RenderResolution | Video854x480RenderResolution | Video1280x720RenderResolution | Video1920x1080RenderResolution | CustomRenderResolution
+RenderSceneBackgroundTypes: EnvironmentRenderSceneBackgroundType | SolidColorRenderSceneBackgroundType
+SelectionDisplayStyles: NormalDisplayStyle | SimpleDisplayStyle
 SetupChangeEventType: Arbitrary | PrintSettingSelection
+StatusMessageTypes: StatusMessageNoneType | StatusMessageErrorType | StatusMessageWarningType
+TransparencyDisplayEffects: BetterPerformanceTransparencyEffect | BetterDisplayTransparencyEffect
+TriadChanges: TriadChangeUnknown | TriadChangeXTranslation | TriadChangeYTranslation | TriadChangeZTranslation | TriadChangeXYTranslation | TriadChangeYZTranslation | TriadChangeXZTranslation | TriadChangeXYZTranslation | TriadChangeXRotation | TriadChangeYRotation | TriadChangeZRotation | TriadChangeXScale | TriadChangeYScale | TriadChangeZScale | TriadChangeXYScale | TriadChangeYZScale | TriadChangeXZScale | TriadChangeXYZScale | TriadChangeHorizontalFlip | TriadChangeVerticalFlip
+UploadStates: UploadProcessing | UploadFinished | UploadFailed
+UserInterfaceThemes: ClassicUserInterfaceTheme | LightGrayUserInterfaceTheme | DarkBlueUserInterfaceTheme | DarkGrayUserInterfaceTheme | DeviceUserInterfaceTheme
+ViewOrientations: ArbitraryViewOrientation | BackViewOrientation | BottomViewOrientation | FrontViewOrientation | IsoBottomLeftViewOrientation | IsoBottomRightViewOrientation | IsoTopLeftViewOrientation | IsoTopRightViewOrientation | LeftViewOrientation | RightViewOrientation | TopViewOrientation
+VisualStyles: ShadedVisualStyle | ShadedWithHiddenEdgesVisualStyle | ShadedWithVisibleEdgesOnlyVisualStyle | WireframeVisualStyle | WireframeWithHiddenEdgesVisualStyle | WireframeWithVisibleEdgesOnlyVisualStyle
 
 [classes]
 ActiveSelectionEvent : Event
@@ -301,6 +332,62 @@ CommandCreatedEventHandler : EventHandler
   Name()
   notify(eventArgs: CommandCreatedEventArgs) -> void
 
+CommandDefinition : Base
+  Name
+  allowedParentCommandDefinitions: list[str]
+  commandCreated: CommandCreatedEvent
+  controlDefinition: ControlDefinition
+  id: str
+  isApplicable: bool
+  isNative: bool
+  isSubCommandDefinition: bool
+  isValid
+  name: str
+  objectType
+  resourceFolder: str
+  toolClipFilename: str
+  tooltip: str
+  Name()
+  classType()
+  deleteMe() -> bool
+  execute() -> bool
+
+CommandDefinitionVector
+  append(x: CommandDefinition) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::core::CommandDefinition > >::size_type, x: CommandDefinition) -> void
+  back() -> CommandDefinition >::value_type
+  begin() -> CommandDefinition >::iterator
+  capacity() -> CommandDefinition >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> CommandDefinition >::iterator
+  erase() -> CommandDefinition >::iterator
+  front() -> CommandDefinition >::value_type
+  get_allocator() -> CommandDefinition >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> CommandDefinition >::value_type
+  pop_back() -> void
+  push_back(x: CommandDefinition) -> void
+  rbegin() -> CommandDefinition >::reverse_iterator
+  rend() -> CommandDefinition >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::core::CommandDefinition > >::size_type) -> void
+  resize() -> void
+  size() -> CommandDefinition >::size_type
+  swap(v: list[CommandDefinition]) -> void
+
+CommandDefinitions *collection<CommandDefinition>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  addButtonDefinition() -> CommandDefinition
+  addCheckBoxDefinition(id: str, name: str, tooltip: str, isChecked: bool) -> CommandDefinition
+  addListDefinition() -> CommandDefinition
+  classType()
+  itemById(id: str) -> CommandDefinition
+
 CommandEvent : Event
   # An event endpoint that supports the connection to client implemented CommandEventHandlers.
   Name
@@ -447,6 +534,377 @@ CustomFeatureEventHandler : EventHandler
   Name()
   notify(eventArgs: CustomFeatureEventArgs) -> void
 
+CustomGraphicsAppearanceColorEffect : CustomGraphicsColorEffect
+  Name
+  appearance: Appearance
+  isValid
+  objectType
+  Name()
+  classType()
+  @static create(appearance: Appearance) -> Appearance
+
+CustomGraphicsBRepBody : CustomGraphicsEntity
+  # This represents custom graphics that are based on a BRepBody.
+  Name
+  bRepBody: BRepBody
+  billBoarding
+  boundingBox
+  color
+  cullMode
+  depthPriority
+  edges: CustomGraphicsBRepEdges
+  faces: CustomGraphicsBRepFaces
+  id
+  isSelectable
+  isValid
+  isVisible
+  name
+  objectType
+  parent
+  transform
+  vertices: CustomGraphicsBRepVertices
+  viewPlacement
+  viewScale
+  Name()
+  classType()
+  deleteMe() -> bool
+  getOpacity() -> bool
+  setOpacity(opacity: float, isOverride: bool) -> bool
+
+CustomGraphicsBRepEdges : Base
+
+CustomGraphicsBRepFaces : Base
+
+CustomGraphicsBRepVertices : Base
+
+CustomGraphicsBasicMaterialColorEffect : CustomGraphicsColorEffect
+  Name
+  ambientColor: Color
+  diffuseColor: Color
+  emissiveColor: Color
+  glossiness: float
+  isValid
+  objectType
+  opacity: float
+  specularColor: Color
+  Name()
+  classType()
+  @static create() -> Color
+
+CustomGraphicsBillBoard : Base
+  Name
+  anchorPoint: Point3D
+  axis: Vector3D
+  billBoardStyle: CustomGraphicsBillBoardStyles
+  isValid
+  objectType
+  Name()
+  classType()
+  @static create(anchorPoint: Point3D) -> Point3D
+
+CustomGraphicsBillBoardStyles
+  AxialBillBoardStyle()
+  Name()
+  RightReadingBillBoardStyle()
+  ScreenBillBoardStyle()
+
+CustomGraphicsColorEffect : Base
+  # The base class for all custom graphics color effects.
+  Name
+  isValid
+  objectType
+  Name()
+  classType()
+
+CustomGraphicsCoordinates : Base
+  # Represents coordinates that are used to define vertices in custom graphics.
+  Name
+  colors: list[short]
+  coordinateCount: int
+  coordinates: list[float]
+  isValid
+  objectType
+  Name()
+  classType()
+  @static create(coordinates: list[float]) -> list[float]
+  getColor(index: int) -> Color
+  getCoordinate(index: int) -> Point3D
+  setColor(index: int, color: Color) -> bool
+  setCoordinate(index: int, coordinate: Point3D) -> bool
+
+CustomGraphicsCullModes
+  CustomGraphicsCullBack()
+  CustomGraphicsCullFront()
+  CustomGraphicsCullNone()
+  Name()
+
+CustomGraphicsCurve : CustomGraphicsEntity
+  Name
+  billBoarding
+  boundingBox
+  color
+  cullMode
+  curve: Curve3D
+  depthPriority
+  id
+  isSelectable
+  isValid
+  isVisible
+  lineStylePattern: LineStylePatterns
+  lineStyleScale: float
+  name
+  objectType
+  parent
+  transform
+  viewPlacement
+  viewScale
+  weight: float
+  Name()
+  classType()
+  deleteMe() -> bool
+  getOpacity() -> bool
+  setOpacity(opacity: float, isOverride: bool) -> bool
+
+CustomGraphicsEntity : Base
+  # The base class for all visible and selectable custom graphics objects.
+  Name
+  billBoarding: CustomGraphicsBillBoard
+  boundingBox: BoundingBox3D
+  color: CustomGraphicsColorEffect
+  cullMode: CustomGraphicsCullModes
+  depthPriority: int
+  id: str
+  isSelectable: bool
+  isValid
+  isVisible: bool
+  name: str
+  objectType
+  parent: Base
+  transform: Matrix3D
+  viewPlacement: CustomGraphicsViewPlacement
+  viewScale: CustomGraphicsViewScale
+  Name()
+  classType()
+  deleteMe() -> bool
+  getOpacity() -> bool
+  setOpacity(opacity: float, isOverride: bool) -> bool
+
+CustomGraphicsGroup *collection<CustomGraphicsEntity>
+  # Represents of group of custom graphics entities. A group can also own other graphics groups.
+  Name
+  billBoarding
+  boundingBox
+  color
+  count: int
+  cullMode
+  depthPriority
+  id
+  isChildrenSelectable: bool
+  isSelectable
+  isValid
+  isVisible
+  name
+  objectType
+  parent
+  transform
+  viewPlacement
+  viewScale
+  Name()
+  addBRepBody(body: BRepBody) -> CustomGraphicsBRepBody
+  addCurve(curve: Curve3D) -> CustomGraphicsCurve
+  addGroup() -> CustomGraphicsGroup
+  addLines() -> CustomGraphicsLines
+  addMesh(coordinates: CustomGraphicsCoordinates, coordinateIndexList: list[int], normalVectors: list[float], normalIndexList: list[int]) -> CustomGraphicsMesh
+  addPointSet(coordinates: CustomGraphicsCoordinates, indexList: list[int], pointType: CustomGraphicsPointTypes, pointImage: str) -> CustomGraphicsPointSet
+  addText(formattedText: str, font: str, size: float, transform: Matrix3D) -> CustomGraphicsText
+  classType()
+  deleteMe() -> bool
+  getOpacity() -> bool
+  setOpacity(opacity: float, isOverride: bool) -> bool
+
+CustomGraphicsGroups *collection<CustomGraphicsGroup>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add() -> CustomGraphicsGroup
+  classType()
+
+CustomGraphicsLines : CustomGraphicsEntity
+  # Represents lines drawn in the graphics window.
+  Name
+  billBoarding
+  boundingBox
+  color
+  coordinates: CustomGraphicsCoordinates
+  cullMode
+  depthPriority
+  id
+  indexList: list[int]
+  isLineStrip: bool
+  isScreenSpaceLineStyle: bool
+  isSelectable
+  isValid
+  isVisible
+  lineStripLengths: list[int]
+  lineStylePattern: LineStylePatterns
+  lineStyleScale: float
+  name
+  objectType
+  parent
+  transform
+  viewPlacement
+  viewScale
+  weight: float
+  Name()
+  classType()
+  deleteMe() -> bool
+  getOpacity() -> bool
+  setOpacity(opacity: float, isOverride: bool) -> bool
+
+CustomGraphicsMesh : CustomGraphicsEntity
+  # Represents a custom triangle mesh drawn in the graphics window.
+  Name
+  billBoarding
+  boundingBox
+  color
+  coordinates: CustomGraphicsCoordinates
+  cullMode
+  depthPriority
+  id
+  isSelectable
+  isValid
+  isVisible
+  name
+  normalIndexList: list[int]
+  normalVectors: list[float]
+  objectType
+  parent
+  textureCoordinates: list[float]
+  transform
+  vertexIndexList: list[int]
+  viewPlacement
+  viewScale
+  Name()
+  classType()
+  deleteMe() -> bool
+  getOpacity() -> bool
+  setOpacity(opacity: float, isOverride: bool) -> bool
+
+CustomGraphicsPointSet : CustomGraphicsEntity
+  # Represents a set of one or more custom graphics points all of the same style.
+  Name
+  billBoarding
+  boundingBox
+  color
+  coordinates: CustomGraphicsCoordinates
+  cullMode
+  depthPriority
+  id
+  indexList: list[int]
+  isSelectable
+  isValid
+  isVisible
+  name
+  objectType
+  parent
+  pointImage: str
+  pointType: CustomGraphicsPointTypes
+  transform
+  viewPlacement
+  viewScale
+  Name()
+  classType()
+  deleteMe() -> bool
+  getOpacity() -> bool
+  setOpacity(opacity: float, isOverride: bool) -> bool
+
+CustomGraphicsPointTypes
+  Name()
+  PointCloudCustomGraphicsPointType()
+  UserDefinedCustomGraphicsPointType()
+
+CustomGraphicsShowThroughColorEffect : CustomGraphicsColorEffect
+  Name
+  color: Color
+  isValid
+  objectType
+  opacity: float
+  Name()
+  classType()
+  @static create(color: Color, opacity: float) -> Color
+
+CustomGraphicsSolidColorEffect : CustomGraphicsColorEffect
+  Name
+  color: Color
+  isValid
+  objectType
+  Name()
+  classType()
+  @static create(color: Color) -> Color
+
+CustomGraphicsText : CustomGraphicsEntity
+  Name
+  billBoarding
+  boundingBox
+  color
+  cullMode
+  depthPriority
+  font: str
+  formattedText: str
+  height: float
+  id
+  isBold: bool
+  isItalic: bool
+  isSelectable
+  isStrikeThrough: bool
+  isUnderline: bool
+  isValid
+  isVisible
+  name
+  objectType
+  parent
+  size: float
+  transform
+  viewPlacement
+  viewScale
+  width: float
+  Name()
+  classType()
+  deleteMe() -> bool
+  getOpacity() -> bool
+  setOpacity(opacity: float, isOverride: bool) -> bool
+
+CustomGraphicsVertexColorEffect : CustomGraphicsColorEffect
+  Name
+  isValid
+  objectType
+  Name()
+  classType()
+  @static create() -> CustomGraphicsVertexColorEffect
+
+CustomGraphicsViewPlacement : Base
+  Name
+  anchorPoint: Point3D
+  isValid
+  objectType
+  viewCorner: ViewCorners
+  viewPoint: Point2D
+  Name()
+  classType()
+  @static create(anchorPoint: Point3D, viewCorner: ViewCorners, viewPoint: Point2D) -> Point2D
+
+CustomGraphicsViewScale : Base
+  Name
+  anchorPoint: Point3D
+  isValid
+  objectType
+  pixelScale: float
+  Name()
+  classType()
+  @static create(pixelScale: float, anchorPoint: Point3D) -> Point3D
+
 CustomSDFCallbackEventHandler : EventHandler
   Name()
   boundingBox(bboxOut: BoundingBox3D) -> bool
@@ -479,6 +937,19 @@ DataEventHandler : EventHandler
   # The DataEventHandler is a client implemented class that can be added as a handler to a DataEvent.
   Name()
   notify(eventArgs: DataEventArgs) -> void
+
+DegradedSelectionDisplayStyles
+  Name()
+  NormalWithGlowDegradedSelectionStyle()
+  SimpleWithoutGlowDegradedSelectionStyle()
+
+DialogResults
+  DialogCancel()
+  DialogError()
+  DialogNo()
+  DialogOK()
+  DialogYes()
+  Name()
 
 DirectionCommandInput : CommandInput
   Name
@@ -586,6 +1057,28 @@ DropDownCommandInput : CommandInput
   classType()
   deleteMe() -> bool
 
+DropDownControl : ToolbarControl
+  # Represents a drop-down control.
+  Name
+  controls: ToolbarControls
+  id
+  index
+  isValid
+  isVisible
+  name: str
+  objectType
+  parent
+  resourceFolder: str
+  Name()
+  classType()
+  deleteMe() -> bool
+
+DropDownStyles
+  CheckBoxDropDownStyle()
+  LabeledIconDropDownStyle()
+  Name()
+  TextListDropDownStyle()
+
 Event : Base
   Name
   isValid
@@ -664,6 +1157,177 @@ FloatSpinnerCommandInput : CommandInput
   classType()
   deleteMe() -> bool
 
+Graph : Base
+  Name
+  allGraphConnectors: GraphConnector]
+  allNodes: GraphNode]
+  allPossibleNodeTypes: list[str]
+  isValid
+  objectType
+  Name()
+  addNode(name: str, nodeType: str) -> GraphNode
+  canEvaluateGraph() -> bool
+  classType()
+  connect(outputNode: GraphNode, outputPinIndex: int, inputNode: GraphNode, inputPinIndex: int) -> bool
+  disconnect(outputNode: GraphNode, outputPinIndex: int, inputNode: GraphNode, inputPinIndex: int) -> bool
+  getNode(name: str) -> GraphNode
+  getNodeInputPinConnector(node: GraphNode, inputPinIndex: int) -> GraphConnector
+  getNodeOutputPinConnectors(node: GraphNode, outputPinIndex: int) -> GraphConnector]
+  getOutputNode(outputNodeType: GraphOutputNodeTypes) -> GraphNode
+
+GraphConnector : Base
+  # A simple read-only structure that represents a connection beween two nodes' pins in the graph.
+  Name
+  isValid
+  objectType
+  sourceGraphNode: GraphNode
+  sourcePinIndex: int
+  targetGraphNode: GraphNode
+  targetPinIndex: int
+  Name()
+  classType()
+
+GraphConnectorVector
+  append(x: GraphConnector) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::volume::GraphConnector > >::size_type, x: GraphConnector) -> void
+  back() -> GraphConnector >::value_type
+  begin() -> GraphConnector >::iterator
+  capacity() -> GraphConnector >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> GraphConnector >::iterator
+  erase() -> GraphConnector >::iterator
+  front() -> GraphConnector >::value_type
+  get_allocator() -> GraphConnector >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> GraphConnector >::value_type
+  pop_back() -> void
+  push_back(x: GraphConnector) -> void
+  rbegin() -> GraphConnector >::reverse_iterator
+  rend() -> GraphConnector >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::volume::GraphConnector > >::size_type) -> void
+  resize() -> void
+  size() -> GraphConnector >::size_type
+  swap(v: list[GraphConnector]) -> void
+
+GraphNode : Base
+  # An individual node within a graph.
+  Name
+  description: str
+  isValid
+  name: str
+  nodeType: str
+  objectType
+  properties: GraphNodeProperties
+  Name()
+  classType()
+  deleteMe() -> bool
+  getInputPinCount() -> int
+  getInputPinName(pinIndex: int) -> str
+  getInputPinType(pinIndex: int) -> NodePinTypes
+  getOutputPinCount() -> int
+  getOutputPinName(pinIndex: int) -> str
+  getOutputPinType(pinIndex: int) -> NodePinTypes
+  hasValidProperties() -> bool
+  isInputPinOptional(pinIndex: int) -> bool
+
+GraphNodeProperties *collection<GraphNodeProperty>
+  # A collection of properties of a graph node.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemByName(propertyName: str) -> GraphNodeProperty
+
+GraphNodeProperty : Base
+  # Class for representing a property of a graph node. These can be of many types.
+  Name
+  description: str
+  isValid
+  name: str
+  objectType
+  Name()
+  classType()
+
+GraphNodeVector
+  append(x: GraphNode) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::volume::GraphNode > >::size_type, x: GraphNode) -> void
+  back() -> GraphNode >::value_type
+  begin() -> GraphNode >::iterator
+  capacity() -> GraphNode >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> GraphNode >::iterator
+  erase() -> GraphNode >::iterator
+  front() -> GraphNode >::value_type
+  get_allocator() -> GraphNode >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> GraphNode >::value_type
+  pop_back() -> void
+  push_back(x: GraphNode) -> void
+  rbegin() -> GraphNode >::reverse_iterator
+  rend() -> GraphNode >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::volume::GraphNode > >::size_type) -> void
+  resize() -> void
+  size() -> GraphNode >::size_type
+  swap(v: list[GraphNode]) -> void
+
+GraphOutputNodeTypes
+  BoundarySDFOutputNodeType()
+  CellLatticeShapeOutputNodeType()
+  CellTextureShapeOutputNodeType()
+  ColorOutputNodeType()
+  LatticeCoordinatesOutputNodeType()
+  LatticeDensityOutputNodeType()
+  Name()
+  TextureCoordinatesOutputNodeType()
+  TextureDensityOutputNodeType()
+
+GraphTypes
+  CellGraphType()
+  Name()
+  PrimaryGraphType()
+
+GraphicsDrivers
+  AutoSelectGraphicsDriver()
+  DirectX11GraphicsDriver()
+  DirectX9GraphicsDriver()
+  Name()
+  OpenGLCoreProfileGraphicsDriver()
+  OpenGLGraphicsDriver()
+
+GraphicsPreferences : Base
+  # The GraphicsPreferences object provides access to the various graphics related preferences.
+  Name
+  autoThrottleEffects: bool
+  canvasEffects: CanvasEffects
+  degradedSelectionDisplayStyle: DegradedSelectionDisplayStyles
+  graphicsPreset: GraphicsPresets
+  hiddenEdgeDimming: int
+  isAnimateViewTransitions: bool
+  isDynamic: bool
+  isHighResolutionCanvasGraphicsEnabled: bool
+  isLimitEffectsDuringNavigation: bool
+  isSurfaceNormalDisplayDisabled: int
+  isValid
+  isWoodBumpEnabled: bool
+  minimumFramesPerSecond: float
+  objectType
+  selectionDisplayStyle: SelectionDisplayStyles
+  transparencyEffects: TransparencyDisplayEffects
+  Name()
+  classType()
+
+GraphicsPresets
+  CustomGraphicsPreset()
+  Name()
+  PerformanceGraphicsPreset()
+  QualityGraphicsPreset()
+
 GroupCommandInput : CommandInput
   Name
   children: CommandInputs
@@ -740,6 +1404,11 @@ HttpEventHandler : EventHandler
   # The HttpEventHandler is a client implemented class that can be added as a handler to an HttpEvent.
   Name()
   notify(eventArgs: HttpEventArgs) -> void
+
+HubTypes
+  Name()
+  PersonalHubType()
+  TeamHubType()
 
 ImageCommandInput : CommandInput
   # Provides an image command input for including an image in a command dialog.
@@ -871,6 +1540,68 @@ KeyboardEventHandler : EventHandler
   Name()
   notify(eventArgs: KeyboardEventArgs) -> void
 
+KeyboardModifiers
+  AltKeyboardModifier()
+  CtrlKeyboardModifier()
+  MetaKeyboardModifier()
+  Name()
+  NoKeyboardModifier()
+  ShiftKeyboardModifier()
+
+LinearMarkingMenu : Base
+  Name
+  controls: ToolbarControls
+  isValid
+  objectType
+  Name()
+  classType()
+  clear() -> bool
+
+ListControlDefinition : ControlDefinition
+  Name
+  isEnabled
+  isValid
+  isVisible
+  lastSelected: ListItem
+  listControlDisplayType: ListControlDisplayTypes
+  listItems: ListItems
+  name
+  objectType
+  Name()
+  classType()
+
+ListControlDisplayTypes
+  CheckBoxListType()
+  Name()
+  RadioButtonlistType()
+  StandardListType()
+
+ListItem : Base
+  # Represents a single item in a check box list or a drop-down command input.
+  Name
+  icon: str
+  index: int
+  isSelected: bool
+  isSeparator: bool
+  isValid
+  name: str
+  objectType
+  parentList: Base
+  Name()
+  classType()
+  deleteMe() -> bool
+
+ListItems *collection<ListItem>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add() -> ListItem
+  addSeparator(beforeIndex: int) -> ListItem
+  classType()
+  clear() -> bool
+
 MFGDMDataEvent : Event
   # A MFGDMDataEvent represents an event related to the state of the MFGDM data structure.
   Name
@@ -922,6 +1653,14 @@ MarkingMenuEventArgs : EventArgs
 MarkingMenuEventHandler : EventHandler
   Name()
   notify(eventArgs: MarkingMenuEventArgs) -> void
+
+MouseButtons
+  # Mouse button values. Defined in namespace "adsk::core" and the header file is <Core\CoreTypeDefs.h>
+  LeftMouseButton()
+  MiddleMouseButton()
+  Name()
+  NoMouseButton()
+  RightMouseButton()
 
 MouseEvent : Event
   # An event endpoint that supports the connection to client implemented MouseEventHandlers.
@@ -982,6 +1721,20 @@ NavigationEventHandler : EventHandler
   Name()
   notify(eventArgs: NavigationEventArgs) -> void
 
+NetworkProxySettings
+  AutomaticProxySettings()
+  Name()
+  NoProxyProxySettings()
+  OverrideProxySettings()
+  WindowsDefaultProxySettings()
+
+NodePinTypes
+  ColorNodePinType()
+  Name()
+  NoNodePinType()
+  ScalarNodePinType()
+  VectorNodePinType()
+
 OperationBaseCommandButtonPressedEventArgs : CAMEventArgs
   # Event arguments specific to an operationBaseCommandButtonPressed event.
   buttonName: str
@@ -1041,6 +1794,93 @@ Palette : Base
   setSize(width: int, height: int) -> bool
   snapTo(palette: Palette, snapOption: PaletteSnapOptions) -> bool
 
+PaletteDockingOptions
+  Name()
+  PaletteDockOptionsNone()
+  PaletteDockOptionsToHorizontalOnly()
+  PaletteDockOptionsToVerticalAndHorizontal()
+  PaletteDockOptionsToVerticalOnly()
+
+PaletteDockingStates
+  Name()
+  PaletteDockStateBottom()
+  PaletteDockStateFloating()
+  PaletteDockStateLeft()
+  PaletteDockStateRight()
+  PaletteDockStateTop()
+
+PaletteSnapOptions
+  Name()
+  PaletteSnapOptionsBottom()
+  PaletteSnapOptionsLeft()
+  PaletteSnapOptionsRight()
+  PaletteSnapOptionsTop()
+
+Palettes *collection<Palette>
+  # Provides access to a set of palettes, which are docked or floating windows that display HTML.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(id: str, name: str, htmlFileURL: str, isVisible: bool, showCloseButton: bool, isResizable: bool, width: int, height: int, useNewWebBrowser: bool) -> Palette
+  add2(id: str, name: str, htmlFileURL: str, isVisible: bool, showCloseButton: bool, isResizable: bool, width: int, height: int) -> Palette
+  addTransparent(id: str, name: str, htmlFileURL: str, isVisible: bool, showCloseButton: bool, isResizable: bool, isOpaqueWhenUndocked: bool, width: int, height: int) -> Palette
+  classType()
+  itemById(id: str) -> Palette
+
+ProgressBar : Base
+  # Provides access to the progress bar.
+  Name
+  isValid
+  message: str
+  objectType
+  progressValue: int
+  Name()
+  classType()
+  hide() -> bool
+  show(message: str, minimumValue: int, maximumValue: int, isModal: bool) -> bool
+  showBusy(message: str, isModal: bool) -> bool
+
+ProgressDialog : Base
+  # Provides access to the progress dialog.
+  Name
+  cancelButtonText: str
+  isBackgroundTranslucent: bool
+  isCancelButtonShown: bool
+  isShowing: bool
+  isValid
+  maximumValue: int
+  message: str
+  minimumValue: int
+  objectType
+  progressValue: int
+  title: str
+  wasCancelled: bool
+  Name()
+  classType()
+  hide() -> bool
+  reset() -> bool
+  show(title: str, message: str, minimumValue: int, maximumValue: int, delay: int) -> bool
+
+RadialMarkingMenu : Base
+  Name
+  eastCommand: Base
+  isValid
+  northCommand: Base
+  northeastCommand: Base
+  northwestCommand: Base
+  objectType
+  southCommand: Base
+  southeastCommand: Base
+  southwestCommand: Base
+  text: str
+  westCommand: Base
+  Name()
+  classType()
+  clear() -> bool
+  create(text: str) -> RadialMarkingMenu
+
 RadioButtonGroupCommandInput : CommandInput
   # Provides a command input to get the choice from a radio button group from the user.
   Name
@@ -1062,6 +1902,37 @@ RadioButtonGroupCommandInput : CommandInput
   Name()
   classType()
   deleteMe() -> bool
+
+RenderAspectRatios
+  CurrentViewportRenderAspectRatio()
+  CustomRenderAspectRatio()
+  Landscape5to4RenderAspectRatio()
+  Name()
+  Portrait4to5RenderAspectRatio()
+  Presentation4to3RenderAspectRatio()
+  Square1to1RenderAspectRatio()
+  Widescreen16to9RenderAspectRatio()
+
+RenderEnvironment : Base
+  Name
+  id: str
+  isCustomEnvironment: bool
+  isValid
+  name: str
+  objectType
+  Name()
+  classType()
+  @static loadCustomEnvironment(fullFilename: str) -> RenderEnvironment
+
+RenderEnvironments *collection<RenderEnvironment>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemById(id: str) -> RenderEnvironment
+  itemByName(name: str) -> RenderEnvironment
 
 RenderEvent : Event
   Name
@@ -1086,6 +1957,85 @@ RenderEventArgs : EventArgs
 RenderEventHandler : EventHandler
   Name()
   notify(eventArgs: RenderEventArgs) -> void
+
+RenderFuture : Base
+  # Used to check the state of a local or in canvas rendering.
+  Name
+  filename: str
+  imageHeight: int
+  imageWidth: int
+  isValid
+  objectType
+  progress: float
+  renderState: LocalRenderStates
+  Name()
+  classType()
+
+RenderManager : Base
+  # Provides access to the Rendering functionality in Fusion and is accessed from the Design object.
+  Name
+  inCanvasRendering: InCanvasRendering
+  isRenderWorkspaceActive: bool
+  isValid
+  objectType
+  parentDesign: Product
+  renderEnvironments: RenderEnvironments
+  rendering: Rendering
+  sceneSettings: SceneSettings
+  Name()
+  activateRenderWorkspace() -> bool
+  classType()
+
+RenderResolutions
+  CustomRenderResolution()
+  Mobile1136x640RenderResolution()
+  Mobile1334x750RenderResolution()
+  Mobile1920x1080RenderResolution()
+  Mobile2048x1536RenderResolution()
+  Mobile960x640RenderResolution()
+  Name()
+  Print1800x1200RenderResolution()
+  Print2100x1500RenderResolution()
+  Print3000x2400RenderResolution()
+  Print3300x2550RenderResolution()
+  Video1280x720RenderResolution()
+  Video1920x1080RenderResolution()
+  Video854x480RenderResolution()
+  Web1024x768RenderResolution()
+  Web1152x864RenderResolution()
+  Web1280x1024RenderResolution()
+  Web1600x1200RenderResolution()
+  Web800x600RenderResolution()
+
+RenderSceneBackgroundTypes
+  EnvironmentRenderSceneBackgroundType()
+  Name()
+  SolidColorRenderSceneBackgroundType()
+
+Rendering : Base
+  # Provides access to the ability to render in a background process on the local machine.
+  Name
+  aspectRatio: RenderAspectRatios
+  isBackgroundTransparent: bool
+  isValid
+  objectType
+  renderQuality: int
+  resolution: RenderResolutions
+  resolutionHeight: int
+  resolutionWidth: int
+  Name()
+  classType()
+  startLocalRender() -> RenderFuture
+
+SandvikIntegration : Base
+  integrationEvent: SandvikIntegrationEvent
+  preIntegrationEvent: SandvikPreIntegrationEvent
+  settings: str
+  @static get() -> SandvikIntegration
+  getStockMaterialId(setup: Setup) -> str
+  getStockMaterialText(setup: Setup) -> str
+  setStockMaterialId(setup: Setup, id: str) -> bool
+  setStockMaterialText(setup: Setup, text: str) -> bool
 
 SandvikIntegrationEvent : Event
   add(handler: SandvikIntegrationEventHandler) -> bool
@@ -1126,6 +2076,16 @@ SearchNetworkMachinesEventArgs : EventArgs
 SearchNetworkMachinesEventHandler
   notify(eventArgs: SearchNetworkMachinesEventArgs) -> void
 
+Selection : Base
+  # Provides access to a selection of an entity in the user interface.
+  Name
+  entity: Base
+  isValid
+  objectType
+  point: Point3D
+  Name()
+  classType()
+
 SelectionCommandInput : CommandInput
   # Provides a command input to get a selection from the user.
   Name
@@ -1158,6 +2118,11 @@ SelectionCommandInput : CommandInput
   selection(index: int) -> Selection
   setSelectionLimits(minimum: int, maximum: int) -> bool
 
+SelectionDisplayStyles
+  Name()
+  NormalDisplayStyle()
+  SimpleDisplayStyle()
+
 SelectionEvent : Event
   # An event endpoint that supports the connection to client implemented SelectionEventHandlers.
   Name
@@ -1186,6 +2151,75 @@ SelectionEventArgs : EventArgs
 SelectionEventHandler : EventHandler
   Name()
   notify(eventArgs: SelectionEventArgs) -> void
+
+SelectionFilters : Base
+  # Provides access to the various filter settings for selections.
+  Name
+  isValid
+  objectType
+  Name()
+  classType()
+
+SelectionSet : Base
+  Name
+  entities: Base]
+  isValid
+  name: str
+  objectType
+  Name()
+  classType()
+  deleteMe() -> bool
+  select() -> bool
+
+SelectionSets *collection<SelectionSet>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add() -> SelectionSet
+  classType()
+  itemByName(name: str) -> SelectionSet
+
+SelectionVector
+  append(x: Selection) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::core::Selection > >::size_type, x: Selection) -> void
+  back() -> Selection >::value_type
+  begin() -> Selection >::iterator
+  capacity() -> Selection >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> Selection >::iterator
+  erase() -> Selection >::iterator
+  front() -> Selection >::value_type
+  get_allocator() -> Selection >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> Selection >::value_type
+  pop_back() -> void
+  push_back(x: Selection) -> void
+  rbegin() -> Selection >::reverse_iterator
+  rend() -> Selection >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::core::Selection > >::size_type) -> void
+  resize() -> void
+  size() -> Selection >::size_type
+  swap(v: list[Selection]) -> void
+
+Selections *collection<Selection>
+  # Provides access to and control over the set of selected entities in the user interface.
+  Name
+  all: ObjectCollection
+  count: int
+  isValid
+  objectType
+  Name()
+  add(entity: Base) -> bool
+  asArray() -> Selection]
+  classType()
+  clear() -> bool
+  removeByEntity(entity: Base) -> bool
+  removeByIndex(index: int) -> bool
+  removeBySelection(selection: Selection) -> bool
 
 SeparatorCommandInput : CommandInput
   # An object that represents a visual separator within a command dialog.
@@ -1291,6 +2325,58 @@ SliderCommandInput : CommandInput
   deleteMe() -> bool
   getText(isLeft: bool) -> str
   setText(left: str, right: str) -> bool
+
+Snapshot : Base
+  # Object that represents a Snapshot in the timeline
+  Name
+  isValid
+  name: str
+  objectType
+  timelineObject: TimelineObject
+  Name()
+  classType()
+  deleteMe() -> bool
+
+Snapshots *collection<Snapshot>
+  # Provides access to the Snapshots within a design and provides
+    methods to create new Snapshots.
+  Name
+  count: int
+  hasPendingSnapshot: bool
+  isValid
+  objectType
+  Name()
+  add() -> Snapshot
+  classType()
+  revertPendingSnapshot() -> bool
+
+StatusMessage : Base
+  # Defines the message associated with a Status object.
+  Name
+  childStatusMessages: StatusMessages
+  isValid
+  message: str
+  messageId: str
+  objectType
+  statusMessageType: StatusMessageTypes
+  Name()
+  classType()
+
+StatusMessageTypes
+  Name()
+  StatusMessageErrorType()
+  StatusMessageNoneType()
+  StatusMessageWarningType()
+
+StatusMessages *collection<StatusMessage>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  addError() -> StatusMessage
+  addWarning() -> StatusMessage
+  classType()
 
 StringValueCommandInput : CommandInput
   # Provides a command input to get a string value from the user.
@@ -1411,6 +2497,43 @@ Toolbar : Base
   Name()
   classType()
 
+ToolbarControl : Base
+  # The base class for all toolbar controls.
+  Name
+  id: str
+  index: int
+  isValid
+  isVisible: bool
+  objectType
+  parent: Base
+  Name()
+  classType()
+  deleteMe() -> bool
+
+ToolbarControlList *collection<ToolbarControl>
+  # Provides access to a list of toolbar controls.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemById(id: str) -> ToolbarControl
+
+ToolbarControls *collection<ToolbarControl>
+  # ToolbarControls is a collection of ToolbarControl objects displayed in a toolbar or menu.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  addCommand() -> CommandControl
+  addDropDown() -> DropDownControl
+  addSeparator() -> SeparatorControl
+  addSplitButton() -> SplitButtonControl
+  classType()
+  itemById(id: str) -> ToolbarControl
+
 ToolbarPanel : Base
   # Toolbar panels are the panels shown in the command toolbar.
   Name
@@ -1429,6 +2552,26 @@ ToolbarPanel : Base
   classType()
   deleteMe() -> bool
   indexWithinTab(tabId: str) -> int
+
+ToolbarPanelList *collection<ToolbarPanel>
+  # A ToolbarPanelList is a list of ToolbarPanel objects.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemById(id: str) -> ToolbarPanel
+
+ToolbarPanels *collection<ToolbarPanel>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add() -> ToolbarPanel
+  classType()
+  itemById(id: str) -> ToolbarPanel
 
 ToolbarTab : Base
   # Toolbar tabs are the tabs shown in the command toolbar.
@@ -1449,6 +2592,65 @@ ToolbarTab : Base
   classType()
   deleteMe() -> bool
   move(positionId: str, isBefore: bool) -> bool
+
+ToolbarTabList *collection<ToolbarTab>
+  # A ToolbarTabList is a list of ToolbarTab objects.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemById(id: str) -> ToolbarTab
+
+ToolbarTabs *collection<ToolbarTab>
+  # Provides access to a set of toolbar tabs.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(id: str, name: str) -> ToolbarTab
+  classType()
+  itemById(id: str) -> ToolbarTab
+
+Toolbars *collection<Toolbar>
+  # Provides access to the toolbars. These are currently the right and left QAT's and the NavBar.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemById(id: str) -> Toolbar
+
+TransparencyDisplayEffects
+  BetterDisplayTransparencyEffect()
+  BetterPerformanceTransparencyEffect()
+  Name()
+
+TriadChanges
+  Name()
+  TriadChangeHorizontalFlip()
+  TriadChangeUnknown()
+  TriadChangeVerticalFlip()
+  TriadChangeXRotation()
+  TriadChangeXScale()
+  TriadChangeXTranslation()
+  TriadChangeXYScale()
+  TriadChangeXYTranslation()
+  TriadChangeXYZScale()
+  TriadChangeXYZTranslation()
+  TriadChangeXZScale()
+  TriadChangeXZTranslation()
+  TriadChangeYRotation()
+  TriadChangeYScale()
+  TriadChangeYTranslation()
+  TriadChangeYZScale()
+  TriadChangeYZTranslation()
+  TriadChangeZRotation()
+  TriadChangeZScale()
+  TriadChangeZTranslation()
 
 TriadCommandInput : CommandInput
   Name
@@ -1533,6 +2735,12 @@ TriadCommandInput : CommandInput
   setScaleVisibility(isVisible: bool) -> bool
   setTranslateVisibility(isVisible: bool) -> bool
 
+UploadStates
+  Name()
+  UploadFailed()
+  UploadFinished()
+  UploadProcessing()
+
 UserInterface : Base
   # Provides access to the user-interface related objects and functionality.
   Name
@@ -1602,6 +2810,13 @@ UserInterfaceGeneralEventHandler : EventHandler
   Name()
   notify(eventArgs: UserInterfaceGeneralEventArgs) -> void
 
+UserInterfaceThemes
+  ClassicUserInterfaceTheme()
+  DarkBlueUserInterfaceTheme()
+  DarkGrayUserInterfaceTheme()
+  LightGrayUserInterfaceTheme()
+  Name()
+
 ValidateInputsEvent : Event
   # An event endpoint that supports the connection to client implemented ValidateInputsEventHandlers.
   Name
@@ -1658,6 +2873,29 @@ ValueCommandInput : CommandInput
   classType()
   deleteMe() -> bool
 
+ViewOrientations
+  ArbitraryViewOrientation()
+  BackViewOrientation()
+  BottomViewOrientation()
+  FrontViewOrientation()
+  IsoBottomLeftViewOrientation()
+  IsoBottomRightViewOrientation()
+  IsoTopLeftViewOrientation()
+  IsoTopRightViewOrientation()
+  LeftViewOrientation()
+  Name()
+  RightViewOrientation()
+  TopViewOrientation()
+
+VisualStyles
+  Name()
+  ShadedVisualStyle()
+  ShadedWithHiddenEdgesVisualStyle()
+  ShadedWithVisibleEdgesOnlyVisualStyle()
+  WireframeVisualStyle()
+  WireframeWithHiddenEdgesVisualStyle()
+  WireframeWithVisibleEdgesOnlyVisualStyle()
+
 WebRequestEvent : Event
   Name
   isValid
@@ -1687,6 +2925,113 @@ WebRequestEventHandler : EventHandler
   Name()
   notify(eventArgs: WebRequestEventArgs) -> void
 
+WhatsNew
+  AdditivePlatformMachineElement.cornerRadius()
+  CAMLibrary.doesPathExist()
+  CAMParameter.fullTitle()
+  CAMParameter.isVisible()
+  CAMParameter.saveExpressionAsUserDefault()
+  CAMParameter.systemDefaultExpression()
+  CAMParameter.userDefaultExpression()
+  CAMParameters.resetToSystemDefaults()
+  CAMTemplateLibrary.doesPathExist()
+  Component.isJointOriginsFolderLightBulbOn()
+  ConfigurationColumns.addInsertStandardDesignColumn()
+  ControllerConfigurationMachineElement.nonTcpRapidInterpolationMode()
+  ControllerConfigurationMachineElement.tcpRapidInterpolationMode()
+  CustomFeatureParameter.textValue()
+  CustomFeatureParameter.valueType()
+  Features.embossFeatures()
+  Features.hemFeatures()
+  Features.meshConvertFeatures()
+  Features.meshReverseNormalFeatures()
+  Features.meshSeparateFeatures()
+  FilletFeature.convert()
+  FilletFeature.filletFeatureType()
+  FilletFeature.fullRoundFilletFaceSets()
+  FilletFeatures.addFullRoundFillet()
+  FilletFeatures.createFullRoundFilletInput()
+  FlatPatternComponent.isJointOriginsFolderLightBulbOn()
+  FusionProductPreferences.isAutoLookAtSketch2()
+  HoleFeature.clearanceHoleInfo()
+  HoleFeature.holeTapType()
+  HoleFeature.setToClearanceHole()
+  HoleFeature.setToSimpleHole()
+  HoleFeature.setToTappedHole()
+  HoleFeature.tappedHoleInfo()
+  HoleFeature.thread()
+  HoleFeatureInput.holeTapType()
+  HoleFeatureInput.isFullLength()
+  HoleFeatureInput.isModeled()
+  HoleFeatureInput.setLengthAndOffset()
+  HoleFeatureInput.setToClearanceHole()
+  HoleFeatureInput.setToSimpleHole()
+  HoleFeatureInput.setToTappedHole()
+  HoleFeatureInput.threadLength()
+  HoleFeatureInput.threadOffset()
+  Joints.addInferredJoint()
+  Joints.createInferredJointInput()
+  Machine.clearSimulationModel()
+  MachineElements.addElement()
+  MachineElements.createMachineElementInput()
+  MachineLibrary.doesPathExist()
+  ModelParameter.textValue()
+  ModelParameter.valueType()
+  Name()
+  OperationStrategy.is2DStrategy()
+  OperationStrategy.is3DStrategy()
+  OperationStrategy.isAdditiveStrategy()
+  OperationStrategy.isCuttingStrategy()
+  OperationStrategy.isDrillingStrategy()
+  OperationStrategy.isFinishingStrategy()
+  OperationStrategy.isMillingStrategy()
+  OperationStrategy.isRotaryStrategy()
+  OperationStrategy.isSupportStrategy()
+  OperationStrategy.isTurningStrategy()
+  Parameter.textValue()
+  Parameter.valueType()
+  PostLibrary.doesPathExist()
+  PrintSettingLibrary.doesPathExist()
+  StockMaterialLibrary.doesPathExist()
+  ThickenFeature.thickenType()
+  ThickenFeatureInput.thickenType()
+  ThreadDataQuery.create()
+  ThreadDataQuery.isTapered()
+  ThreadFeature.hole()
+  ThreadInfo.create()
+  ThreadInfo.isRightHanded()
+  ThreadInfo.isTapered()
+  ThreadInfo.redefine()
+  ThreadInfo.taperAngle()
+  ThreadInfo.taperTapDrillDiameter()
+  ThreadInfo.taperThreadHeight()
+  ThreadInfo.taperUsefulThreadLength()
+  ThreadInfo.taperWrenchMakeupInternalDiameter()
+  ToolLibraries.doesPathExist()
+  UserParameter.textValue()
+  UserParameter.valueType()
+  © Copyright 2025 Autodesk, Inc.()
+
+Workspace : Base
+  Name
+  id: str
+  isActive: bool
+  isNative: bool
+  isValid
+  name: str
+  objectType
+  productType: str
+  resourceFolder: str
+  toolClipFilename: str
+  toolbarPanels: ToolbarPanels
+  toolbarTabs: ToolbarTabs
+  tooltip: str
+  tooltipDescription: str
+  Name()
+  activate() -> bool
+  classType()
+  deleteMe() -> bool
+
 WorkspaceEvent : Event
   Name
   isValid
@@ -1711,5 +3056,26 @@ WorkspaceEventArgs : EventArgs
 WorkspaceEventHandler : EventHandler
   Name()
   notify(eventArgs: WorkspaceEventArgs) -> void
+
+WorkspaceList *collection<Workspace>
+  # A WorkspaceList is a list of Workspaces - e.g. the Workspaces for a given product.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemById(id: str) -> Workspace
+
+Workspaces *collection<Workspace>
+  # Provides access to all of the existing workspaces.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(productType: str, id: str, name: str, resourceFolder: str) -> Workspace
+  classType()
+  itemById(id: str) -> Workspace
 
 _SelectionCommandInput_Meta_Class : type

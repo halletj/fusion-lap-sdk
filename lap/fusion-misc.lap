@@ -1,0 +1,3428 @@
+# fusion-misc.lap
+
+[types]
+AutoLookAtSketchSettings: OffAutoLookAtSketchSetting | UserCameraAutoLookAtSketchSetting | AlwaysOrthographicAutoLookAtSketchSetting
+AutomaticGenerationModes: ForceGeneration | SkipGeneration | UserPreference
+CalculationAccuracy: LowCalculationAccuracy | MediumCalculationAccuracy | HighCalculationAccuracy | VeryHighCalculationAccuracy
+CommandTerminationReason: UnknownTerminationReason | CompletedTerminationReason | CancelledTerminationReason | AbortedTerminationReason | PreEmptedTerminationReason | SessionEndingTerminationReason
+ConstraintTypes: UnknownConstraintType | FixedConstraintType | FrictionlessConstraintType | PrescribedDisplacementConstraintType | PinConstraintType | RemoteConstraintType
+ControlPointInterpolators: LinearInterpolator | NearestInterpolator | CubicInterpolator | SmoothInterpolator
+DataFileCopyTypes: CopyDrawingsDataFileCopyType
+DefaultDesignTypeOptions: PromptForDesignTypeOption | DirectDesignTypeOption | ParametricDesignTypeOption
+DefaultGroupType: Fixture_GroupType | Model_GroupType | Drive_GroupType | Floor_GroupType | Wall_GroupType | Adjacent_GroupType
+DefaultModelingOrientations: YUpModelingOrientation | ZUpModelingOrientation
+DefaultOrbits: ConstrainedOrbit | FreeOrbit
+DefaultWorkspaces: ModelWorkspace | SculptWorkspace | PatchWorkspace
+DegreeDisplayFormats: DecimalDegreeDisplay | MinutesAndSecondsDegreeDisplay
+DesignIntentTypes: PartDesignIntentType | AssemblyDesignIntentType | HybridDesignIntentType
+DesignTypes: DirectDesignType | ParametricDesignType
+DimensionOrientations: AlignedDimensionOrientation | HorizontalDimensionOrientation | VerticalDimensionOrientation
+DimensionStrategyTypes: DefaultDimensionStrategyType | ChainDimensionStrategyType | BaselineDimensionStrategyType | EdgeAndAlignedDimensionStrategyType | SymmetricAndChainDimensionStrategyType | SymmetricAndBaselineDimensionStrategyType | EdgeAndAlignedHigherAngleDimPriorityDimensionStrategyType | EdgeAndAlignedWithBaselineDimensionStrategyType
+DocumentTypes: FusionDesignDocumentType
+ElementOrderTypes: UnknownElementOrderType | LinearElementOrderType | ParabolicElementOrderType
+ElementSizeDeterminationTypes: UnknownElementSizeDeterminationType | SizeByModelElementSizeDeterminationType | AbsoluteElementSizeDeterminationType
+ExtensionMethods: TangentExtensionMethod | ClosestBoundaryExtensionMethod | ParallelExtensionMethod
+ExtensionTypes: BoundaryExtensionType | DistanceExtensionType
+FeatureHealthStates: HealthyFeatureHealthState | WarningFeatureHealthState | ErrorFeatureHealthState | SuppressedFeatureHealthState | RolledBackFeatureHealthState | UnknownFeatureHealthState
+FeatureOperations: JoinFeatureOperation | CutFeatureOperation | IntersectFeatureOperation | NewBodyFeatureOperation | NewComponentFeatureOperation
+FloatParameterValueTypes: UnspecifiedValueType | LengthValueType | AngleValueType | LinearVelocityValueType | RotationalVelocityValueType | TimeValueType | WeightValueType | PowerValueType | FlowRateValueType | AreaValueType | VolumeValueType | TemperatureValueType
+FootAndInchDisplayFormats: DecimalFootAndInchDisplay | FractionalFootAndInchDisplay | ArchitecturalFootAndInchDisplay
+FusionHubExecutionBehaviors: FusionHubExecutionBehavior_ForceExportWithRelationship | FusionHubExecutionBehavior_SilentForceExportWithRelationship | FusionHubExecutionBehavior_ExportWithRelationship | FusionHubExecutionBehavior_SkipRelationship
+HorizontalAlignments: LeftHorizontalAlignment | CenterHorizontalAlignment | RightHorizontalAlignment
+HttpMethods: GetMethod | PostMethod | PutMethod | DeleteMethod | PatchMethod
+InterLoopDimensionStrategyTypes: DefaultInterLoopDimensionStrategyType | ChainInterLoopDimensionStrategyType | BaselineInterLoopDimensionStrategyType
+KeyCodes: NoKeyCode | SpaceKeyCode | AsteriskKeyCode | PlusKeyCode | CommaKeyCode | MinusKeyCode | PeriodKeyCode | SlashKeyCode | D0KeyCode | D1KeyCode | D2KeyCode | D3KeyCode | D4KeyCode | D5KeyCode | D6KeyCode | D7KeyCode | D8KeyCode | D9KeyCode | ColonKeyCode | SemicolonKeyCode | LessKeyCode | EqualKeyCode | GreaterKeyCode | QuestionKeyCode | AKeyCode | BKeyCode | CKeyCode | DKeyCode | EKeyCode | FKeyCode | GKeyCode | HKeyCode | IKeyCode | JKeyCode | KKeyCode | LKeyCode | MKeyCode | NKeyCode | OKeyCode | PKeyCode | QKeyCode | RKeyCode | SKeyCode | TKeyCode | UKeyCode | VKeyCode | WKeyCode | XKeyCode | YKeyCode | ZKeyCode | BracketLeftKeyCode | BackslashKeyCode | BracketRightKeyCode | AsciiCircumKeyCode | UnderscoreKeyCode | QuoteLeftKeyCode | BraceLeftKeyCode | BarKeyCode | BraceRightKeyCode | AsciiTildeKeyCode | GraveAccentKeyCode | EscapeKeyCode | TabKeyCode | BacktabKeyCode | BackspaceKeyCode | ReturnKeyCode | EnterKeyCode | InsertKeyCode | DeleteKeyCode | PauseKeyCode | PrintKeyCode | SysReqKeyCode | ClearKeyCode | HomeKeyCode | EndKeyCode | LeftKeyCode | UpKeyCode | RightKeyCode | DownKeyCode | PageUpKeyCode | PageDownKeyCode | ShiftKeyCode | ControlKeyCode | MetaKeyCode | AltKeyCode | F1KeyCode | F2KeyCode | F3KeyCode | F4KeyCode | F5KeyCode | F6KeyCode | F7KeyCode | F8KeyCode | F9KeyCode | F10KeyCode | F11KeyCode | F12KeyCode | MenuKeyCode
+LibraryLocations: LocalLibraryLocation | CloudLibraryLocation | NetworkLibraryLocation | OnlineSamplesLibraryLocation | ExternalLibraryLocation | Fusion360LibraryLocation | HubLibraryLocation
+LoadDirectionTypes: UnknownLoadDirectionType | DefaultLoadDirectionType | CartesianLoadDirectionType | AnglesLoadDirectionType | ReferenceLoadDirectionType
+LocalRenderStates: QueuedLocalRenderState | ProcessingLocalRenderState | FinishedLocalRenderState | FailedLocalRenderState
+LogLevels: ErrorLogLevel | WarningLogLevel | InfoLogLevel
+LogTypes: FileLogType | ConsoleLogType
+MessageBoxButtonTypes: OKButtonType | OKCancelButtonType | RetryCancelButtonType | YesNoButtonType | YesNoCancelButtonType
+MessageBoxIconTypes: NoIconIconType | QuestionIconType | InformationIconType | WarningIconType | CriticalIconType
+ModifyUtilityTypes: AdditiveSetupModifyUtility
+OperatingSystems: WindowsOperatingSystem | MacOperatingSystem | WindowsAndMacOperatingSystem
+PanZoomOrbitShortcuts: Fusion360PanZoomOrbitShortcut | AliasPanZoomOrbitShortcut | InventorPanZoomOrbitShortcut | SolidWorksPanZoomOrbitShortcut | TinkercadPanZoomOrbitShortcut | PowerMillPanZoomOrbitShortcut
+ProjectedTextureMapTypes: AutomaticTextureMapProjection | PlanarTextureMapProjection | BoxTextureMapProjection | SphericalTextureMapProjection | CylindricalTextureMapProjection
+StudyTypes: UnknownStudyType | LinearStaticStressStudyType | NonLinearStaticStressStudyType | DynamicEventSimulationStudyType | ModalFrequenciesStudyType | ElectronicsCoolingStudyType | ThermalStudyType | ThermalStressStudyType | StructuralBucklingStudyType | QuasiStaticEventSimulationStudyType | ShapeOptimizationStudyType | InjectionMoldingStudyType
+SymmetricDimensionStrategyTypes: DefaultSymmetricDimensionStrategyType | EndToEndSymmetricDimensionStrategyType | EndToCenterSymmetricDimensionStrategyType | CenterToEndSymmetricDimensionStrategyType | CenterToEndWithSymmetryConstraintSymmetricDimensionStrategyType
+TablePresentationStyles: nameValueTablePresentationStyle | itemBorderTablePresentationStyle | transparentBackgroundTablePresentationStyle
+TextStyles: TextStyleBold | TextStyleItalic | TextStyleUnderline
+TextureTypes: UnknownTexture | ImageTexture | CheckerTexture | GradientTexture | MarbleTexture | NoiseTexture | SpeckleTexture | TileTexture | WaveTexture | WoodTexture
+ThinExtrudeWallLocation: Side1 | Center | Side2
+UntrimLoopTypes: AllLoopsUntrimType | ExternalLoopsUntrimType | InternalLoopsUntrimType | ManualLoopsUntrimType
+UserLanguages: ChinesePRCLanguage | ChineseTaiwanLanguage | CzechLanguage | EnglishLanguage | FrenchLanguage | GermanLanguage | HungarianLanguage | ItalianLanguage | JapaneseLanguage | KoreanLanguage | PolishLanguage | PortugueseBrazilianLanguage | RussianLanguage | SpanishLanguage | TurkishLanguage
+ValueTypes: StringValueType | RealValueType | ObjectValueType | BooleanValueType
+VerticalAlignments: TopVerticalAlignment | MiddleVerticalAlignment | BottomVerticalAlignment
+
+[classes]
+AccessibilityAnalyses *collection<AccessibilityAnalysis>
+  # Provides access to any accessibility analyses results in the design.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemByName(name: str) -> AccessibilityAnalysis
+
+AccessibilityAnalysis : Analysis
+  # Represents any existing Accessibility Analysis that exist in the design.
+  Name
+  attributes
+  entityToken
+  isLightBulbOn
+  isValid
+  isVisible
+  name
+  objectType
+  Name()
+  classType()
+  deleteMe() -> bool
+
+Analyses *collection<Analysis>
+  # Provides access to the existing analysis results within a design.
+  Name
+  accessibilityAnalyses: AccessibilityAnalyses
+  count: int
+  curvatureCombAnalyses: CurvatureCombAnalyses
+  curvatureMapAnalyses: CurvatureMapAnalyses
+  draftAnalyses: DraftAnalyses
+  isLightBulbOn: bool
+  isValid
+  isoCurveAnalyses: IsoCurveAnalyses
+  minimumRadiusAnalyses: MinimumRadiusAnalyses
+  objectType
+  sectionAnalyses: SectionAnalyses
+  zebraAnalyses: ZebraAnalyses
+  Name()
+  classType()
+  itemByName(name: str) -> Analysis
+
+Analysis : Base
+  # The base class Analysis object that represents all the types of analysis results.
+  Name
+  attributes: Attributes
+  entityToken: str
+  isLightBulbOn: bool
+  isValid
+  isVisible: bool
+  name: str
+  objectType
+  Name()
+  classType()
+  deleteMe() -> bool
+
+ApplicationFolders : Base
+  Name
+  appLogFilePath: str
+  appStoreInstallPath: str
+  defaultPathForScriptsAndAddIns: str
+  isValid
+  materialsPath: str
+  objectType
+  optionsPath: str
+  rootPath: str
+  userDataPath: str
+  Name()
+  classType()
+
+AutoConstrainResult : Base
+  addedConstraints: GeometricConstraint]
+  addedDimensions: SketchDimension]
+  isFullyConstrained: bool
+
+AutoLookAtSketchSettings
+  AlwaysOrthographicAutoLookAtSketchSetting()
+  Name()
+  OffAutoLookAtSketchSetting()
+  UserCameraAutoLookAtSketchSetting()
+
+AutomaticGenerationModes
+  ForceGeneration()
+  Name()
+  SkipGeneration()
+  UserPreference()
+
+BaseVector
+  append(x: Base) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::core::Base > >::size_type, x: Base) -> void
+  back() -> Base >::value_type
+  begin() -> Base >::iterator
+  capacity() -> Base >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> Base >::iterator
+  erase() -> Base >::iterator
+  front() -> Base >::value_type
+  get_allocator() -> Base >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> Base >::value_type
+  pop_back() -> void
+  push_back(x: Base) -> void
+  rbegin() -> Base >::reverse_iterator
+  rend() -> Base >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::core::Base > >::size_type) -> void
+  resize() -> void
+  size() -> Base >::size_type
+  swap(v: list[Base]) -> void
+
+BeamNetwork : Base
+  Name
+  beams: list[int]
+  isValid
+  objectType
+  radii: list[float]
+  vertices: Point3D]
+  Name()
+  classType()
+  @static create() -> BeamNetwork
+
+BearingLoad : StructuralLoadDirectional
+  # Object that represents a Bearing load.
+
+C3MFExportOptions : ExportOptions
+  # Defines that a 3MF export is to be done and specifies the various options.
+  Name
+  aspectRatio: float
+  availablePrintUtilities: list[str]
+  filename
+  geometry
+  isOneFilePerBody: bool
+  isValid
+  maximumEdgeLength: float
+  meshRefinement: MeshRefinementSettings
+  normalDeviation: float
+  objectType
+  printUtility: str
+  sendToPrintUtility: bool
+  surfaceDeviation: float
+  Name()
+  classType()
+
+CadContours2dParameterValue : ParameterValue
+  Name
+  isValid
+  objectType
+  parent
+  Name()
+  applyCurveSelections(curveSelections: CurveSelections) -> void
+  classType()
+  getCurveSelections() -> CurveSelections
+
+CadMachineAvoidGroupsParameterValue : ParameterValue
+  # A parameter value that is a CadMachineAvoidGroupsParameterValue.
+  Name
+  isValid
+  objectType
+  parent
+  Name()
+  applyMachineAvoidGroups(machineAvoidSelectionGroups: MachineAvoidGroups) -> void
+  classType()
+  getMachineAvoidGroups() -> MachineAvoidGroups
+
+CadMultiPointOnSurfaceParameterValue : CadObjectParameterValue
+  # A parameter value that is a CadMultiPointOnSurface.
+  values: Point3D]
+
+CadObjectParameterValue : ParameterValue
+  # A parameter value that is a collection of cad objects.
+  Name
+  isValid
+  objectType
+  parent
+  value: Base]
+  Name()
+  classType()
+
+CalculationAccuracy
+  HighCalculationAccuracy()
+  LowCalculationAccuracy()
+  MediumCalculationAccuracy()
+  Name()
+  VeryHighCalculationAccuracy()
+
+Canvas : Base
+  # Represents a Canvas within a component.
+  Name
+  assemblyContext: Occurrence
+  deriveFeature: DeriveFeature
+  entityToken: str
+  imageFilename: str
+  isDerived: bool
+  isDisplayedThrough: bool
+  isLightBulbOn: bool
+  isRenderable: bool
+  isSelectable: bool
+  isValid
+  isVisible: bool
+  name: str
+  nativeObject: Canvas
+  objectType
+  opacity: int
+  planarEntity: Base
+  plane: Plane
+  timelineObject: TimelineObject
+  transform: Matrix2D
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> Canvas
+  deleteMe() -> bool
+  flipHorizontal() -> bool
+  flipVertical() -> bool
+  saveImage(filename: str) -> bool
+
+CanvasEffects : Base
+  # Provides access to the settings that control the canvas effects.
+  Name
+  isAmbientOcclusionEnabled: bool
+  isAntiAliasingEnabled: bool
+  isEnvironmentDomeEnabled: bool
+  isGroundPlaneEnabled: bool
+  isGroundReflectionEnabled: bool
+  isGroundShadowEnabled: bool
+  isObjectShadowEnabled: bool
+  isValid
+  objectType
+  Name()
+  classType()
+
+Canvases *collection<Canvas>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(input: CanvasInput) -> Canvas
+  classType()
+  createInput(imageFilename: str, planarEntity: Base) -> CanvasInput
+  itemByName(name: str) -> Canvas
+
+ChainSelection : CurveSelection
+  Name
+  endExtensionLength: float
+  error
+  extensionMethod: ExtensionMethods
+  extensionType: ExtensionTypes
+  hasError
+  hasWarning
+  inputGeometry
+  isOpen: bool
+  isOpenAllowed: bool
+  isReverted: bool
+  isValid
+  objectType
+  startExtensionLength: float
+  value
+  warning
+  Name()
+  classType()
+
+ChoiceParameterValue : ParameterValue
+  # A parameter value that is a list of choices.
+  Name
+  isValid
+  objectType
+  parent
+  value: str
+  Name()
+  classType()
+  getChoices() -> bool
+
+ChoiceProperty : Property
+  Name
+  id
+  isReadOnly
+  isValid
+  name
+  objectType
+  parent
+  value: str
+  Name()
+  classType()
+  getChoices() -> bool
+
+CloudFileDialog : Base
+  Name
+  dataFile: DataFile
+  dataFiles: DataFile]
+  dataFolder: DataFolder
+  filename: str
+  filter: str
+  isMultiSelectEnabled: bool
+  isValid
+  objectType
+  title: str
+  Name()
+  classType()
+  showOpen() -> DialogResults
+  showSave() -> DialogResults
+
+CloudFolderDialog : Base
+  dataFolder: DataFolder
+  initialFolder: DataFolder
+  title: str
+  showDialog() -> DialogResults
+
+ColorControlPoint : Base
+  Name
+  interpolator: ControlPointInterpolators
+  isValid
+  objectType
+  parameter: float
+  value: Color
+  Name()
+  classType()
+
+ColorControlPointMapGraphNodeProperty : GraphNodeProperty
+  Name
+  description
+  isValid
+  name
+  objectType
+  pointCount: int
+  Name()
+  addPoint(parameter: float, value: Color, interpolator: ControlPointInterpolators) -> bool
+  classType()
+  clear() -> bool
+  getPoint(index: int) -> ColorControlPoint
+  removePoint(index: int) -> bool
+
+ColorGraphNodeProperty : GraphNodeProperty
+  # A property value that is a color.
+  Name
+  description
+  isValid
+  name
+  objectType
+  value: Color
+  Name()
+  classType()
+
+ColorProperty : Property
+  Name
+  connectedTexture: AppearanceTexture
+  hasConnectedTexture: bool
+  hasMultipleValues: bool
+  id
+  isReadOnly
+  isValid
+  name
+  objectType
+  parent
+  value: Color
+  values: Color]
+  Name()
+  classType()
+
+ColorVector
+  append(x: Color) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::core::Color > >::size_type, x: Color) -> void
+  back() -> Color >::value_type
+  begin() -> Color >::iterator
+  capacity() -> Color >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> Color >::iterator
+  erase() -> Color >::iterator
+  front() -> Color >::value_type
+  get_allocator() -> Color >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> Color >::value_type
+  pop_back() -> void
+  push_back(x: Color) -> void
+  rbegin() -> Color >::reverse_iterator
+  rend() -> Color >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::core::Color > >::size_type) -> void
+  resize() -> void
+  size() -> Color >::size_type
+  swap(v: list[Color]) -> void
+
+CommandControl : ToolbarControl
+  # Represents a button, check box, or radio control list in a panel, toolbar, or drop-down.
+  Name
+  commandDefinition: CommandDefinition
+  id
+  index
+  isPromoted: bool
+  isPromotedByDefault: bool
+  isValid
+  isVisible
+  objectType
+  parent
+  Name()
+  classType()
+  deleteMe() -> bool
+  promote() -> bool
+
+CommandTerminationReason
+  AbortedTerminationReason()
+  CancelledTerminationReason()
+  CompletedTerminationReason()
+  Name()
+  PreEmptedTerminationReason()
+  SessionEndingTerminationReason()
+  UnknownTerminationReason()
+
+Cone : Surface
+  Name
+  axis: Vector3D
+  evaluator
+  halfAngle: float
+  isValid
+  objectType
+  origin: Point3D
+  radius: float
+  surfaceType
+  Name()
+  classType()
+  copy() -> Cone
+  @static create(origin: Point3D, axis: Vector3D, radius: float, halfAngle: float) -> Vector3D
+  getData() -> bool
+  set(origin: Point3D, axis: Vector3D, radius: float, halfAngle: float) -> bool
+  transformBy(matrix: Matrix3D) -> bool
+
+ConstructionAxes *collection<ConstructionAxis>
+  Name
+  component: Component
+  count: int
+  isValid
+  objectType
+  Name()
+  add(input: ConstructionAxisInput) -> ConstructionAxis
+  classType()
+  createInput() -> ConstructionAxisInput
+  itemByName(name: str) -> ConstructionAxis
+
+ConstructionAxis : Base
+  # ConstructionAxis Object
+  Name
+  assemblyContext: Occurrence
+  attributes: Attributes
+  baseFeature: BaseFeature
+  component: Component
+  definition: ConstructionAxisDefinition
+  deriveFeature: DeriveFeature
+  entityToken: str
+  errorOrWarningMessage: str
+  geometry: InfiniteLine3D
+  healthState: FeatureHealthStates
+  isDeletable: bool
+  isDerived: bool
+  isLightBulbOn: bool
+  isParametric: bool
+  isValid
+  isVisible: bool
+  name: str
+  nativeObject: ConstructionAxis
+  objectType
+  parent: Base
+  timelineObject: TimelineObject
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> ConstructionAxis
+  deleteMe() -> bool
+
+ConstructionAxisVector
+  append(x: ConstructionAxis) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::ConstructionAxis > >::size_type, x: ConstructionAxis) -> void
+  back() -> ConstructionAxis >::value_type
+  begin() -> ConstructionAxis >::iterator
+  capacity() -> ConstructionAxis >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> ConstructionAxis >::iterator
+  erase() -> ConstructionAxis >::iterator
+  front() -> ConstructionAxis >::value_type
+  get_allocator() -> ConstructionAxis >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> ConstructionAxis >::value_type
+  pop_back() -> void
+  push_back(x: ConstructionAxis) -> void
+  rbegin() -> ConstructionAxis >::reverse_iterator
+  rend() -> ConstructionAxis >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::ConstructionAxis > >::size_type) -> void
+  resize() -> void
+  size() -> ConstructionAxis >::size_type
+  swap(v: list[ConstructionAxis]) -> void
+
+ConstructionPlane : Base
+  # ConstructionPlane Object
+  Name
+  assemblyContext: Occurrence
+  attributes: Attributes
+  baseFeature: BaseFeature
+  component: Component
+  definition: ConstructionPlaneDefinition
+  deriveFeature: DeriveFeature
+  displayBounds: BoundingBox2D
+  entityToken: str
+  errorOrWarningMessage: str
+  geometry: Plane
+  healthState: FeatureHealthStates
+  isDeletable: bool
+  isDerived: bool
+  isLightBulbOn: bool
+  isParametric: bool
+  isValid
+  isVisible: bool
+  name: str
+  nativeObject: ConstructionPlane
+  objectType
+  parent: Base
+  timelineObject: TimelineObject
+  transform: Matrix3D
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> ConstructionPlane
+  deleteMe() -> bool
+
+ConstructionPlaneVector
+  append(x: ConstructionPlane) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::ConstructionPlane > >::size_type, x: ConstructionPlane) -> void
+  back() -> ConstructionPlane >::value_type
+  begin() -> ConstructionPlane >::iterator
+  capacity() -> ConstructionPlane >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> ConstructionPlane >::iterator
+  erase() -> ConstructionPlane >::iterator
+  front() -> ConstructionPlane >::value_type
+  get_allocator() -> ConstructionPlane >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> ConstructionPlane >::value_type
+  pop_back() -> void
+  push_back(x: ConstructionPlane) -> void
+  rbegin() -> ConstructionPlane >::reverse_iterator
+  rend() -> ConstructionPlane >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::ConstructionPlane > >::size_type) -> void
+  resize() -> void
+  size() -> ConstructionPlane >::size_type
+  swap(v: list[ConstructionPlane]) -> void
+
+ConstructionPlanes *collection<ConstructionPlane>
+  Name
+  component: Component
+  count: int
+  isValid
+  objectType
+  Name()
+  add(input: ConstructionPlaneInput) -> ConstructionPlane
+  classType()
+  createInput() -> ConstructionPlaneInput
+  itemByName(name: str) -> ConstructionPlane
+
+ConstructionPoint : Base
+  # ConstructionPoint Object
+  Name
+  assemblyContext: Occurrence
+  attributes: Attributes
+  baseFeature: BaseFeature
+  component: Component
+  definition: ConstructionPointDefinition
+  deriveFeature: DeriveFeature
+  entityToken: str
+  errorOrWarningMessage: str
+  geometry: Point3D
+  healthState: FeatureHealthStates
+  isDeletable: bool
+  isDerived: bool
+  isLightBulbOn: bool
+  isParametric: bool
+  isValid
+  isVisible: bool
+  name: str
+  nativeObject: ConstructionPoint
+  objectType
+  parent: Base
+  timelineObject: TimelineObject
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> ConstructionPoint
+  deleteMe() -> bool
+
+ConstructionPointVector
+  append(x: ConstructionPoint) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::ConstructionPoint > >::size_type, x: ConstructionPoint) -> void
+  back() -> ConstructionPoint >::value_type
+  begin() -> ConstructionPoint >::iterator
+  capacity() -> ConstructionPoint >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> ConstructionPoint >::iterator
+  erase() -> ConstructionPoint >::iterator
+  front() -> ConstructionPoint >::value_type
+  get_allocator() -> ConstructionPoint >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> ConstructionPoint >::value_type
+  pop_back() -> void
+  push_back(x: ConstructionPoint) -> void
+  rbegin() -> ConstructionPoint >::reverse_iterator
+  rend() -> ConstructionPoint >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::ConstructionPoint > >::size_type) -> void
+  resize() -> void
+  size() -> ConstructionPoint >::size_type
+  swap(v: list[ConstructionPoint]) -> void
+
+ConstructionPoints *collection<ConstructionPoint>
+  Name
+  component: Component
+  count: int
+  isValid
+  objectType
+  Name()
+  add(input: ConstructionPointInput) -> ConstructionPoint
+  classType()
+  createInput() -> ConstructionPointInput
+  itemByName(name: str) -> ConstructionPoint
+
+ControlPointInterpolators
+  CubicInterpolator()
+  LinearInterpolator()
+  Name()
+  NearestInterpolator()
+  SmoothInterpolator()
+
+ControllerConfigurationMachineElement : MachineElement
+  # Machine element representing controller settings for kinematics.
+  Name
+  axisConfigurations: MachineAxisConfigurations
+  elementId
+  isValid
+  maxBlockProcessingSpeed: int
+  maxNormalSpeed: float
+  nonTcpRapidInterpolationMode: MachineNonTCPInterpolationMode
+  objectType
+  tcpRapidInterpolationMode: MachineTCPInterpolationMode
+  typeId
+  Name()
+  classType()
+  @static staticTypeId() -> str
+
+CurvatureCombAnalyses *collection<CurvatureCombAnalysis>
+  # Provides access to any curvature comb analyses results in the design.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemByName(name: str) -> CurvatureCombAnalysis
+
+CurvatureCombAnalysis : Analysis
+  # Represents any existing Curvature Comb Analysis that exist in the design.
+  Name
+  attributes
+  entityToken
+  isLightBulbOn
+  isValid
+  isVisible
+  name
+  objectType
+  Name()
+  classType()
+  deleteMe() -> bool
+
+CurvatureMapAnalyses *collection<CurvatureMapAnalysis>
+  # Provides access to any curvature map analyses results in the design.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemByName(name: str) -> CurvatureMapAnalysis
+
+CurvatureMapAnalysis : Analysis
+  # Represents any existing Curvature Map Analysis that exist in the design.
+  Name
+  attributes
+  entityToken
+  isLightBulbOn
+  isValid
+  isVisible
+  name
+  objectType
+  Name()
+  classType()
+  deleteMe() -> bool
+
+CustomFeatureDependencies *collection<CustomFeatureDependency>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(id: str, entity: Base) -> CustomFeatureDependency
+  classType()
+  deleteAll() -> bool
+  itemById(id: str) -> CustomFeatureDependency
+
+CustomFeatureDependency : Base
+  Name
+  entity: Base
+  id: str
+  isValid
+  objectType
+  parentCustomFeature: CustomFeature
+  Name()
+  classType()
+  deleteMe() -> bool
+
+CustomOperationDefinitionInputVector
+  append(x: CustomOperationDefinitionInput) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::cam::CustomOperationDefinitionInput > >::size_type, x: CustomOperationDefinitionInput) -> void
+  back() -> CustomOperationDefinitionInput >::value_type
+  begin() -> CustomOperationDefinitionInput >::iterator
+  capacity() -> CustomOperationDefinitionInput >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> CustomOperationDefinitionInput >::iterator
+  erase() -> CustomOperationDefinitionInput >::iterator
+  front() -> CustomOperationDefinitionInput >::value_type
+  get_allocator() -> CustomOperationDefinitionInput >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> CustomOperationDefinitionInput >::value_type
+  pop_back() -> void
+  push_back(x: CustomOperationDefinitionInput) -> void
+  rbegin() -> CustomOperationDefinitionInput >::reverse_iterator
+  rend() -> CustomOperationDefinitionInput >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::cam::CustomOperationDefinitionInput > >::size_type) -> void
+  resize() -> void
+  size() -> CustomOperationDefinitionInput >::size_type
+  swap(v: list[CustomOperationDefinitionInput]) -> void
+
+CustomOperationRegistrationResult : Base
+  # Holds information gathered during the registration of a custom strategy.
+  collidingMetaparameters: list[str]
+  collidingParameters: list[str]
+  errorMessage: str
+  isOverwritingPreviousRegistration: bool
+  isRegistrationSuccessful: bool
+  strategyName: str
+  unsupportedMetaparameters: list[str]
+  unsupportedParameterOverrides: list[str]
+  warningMessage: str
+
+CustomOperationRegistrationResultVector
+  append(x: CustomOperationRegistrationResult) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::cam::CustomOperationRegistrationResult > >::size_type, x: CustomOperationRegistrationResult) -> void
+  back() -> CustomOperationRegistrationResult >::value_type
+  begin() -> CustomOperationRegistrationResult >::iterator
+  capacity() -> CustomOperationRegistrationResult >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> CustomOperationRegistrationResult >::iterator
+  erase() -> CustomOperationRegistrationResult >::iterator
+  front() -> CustomOperationRegistrationResult >::value_type
+  get_allocator() -> CustomOperationRegistrationResult >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> CustomOperationRegistrationResult >::value_type
+  pop_back() -> void
+  push_back(x: CustomOperationRegistrationResult) -> void
+  rbegin() -> CustomOperationRegistrationResult >::reverse_iterator
+  rend() -> CustomOperationRegistrationResult >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::cam::CustomOperationRegistrationResult > >::size_type) -> void
+  resize() -> void
+  size() -> CustomOperationRegistrationResult >::size_type
+  swap(v: list[CustomOperationRegistrationResult]) -> void
+
+Cylinder : Surface
+  Name
+  axis: Vector3D
+  evaluator
+  isValid
+  objectType
+  origin: Point3D
+  radius: float
+  surfaceType
+  Name()
+  classType()
+  copy() -> Cylinder
+  @static create(origin: Point3D, axis: Vector3D, radius: float) -> Vector3D
+  getData() -> bool
+  set(origin: Point3D, axis: Vector3D, radius: float) -> bool
+  transformBy(matrix: Matrix3D) -> bool
+
+DXF2DImportOptions : ImportOptions
+  Name
+  filename
+  isCreateControlPointSplines: bool
+  isSingleSketchResult: bool
+  isValid
+  isViewFit
+  layers: list[str]
+  objectType
+  planarEntity: Base
+  position: Point2D
+  results: ObjectCollection
+  Name()
+  classType()
+
+DXFSketchExportOptions : ExportOptions
+  # Defines the various settings associated with exporting a sketch in DXF format.
+  Name
+  filename
+  geometry
+  isConstructionExported: bool
+  isPointsExported: bool
+  isProjectedGeometryExported: bool
+  isValid
+  objectType
+  units: DistanceUnits
+  Name()
+  classType()
+
+DataFileFuture : Base
+  # Used to check the state and get back the results of a file upload.
+  Name
+  dataFile: DataFile
+  isValid
+  objectType
+  uploadState: UploadStates
+  Name()
+  classType()
+
+DataFileVector
+  append(x: DataFile) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::core::DataFile > >::size_type, x: DataFile) -> void
+  back() -> DataFile >::value_type
+  begin() -> DataFile >::iterator
+  capacity() -> DataFile >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> DataFile >::iterator
+  erase() -> DataFile >::iterator
+  front() -> DataFile >::value_type
+  get_allocator() -> DataFile >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> DataFile >::value_type
+  pop_back() -> void
+  push_back(x: DataFile) -> void
+  rbegin() -> DataFile >::reverse_iterator
+  rend() -> DataFile >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::core::DataFile > >::size_type) -> void
+  resize() -> void
+  size() -> DataFile >::size_type
+  swap(v: list[DataFile]) -> void
+
+DataFiles *collection<DataFile>
+  # Returns the items within a folder. This includes everything in a folder except for other folders.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  asArray() -> DataFile]
+  classType()
+  itemById(id: str) -> DataFile
+
+DataFolderVector
+  append(x: DataFolder) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::core::DataFolder > >::size_type, x: DataFolder) -> void
+  back() -> DataFolder >::value_type
+  begin() -> DataFolder >::iterator
+  capacity() -> DataFolder >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> DataFolder >::iterator
+  erase() -> DataFolder >::iterator
+  front() -> DataFolder >::value_type
+  get_allocator() -> DataFolder >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> DataFolder >::value_type
+  pop_back() -> void
+  push_back(x: DataFolder) -> void
+  rbegin() -> DataFolder >::reverse_iterator
+  rend() -> DataFolder >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::core::DataFolder > >::size_type) -> void
+  resize() -> void
+  size() -> DataFolder >::size_type
+  swap(v: list[DataFolder]) -> void
+
+DataFolders *collection<DataFolder>
+  # Collection object the provides a list of data folders.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(name: str) -> DataFolder
+  asArray() -> DataFolder]
+  classType()
+  itemById(id: str) -> DataFolder
+  itemByName(name: str) -> DataFolder
+
+DataHub : Base
+  # Represents a hub within the data.
+  Name
+  dataProjects: DataProjects
+  fusionWebURL: str
+  hubType: HubTypes
+  id: str
+  isCollaborativeEditingEnabled: bool
+  isValid
+  mfgdmId: str
+  name: str
+  objectType
+  version: str
+  Name()
+  classType()
+
+DataHubVector
+  append(x: DataHub) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::core::DataHub > >::size_type, x: DataHub) -> void
+  back() -> DataHub >::value_type
+  begin() -> DataHub >::iterator
+  capacity() -> DataHub >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> DataHub >::iterator
+  erase() -> DataHub >::iterator
+  front() -> DataHub >::value_type
+  get_allocator() -> DataHub >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> DataHub >::value_type
+  pop_back() -> void
+  push_back(x: DataHub) -> void
+  rbegin() -> DataHub >::reverse_iterator
+  rend() -> DataHub >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::core::DataHub > >::size_type) -> void
+  resize() -> void
+  size() -> DataHub >::size_type
+  swap(v: list[DataHub]) -> void
+
+DataHubs *collection<DataHub>
+  # Collection object that provides a list of all available hubs.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  asArray() -> DataHub]
+  classType()
+  itemById(id: str) -> DataHub
+
+DataObject : Base
+  Name
+  isValid
+  objectType
+  Name()
+  asString() -> str
+  classType()
+  getAsBase64String() -> str
+  saveToFile(filename: str) -> bool
+
+DataObjectFuture : Future
+  Name
+  dataObject: DataObject
+  isValid
+  objectType
+  state
+  Name()
+  classType()
+
+DataProject : Base
+  # Represents the master branch project within a hub.
+  Name
+  id: str
+  isValid
+  name: str
+  objectType
+  parentHub: DataHub
+  rootFolder: DataFolder
+  Name()
+  classType()
+
+DataProjectVector
+  append(x: DataProject) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::core::DataProject > >::size_type, x: DataProject) -> void
+  back() -> DataProject >::value_type
+  begin() -> DataProject >::iterator
+  capacity() -> DataProject >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> DataProject >::iterator
+  erase() -> DataProject >::iterator
+  front() -> DataProject >::value_type
+  get_allocator() -> DataProject >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> DataProject >::value_type
+  pop_back() -> void
+  push_back(x: DataProject) -> void
+  rbegin() -> DataProject >::reverse_iterator
+  rend() -> DataProject >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::core::DataProject > >::size_type) -> void
+  resize() -> void
+  size() -> DataProject >::size_type
+  swap(v: list[DataProject]) -> void
+
+DataProjects *collection<DataProject>
+  # Collection object that provides a list of all available projects.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add() -> DataProject
+  asArray() -> DataProject]
+  classType()
+  itemById(id: str) -> DataProject
+
+Decal : Base
+  # Represents a Decal within a component.
+  Name
+  assemblyContext: Occurrence
+  deriveFeature: DeriveFeature
+  entityToken: str
+  faces: BRepFace]
+  imageFilename: str
+  isChainFaces: bool
+  isDerived: bool
+  isLightBulbOn: bool
+  isValid
+  isVisible: bool
+  name: str
+  nativeObject: Decal
+  objectType
+  opacity: float
+  timelineObject: TimelineObject
+  transform: Matrix3D
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> Decal
+  deleteMe() -> bool
+  redefine(position: Matrix3D, faces: list[BRepFace], isChainFaces: bool) -> bool
+  saveImage(filename: str) -> bool
+
+Decals *collection<Decal>
+  # Provides access to the Decals in a component and provides the functionality
+    to add new Decals.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(input: DecalInput) -> Decal
+  classType()
+  createInput(imageFilename: str, faces: list[BRepFace], point: Point3D) -> DecalInput
+  itemByName(name: str) -> Decal
+
+DefaultDesignTypeOptions
+  DirectDesignTypeOption()
+  Name()
+  ParametricDesignTypeOption()
+  PromptForDesignTypeOption()
+
+DefaultGroupType
+  Adjacent_GroupType()
+  Drive_GroupType()
+  Fixture_GroupType()
+  Floor_GroupType()
+  Model_GroupType()
+  Name()
+  Wall_GroupType()
+
+DefaultModelingOrientations
+  Name()
+  YUpModelingOrientation()
+  ZUpModelingOrientation()
+
+DefaultOrbits
+  ConstrainedOrbit()
+  FreeOrbit()
+  Name()
+
+DefaultUnitsPreferencesCollection *collection<DefaultUnitsPreferences>
+  # A collection that provides access to product specific unit preference objects.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemByName(name: str) -> DefaultUnitsPreferences
+
+DefaultWorkspaces
+  ModelWorkspace()
+  Name()
+  PatchWorkspace()
+  SculptWorkspace()
+
+DegreeDisplayFormats
+  DecimalDegreeDisplay()
+  MinutesAndSecondsDegreeDisplay()
+  Name()
+
+DerivedParameterVector
+  append(x: DerivedParameter) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::DerivedParameter > >::size_type, x: DerivedParameter) -> void
+  back() -> DerivedParameter >::value_type
+  begin() -> DerivedParameter >::iterator
+  capacity() -> DerivedParameter >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> DerivedParameter >::iterator
+  erase() -> DerivedParameter >::iterator
+  front() -> DerivedParameter >::value_type
+  get_allocator() -> DerivedParameter >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> DerivedParameter >::value_type
+  pop_back() -> void
+  push_back(x: DerivedParameter) -> void
+  rbegin() -> DerivedParameter >::reverse_iterator
+  rend() -> DerivedParameter >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::DerivedParameter > >::size_type) -> void
+  resize() -> void
+  size() -> DerivedParameter >::size_type
+  swap(v: list[DerivedParameter]) -> void
+
+DesignDataFile : DataFile
+  # A data file that represents a design file (f3d).
+  assemblyPIMData(noTraverse: bool) -> str
+  copy(targetFolder: DataFolder) -> DataFile
+  copyDesign(input: CopyFileInput) -> bool
+  copyWithInput(input: CopyFileInput) -> DataFileFuture
+  createCopyDesignFileInput(folder: DataFolder) -> CopyDesignFileInput
+  createCopyFileInput(folder: DataFolder) -> CopyFileInput
+  createCopyInput(targetFolder: DataFolder, copyType: DataFileCopyTypes) -> CopyFileInput
+  createDataVersion(versionDescription: str) -> bool
+  createMilestone(milestoneName: str) -> Milestone
+  deleteMe() -> bool
+  download(path: str, handler: DataEventHandler) -> bool
+  move(targetFolder: DataFolder) -> bool
+  promote() -> bool
+  refresh(handler: DataEventHandler) -> bool
+
+DesignTypes
+  DirectDesignType()
+  Name()
+  ParametricDesignType()
+
+DimensionOrientations
+  AlignedDimensionOrientation()
+  HorizontalDimensionOrientation()
+  Name()
+  VerticalDimensionOrientation()
+
+DocumentStockMaterialLibrary *collection<StockMaterial>
+  # DocumentStockMaterialLibrary provides access to stock materials used by the document.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  setupsByStockMaterial(stockMaterial: StockMaterial) -> Setup]
+  update(stockMaterial: StockMaterial) -> bool
+
+DocumentToolLibrary *collection<Tool>
+  Name
+  count
+  isValid
+  objectType
+  Name()
+  add(tool: Tool) -> bool
+  classType()
+  createEmpty()
+  createFromJson()
+  createQuery() -> ToolQuery
+  operationsByTool(tool: Tool) -> Operation]
+  remove(index: int) -> bool
+  toJson() -> str
+  toolsBySetupOrFolder(setupOrFolder: OperationBase) -> Tool]
+  update(tool: Tool, updateFeedAndSpeed: bool) -> bool
+
+DocumentTypes
+  FusionDesignDocumentType()
+  Name()
+
+EllipticalCone : Surface
+  Name
+  evaluator
+  halfAngle: float
+  isValid
+  majorRadius: float
+  minorRadius: float
+  objectType
+  origin: Point3D
+  surfaceType
+  Name()
+  classType()
+  copy() -> EllipticalCone
+  @static create(origin: Point3D, axis: Vector3D, majorAxisDirection: Vector3D, majorRadius: float, minorRadius: float, halfAngle: float) -> Vector3D
+  getAxes() -> void
+  getData() -> bool
+  set(origin: Point3D, axis: Vector3D, majorAxisDirection: Vector3D, majorRadius: float, minorRadius: float, halfAngle: float) -> bool
+  setAxes(axis: Vector3D, majorAxisDirection: Vector3D) -> bool
+  transformBy(matrix: Matrix3D) -> bool
+
+EllipticalCylinder : Surface
+  Name
+  axis: Vector3D
+  evaluator
+  isValid
+  majorAxis: Vector3D
+  majorRadius: float
+  minorRadius: float
+  objectType
+  origin: Point3D
+  surfaceType
+  Name()
+  classType()
+  copy() -> EllipticalCylinder
+  @static create(origin: Point3D, axis: Vector3D, majorAxis: Vector3D, majorRadius: float, minorRadius: float) -> Vector3D
+  getData() -> bool
+  set(origin: Point3D, axis: Vector3D, majorAxis: Vector3D, majorRadius: float, minorRadius: float) -> bool
+  transformBy(matrix: Matrix3D) -> bool
+
+ExtensionMethods
+  ClosestBoundaryExtensionMethod()
+  Name()
+  ParallelExtensionMethod()
+  TangentExtensionMethod()
+
+ExtensionTypes
+  BoundaryExtensionType()
+  DistanceExtensionType()
+  Name()
+
+ExtruderMachineElement : MachineElement
+  filamentDiameter: float
+  isFanAvailable: bool
+  name: str
+  nozzleDiameter: float
+  offset: Vector3D
+  temperature: float
+  volumePerSecond: float
+  deleteMe() -> void
+  @static staticTypeId() -> str
+
+FeatureHealthStates
+  ErrorFeatureHealthState()
+  HealthyFeatureHealthState()
+  Name()
+  RolledBackFeatureHealthState()
+  SuppressedFeatureHealthState()
+  UnknownFeatureHealthState()
+  WarningFeatureHealthState()
+
+FeatureOperations
+  CutFeatureOperation()
+  IntersectFeatureOperation()
+  JoinFeatureOperation()
+  Name()
+  NewBodyFeatureOperation()
+  NewComponentFeatureOperation()
+
+FileDialog : Base
+  Name
+  filename: str
+  filenames: list[str]
+  filter: str
+  filterIndex: int
+  initialDirectory: str
+  initialFilename: str
+  isMultiSelectEnabled: bool
+  isValid
+  objectType
+  title: str
+  Name()
+  classType()
+  showOpen() -> DialogResults
+  showSave() -> DialogResults
+
+FilenameProperty : Property
+  Name
+  hasMultipleValues: bool
+  id
+  isReadOnly
+  isValid
+  name
+  objectType
+  parent
+  value: str
+  values: list[str]
+  Name()
+  classType()
+
+FitOnPathTextDefintion : SketchTextDefinition
+  # Defines the information for text that fits along a path.
+  Name
+  isAbovePath: bool
+  isValid
+  objectType
+  parentSketchText
+  path: Base
+  Name()
+  classType()
+
+FloatParameterValue : ParameterValue
+  # A parameter value that is a floating point value.
+  Name
+  isValid
+  objectType
+  parent
+  type: FloatParameterValueTypes
+  value: float
+  Name()
+  classType()
+
+FloatParameterValueTypes
+  AngleValueType()
+  AreaValueType()
+  FlowRateValueType()
+  LengthValueType()
+  LinearVelocityValueType()
+  Name()
+  PowerValueType()
+  RotationalVelocityValueType()
+  TemperatureValueType()
+  TimeValueType()
+  UnspecifiedValueType()
+  VolumeValueType()
+  WeightValueType()
+
+FloatProperty : Property
+  # A float or real value property.
+  Name
+  connectedTexture: AppearanceTexture
+  hasConnectedTexture: bool
+  hasLimits: bool
+  hasMultipleValues: bool
+  id
+  isPercentage: bool
+  isReadOnly
+  isValid
+  name
+  objectType
+  parent
+  units: str
+  value: float
+  values: list[float]
+  Name()
+  classType()
+  getLimits() -> bool
+
+FolderDialog : Base
+  # Provides access to a folder selection dialog to allow the user to select a folder.
+  Name
+  folder: str
+  initialDirectory: str
+  isValid
+  objectType
+  title: str
+  Name()
+  classType()
+  showDialog() -> DialogResults
+
+FootAndInchDisplayFormats
+  ArchitecturalFootAndInchDisplay()
+  DecimalFootAndInchDisplay()
+  FractionalFootAndInchDisplay()
+  Name()
+
+ForceLoad : StructuralLoadDirectional
+  # Object that represents a Force load.
+  loadPerEntity: bool
+
+FusionDocument : Document
+  # Object that represents a Fusion specific document.
+  Name
+  allDocumentReferences
+  attributes
+  creationId
+  dataFile
+  design: Design
+  documentReferences
+  isActive
+  isModified
+  isSaved
+  isUpToDate
+  isValid
+  isVisible
+  name
+  objectType
+  parent
+  products
+  version
+  Name()
+  activate() -> bool
+  classType()
+  close(saveChanges: bool) -> bool
+  save(description: str) -> bool
+  saveAs(name: str, dataFolder: DataFolder, description: str, tag: str) -> bool
+  saveDataVersion(versionDescription: str) -> bool
+  saveMilestone(milestoneName: str, versionDescription: str) -> bool
+  updateAllReferences() -> bool
+
+FusionHubExecutionBehaviors
+  FusionHubExecutionBehavior_ExportWithRelationship()
+  FusionHubExecutionBehavior_ForceExportWithRelationship()
+  FusionHubExecutionBehavior_SilentForceExportWithRelationship()
+  FusionHubExecutionBehavior_SkipRelationship()
+  Name()
+
+FusionUnitsManager : UnitsManager
+  Name
+  defaultLengthUnits
+  design: Design
+  distanceDisplayUnits: DistanceUnits
+  internalUnits
+  isValid
+  massDisplayUnits: MassUnits
+  objectType
+  product
+  unitSystem: UnitSystems
+  Name()
+  classType()
+  convert(valueInInputUnits: float, inputUnits: str, outputUnits: str) -> float
+  evaluateExpression() -> float
+  formatInternalValue() -> str
+  formatUnits(units: str) -> str
+  formatValue() -> str
+  isValidExpression(expression: str, units: str) -> bool
+  standardizeExpression() -> str
+
+Future : Base
+  # The base class for futures.
+  Name
+  isValid
+  objectType
+  state: FutureStates
+  Name()
+  classType()
+
+GeneralSettings : Base
+  # Object that represents simulation general settings.
+  placeholder: float
+
+GenerateToolpathFuture : Base
+  # Used to check the state and get back the results of an operation generation.
+  Name
+  isGenerationCompleted: bool
+  isValid
+  numberOfCompleted: int
+  numberOfCompletedTasks: int
+  numberOfOperations: int
+  numberOfTasks: int
+  objectType
+  operations: Operations
+  Name()
+  classType()
+
+GeometricRelationship : Base
+  Name
+  angleReferenceEntity: Base
+  entityOne: Base
+  entityTwo: Base
+  isFlipped: bool
+  isMate: bool
+  isSuppressed: bool
+  isTemporary: bool
+  isValid
+  name: str
+  objectType
+  offsetOrAngle: ModelParameter
+  offsetOrAngleValue: ValueInput
+  parent: Base
+  Name()
+  classType()
+  deleteMe() -> bool
+  redefineOffsetOrAngle(isMate: bool, offsetOrAngleValue: ValueInput) -> bool
+
+GeometricRelationships *collection<GeometricRelationship>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add() -> GeometricRelationship
+  classType()
+
+GeometryGraphNodeProperty : GraphNodeProperty
+  # A property value that represents a link to a geometric object.
+  Name
+  beamNetwork: BeamNetwork
+  customSDFCallbackID: str
+  description
+  isValid
+  name
+  objectType
+  value: Base]
+  Name()
+  classType()
+
+GeometrySelection : Base
+  Name
+  error: str
+  hasError: bool
+  hasWarning: bool
+  isValid
+  objectType
+  value: Base]
+  warning: str
+  Name()
+  classType()
+
+HorizontalAlignments
+  CenterHorizontalAlignment()
+  LeftHorizontalAlignment()
+  Name()
+  RightHorizontalAlignment()
+
+HttpMethods
+  DeleteMethod()
+  GetMethod()
+  Name()
+  PatchMethod()
+  PostMethod()
+  PutMethod()
+
+HttpRequest : Base
+  # Supports the ability to make HTTP requests.
+  Name
+  completed: HttpEvent
+  data: str
+  isValid
+  method: HttpMethods
+  objectType
+  url: str
+  Name()
+  classType()
+  @static create() -> HttpRequest
+  execute() -> bool
+  executeSync() -> HttpResponse
+  getHeader(name: str) -> str
+  hasHeader(name: str) -> bool
+  headers() -> bool
+  removeHeader(name: str) -> bool
+  setHeader(name: str, value: str) -> bool
+
+IGESExportOptions : ExportOptions
+  # Defines that an IGES export is to be done and specifies the various options.
+  Name
+  filename
+  geometry
+  isValid
+  objectType
+  Name()
+  classType()
+
+IGESImportOptions : ImportOptions
+  # Defines that an IGES import is to be done and specifies the various options.
+  Name
+  filename
+  isValid
+  isViewFit
+  objectType
+  Name()
+  classType()
+
+InCanvasRendering : Base
+  Name
+  elapsedTime: int
+  isAdvanced: bool
+  isValid
+  iterations: int
+  limitResolution: float
+  lockView: bool
+  objectType
+  renderComplete: RenderEvent
+  Name()
+  classType()
+  saveImage(filename: str) -> bool
+  start(renderQuality: float) -> bool
+  stop() -> bool
+
+IntegerGraphNodeProperty : GraphNodeProperty
+  # A property value that is an integer.
+  Name
+  description
+  isValid
+  name
+  objectType
+  value: int
+  Name()
+  classType()
+
+IntegerParameterValue : ParameterValue
+  # A parameter value that is an integer.
+  Name
+  isValid
+  objectType
+  parent
+  value: int
+  Name()
+  classType()
+
+IntegerProperty : Property
+  # An integer value property.
+  Name
+  hasLimits: bool
+  hasMultipleValues: bool
+  id
+  isReadOnly
+  isValid
+  name
+  objectType
+  parent
+  value: int
+  values: list[int]
+  Name()
+  classType()
+  getLimits() -> bool
+
+InteractionsMachineElement *collection<MachineInteractionPair>
+  Name
+  count: int
+  elementId
+  isValid
+  objectType
+  typeId
+  Name()
+  apply(setting: MachineInteractionPair) -> bool
+  classType()
+  createMachineInteractionPair(item1: MachineItem, item2: MachineItem) -> MachineInteractionPair
+  createMachineItem(type: MachineItemType, part: MachinePart) -> MachineItem
+  resetMachineInteractionPairs() -> bool
+  @static staticTypeId() -> str
+
+InterferenceResult : Base
+  # Represents the interference between bodies and/or occurrences in an interference analysis.
+  Name
+  entityOne: Base
+  entityTwo: Base
+  interferenceBody: BRepBody
+  isCreateBody: bool
+  isValid
+  objectType
+  Name()
+  classType()
+
+InterferenceResults *collection<InterferenceResult>
+  # Transient object used to return the result of an interference analysis.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  createBodies(allInterferenceBodies: bool) -> ObjectCollection
+
+KeyCodes
+  AKeyCode()
+  AltKeyCode()
+  AsciiCircumKeyCode()
+  AsciiTildeKeyCode()
+  AsteriskKeyCode()
+  BKeyCode()
+  BackslashKeyCode()
+  BackspaceKeyCode()
+  BacktabKeyCode()
+  BarKeyCode()
+  BraceLeftKeyCode()
+  BraceRightKeyCode()
+  BracketLeftKeyCode()
+  BracketRightKeyCode()
+  CKeyCode()
+  ClearKeyCode()
+  ColonKeyCode()
+  CommaKeyCode()
+  ControlKeyCode()
+  D0KeyCode()
+  D1KeyCode()
+  D2KeyCode()
+  D3KeyCode()
+  D4KeyCode()
+  D5KeyCode()
+  D6KeyCode()
+  D7KeyCode()
+  D8KeyCode()
+  D9KeyCode()
+  DKeyCode()
+  DeleteKeyCode()
+  DownKeyCode()
+  EKeyCode()
+  EndKeyCode()
+  EnterKeyCode()
+  EqualKeyCode()
+  EscapeKeyCode()
+  F10KeyCode()
+  F11KeyCode()
+  F12KeyCode()
+  F1KeyCode()
+  F2KeyCode()
+  F3KeyCode()
+  F4KeyCode()
+  F5KeyCode()
+  F6KeyCode()
+  F7KeyCode()
+  F8KeyCode()
+  F9KeyCode()
+  FKeyCode()
+  GKeyCode()
+  GraveAccentKeyCode()
+  GreaterKeyCode()
+  HKeyCode()
+  HomeKeyCode()
+  IKeyCode()
+  InsertKeyCode()
+  JKeyCode()
+  KKeyCode()
+  LKeyCode()
+  LeftKeyCode()
+  LessKeyCode()
+  MKeyCode()
+  MenuKeyCode()
+  MetaKeyCode()
+  MinusKeyCode()
+  NKeyCode()
+  Name()
+  NoKeyCode()
+  OKeyCode()
+  PKeyCode()
+  PageDownKeyCode()
+  PageUpKeyCode()
+  PauseKeyCode()
+  PeriodKeyCode()
+  PlusKeyCode()
+  PrintKeyCode()
+  QKeyCode()
+  QuestionKeyCode()
+  QuoteLeftKeyCode()
+  RKeyCode()
+  ReturnKeyCode()
+  RightKeyCode()
+  SKeyCode()
+  SemicolonKeyCode()
+  ShiftKeyCode()
+  SlashKeyCode()
+  SpaceKeyCode()
+  SysReqKeyCode()
+  TKeyCode()
+  TabKeyCode()
+  UKeyCode()
+  UnderscoreKeyCode()
+  UpKeyCode()
+  VKeyCode()
+  WKeyCode()
+  XKeyCode()
+  YKeyCode()
+  ZKeyCode()
+
+KinematicsMachineElement : MachineElement
+  # Machine element representing the machine's kinematics tree.
+  Name
+  elementId
+  isValid
+  objectType
+  parts: MachineParts
+  typeId
+  Name()
+  classType()
+  @static staticTypeId() -> str
+
+LaserMachineElement : MachineElement
+  maximumCoordinate: Vector3D
+  minimumCoordinate: Vector3D
+  name: str
+  deleteMe() -> void
+  @static staticTypeId() -> str
+
+LibraryLocations
+  CloudLibraryLocation()
+  ExternalLibraryLocation()
+  Fusion360LibraryLocation()
+  LocalLibraryLocation()
+  Name()
+  NetworkLibraryLocation()
+  OnlineSamplesLibraryLocation()
+
+LoadCase : Base
+  # Object that represents a LoadCase inside a study.
+  constraints: LoadCaseItems
+  loads: LoadCaseItems
+  name: str
+
+LoadCaseItems *collection<SimAttribute>
+  # Provides access to a collection of items in a load case.
+  count: int
+  add(input: StructuralConstraintInput) -> StructuralConstraint
+  createFixedStructuralConstraintInput(isDisplacementConstrainedX: bool, isDisplacementConstrainedY: bool, isDisplacementConstrainedZ: bool) -> StructuralConstraintInput
+  createFrictionlessStructuralConstraintInput() -> StructuralConstraintInput
+  createPinStructuralConstraintInput(isRadial: bool, isAxial: bool, isTangential: bool) -> StructuralConstraintInput
+  createPrescribedDisplacementStructuralConstraintInput(isDisplacementConstrainedX: bool, isDisplacementConstrainedY: bool, isDisplacementConstrainedZ: bool, displacementX: ValueInput, displacementY: ValueInput, displacementZ: ValueInput) -> StructuralConstraintInput
+  createRemoteStructuralConstraintInput(isDisplacementConstrainedX: bool, isDisplacementConstrainedY: bool, isDisplacementConstrainedZ: bool, displacementX: ValueInput, displacementY: ValueInput, displacementZ: ValueInput) -> StructuralConstraintInput
+  itemByName(name: str) -> SimAttribute
+
+LoadCases *collection<LoadCase>
+  # Provides access to the LoadCases in the study.
+  count: int
+  itemByName(name: str) -> LoadCase
+
+LocalRenderStates
+  FailedLocalRenderState()
+  FinishedLocalRenderState()
+  Name()
+  ProcessingLocalRenderState()
+  QueuedLocalRenderState()
+
+LogLevels
+  # Log message level Defined in namespace "adsk::core" and the header file is <Core\CoreTypeDefs.h>
+  ErrorLogLevel()
+  InfoLogLevel()
+  Name()
+  WarningLogLevel()
+
+LogTypes
+  ConsoleLogType()
+  FileLogType()
+  Name()
+
+MeasureManager : Base
+  Name
+  isValid
+  objectType
+  Name()
+  classType()
+  getOrientedBoundingBox(geometry: Base, lengthVector: Vector3D, widthVector: Vector3D) -> OrientedBoundingBox3D
+  measureAngle() -> MeasureResults
+  measureMinimumDistance(geometryOne: Base, geometryTwo: Base) -> MeasureResults
+
+MeasureResults : Base
+  Name
+  isValid
+  objectType
+  positionOne: Point3D
+  positionThree: Point3D
+  positionTwo: Point3D
+  value: float
+  Name()
+  classType()
+
+MessageBoxButtonTypes
+  Name()
+  OKButtonType()
+  OKCancelButtonType()
+  RetryCancelButtonType()
+  YesNoButtonType()
+  YesNoCancelButtonType()
+
+MessageBoxIconTypes
+  CriticalIconType()
+  InformationIconType()
+  Name()
+  NoIconIconType()
+  QuestionIconType()
+  WarningIconType()
+
+Milestone : Base
+  # An object that represents a milestone.
+  Name
+  isValid
+  name: str
+  objectType
+  version: DataFile
+  Name()
+  classType()
+
+MilestoneVector
+  append(x: Milestone) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::core::Milestone > >::size_type, x: Milestone) -> void
+  back() -> Milestone >::value_type
+  begin() -> Milestone >::iterator
+  capacity() -> Milestone >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> Milestone >::iterator
+  erase() -> Milestone >::iterator
+  front() -> Milestone >::value_type
+  get_allocator() -> Milestone >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> Milestone >::value_type
+  pop_back() -> void
+  push_back(x: Milestone) -> void
+  rbegin() -> Milestone >::reverse_iterator
+  rend() -> Milestone >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::core::Milestone > >::size_type) -> void
+  resize() -> void
+  size() -> Milestone >::size_type
+  swap(v: list[Milestone]) -> void
+
+Milestones *collection<Milestone>
+  # Returns the milestones associated with a DataFile.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  asArray() -> Milestone]
+  classType()
+  itemByName(name: str) -> Milestone
+
+MinimumRadiusAnalyses *collection<MinimumRadiusAnalysis>
+  # Provides access to any minimum radius analyses results in the design.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemByName(name: str) -> MinimumRadiusAnalysis
+
+MinimumRadiusAnalysis : Analysis
+  # Represents any existing Minimum Radius Analysis that exist in the design.
+  Name
+  attributes
+  entityToken
+  isLightBulbOn
+  isValid
+  isVisible
+  name
+  objectType
+  Name()
+  classType()
+  deleteMe() -> bool
+
+ModifyUtility : Base
+  # Base class for all modify utilities.
+  Name
+  isValid
+  objectType
+  Name()
+  classType()
+
+ModifyUtilityTypes
+  AdditiveSetupModifyUtility()
+  Name()
+
+MomentLoad : StructuralLoadDirectional
+  # Object that represents a Moment load.
+  loadPerEntity: bool
+
+NamedView : Base
+  # Represents a named view as seen in the browser.
+  Name
+  camera: Camera
+  isBuiltIn: bool
+  isValid
+  name: str
+  objectType
+  parentProduct: Product
+  Name()
+  apply() -> bool
+  classType()
+  deleteMe() -> bool
+
+NamedViews *collection<NamedView>
+  Name
+  count: int
+  frontNamedView: NamedView
+  homeNamedView: NamedView
+  isValid
+  objectType
+  rightNamedView: NamedView
+  topNamedView: NamedView
+  Name()
+  add() -> NamedView
+  classType()
+  itemByName(name: str) -> NamedView
+
+NetworkMachineIntegrationManager : Base
+  createMachineConfigurationsEvent: CreateMachineConfigurationsEvent
+  searchNetworkMachinesEvent: SearchNetworkMachinesEvent
+  registerNetworkMachineIntegration(networkMachineIntegrationInput: NetworkMachineIntegrationInput) -> bool
+
+OBJExportOptions : ExportOptions
+  # Defines that an OBJ export is to be done and specifies the various options.
+  Name
+  aspectRatio: float
+  availablePrintUtilities: list[str]
+  filename
+  geometry
+  isOneFilePerBody: bool
+  isValid
+  maximumEdgeLength: float
+  meshRefinement: MeshRefinementSettings
+  normalDeviation: float
+  objectType
+  printUtility: str
+  sendToPrintUtility: bool
+  surfaceDeviation: float
+  unitType: DistanceUnits
+  Name()
+  classType()
+
+ObjectVisibility : Base
+  isAllObjectsVisible: bool
+  isJointOriginAxesVisible: bool
+  isJointOriginsVisible: bool
+  isJointsVisible: bool
+  isOriginAxesVisible: bool
+  isOriginPlanesVisible: bool
+  isOriginPointsVisible: bool
+  isSketchesVisible: bool
+  isUserWorkAxesVisible: bool
+  isUserWorkPlanesVisible: bool
+  isUserWorkPointsVisible: bool
+
+OperatingSystems
+  MacOperatingSystem()
+  Name()
+  WindowsAndMacOperatingSystem()
+  WindowsOperatingSystem()
+
+OptimizedOrientationResult : Base
+  Name
+  boundingBoxVolume: float
+  centerOfGravityHeight: float
+  index: int
+  isValid
+  objectType
+  partHeight: float
+  rankingValue: float
+  supportArea: float
+  supportVolume: float
+  transformation: Matrix3D
+  Name()
+  classType()
+
+OptimizedOrientationResults *collection<OptimizedOrientationResult>
+  Name
+  count: int
+  currentOrientationResult: OptimizedOrientationResult
+  initialOrientationResult: OptimizedOrientationResult
+  isValid
+  objectType
+  Name()
+  classType()
+
+PRMExportOptions : CAMExportOptions
+  # PRM export options for additive FEA.
+
+PanZoomOrbitShortcuts
+  AliasPanZoomOrbitShortcut()
+  Fusion360PanZoomOrbitShortcut()
+  InventorPanZoomOrbitShortcut()
+  Name()
+  PowerMillPanZoomOrbitShortcut()
+  SolidWorksPanZoomOrbitShortcut()
+  TinkercadPanZoomOrbitShortcut()
+
+ParameterList *collection<Parameter>
+  # Transient object used to pass a set of parameters.
+  Name
+  count: int
+  isReadOnly: bool
+  isValid
+  objectType
+  Name()
+  add(parameter: Parameter) -> bool
+  classType()
+  contains(parameter: Parameter) -> bool
+  @static create() -> ParameterList
+  find(parameter: Parameter, startIndex: int) -> int
+  itemByName(name: str) -> Parameter
+  removeByIndex(index: int) -> bool
+  removeByItem(item: Parameter) -> bool
+
+ParameterVector
+  append(x: Parameter) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::Parameter > >::size_type, x: Parameter) -> void
+  back() -> Parameter >::value_type
+  begin() -> Parameter >::iterator
+  capacity() -> Parameter >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> Parameter >::iterator
+  erase() -> Parameter >::iterator
+  front() -> Parameter >::value_type
+  get_allocator() -> Parameter >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> Parameter >::value_type
+  pop_back() -> void
+  push_back(x: Parameter) -> void
+  rbegin() -> Parameter >::reverse_iterator
+  rend() -> Parameter >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::Parameter > >::size_type) -> void
+  resize() -> void
+  size() -> Parameter >::size_type
+  swap(v: list[Parameter]) -> void
+
+Path *collection<PathEntity>
+  Name
+  assemblyContext: Occurrence
+  count: int
+  isClosed: bool
+  isValid
+  nativeObject: Path
+  objectType
+  Name()
+  addCurves(curves: Base, chainOptions: ChainedCurveOptions) -> bool
+  classType()
+  @static create(curves: Base, chainOptions: ChainedCurveOptions) -> Path
+  createForAssemblyContext(occurrence: Occurrence) -> Path
+
+PathEntity : Base
+  # The PathEntity object represents a curve within a path
+  Name
+  assemblyContext: Occurrence
+  curve: Curve3D
+  curveType: Curve3DTypes
+  entity: Base
+  isOpposedToEntity: bool
+  isValid
+  nativeObject: PathEntity
+  objectType
+  parentPath: Path
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> PathEntity
+
+PersonalUseLimits : Base
+  Name
+  editableFileCount: int
+  editableFiles: DataFile]
+  isValid
+  maxEditableFileCount: int
+  objectType
+  Name()
+  classType()
+
+PlasticRule : Base
+  # A plastic rule.
+  Name
+  clearance: PlasticRuleValue
+  draftAngle: PlasticRuleValue
+  isDefault: bool
+  isUsed: bool
+  isValid
+  knifeEdgeThreshold: PlasticRuleValue
+  material: Material
+  maximumThickness: float
+  minimumDraftAngle: float
+  minimumThickness: float
+  name: str
+  nominalRadius: PlasticRuleValue
+  objectType
+  parentDesign: Design
+  revealHeight: PlasticRuleValue
+  thickness: PlasticRuleValue
+  thicknessVariation: PlasticRuleValue
+  units: str
+  Name()
+  classType()
+  deleteMe() -> bool
+
+PlasticRuleValue : Base
+  Name
+  expression: str
+  isValid
+  objectType
+  value: float
+  Name()
+  classType()
+
+PlasticRules *collection<PlasticRule>
+  # A collection of plastic rules.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  addByCopy(existingPlasticRule: PlasticRule, name: str) -> PlasticRule
+  classType()
+  itemByName(name: str) -> PlasticRule
+
+PocketRecognitionSelection : CurveSelection
+  Name
+  areHolesIncluded: bool
+  error
+  hasError
+  hasWarning
+  inputGeometry
+  isSetupModelSelected: bool
+  isValid
+  maximumCornerRadius: float
+  maximumPocketDepth: float
+  minimumCornerRadius: float
+  minimumHoleDiameter: float
+  minimumPocketDepth: float
+  objectType
+  value
+  warning
+  Name()
+  classType()
+
+PocketSelection : CurveSelection
+  Name
+  error
+  extensionMethod: ExtensionMethods
+  hasError
+  hasWarning
+  inputGeometry
+  isSelectingSamePlaneFaces: bool
+  isValid
+  objectType
+  value
+  warning
+  Name()
+  classType()
+
+Polyline2D : Curve2D
+  # Represents a single curve composed of a series of connected lines in 2D space.
+  Name
+  asNurbsCurve: NurbsCurve2D
+  curveType
+  evaluator
+  isValid
+  objectType
+  pointCount: int
+  points: Point2D]
+  Name()
+  classType()
+  @static create(points: list[Point2D]) -> Point2D]
+  @static createByArray(pointCoordinates: list[float]) -> list[float]
+  transformBy(matrix: Matrix2D) -> bool
+
+Polyline3D : Curve3D
+  Name
+  asNurbsCurve: NurbsCurve3D
+  curveType
+  evaluator
+  isValid
+  objectType
+  pointCount: int
+  points: Point3D]
+  Name()
+  classType()
+  @static create(points: list[Point3D]) -> Point3D]
+  @static createByArray(pointCoordinates: list[float]) -> list[float]
+  transformBy(matrix: Matrix3D) -> bool
+
+PressureLoad : SimAttribute
+  # Object that represents a Pressure load.
+  magnitude: float
+
+ProductPreferencesCollection *collection<ProductPreferences>
+  # A collection that provides access to product specific preference objects.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemByName(name: str) -> ProductPreferences
+
+ProductUsageData : Base
+  # Provides access to the product usage data settings.
+  Name
+  isGoogleAnalyticsTrackingEnabled: bool
+  isLearningPanelContextEnabled: bool
+  isTrackingToImproveCommunicationEnabled: bool
+  isTrackingToImproveSoftwareEnabled: bool
+  isValid
+  objectType
+  Name()
+  classType()
+
+ProjectedTextureMapControl : TextureMapControl
+  # Provides access to the various settings that control how a projected texture is applied to a body.
+  Name
+  isCapped: bool
+  isValid
+  objectType
+  projectedTextureMapType: ProjectedTextureMapTypes
+  transform: Matrix3D
+  Name()
+  classType()
+  reset() -> bool
+
+ProjectedTextureMapTypes
+  AutomaticTextureMapProjection()
+  BoxTextureMapProjection()
+  CylindricalTextureMapProjection()
+  Name()
+  PlanarTextureMapProjection()
+  SphericalTextureMapProjection()
+
+Property : Base
+  # The base class for the specific property types used by materials and appearances.
+  Name
+  id: str
+  isReadOnly: bool
+  isValid
+  name: str
+  objectType
+  parent: Base
+  Name()
+  classType()
+
+PropertyGroup *collection<Property>
+  # Represents a group of properties and provides access to the properties.
+  Name
+  count: int
+  id: str
+  isValid
+  name: str
+  objectType
+  parent: Base
+  Name()
+  classType()
+  itemById(id: str) -> Property
+  itemByName(name: str) -> Property
+
+PropertyGroups *collection<PropertyGroup>
+  # A collection of PropertyGroup objects.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemById(id: str) -> PropertyGroup
+  itemByName(name: str) -> PropertyGroup
+
+RemoteForceLoad : StructuralLoadDirectional
+  # Object that represents a Remote Force load.
+  positionX: float
+  positionY: float
+  positionZ: float
+
+RemoteMomentLoad : StructuralLoadDirectional
+  # Object that represents a Remote Moment load.
+  positionX: float
+  positionY: float
+  positionZ: float
+
+RotaryMachineAxis : MachineAxis
+  # Object that represents an axis with rotary motion (e.g. A, B, and C).
+  Name
+  axisType
+  hasLimits
+  homePosition
+  isValid
+  name
+  objectType
+  physicalRange
+  rotationAxis: InfiniteLine3D
+  toolChangePosition
+  Name()
+  classType()
+  useContinuousResolution() -> void
+
+RotaryMachineAxisConfiguration : MachineAxisConfiguration
+  # A MachineAxisConfiguration holding settings specific to rotary axes.
+  Name
+  coordinate
+  isReversed
+  isValid
+  maxNormalSpeed
+  maxRapidSpeed
+  objectType
+  partId
+  reset: MachineResetOptions
+  rotaryPreference: MachineAnglePreferences
+  type
+  useToolCenterPointControl: bool
+  wrapAroundAtRange: MachineAxisRange
+  Name()
+  classType()
+  deleteMe() -> void
+
+SATExportOptions : ExportOptions
+  # Defines that a SAT export is to be done and specifies the various options.
+  Name
+  filename
+  geometry
+  isValid
+  objectType
+  Name()
+  classType()
+
+SATImportOptions : ImportOptions
+  # Defines that a SAT import is to be done and specifies the various options.
+  Name
+  filename
+  isValid
+  isViewFit
+  objectType
+  Name()
+  classType()
+
+SMTExportOptions : ExportOptions
+  # Defines that an SMT export is to be done and specifies the various options.
+  Name
+  filename
+  geometry
+  isValid
+  objectType
+  version: int
+  Name()
+  classType()
+
+SMTImportOptions : ImportOptions
+  # Defines that an SMT import is to be done and specifies the various options.
+  Name
+  filename
+  isValid
+  isViewFit
+  objectType
+  Name()
+  classType()
+
+STEPExportOptions : ExportOptions
+  # Defines that a STEP export is to be done and specifies the various options.
+  Name
+  filename
+  geometry
+  isValid
+  objectType
+  wantTempIds: bool
+  Name()
+  classType()
+
+STEPImportOptions : ImportOptions
+  # Defines that a STEP import is to be done and specifies the various options.
+  Name
+  filename
+  isValid
+  isViewFit
+  objectType
+  Name()
+  classType()
+
+STLExportOptions : ExportOptions
+  # Defines that a STL export is to be done and specifies the various options.
+  Name
+  aspectRatio: float
+  availablePrintUtilities: list[str]
+  filename
+  geometry
+  isBinaryFormat: bool
+  isOneFilePerBody: bool
+  isValid
+  maximumEdgeLength: float
+  meshRefinement: MeshRefinementSettings
+  normalDeviation: float
+  objectType
+  printUtility: str
+  sendToPrintUtility: bool
+  surfaceDeviation: float
+  unitType: DistanceUnits
+  Name()
+  classType()
+
+SVGImportOptions : ImportOptions
+  # Defines that an SVG import is to be done and specifies the various options.
+  Name
+  filename
+  isControlPointFrameDisplayed: bool
+  isHorizontalFlip: bool
+  isValid
+  isVerticalFlip: bool
+  isViewFit
+  objectType
+  transform: Matrix3D
+  Name()
+  classType()
+
+SampleList
+
+ScalarControlPoint : Base
+  Name
+  interpolator: ControlPointInterpolators
+  isValid
+  objectType
+  parameter: float
+  value: float
+  Name()
+  classType()
+
+ScalarControlPointMapGraphNodeProperty : GraphNodeProperty
+  Name
+  description
+  isValid
+  name
+  objectType
+  pointCount: int
+  Name()
+  addPoint(parameter: float, value: float, interpolator: ControlPointInterpolators) -> bool
+  classType()
+  clear() -> bool
+  getPoint(index: int) -> ScalarControlPoint
+  removePoint(index: int) -> bool
+
+ScalarGraphNodeProperty : GraphNodeProperty
+  # A property value that is a floating point value.
+  Name
+  description
+  isValid
+  name
+  objectType
+  value: float
+  Name()
+  classType()
+
+SceneSettings : Base
+  # Provides access to all the settings that control how the scene is rendered.
+  Name
+  aspectRatio: RenderAspectRatios
+  aspectRatioHeight: int
+  aspectRatioWidth: int
+  backgroundEnvironment: RenderEnvironment
+  backgroundSolidColor: Color
+  backgroundType: RenderSceneBackgroundTypes
+  brightness: float
+  cameraExposure: float
+  cameraFocalLength: float
+  cameraType: CameraTypes
+  centerOfFocus: Point3D
+  depthOfFieldBlur: float
+  groundOffset: float
+  groundPosition: Point3D
+  groundRoughness: float
+  isDepthOfFieldEnabled: bool
+  isGroundDisplayed: bool
+  isGroundFlattened: bool
+  isGroundReflections: bool
+  isValid
+  lightAngle: float
+  objectType
+  Name()
+  classType()
+  restoreDefaults() -> bool
+  saveAsDefaults() -> bool
+
+Script : Base
+  # Object that represents a script or add-in.
+  Name
+  appStoreURL: str
+  author: str
+  description: str
+  folder: str
+  helpFilename: str
+  iconFilename: str
+  id: str
+  isAddIn: bool
+  isEditable: bool
+  isFavorite: bool
+  isInternal: bool
+  isRunOnStartup: bool
+  isRunning: bool
+  isValid
+  isVisible: bool
+  location: ScriptSourceLocations
+  manifestContent: str
+  name: str
+  objectType
+  programmingLanguage: ProgrammingLanguages
+  targetOperatingSystem: OperatingSystems
+  version: str
+  Name()
+  classType()
+  edit() -> bool
+  run(waitForFinish: bool) -> bool
+  stop() -> bool
+  unlink() -> bool
+
+ScriptVector
+  append(x: Script) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::core::Script > >::size_type, x: Script) -> void
+  back() -> Script >::value_type
+  begin() -> Script >::iterator
+  capacity() -> Script >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> Script >::iterator
+  erase() -> Script >::iterator
+  front() -> Script >::value_type
+  get_allocator() -> Script >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> Script >::value_type
+  pop_back() -> void
+  push_back(x: Script) -> void
+  rbegin() -> Script >::reverse_iterator
+  rend() -> Script >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::core::Script > >::size_type) -> void
+  resize() -> void
+  size() -> Script >::size_type
+  swap(v: list[Script]) -> void
+
+SectionAnalyses *collection<SectionAnalysis>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(input: SectionAnalysisInput) -> SectionAnalysis
+  classType()
+  createInput(cutPlaneEntity: Base, distance: float) -> SectionAnalysisInput
+  itemByName(name: str) -> SectionAnalysis
+
+SectionAnalysis : Analysis
+  # Represents any existing Section Analysis that exist in the design.
+  Name
+  attributes
+  cutPlane: Base
+  entityToken
+  initialPosition: Matrix3D
+  isHatchShown: bool
+  isLightBulbOn
+  isValid
+  isVisible
+  name
+  objectType
+  sectionColor: Color
+  transform: Matrix3D
+  Name()
+  classType()
+  deleteMe() -> bool
+  flip() -> bool
+
+SeparatorControl : ToolbarControl
+  # Represents a separator within a panel, toolbar, or drop-down control.
+  Name
+  id
+  index
+  isValid
+  isVisible
+  objectType
+  parent
+  Name()
+  classType()
+  deleteMe() -> bool
+
+Settings : Base
+  # Object that represents all simulation settings.
+  generalSettings: GeneralSettings
+  meshSettings: MeshSettings
+  solveSettings: SolveSettings
+  applyChanges() -> bool
+
+SharedLink : Base
+  Name
+  isDownloadAllowed: bool
+  isPasswordRequired: bool
+  isShared: bool
+  isValid
+  linkURL: str
+  objectType
+  Name()
+  classType()
+  setPassword(password: str) -> bool
+
+SharedPointCoincident : Base
+  Name
+  curveOne: SketchCurve
+  curveTwo: SketchCurve
+  isValid
+  objectType
+  point: SketchPoint
+  Name()
+  classType()
+
+SimAttribute : Base
+  # Object that represents a SimAttribute.
+  entities: Base]
+  name: str
+
+SimulationModel : Base
+  # Object that represents a simulation model inside the simulation workspace.
+  modelComponents: WorkingModel
+  name: str
+  studies: Studies
+
+SimulationModelVector
+  append(x: SimulationModel) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::sim::SimulationModel > >::size_type, x: SimulationModel) -> void
+  back() -> SimulationModel >::value_type
+  begin() -> SimulationModel >::iterator
+  capacity() -> SimulationModel >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> SimulationModel >::iterator
+  erase() -> SimulationModel >::iterator
+  front() -> SimulationModel >::value_type
+  get_allocator() -> SimulationModel >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> SimulationModel >::value_type
+  pop_back() -> void
+  push_back(x: SimulationModel) -> void
+  rbegin() -> SimulationModel >::reverse_iterator
+  rend() -> SimulationModel >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::sim::SimulationModel > >::size_type) -> void
+  resize() -> void
+  size() -> SimulationModel >::size_type
+  swap(v: list[SimulationModel]) -> void
+
+SimulationModels *collection<SimulationModel>
+  # Provides access to the simulation models in the simulations object.
+  count: int
+  itemById(id: str) -> SimulationModel
+  itemByName(name: str) -> SimulationModel]
+
+Simulations : Product
+  # Object that represents the simulations environment of a Fusion document.
+  simulationModels: SimulationModels
+  studies: Studies
+  deleteEntities(entities: ObjectCollection) -> bool
+  findAttributes(groupName: str, attributeName: str) -> Attribute]
+
+SolveSettings : Base
+  # Object that represents simulation solve settings.
+  placeholder: float
+
+Sphere : Surface
+  Name
+  evaluator
+  isValid
+  objectType
+  origin: Point3D
+  radius: float
+  surfaceType
+  Name()
+  classType()
+  copy() -> Sphere
+  @static create(origin: Point3D, radius: float) -> Point3D
+  getData() -> bool
+  set(origin: Point3D, radius: float) -> bool
+  transformBy(matrix: Matrix3D) -> bool
+
+Status : Base
+  Name
+  isError: bool
+  isOK: bool
+  isValid
+  isWarning: bool
+  objectType
+  statusMessages: StatusMessages
+  Name()
+  classType()
+
+StringGraphNodeProperty : GraphNodeProperty
+  # A property value that is a string.
+  Name
+  description
+  isValid
+  name
+  objectType
+  value: str
+  Name()
+  classType()
+
+StringParameterValue : ParameterValue
+  # A parameter value that is a string.
+  Name
+  isValid
+  objectType
+  parent
+  value: str
+  Name()
+  classType()
+
+StringProperty : Property
+  # A string value property.
+  Name
+  id
+  isReadOnly
+  isValid
+  name
+  objectType
+  parent
+  value: str
+  Name()
+  classType()
+
+StructuralLoadDirectional : SimAttribute
+  # Object that represents a directional structural load.
+  directionReference: Base
+  directionType: LoadDirectionTypes
+  forceVector: Vector3D
+  magnitude: float
+  rotationVector: Vector3D
+  transformation: Matrix3D
+
+Studies *collection<Study>
+  # Provides access to the Studies in the simulation model.
+  count: int
+  itemByName(name: str) -> Study
+
+Study : Base
+  # Object that represents a study inside a simulation model.
+  loadCases: LoadCases
+  name: str
+  settings: Settings
+  type: StudyTypes
+
+TablePresentationStyles
+  Name()
+  itemBorderTablePresentationStyle()
+  nameValueTablePresentationStyle()
+  transparentBackgroundTablePresentationStyle()
+
+TangentRelationship : Base
+  # A tangent relationship in a design.
+  Name
+  assemblyContext: Occurrence
+  attributes: Attributes
+  entityToken: str
+  errorOrWarningMessage: str
+  faceOne: Base
+  healthState: FeatureHealthStates
+  isSuppressed: bool
+  isValid
+  name: str
+  nativeObject: TangentRelationship
+  objectType
+  occurrenceOne: Occurrence
+  occurrenceTwo: Occurrence
+  parentComponent: Component
+  tangentFaces: Base
+  timelineObject: TimelineObject
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> TangentRelationship
+  deleteMe() -> bool
+
+TangentRelationshipVector
+  append(x: TangentRelationship) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::TangentRelationship > >::size_type, x: TangentRelationship) -> void
+  back() -> TangentRelationship >::value_type
+  begin() -> TangentRelationship >::iterator
+  capacity() -> TangentRelationship >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> TangentRelationship >::iterator
+  erase() -> TangentRelationship >::iterator
+  front() -> TangentRelationship >::value_type
+  get_allocator() -> TangentRelationship >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> TangentRelationship >::value_type
+  pop_back() -> void
+  push_back(x: TangentRelationship) -> void
+  rbegin() -> TangentRelationship >::reverse_iterator
+  rend() -> TangentRelationship >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::TangentRelationship > >::size_type) -> void
+  resize() -> void
+  size() -> TangentRelationship >::size_type
+  swap(v: list[TangentRelationship]) -> void
+
+TangentRelationships *collection<TangentRelationship>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(input: TangentRelationshipInput) -> TangentRelationship
+  classType()
+  createInput(faceOne: BRepFace, tangentFaces: Base) -> TangentRelationshipInput
+  itemByName(name: str) -> TangentRelationship
+
+TemporaryBRepManager : Base
+  Name
+  isValid
+  objectType
+  Name()
+  booleanOperation(targetBody: BRepBody, toolBody: BRepBody, booleanType: BooleanTypes) -> bool
+  classType()
+  copy(bRepEntity: Base) -> BRepBody
+  createBox(box: OrientedBoundingBox3D) -> BRepBody
+  createCylinderOrCone(pointOne: Point3D, pointOneRadius: float, pointTwo: Point3D, pointTwoRadius: float) -> BRepBody
+  createEllipticalCylinderOrCone(pointOne: Point3D, pointOneMajorRadius: float, pointOneMinorRadius: float, pointTwo: Point3D, pointTwoMajorRadius: float, majorAxisDirection: Vector3D) -> BRepBody
+  createFaceFromPlanarWires(wireBodies: list[BRepBody]) -> BRepBody
+  createFromFile(filename: str) -> BRepBodies
+  createHelixWire(axisPoint: Point3D, axisVector: Vector3D, startPoint: Point3D, pitch: float, turns: float, taperAngle: float) -> BRepBody
+  createProjectedBodyOutline(body: BRepBody, projectionPlane: Plane, tolerance: float) -> BRepBody
+  createRuledSurface(sectionOne: BRepWire, sectionTwo: BRepWire) -> BRepBody
+  createSilhouetteCurves(face: BRepFace, viewDirection: Vector3D, returnCoincidentSilhouettes: bool) -> BRepBody
+  createSphere(center: Point3D, radius: float) -> BRepBody
+  createTorus(center: Point3D, axis: Vector3D, majorRadius: float, minorRadius: float) -> BRepBody
+  createWireFromCurves(curves: list[Curve3D], allowSelfIntersections: bool) -> BRepBody
+  deleteFaces(faces: list[BRepFace], deleteSpecifiedFaces: bool) -> bool
+  exportToFile(bodies: list[BRepBody], filename: str) -> bool
+  @static get() -> TemporaryBRepManager
+  imprintOverlapBodies(bodyOne: BRepBody, bodyTwo: BRepBody, imprintCoincidentEdges: bool, tolerance: float) -> bool
+  planeIntersection(body: BRepBody, plane: Plane) -> BRepBody
+  transform(body: BRepBody, transform: Matrix3D) -> bool
+
+TextCommandPalette : Palette
+  # Represents the palette that is the Text Command window in Fusion.
+  Name
+  dockingOption
+  dockingState
+  height
+  htmlFileURL
+  id
+  isNative
+  isTransparent
+  isValid
+  isVisible
+  left
+  name
+  objectType
+  top
+  width
+  Name()
+  classType()
+  deleteMe() -> bool
+  sendInfoToHTML(action: str, data: str) -> str
+  setMaximumSize(width: int, height: int) -> bool
+  setMinimumSize(width: int, height: int) -> bool
+  setPosition(left: int, top: int) -> bool
+  setSize(width: int, height: int) -> bool
+  snapTo(palette: Palette, snapOption: PaletteSnapOptions) -> bool
+  writeText(text: str) -> bool
+
+TextStyles
+  Name()
+  TextStyleBold()
+  TextStyleItalic()
+  TextStyleUnderline()
+
+TextureImage : Base
+  # Provides access to the image data associated with a texture map.
+  transform: Matrix2D
+
+TextureMapControl : Base
+  Name
+  isValid
+  objectType
+  Name()
+  classType()
+  reset() -> bool
+
+TextureMapControl3D : TextureMapControl
+  # Provides access to the various settings that control how a 3D texture is applied to a body.
+  Name
+  isValid
+  objectType
+  transform: Matrix3D
+  Name()
+  bestFit() -> bool
+  classType()
+  reset() -> bool
+
+TextureTypes
+  CheckerTexture()
+  GradientTexture()
+  ImageTexture()
+  MarbleTexture()
+  Name()
+  NoiseTexture()
+  SpeckleTexture()
+  TileTexture()
+  UnknownTexture()
+  WaveTexture()
+  WoodTexture()
+
+ThinExtrudeWallLocation
+  Center()
+  Name()
+  Side1()
+  Side2()
+
+TimelineGroup *collection<TimelineObject>
+  # Represents a group in the timeline.
+  Name
+  count: int
+  entity
+  errorOrWarningMessage
+  healthState
+  index
+  isCollapsed: bool
+  isGroup
+  isRolledBack
+  isSuppressed
+  isValid
+  name
+  objectType
+  parentGroup
+  Name()
+  canReorder(beforeIndex: int) -> bool
+  classType()
+  deleteMe(deleteGroupAndContents: bool) -> bool
+  reorder(beforeIndex: int) -> bool
+  rollTo(rollBefore: bool) -> bool
+
+TimelineGroups *collection<TimelineGroup>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(startIndex: int, endIndex: int) -> TimelineGroup
+  classType()
+
+ToolQuery : Base
+  Name
+  criteria: NamedValues
+  isValid
+  location: LibraryLocations
+  objectType
+  url: URL
+  vendor: str
+  Name()
+  classType()
+  execute() -> ToolQueryResult]
+
+ToolQueryResult : Base
+  # The ToolQueryResult represents one result item of a ToolQuery.
+  Name
+  isValid
+  objectType
+  tool: Tool
+  toolItemIndex: int
+  toolLibrary: ToolLibrary
+  toolLibraryURL: URL
+  Name()
+  classType()
+
+ToolQueryResultVector
+  append(x: ToolQueryResult) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::cam::ToolQueryResult > >::size_type, x: ToolQueryResult) -> void
+  back() -> ToolQueryResult >::value_type
+  begin() -> ToolQueryResult >::iterator
+  capacity() -> ToolQueryResult >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> ToolQueryResult >::iterator
+  erase() -> ToolQueryResult >::iterator
+  front() -> ToolQueryResult >::value_type
+  get_allocator() -> ToolQueryResult >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> ToolQueryResult >::value_type
+  pop_back() -> void
+  push_back(x: ToolQueryResult) -> void
+  rbegin() -> ToolQueryResult >::reverse_iterator
+  rend() -> ToolQueryResult >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::cam::ToolQueryResult > >::size_type) -> void
+  resize() -> void
+  size() -> ToolQueryResult >::size_type
+  swap(v: list[ToolQueryResult]) -> void
+
+ToolVector
+  append(x: Tool) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::cam::Tool > >::size_type, x: Tool) -> void
+  back() -> Tool >::value_type
+  begin() -> Tool >::iterator
+  capacity() -> Tool >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> Tool >::iterator
+  erase() -> Tool >::iterator
+  front() -> Tool >::value_type
+  get_allocator() -> Tool >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> Tool >::value_type
+  pop_back() -> void
+  push_back(x: Tool) -> void
+  rbegin() -> Tool >::reverse_iterator
+  rend() -> Tool >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::cam::Tool > >::size_type) -> void
+  resize() -> void
+  size() -> Tool >::size_type
+  swap(v: list[Tool]) -> void
+
+ToolingCapabilitiesMachineElement : MachineElement
+  # Machine element representing the tooling capabilities of a machine.
+  Name
+  elementId
+  isToolChangerAutomatic: bool
+  isToolPreloadSupported: bool
+  isValid
+  maxToolCount: int
+  objectType
+  typeId
+  Name()
+  classType()
+  @static staticTypeId() -> str
+
+Torus : Surface
+  Name
+  axis: Vector3D
+  evaluator
+  isValid
+  majorRadius: float
+  minorRadius: float
+  objectType
+  origin: Point3D
+  surfaceType
+  Name()
+  classType()
+  copy() -> Torus
+  @static create(origin: Point3D, axis: Vector3D, majorRadius: float, minorRadius: float) -> Vector3D
+  getData() -> bool
+  set(origin: Point3D, axis: Vector3D, majorRadius: float, minorRadius: float) -> bool
+  transformBy(matrix: Matrix3D) -> bool
+
+TransformRefGraphNodeProperty : GraphNodeProperty
+  Name
+  description
+  isValid
+  name
+  objectType
+  value: Occurrence
+  Name()
+  classType()
+
+URL : Base
+  # A URL object provides useful and easy-to-use methods for creating, modifying, and analyzing URLs.
+  Name
+  isURLValid: bool
+  isValid
+  leafName: str
+  objectType
+  parent: URL
+  pathName: str
+  protocol: str
+  Name()
+  classType()
+  @static create(url: str) -> URL
+  join(path: str) -> URL
+  toString() -> str
+
+URLVector
+  append(x: URL) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::core::URL > >::size_type, x: URL) -> void
+  back() -> URL >::value_type
+  begin() -> URL >::iterator
+  capacity() -> URL >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> URL >::iterator
+  erase() -> URL >::iterator
+  front() -> URL >::value_type
+  get_allocator() -> URL >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> URL >::value_type
+  pop_back() -> void
+  push_back(x: URL) -> void
+  rbegin() -> URL >::reverse_iterator
+  rend() -> URL >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::core::URL > >::size_type) -> void
+  resize() -> void
+  size() -> URL >::size_type
+  swap(v: list[URL]) -> void
+
+USDExportOptions : ExportOptions
+  # Defines that an USD export is to be done and specifies the various options.
+  Name
+  filename
+  geometry
+  isValid
+  objectType
+  Name()
+  classType()
+
+UntrimLoopTypes
+  AllLoopsUntrimType()
+  ExternalLoopsUntrimType()
+  InternalLoopsUntrimType()
+  ManualLoopsUntrimType()
+  Name()
+
+UserLanguages
+  ChinesePRCLanguage()
+  ChineseTaiwanLanguage()
+  CzechLanguage()
+  EnglishLanguage()
+  FrenchLanguage()
+  GermanLanguage()
+  HungarianLanguage()
+  ItalianLanguage()
+  JapaneseLanguage()
+  KoreanLanguage()
+  Name()
+  PolishLanguage()
+  PortugueseBrazilianLanguage()
+  RussianLanguage()
+  SpanishLanguage()
+  TurkishLanguage()
+
+UserParameterVector
+  append(x: UserParameter) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::UserParameter > >::size_type, x: UserParameter) -> void
+  back() -> UserParameter >::value_type
+  begin() -> UserParameter >::iterator
+  capacity() -> UserParameter >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> UserParameter >::iterator
+  erase() -> UserParameter >::iterator
+  front() -> UserParameter >::value_type
+  get_allocator() -> UserParameter >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> UserParameter >::value_type
+  pop_back() -> void
+  push_back(x: UserParameter) -> void
+  rbegin() -> UserParameter >::reverse_iterator
+  rend() -> UserParameter >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::UserParameter > >::size_type) -> void
+  resize() -> void
+  size() -> UserParameter >::size_type
+  swap(v: list[UserParameter]) -> void
+
+UserVector
+  append(x: User) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::core::User > >::size_type, x: User) -> void
+  back() -> User >::value_type
+  begin() -> User >::iterator
+  capacity() -> User >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> User >::iterator
+  erase() -> User >::iterator
+  front() -> User >::value_type
+  get_allocator() -> User >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> User >::value_type
+  pop_back() -> void
+  push_back(x: User) -> void
+  rbegin() -> User >::reverse_iterator
+  rend() -> User >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::core::User > >::size_type) -> void
+  resize() -> void
+  size() -> User >::size_type
+  swap(v: list[User]) -> void
+
+ValueInputVector
+  append(x: ValueInput) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::core::ValueInput > >::size_type, x: ValueInput) -> void
+  back() -> ValueInput >::value_type
+  begin() -> ValueInput >::iterator
+  capacity() -> ValueInput >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> ValueInput >::iterator
+  erase() -> ValueInput >::iterator
+  front() -> ValueInput >::value_type
+  get_allocator() -> ValueInput >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> ValueInput >::value_type
+  pop_back() -> void
+  push_back(x: ValueInput) -> void
+  rbegin() -> ValueInput >::reverse_iterator
+  rend() -> ValueInput >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::core::ValueInput > >::size_type) -> void
+  resize() -> void
+  size() -> ValueInput >::size_type
+  swap(v: list[ValueInput]) -> void
+
+ValueTypes
+  BooleanValueType()
+  Name()
+  ObjectValueType()
+  RealValueType()
+  StringValueType()
+
+VerticalAlignments
+  BottomVerticalAlignment()
+  MiddleVerticalAlignment()
+  Name()
+  TopVerticalAlignment()
+
+WorkingModel : Design
+  Name
+  activeComponent
+  activeEditObject
+  activeOccurrence
+  allComponents
+  allParameters
+  analyses
+  appearances
+  attributes
+  configurationRowId
+  configurationTopTable
+  contactSets
+  designPlasticRules
+  designSheetMetalRules
+  designType
+  exportManager
+  fusionUnitsManager
+  isConfiguration
+  isConfiguredDesign
+  isContactAnalysisEnabled
+  isContactSetAnalysis
+  isRootComponentActive
+  isValid
+  libraryPlasticRules
+  librarySheetMetalRules
+  materials
+  namedViews
+  objectType
+  parentDocument
+  productType
+  renderManager
+  rootComponent
+  rootDataComponent
+  selectionSets
+  snapshots
+  sourceComponent: Component
+  timeline
+  unitsManager
+  userParameters
+  workspaces
+  Name()
+  activateRootComponent() -> bool
+  analyzeInterference(input: InterferenceInput) -> InterferenceResults
+  areaProperties() -> AreaProperties
+  classType()
+  computeAll() -> bool
+  createConfiguredDesign() -> ConfigurationTopTable
+  createInterferenceInput(entities: ObjectCollection) -> InterferenceInput
+  deleteEntities(entities: ObjectCollection) -> bool
+  findAttributes(groupName: str, attributeName: str) -> Attribute]
+  findEntityByToken(entityToken: str) -> Base]
+  modifyParameters(parameters: list[Parameter], values: list[ValueInput]) -> bool
+  physicalProperties() -> PhysicalProperties
+  setGroundPlaneOffset(offset: float) -> bool
+
+ZebraAnalyses *collection<ZebraAnalysis>
+  # Provides access to any zebra analyses results in the design.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemByName(name: str) -> ZebraAnalysis
+
+ZebraAnalysis : Analysis
+  # Represent any existing Zebra Analysis that exist in the design.
+  Name
+  attributes
+  entityToken
+  isLightBulbOn
+  isValid
+  isVisible
+  name
+  objectType
+  Name()
+  classType()
+  deleteMe() -> bool
+
+_SelectionFilters_Meta_Class : type

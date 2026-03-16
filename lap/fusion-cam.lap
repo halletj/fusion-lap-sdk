@@ -1,15 +1,665 @@
 # fusion-cam.lap
 
 [types]
+AdditiveFEAAnalysisType: Thermal | Mechanical | ThermoMechanical
+AdditiveFEACard: TitleCard | STLToleranceCard | LayersPerElementCard | AmbientTemperatureCard | FinalTemperatureCard | BuildPlateZBoundsCard | STLMapCard | ConvectionCard | PRMsCard | STLsCard | BuildPlateXYExtensionCard | AdaptivityCard | AnalysisTypeCard | BinaryOutputCard | EnsightOutputCard | NoOffCoreCard | OnCore1Card | CoarseningGenerationsCard | EndCard | MaterialCard | LaserPathGenerationCard | TransientCard | PropertyScalingCard | PowderTypeCard | FineLayerCountCard | AutomaticTimingCard | DiskCheckCard | GoldakCard | PowderCard | AutomaticMeshingCard | PowderBedYSymmetryCard | NewPRMGenerationMethodCard | InitialTemperatureCard | EvaporationTemperatureCard | RelaxationCard | OutputFileFrequencyCard | SolutionParametersCard | MechanicalRelaxationCard
+AdditiveFEAGenerationType: MeshPreCheck | PRM | Result
+AdditiveFEAMaterial: AISI4340AlloySteel | AlSi10Mg | CobaltChrome | Inconel625 | Inconel718 | Inconel718Plus | SAE304 | StainlessSteel174PH | StainlessSteel316 | Ti6Al4V
+AdditiveFEAPowderType: Automatic | Scaled | Custom
+AdditiveFEASTLConfiguration: Part | BuildPlate | Support | Ghost
+AdditiveTechnologies: FFFTechnology | DEDTechnology | MPBFTechnology | MFJTechnology | BinderJettingTechnology | SLATechnology | SLSTechnology | NATechnology | OtherTechnology | EbeamTechnology
+ArrangePriorities: VeryLowArrangePriority | LowArrangePriority | MediumArrangePriority | HighArrangePriority | VeryHighArrangePriority
+ArrangePriorityTypes: VeryHighArrangePriorityType | HighArrangePriorityType | MediumArrangePriorityType | LowArrangePriorityType | VeryLowArrangePriorityType
+ArrangeRotationTypes: GlobalArrangeRotationType | AllRotationsArrangeRotationType | NoneArrangeRotationType | Only180ArrangeRotationType | Only90And270ArrangeRotationType
+ArrangeSolverTypes: Arrange2DTrueShapeSolverType | Arrange2DRectangularSolverType | Arrange3DSolverType
 CAM3MFSupportInclusionType: NotIncluded | IncludeAsSupportType | IncludeAsModelType
 CAMAdditiveContainerTypes: SupportCAMAdditiveContainerType | OptimizedOrientationCAMAdditiveContainerType | BodyPresetCAMAdditiveContainerType | AdditiveProcessSimulationCAMAdditiveContainerType
 CAMEventChangeType: ErrorCAMEventChangeType | ToolCAMEventChangeType | ToolSwitchCAMEventChangeType | NameCAMEventChangeType | ParameterCAMEventChangeType
 CAMEventState: CAMEventStateSuccessful | CAMEventStateDeferred | CAMEventStateErrorMissingOperation | CAMEventStateErrorMissingDocument | CAMEventStateErrorOther
+GeneratedDataType: OptimizedOrientationGeneratedDataType | AdditiveFEAGeneratedDataType
+InspectionPointState: WithinTolerance | AboveTolerance | BelowTolerance | Unprojected
+MachineAnglePreferences: MachineAngleNoPreference | MachineAnglePreferNegative | MachineAnglePreferPositive
+MachineAxisCoordinates: MachineCoordinate_None | MachineCoordinate_X_A | MachineCoordinate_Y_B | MachineCoordinate_Z_C
+MachineAxisTypes: LinearMachineAxisType | RotaryMachineAxisType
+MachineCoolant: MachineCoolant_FLOOD | MachineCoolant_MIST | MachineCoolant_THROUGH_TOOL | MachineCoolant_AIR | MachineCoolant_AIR_THROUGH_TOOL | MachineCoolant_SUCTION | MachineCoolant_FLOOD_MIST | MachineCoolant_FLOOD_THROUGH_TOOL
+MachineElementInputType: MultiAxisElement | ToolingCapabilityElement | ExtruderElement | LaserElement
+MachineInputTypes: MachineInputFromTemplate | MachineInputFromFile | MachineInputFromLibrary
+MachineItemType: MachineItemType_TOOL | MachineItemType_TOOL_CUTTER | MachineItemType_TOOL_NONCUTTER | MachineItemType_STOCK | MachineItemType_FIXTURE | MachineItemType_MODEL | MachineItemType_MACHINE_PART | MachineItemType_TURRET_ACTIVE_TOOL | MachineItemType_TURRET_INACTIVE_TOOL | MachineItemType_INVALID
+MachineNonTCPInterpolationMode: MachineNonTCPInterpolationMode_SynchronizedAxes | MachineNonTCPInterpolationMode_IndependentAxes
+MachinePartTypes: BasicMachinePartType | AxisMachinePartType | ToolAttachmentMachinePartType | FixtureAttachmentMachinePartType
+MachineResetOptions: MachineResetNever | MachineResetBeforeEveryOperation | MachineResetOnRewind | MachineResetBeforeOpAndOnRewind
+MachineTCPInterpolationMode: MachineTCPInterpolationMode_SynchronizedAxes | MachineTCPInterpolationMode_IndependentAxes | MachineTCPInterpolationMode_ToolTip
+MachineTemplate: GenericLathe | Generic3Axis | Generic4Axis | Generic5AxisHeadHead | Generic5AxisHeadTable | Generic5AxisTableTable | GenericFFF
+MachiningMode: Avoid_MachiningMode | Machine_MachiningMode | Gouge_MachiningMode | Fixture_MachiningMode
+MultiAxisDegreesPerMinuteType: MultiAxisDegreesPerMinuteType_Standard | MultiAxisDegreesPerMinuteType_Combination
+MultiAxisFeedMode: MultiAxisFeedMode_InverseTime | MultiAxisFeedMode_DegreesPerMinute | MultiAxisFeedMode_ProgrammerdFeedrate
+MultiAxisInverseTimeUnit: MultiAxisInverseTimeUnit_Seconds | MultiAxisInverseTimeUnit_Minutes
+MultiAxisRetractPreference: MultiAxisRetractPreference_RetractAtApex | MultiAxisRetractPreference_StayAtApex
+MultiAxisRewindPreference: MultiAxisRewindPreference_RewindAtLinear | MultiAxisRewindPreference_RewindAtRapid
+MultiAxisRotationTypes: MultiAxisRotationType_SingleAxis | MultiAxisRotationType_AllAxes | MultiAxisRotationType_XYAxes | MultiAxisRotationType_XZAxes | MultiAxisRotationType_YZAxes
+MultiAxisSingularityLinearizeMethod: MultiAxisSingularityLinearize_Linear | MultiAxisSingularityLinearize_Rotary
+OperationBaseEventTypes: ErrorOperationBaseEventType | CommandStartedOperationBaseEventType | GenerationStartedOperationBaseEventType | ChangeOperationBaseEventType | GenerationStartingOperationBaseEventType | CommandButtonPressedOperationBaseEventType
+OperationStates: IsValidOperationState | IsInvalidOperationState | SuppressedOperationState | NoToolpathOperationState
+OperationStrategyTypes: AdaptiveClearing2D | Pocket2D | Face | Contour2D | Slot | Trace | Thread | Bore | Circular | Engrave | AdaptiveClearing | PocketClearing | Parallel | Contour | Ramp | Horizontal | Pencil | Scallop | Spiral | Radial | MorphedSpiral | Projection | Drilling | Jet2D | TurningChamfer | TurningFace | TurningGroove | TurningPart | TurningProfile | TurningProfileGroove | TurningStockTransfer | TurningThread | SteepAndShallow | Flow | Flow2 | RotaryFinishing | Chamfer2D | Morph | MultiAxisContour | MultiAxisMorph | RestFinishing | Swarf | SurfaceInspection | ManualInspection | ProbeWCS | ProbeGeometry | PartAlignment | PathMeasure | ManualMeasure
+OperationTypes: MillingOperation | TurningOperation | JetOperation | AdditiveOperation
 PostCapabilities: Undefined | Milling | Turning | SetupSheet | Intermediate | Jet | Cascading | Additive | Inspection | MachineSimulation
 PostOutputUnitOptions: DocumentUnitsOutput | InchesOutput | MillimetersOutput
 PostProcessExecutionBehaviors: PostProcessExecutionBehavior_OmitInvalidAndEmptyOperations | PostProcessExecutionBehavior_Fail | PostProcessExecutionBehavior_PostAll
+PrintSettingItemTypes: GENERAL | EXPORTER
+RecognizedPocketBottomType: RecognizedPocketBottomTypeFlat | RecognizedPocketBottomTypeThrough | RecognizedPocketBottomTypeChamfer | RecognizedPocketBottomTypeFillet | RecognizedPocketBottomTypeOther
+SetupChangeEventType: Arbitrary | PrintSettingSelection
+SetupSheetFormats: HTMLFormat | ExcelFormat
+SetupStockModes: FixedBoxStock | RelativeBoxStock | FixedCylinderStock | RelativeCylinderStock | FixedTubeStock | RelativeTubeStock | SolidStock | PreviousSetupStock
+StrategyRegistrationIssues: SkipAll_StrategyRegistrationIssues | CancelOnParameterCollisions_StrategyRegistrationIssues | CancelOnMetaparameterCollisions_StrategyRegistrationIssues | CancelOnUnsupporedMetaparameters_StrategyRegistrationIssues | CancelOnAll_StrategyRegistrationIssues
 
 [classes]
+AdditiveFEAConvection : Base
+  append(convectionCoefficient: float, temperature: float) -> void
+
+AdditiveFEADeckBuilder : Base
+  cards: AdditiveFEADeckBuilderCard]
+  append(card: AdditiveFEADeckBuilderCard) -> void
+  @static create() -> AdditiveFEADeckBuilder
+  createBuildPlateXYExtensionCard(left: float, right: float, front: float, back: float) -> AdditiveFEADeckBuilderCard
+  createBuildPlateZBoundsCard(zTop: float, zBottom: float) -> AdditiveFEADeckBuilderCard
+  createConvection() -> AdditiveFEAConvection
+  createConvectionCard(convection: AdditiveFEAConvection) -> AdditiveFEADeckBuilderCard
+  createDiskCheckCard(i1: int, r1: float) -> AdditiveFEADeckBuilderCard
+  createDoubleCard(card: AdditiveFEACard, value: float) -> AdditiveFEADeckBuilderCard
+  createGenericCard(name: str, value: str) -> AdditiveFEADeckBuilderCard
+  createGoldakCard(efficiency: float, bAxisMultiplier: float, c1AxisMultiplier: float, c2AxisMultiplier: float, f1Factor: float, f2Factor: float) -> AdditiveFEADeckBuilderCard
+  createIntCard(card: AdditiveFEACard, value: int) -> AdditiveFEADeckBuilderCard
+  createLaserPathGenerationCard(power: float, radius: float, speed: float, thickness: float, hatch: float, recoaterTime: float, layerCount: int, initialAngle: float, angleChange: float, xSize: float, ySize: float) -> AdditiveFEADeckBuilderCard
+  createMaterialCard(material: AdditiveFEAMaterial, materialId: int) -> AdditiveFEADeckBuilderCard
+  createMechanicalRelaxationCard(isUsed: int, maxIterations: int, scalingFactor: float) -> AdditiveFEADeckBuilderCard
+  createPropertyScalingCard(conductivityScaling: float, specificHeatScaling: float, elasticModulusScaling: float, emissivityScaling: float) -> AdditiveFEADeckBuilderCard
+  createRelaxationCard(iterations: int, scalingFactor: float) -> AdditiveFEADeckBuilderCard
+  createSTLMap() -> AdditiveFEASTLMap
+  createSTLMapCard(map: AdditiveFEASTLMap) -> AdditiveFEADeckBuilderCard
+  createSolutionParametersCard(maxIterations: int, tolerance: float, maxResidual: float) -> AdditiveFEADeckBuilderCard
+  createStringArrayCard(card: AdditiveFEACard, value: list[str]) -> AdditiveFEADeckBuilderCard
+  createStringCard(card: AdditiveFEACard, value: str) -> AdditiveFEADeckBuilderCard
+  createTransientCard(startTime: float, endTime: float, initialTimeIncrement: float, maxTimeIncrement: float, minTimeIncrement: float, incrementTol: float, maxCutbacks: int, maxIncrements: int) -> AdditiveFEADeckBuilderCard
+  createVoidCard(card: AdditiveFEACard) -> AdditiveFEADeckBuilderCard
+
+AdditiveFEADeckBuilderCard : Base
+  # An AdditiveFEADeckBuilderCard is a single card in an additive FEA simulation input file.
+  name: str
+  stringValue: str
+
+AdditiveFEADeckBuilderCardVector
+  append(x: AdditiveFEADeckBuilderCard) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::cam::AdditiveFEADeckBuilderCard > >::size_type, x: AdditiveFEADeckBuilderCard) -> void
+  back() -> AdditiveFEADeckBuilderCard >::value_type
+  begin() -> AdditiveFEADeckBuilderCard >::iterator
+  capacity() -> AdditiveFEADeckBuilderCard >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> AdditiveFEADeckBuilderCard >::iterator
+  erase() -> AdditiveFEADeckBuilderCard >::iterator
+  front() -> AdditiveFEADeckBuilderCard >::value_type
+  get_allocator() -> AdditiveFEADeckBuilderCard >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> AdditiveFEADeckBuilderCard >::value_type
+  pop_back() -> void
+  push_back(x: AdditiveFEADeckBuilderCard) -> void
+  rbegin() -> AdditiveFEADeckBuilderCard >::reverse_iterator
+  rend() -> AdditiveFEADeckBuilderCard >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::cam::AdditiveFEADeckBuilderCard > >::size_type) -> void
+  resize() -> void
+  size() -> AdditiveFEADeckBuilderCard >::size_type
+  swap(v: list[AdditiveFEADeckBuilderCard]) -> void
+
+AdditiveFEAOperation : OperationBase
+  copyAfter(operation: OperationBase) -> bool
+  copyBefore(operation: OperationBase) -> bool
+  copyInto(container: OperationBase) -> bool
+  deleteMe() -> bool
+  duplicate() -> bool
+  hasMissingReferences() -> bool
+  modifyUtility(utility: ModifyUtilityTypes) -> ModifyUtility
+  moveAfter(operation: OperationBase) -> bool
+  moveBefore(operation: OperationBase) -> bool
+  moveInto(container: OperationBase) -> bool
+  removeReferences(entity: Base, removeFromChildren: bool) -> bool
+
+AdditiveFEAOperationInput : OperationInput
+  base64PRMData: str
+  generationType: AdditiveFEAGenerationType
+  internalStudyName: str
+  text: str
+  workDirectory: str
+  addSolverFileContent(destFileName: str, fileContentsBase64: str) -> void
+  applyDeck(deck: AdditiveFEADeckBuilder) -> void
+  linkDependentThermalInput(thermalInput: AdditiveFEAOperationInput) -> void
+
+AdditiveFEAResults : GeneratedData
+
+AdditiveFEASTLMap : Base
+  append(configuration: AdditiveFEASTLConfiguration, prmId: int, materialId: int, volumeFraction: float) -> void
+
+AdditiveFFFLimitsMachineElement : MachineElement
+  Name
+  elementId
+  homePosition: Point3D
+  isValid
+  maximumBedTemperature: float
+  maximumXYAcceleration: float
+  maximumXYSpeed: float
+  maximumZAcceleration: float
+  maximumZSpeed: float
+  objectType
+  parkPosition: Point3D
+  typeId
+  Name()
+  classType()
+  @static staticTypeId() -> str
+
+AdditivePlatformMachineElement : MachineElement
+  # Machine element representing the additive platform settings.
+  Name
+  ceilingClearance: float
+  clearance: float
+  cornerRadius: float
+  elementId
+  frameWidth: float
+  isValid
+  objectType
+  origin: Point3D
+  size: Point3D
+  typeId
+  Name()
+  classType()
+  @static staticTypeId() -> str
+
+AdditiveSetupUtility : ModifyUtility
+  # AdditiveSetupUtility provides functionality for modifications of additive setups.
+  Name
+  isValid
+  objectType
+  Name()
+  assignPartsToBodyPreset(parts: list[Base], presetName: str) -> Operation
+  classType()
+  removeExcessParts() -> int
+  splitSupport(targets: list[Base], splitType: SplitSupportTypes) -> bool
+
+AdditiveTechnologies
+  BinderJettingTechnology()
+  DEDTechnology()
+  EbeamTechnology()
+  FFFTechnology()
+  MFJTechnology()
+  MPBFTechnology()
+  NATechnology()
+  Name()
+  OtherTechnology()
+  SLATechnology()
+  SLSTechnology()
+
+Arrange2DDefinition : ArrangeDefinition
+  Name
+  globalQuantity: ModelParameter
+  globalRotation: ArrangeRotationTypes
+  grainDirection: ModelParameter
+  isCreateCopies
+  isGlobalDirectionFaceUp: bool
+  isPartInPartAllowed: bool
+  isValid
+  objectType
+  solverType
+  Name()
+  classType()
+
+Arrange2DEnvelopeInput : ArrangeEnvelopeInput
+  Name
+  frameWidth
+  isFlipped: bool
+  isPartialArrangeAllowed
+  isValid
+  objectSpacing
+  objectType
+  placementClearance
+  Name()
+  classType()
+
+Arrange2DPlaneEnvelopeInput : Arrange2DEnvelopeInput
+  # This object is used to specify the input needed to define a 2D rectangular envelope.
+  Name
+  envelopeSpacing: ValueInput
+  frameWidth
+  isFlipped
+  isPartialArrangeAllowed
+  isValid
+  length: ValueInput
+  objectSpacing
+  objectType
+  originXOffset: ValueInput
+  originYOffset: ValueInput
+  placementClearance
+  plane: ConstructionPlane
+  quantity: ValueInput
+  width: ValueInput
+  Name()
+  classType()
+
+Arrange2DProfileOrFaceEnvelopeInput : Arrange2DEnvelopeInput
+  Name
+  frameWidth
+  isFlipped
+  isPartialArrangeAllowed
+  isValid
+  objectSpacing
+  objectType
+  placementClearance
+  profilesOrFaces: Base]
+  Name()
+  classType()
+
+Arrange3DDefinition : ArrangeDefinition
+  # This object defines all of the settings associated with a 3D arrangement.
+  Name
+  isCreateCopies
+  isValid
+  objectType
+  solverType
+  Name()
+  classType()
+
+Arrange3DEnvelopeDefinition : ArrangeEnvelopeDefinition
+  # The Arrange3DEnvelope object represents an 3D arrange envelope.
+  Name
+  ceilingClearance: ModelParameter
+  frameWidth
+  height: ModelParameter
+  isPartialArrangeAllowed
+  isValid
+  length: ModelParameter
+  objectSpacing
+  objectType
+  originXOffset: ModelParameter
+  originYOffset: ModelParameter
+  parentArrange
+  placementClearance
+  plane: ConstructionPlane
+  width: ModelParameter
+  Name()
+  classType()
+
+Arrange3DEnvelopeInput : ArrangeEnvelopeInput
+  # This object is used to specify the input needed to define a 3D envelope.
+  Name
+  ceilingClearance: ValueInput
+  frameWidth
+  height: ValueInput
+  isPartialArrangeAllowed
+  isValid
+  length: ValueInput
+  objectSpacing
+  objectType
+  originXOffset: ValueInput
+  originYOffset: ValueInput
+  placementClearance
+  plane: ConstructionPlane
+  width: ValueInput
+  Name()
+  classType()
+
+Arrange3DResultEnvelope : ArrangeResultEnvelope
+  # Represents the arrange envelope result of a 3D arrange feature.
+  Name
+  boundingBox: BoundingBox3D
+  envelopeDefinition
+  isValid
+  name
+  objectType
+  occurrences
+  parentFeature
+  Name()
+  classType()
+
+ArrangeComponent : Base
+  Name
+  isDirectionFlipped: bool
+  isFiller: bool
+  isValid
+  objectType
+  occurrence: Occurrence
+  occurrenceOrFace: Base
+  parentArrangeFeature: ArrangeFeature
+  priority: ArrangePriorities
+  quantity: int
+  rotation: float
+  rotationType: ArrangeRotationTypes
+  upDirection: Vector3D
+  zeroDirection: Vector3D
+  Name()
+  classType()
+  deleteMe() -> bool
+  setRotationUsingEdge(edge: BRepEdge) -> bool
+
+ArrangeComponentVector
+  append(x: ArrangeComponent) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::ArrangeComponent > >::size_type, x: ArrangeComponent) -> void
+  back() -> ArrangeComponent >::value_type
+  begin() -> ArrangeComponent >::iterator
+  capacity() -> ArrangeComponent >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> ArrangeComponent >::iterator
+  erase() -> ArrangeComponent >::iterator
+  front() -> ArrangeComponent >::value_type
+  get_allocator() -> ArrangeComponent >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> ArrangeComponent >::value_type
+  pop_back() -> void
+  push_back(x: ArrangeComponent) -> void
+  rbegin() -> ArrangeComponent >::reverse_iterator
+  rend() -> ArrangeComponent >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::ArrangeComponent > >::size_type) -> void
+  resize() -> void
+  size() -> ArrangeComponent >::size_type
+  swap(v: list[ArrangeComponent]) -> void
+
+ArrangeComponents *collection<ArrangeComponent>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(occurrenceOrFace: Base) -> ArrangeComponent
+  classType()
+
+ArrangeDefinition : Base
+  Name
+  isCreateCopies: bool
+  isValid
+  objectType
+  solverType: ArrangeSolverTypes
+  Name()
+  classType()
+
+ArrangeDefinition2DInput : ArrangeDefinitionInput
+  Name
+  globalQuantity: ValueInput
+  globalRotation: ArrangeRotationTypes
+  grainDirection: ValueInput
+  isCreateCopies
+  isGlobalDirectionFaceUp: bool
+  isPartInPartAllowed: bool
+  isValid
+  objectType
+  solverType
+  Name()
+  classType()
+
+ArrangeDefinition3DInput : ArrangeDefinitionInput
+  # This object defines all of the settings associated with a 3D arrangement.
+  Name
+  isCreateCopies
+  isValid
+  objectType
+  solverType
+  Name()
+  classType()
+
+ArrangeDefinitionInput : Base
+  Name
+  isCreateCopies: bool
+  isValid
+  objectType
+  solverType: ArrangeSolverTypes
+  Name()
+  classType()
+
+ArrangeEnvelopeDefinition : Base
+  Name
+  frameWidth: ModelParameter
+  isPartialArrangeAllowed: bool
+  isValid
+  objectSpacing: ModelParameter
+  objectType
+  parentArrange: ArrangeFeature
+  placementClearance: ModelParameter
+  Name()
+  classType()
+
+ArrangeEnvelopeInput : Base
+  # The base class used to define the arrange envelope when creating an Arrange feature.
+  Name
+  frameWidth: ValueInput
+  isPartialArrangeAllowed: bool
+  isValid
+  objectSpacing: ValueInput
+  objectType
+  placementClearance: ValueInput
+  Name()
+  classType()
+
+ArrangeFeature : Feature
+  # Represents an Arrange feature within a component.
+  Name
+  arrangeComponents: ArrangeComponents
+  arrangeStatistics: str
+  assemblyContext
+  attributes
+  baseFeature
+  bodies
+  definition: ArrangeDefinition
+  entityToken
+  envelopeDefinition: ArrangeEnvelopeDefinition
+  errorOrWarningMessage
+  faces
+  healthState
+  isParametric
+  isSuppressed
+  isValid
+  linkedFeatures
+  name
+  nativeObject: ArrangeFeature
+  objectType
+  parentComponent
+  resultEnvelopes: ArrangeResultEnvelopes
+  timelineObject
+  unusedComponents: ArrangeComponent]
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> ArrangeFeature
+  deleteMe() -> bool
+  dissolve() -> bool
+
+ArrangeFeatureInput : Base
+  Name
+  arrangeComponents: ArrangeComponents
+  definition: ArrangeDefinitionInput
+  isValid
+  objectType
+  solverType: ArrangeSolverTypes
+  Name()
+  classType()
+  set3DEnvelope(plane: ConstructionPlane, length: ValueInput, width: ValueInput, height: ValueInput) -> Arrange3DEnvelopeInput
+  setPlaneEnvelope(plane: ConstructionPlane, length: ValueInput, width: ValueInput) -> Arrange2DPlaneEnvelopeInput
+  setProfileOrFaceEnvelope(profilesOrFaces: list[Base]) -> Arrange2DProfileOrFaceEnvelopeInput
+
+ArrangeFeatures *collection<ArrangeFeature>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(input: ArrangeFeatureInput) -> ArrangeFeature
+  classType()
+  createInput(solverType: ArrangeSolverTypes) -> ArrangeFeatureInput
+  itemByName(name: str) -> ArrangeFeature
+
+ArrangeOccurrenceResult : Base
+  # The ArrangeOccurrence object represents a single occurrence within an Arrange
+    envelope.
+  Name
+  arrangeComponent: ArrangeComponent
+  isValid
+  objectType
+  occurrence: Occurrence
+  parentEnvelope: ArrangeResultEnvelope
+  Name()
+  classType()
+
+ArrangeOccurrenceResults *collection<ArrangeOccurrenceResult>
+  # A collection that contains the occurrences in an Arrange envelope.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+
+ArrangePlaneEnvelopeDefinition : ArrangeEnvelopeDefinition
+  Name
+  envelopeSpacing: ModelParameter
+  frameWidth
+  isPartialArrangeAllowed
+  isValid
+  length: ModelParameter
+  objectSpacing
+  objectType
+  originXOffset: ModelParameter
+  originYOffset: ModelParameter
+  parentArrange
+  placementClearance
+  plane: ConstructionPlane
+  quantity: ModelParameter
+  width: ModelParameter
+  Name()
+  classType()
+
+ArrangePlaneResultEnvelope : ArrangeResultEnvelope
+  # Represents the arrange result of a single envelope that is defined on a plane.
+  Name
+  boundingBox: BoundingBox2D
+  envelopeDefinition
+  isValid
+  name
+  objectType
+  occurrences
+  parentFeature
+  Name()
+  classType()
+
+ArrangePriorities
+  HighArrangePriority()
+  LowArrangePriority()
+  MediumArrangePriority()
+  Name()
+  VeryHighArrangePriority()
+  VeryLowArrangePriority()
+
+ArrangePriorityTypes
+  HighArrangePriorityType()
+  LowArrangePriorityType()
+  MediumArrangePriorityType()
+  Name()
+  VeryHighArrangePriorityType()
+  VeryLowArrangePriorityType()
+
+ArrangeProfileOrFaceEnvelopeDefinition : ArrangeEnvelopeDefinition
+  Name
+  frameWidth
+  isPartialArrangeAllowed
+  isValid
+  objectSpacing
+  objectType
+  parentArrange
+  placementClearance
+  profilesAndFaces: Base]
+  Name()
+  classType()
+
+ArrangeProfileOrFaceResultEnvelope : ArrangeResultEnvelope
+  # Represents the arrange envelope result of a profile or face defined arrange feature.
+  Name
+  envelopeDefinition
+  isValid
+  name
+  objectType
+  occurrences
+  parentFeature
+  profileOrFace: Base
+  Name()
+  classType()
+
+ArrangeResultEnvelope : Base
+  # The ArrangeResult object represents the results of an arrangement
+    for a single envelope.
+  Name
+  envelopeDefinition: ArrangeEnvelopeDefinition
+  isValid
+  name: str
+  objectType
+  occurrences: ArrangeOccurrenceResults
+  parentFeature: ArrangeFeature
+  Name()
+  classType()
+
+ArrangeResultEnvelopes *collection<ArrangeResultEnvelope>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+
+ArrangeRotationTypes
+  AllRotationsArrangeRotationType()
+  GlobalArrangeRotationType()
+  Name()
+  NoneArrangeRotationType()
+  Only180ArrangeRotationType()
+  Only90And270ArrangeRotationType()
+
+ArrangeSelection : GeometrySelection
+  # Class for arrange selections. Provides access to the selected geometry and its properties.
+  Name
+  customMultiAxisRotationType: MultiAxisRotationTypes
+  customQuantity: int
+  customRotationX: float
+  customRotationY: float
+  customRotationZ: float
+  error
+  hasError
+  hasWarning
+  inputGeometry: Base
+  isUsingCustomMultiAxisRotationType: bool
+  isUsingCustomQuantity: bool
+  isUsingCustomRotationX: bool
+  isUsingCustomRotationY: bool
+  isUsingCustomRotationZ: bool
+  isValid
+  objectType
+  priorityType: ArrangePriorityTypes
+  value
+  warning
+  Name()
+  classType()
+
+ArrangeSelections *collection<ArrangeSelection>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  clear() -> void
+  createNewArrangeSelection() -> ArrangeSelection
+  remove(index: int) -> void
+  removeByObject(selection: ArrangeSelection) -> void
+
+ArrangeSolverTypes
+  Arrange2DRectangularSolverType()
+  Arrange2DTrueShapeSolverType()
+  Arrange3DSolverType()
+  Name()
+
 CAM : Product
   # Object that represents the CAM environment of a Fusion document.
   Name
@@ -640,6 +1290,878 @@ CAMTemplateVector
   size() -> CAMTemplate >::size_type
   swap(v: list[CAMTemplate]) -> void
 
+ChildOperationList *collection<Base>
+  # Provides access to the collection of child operations, folders and patterns of an existing setup.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemByName(name: str) -> Base
+  itemByOperationId(id: int) -> Base
+
+FeatureList *collection<Feature>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+
+GeneratedData : Base
+  Name
+  isValid
+  objectType
+  Name()
+  classType()
+
+GeneratedDataCollection *collection<GeneratedData>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemByIdentifier(resultType: GeneratedDataType) -> GeneratedData
+
+GeneratedDataType
+  Name()
+  OptimizedOrientationGeneratedDataType()
+
+InspectionPathResult : Base
+  # Class to represent measured results from an surface inspection path.
+  pointResults: InspectionPointResults
+
+InspectionPathResults *collection<InspectionPathResult>
+  # collection of inspection paths results.
+  count: int
+
+InspectionPointResult : Base
+  contact: Point3D
+  delta: Vector3D
+  deviation: float
+  error: float
+  nominalPosition: Point3D
+  offset: float
+  projectedPoint: Point3D
+  state: InspectionPointState
+
+InspectionPointResults *collection<InspectionPointResult>
+  # collection of inspection point results
+  count: int
+
+Machine : Base
+  # Object that represents a machine.
+  Name
+  capabilities: MachineCapabilities
+  description: str
+  elements: MachineElements
+  hasPost: bool
+  hasSimulationModel: bool
+  id: str
+  isValid
+  kinematics: MachineKinematics
+  model: str
+  objectType
+  postURL: URL
+  vendor: str
+  Name()
+  classType()
+  clearSimulationModel() -> void
+  @static create(machineInput: MachineInput) -> MachineInput
+  @static createFromFile(location: LibraryLocations, filePath: str) -> Machine
+  @static createFromTemplate(machineTemplate: MachineTemplate) -> Machine
+  equivalentTo(machine: Machine) -> bool
+  save(location: LibraryLocations, filePath: str) -> bool
+
+MachineAnglePreferences
+  MachineAngleNoPreference()
+  MachineAnglePreferNegative()
+  MachineAnglePreferPositive()
+  Name()
+
+MachineAvoidDefaultSelection : MachineAvoidSelectionBase
+  Name
+  axialOffset
+  combinedOffset
+  error
+  hasError
+  hasWarning
+  inputGeometry: Base]
+  isValid
+  machineMode
+  objectType
+  radialOffset
+  value
+  warning
+  Name()
+  classType()
+
+MachineAvoidDirectSelection : MachineAvoidSelectionBase
+  Name
+  axialOffset
+  combinedOffset
+  error
+  hasError
+  hasWarning
+  inputGeometry: Base]
+  isValid
+  machineMode
+  objectType
+  radialOffset
+  value
+  warning
+  Name()
+  classType()
+
+MachineAvoidGroups *collection<MachineAvoidSelectionBase>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  clear() -> void
+  createNewMachineAvoidDirectSelectionGroup() -> MachineAvoidDirectSelection
+  defaultGroup(type: DefaultGroupType) -> MachineAvoidSelectionBase
+  remove(index: int) -> void
+  removeByObject(group: MachineAvoidSelectionBase) -> void
+  sync() -> void
+
+MachineAvoidSelectionBase : GeometrySelection
+  # Base parent class for all machine/avoid selection classes.
+  Name
+  axialOffset: float
+  combinedOffset: float
+  error
+  hasError
+  hasWarning
+  isValid
+  machineMode: MachiningMode
+  objectType
+  radialOffset: float
+  value
+  warning
+  Name()
+  classType()
+
+MachineAxis : Base
+  # Abstract base class representing a single machine axis.
+  Name
+  axisType: MachineAxisTypes
+  hasLimits: bool
+  homePosition: float
+  isValid
+  name: str
+  objectType
+  physicalMax: float
+  physicalMin: float
+  physicalRange: MachineAxisRange
+  resolutionStepSize: float
+  toolChangePosition: float
+  Name()
+  classType()
+  useContinuousResolution() -> void
+
+MachineAxisConfiguration : Base
+  # MachineAxisConfiguration holds controller settings that differ for each axis.
+  Name
+  coordinate: MachineAxisCoordinates
+  isReversed: bool
+  isValid
+  maxNormalSpeed: float
+  maxRapidSpeed: float
+  objectType
+  partId: str
+  type: MachineAxisTypes
+  Name()
+  classType()
+  deleteMe() -> void
+
+MachineAxisConfigurations *collection<MachineAxisConfiguration>
+  # Collection of axis configuration objects.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  addLinear(partId: str) -> LinearMachineAxisConfiguration
+  addRotary(partId: str) -> RotaryMachineAxisConfiguration
+  classType()
+  itemById(id: str) -> MachineAxisConfiguration
+
+MachineAxisCoordinates
+  MachineCoordinate_None()
+  MachineCoordinate_X_A()
+  MachineCoordinate_Y_B()
+  MachineCoordinate_Z_C()
+  Name()
+
+MachineAxisInput : Base
+  # Object that defines the properties required to create a machine axis object.
+  Name
+  axisType: MachineAxisTypes
+  homePosition: float
+  isValid
+  name: str
+  objectType
+  physicalMax: float
+  physicalMin: float
+  physicalRange: MachineAxisRange
+  resolutionStepSize: float
+  toolChangePosition: float
+  Name()
+  classType()
+  useContinuousResolution() -> void
+
+MachineAxisRange : Base
+  # Class representing limits of motion for a machine axis.
+  Name
+  isInfinite: bool
+  isValid
+  max: float
+  min: float
+  objectType
+  Name()
+  classType()
+  @static create(min: float, max: float) -> MachineAxisRange
+  @static createInfinite() -> MachineAxisRange
+
+MachineAxisTypes
+  LinearMachineAxisType()
+  Name()
+  RotaryMachineAxisType()
+
+MachineCapabilities : Base
+  # Object that represents the capabilities of the machine.
+  Name
+  additiveTechnology: AdditiveTechnologies
+  isAdditiveSupported: bool
+  isCuttingSupported: bool
+  isMillingSupported: bool
+  isTurningSupported: bool
+  isValid
+  objectType
+  Name()
+  classType()
+
+MachineCoolant
+  MachineCoolant_AIR()
+  MachineCoolant_AIR_THROUGH_TOOL()
+  MachineCoolant_FLOOD()
+  MachineCoolant_FLOOD_MIST()
+  MachineCoolant_FLOOD_THROUGH_TOOL()
+  MachineCoolant_MIST()
+  MachineCoolant_SUCTION()
+  MachineCoolant_THROUGH_TOOL()
+  Name()
+
+MachineDescription : Base
+  # A description of a machine used to preview machines in the 'Find network machines' dialog
+  control: str
+  iconPath: str
+  id: int
+  ipAddress: str
+  model: str
+  serial: str
+  vendor: str
+  @static create(vendor: str, model: str, ipAddress: str) -> MachineDescription
+
+MachineDescriptionVector
+  append(x: MachineDescription) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::cam::MachineDescription > >::size_type, x: MachineDescription) -> void
+  back() -> MachineDescription >::value_type
+  begin() -> MachineDescription >::iterator
+  capacity() -> MachineDescription >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> MachineDescription >::iterator
+  erase() -> MachineDescription >::iterator
+  front() -> MachineDescription >::value_type
+  get_allocator() -> MachineDescription >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> MachineDescription >::value_type
+  pop_back() -> void
+  push_back(x: MachineDescription) -> void
+  rbegin() -> MachineDescription >::reverse_iterator
+  rend() -> MachineDescription >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::cam::MachineDescription > >::size_type) -> void
+  resize() -> void
+  size() -> MachineDescription >::size_type
+  swap(v: list[MachineDescription]) -> void
+
+MachineElement : Base
+  # Base class for objects that compose a machine.
+  Name
+  elementId: str
+  isValid
+  objectType
+  typeId: str
+  Name()
+  classType()
+
+MachineElementInput : Base
+  # Base class for machine element inputs.
+  Name
+  inputType: MachineElementInputType
+  isValid
+  objectType
+  Name()
+  classType()
+
+MachineElementInputType
+  MultiAxisElement()
+  Name()
+  ToolingCapabilityElement()
+
+MachineElementVector
+  append(x: MachineElement) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::cam::MachineElement > >::size_type, x: MachineElement) -> void
+  back() -> MachineElement >::value_type
+  begin() -> MachineElement >::iterator
+  capacity() -> MachineElement >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> MachineElement >::iterator
+  erase() -> MachineElement >::iterator
+  front() -> MachineElement >::value_type
+  get_allocator() -> MachineElement >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> MachineElement >::value_type
+  pop_back() -> void
+  push_back(x: MachineElement) -> void
+  rbegin() -> MachineElement >::reverse_iterator
+  rend() -> MachineElement >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::cam::MachineElement > >::size_type) -> void
+  resize() -> void
+  size() -> MachineElement >::size_type
+  swap(v: list[MachineElement]) -> void
+
+MachineElements *collection<MachineElement>
+  # Collection of machine elements.
+    These elements contain the properties that define the machine.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  addElement(input: MachineElementInput) -> MachineElement
+  classType()
+  countByType(typeId: str) -> int
+  createMachineElementInput(type: MachineElementInputType) -> MachineElementInput
+  defaultItemByType(typeId: str) -> MachineElement
+  itemById(typeId: str, elementId: str) -> MachineElement
+  itemsByType(typeId: str) -> MachineElement]
+
+MachineFromFileInput : MachineInput
+  Name
+  filePath: str
+  ignoreSimulationModel: bool
+  isValid
+  objectType
+  Name()
+  classType()
+  @static create(filePath: str) -> MachineFromFileInput
+
+MachineFromLibraryInput : MachineInput
+  # Object used as input to create a machine from library URL.
+  Name
+  ignoreSimulationModel: bool
+  isValid
+  objectType
+  url: URL
+  Name()
+  classType()
+  @static create(url: URL) -> URL
+
+MachineFromTemplateInput : MachineInput
+  Name
+  isValid
+  machineTemplate: MachineTemplate
+  objectType
+  Name()
+  classType()
+  @static create(machineTemplate: MachineTemplate) -> MachineFromTemplateInput
+
+MachineInput : Base
+  Name
+  isValid
+  objectType
+  type: MachineInputTypes
+  Name()
+  classType()
+
+MachineInteractionPair : Base
+  # MachineInteractionPair objects control how a pair of MachineItems interact with each other.
+  Name
+  isCheckedForCollisions: bool
+  isIgnored: bool
+  isValid
+  item1: MachineItem
+  item2: MachineItem
+  objectType
+  Name()
+  classType()
+  reset() -> bool
+
+MachineItem : Base
+  Name
+  isValid
+  itemType: MachineItemType
+  objectType
+  part: MachinePart
+  Name()
+  classType()
+
+MachineItemType
+  MachineItemType_FIXTURE()
+  MachineItemType_INVALID()
+  MachineItemType_MACHINE_PART()
+  MachineItemType_MODEL()
+  MachineItemType_STOCK()
+  MachineItemType_TOOL()
+  MachineItemType_TOOL_CUTTER()
+  MachineItemType_TOOL_NONCUTTER()
+  MachineItemType_TURRET_ACTIVE_TOOL()
+  MachineItemType_TURRET_INACTIVE_TOOL()
+  Name()
+
+MachineKinematics : Base
+  # Object that represents the kinematics tree in the machine.
+  parts: MachineParts
+
+MachineLibrary : CAMLibrary
+  Name
+  assetTypeName
+  isValid
+  objectType
+  Name()
+  childAssetURLs(url: URL) -> URL]
+  childFolderURLs(url: URL) -> URL]
+  childMachines(url: URL) -> Machine]
+  classType()
+  createFolder(parentUrl: URL, folderName: str) -> URL
+  createQuery() -> MachineQuery
+  deleteAsset(url: URL) -> bool
+  deleteFolder(url: URL) -> bool
+  displayName(url: URL) -> str
+  doesPathExist(url: URL) -> bool
+  importMachine(machine: Machine, destinationUrl: URL, machineName: str) -> URL
+  machineAtURL(url: URL) -> Machine
+  updateMachine(url: URL, machine: Machine) -> bool
+  urlByLocation(location: LibraryLocations) -> URL
+
+MachineNonTCPInterpolationMode
+  MachineNonTCPInterpolationMode_IndependentAxes()
+  MachineNonTCPInterpolationMode_SynchronizedAxes()
+  Name()
+
+MachinePart : Base
+  Name
+  axis: MachineAxis
+  children: MachineParts
+  id: str
+  isValid
+  objectType
+  parent: MachinePart
+  partType: MachinePartTypes
+  spindle: MachineSpindle
+  toolStation: MachineToolStation
+  Name()
+  classType()
+  deleteMe() -> void
+
+MachinePartInput : Base
+  Name
+  axisInput: MachineAxisInput
+  id: str
+  isValid
+  objectType
+  partType: MachinePartTypes
+  spindleInput: MachineSpindleInput
+  toolStationInput: MachineToolStationInput
+  Name()
+  classType()
+  createAxisInput(axisType: MachineAxisTypes) -> MachineAxisInput
+  createSpindleInput() -> MachineSpindleInput
+  createToolStationInput() -> MachineToolStationInput
+
+MachinePartTypes
+  AxisMachinePartType()
+  BasicMachinePartType()
+  FixtureAttachmentMachinePartType()
+  Name()
+  ToolAttachmentMachinePartType()
+
+MachineParts *collection<MachinePart>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(partInput: MachinePartInput) -> MachinePart
+  classType()
+  createPartInput(partType: MachinePartTypes) -> MachinePartInput
+  itemById(id: str) -> MachinePart
+
+MachineQuery : Base
+  # MachineQuery defines the query to access Machines.
+  Name
+  isValid
+  location: LibraryLocations
+  model: str
+  objectType
+  url: URL
+  vendor: str
+  Name()
+  classType()
+  execute() -> Machine]
+
+MachineResetOptions
+  MachineResetBeforeEveryOperation()
+  MachineResetBeforeOpAndOnRewind()
+  MachineResetNever()
+  MachineResetOnRewind()
+  Name()
+
+MachineSpindle : Base
+  # Object representing a spindle on the machine
+  Name
+  description: str
+  isValid
+  maxSpeed: float
+  minSpeed: float
+  objectType
+  peakTorque: float
+  peakTorqueSpeed: float
+  power: float
+  Name()
+  classType()
+
+MachineSpindleInput : Base
+  # Object representing the set of inputs required to create a new MachineSpindle.
+  Name
+  description: str
+  isValid
+  maxSpeed: float
+  minSpeed: float
+  objectType
+  peakTorque: float
+  peakTorqueSpeed: float
+  power: float
+  Name()
+  classType()
+
+MachineTCPInterpolationMode
+  MachineTCPInterpolationMode_IndependentAxes()
+  MachineTCPInterpolationMode_SynchronizedAxes()
+  MachineTCPInterpolationMode_ToolTip()
+  Name()
+
+MachineTemplate
+  Generic3Axis()
+  Generic4Axis()
+  Generic5AxisHeadHead()
+  Generic5AxisHeadTable()
+  Generic5AxisTableTable()
+  GenericFFF()
+  GenericLathe()
+  Name()
+
+MachineToolStation : Base
+  # Object representing a tool station on the machine
+  Name
+  coolants: list[int]
+  isValid
+  maxToolDiameter: float
+  maxToolLength: float
+  objectType
+  toolInterface: str
+  Name()
+  classType()
+
+MachineToolStationInput : Base
+  # Object representing the set of inputs required to create a new MachineToolStation.
+  Name
+  coolants: list[int]
+  isValid
+  maxToolDiameter: float
+  maxToolLength: float
+  objectType
+  toolInterface: str
+  Name()
+  classType()
+
+MachineVector
+  append(x: Machine) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::cam::Machine > >::size_type, x: Machine) -> void
+  back() -> Machine >::value_type
+  begin() -> Machine >::iterator
+  capacity() -> Machine >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> Machine >::iterator
+  erase() -> Machine >::iterator
+  front() -> Machine >::value_type
+  get_allocator() -> Machine >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> Machine >::value_type
+  pop_back() -> void
+  push_back(x: Machine) -> void
+  rbegin() -> Machine >::reverse_iterator
+  rend() -> Machine >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::cam::Machine > >::size_type) -> void
+  resize() -> void
+  size() -> Machine >::size_type
+  swap(v: list[Machine]) -> void
+
+MachiningMode
+  Avoid_MachiningMode()
+  Fixture_MachiningMode()
+  Gouge_MachiningMode()
+  Machine_MachiningMode()
+  Name()
+
+MachiningTime : Base
+  Name
+  feedDistance: float
+  isValid
+  machiningTime: float
+  objectType
+  rapidDistance: float
+  toolChangeCount: int
+  totalFeedTime: float
+  totalRapidTime: float
+  totalToolChangeTime: float
+  Name()
+  classType()
+
+ManufacturingModel : Base
+  Name
+  id: str
+  isActive: bool
+  isValid
+  name: str
+  objectType
+  occurrence: Occurrence
+  Name()
+  activate() -> bool
+  classType()
+  deleteMe() -> bool
+  duplicate() -> ManufacturingModel
+  syncManufacturingModel() -> bool
+
+ManufacturingModelInput : Base
+  Name
+  isValid
+  name: str
+  objectType
+  Name()
+  classType()
+
+ManufacturingModelVector
+  append(x: ManufacturingModel) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::cam::ManufacturingModel > >::size_type, x: ManufacturingModel) -> void
+  back() -> ManufacturingModel >::value_type
+  begin() -> ManufacturingModel >::iterator
+  capacity() -> ManufacturingModel >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> ManufacturingModel >::iterator
+  erase() -> ManufacturingModel >::iterator
+  front() -> ManufacturingModel >::value_type
+  get_allocator() -> ManufacturingModel >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> ManufacturingModel >::value_type
+  pop_back() -> void
+  push_back(x: ManufacturingModel) -> void
+  rbegin() -> ManufacturingModel >::reverse_iterator
+  rend() -> ManufacturingModel >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::cam::ManufacturingModel > >::size_type) -> void
+  resize() -> void
+  size() -> ManufacturingModel >::size_type
+  swap(v: list[ManufacturingModel]) -> void
+
+ManufacturingModels *collection<ManufacturingModel>
+  # Referenced from CAM product to access manufacturing models in document.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(input: ManufacturingModelInput) -> ManufacturingModel
+  classType()
+  createInput() -> ManufacturingModelInput
+  itemById(id: str) -> ManufacturingModel
+  itemByName(name: str) -> ManufacturingModel]
+  syncAllManufacturingModels() -> bool
+
+MultiAxisCombinationDPMFeedrateSettings : MultiAxisDPMFeedrateSettings
+  Name
+  dpmType
+  feedMode
+  isValid
+  maximumFeedrate
+  objectType
+  outputTolerance
+  pulseWeight: float
+  Name()
+  classType()
+
+MultiAxisDPMFeedrateSettings : MultiAxisFeedrateSettings
+  # Specialization of MultiAxisFeedrateSettings for standard degrees per minute feedrates.
+  Name
+  dpmType: MultiAxisDegreesPerMinuteType
+  feedMode
+  isValid
+  maximumFeedrate: float
+  objectType
+  outputTolerance: float
+  Name()
+  classType()
+
+MultiAxisDegreesPerMinuteType
+  MultiAxisDegreesPerMinuteType_Combination()
+  MultiAxisDegreesPerMinuteType_Standard()
+  Name()
+
+MultiAxisFeedMode
+  MultiAxisFeedMode_DegreesPerMinute()
+  MultiAxisFeedMode_InverseTime()
+  MultiAxisFeedMode_ProgrammerdFeedrate()
+  Name()
+
+MultiAxisFeedrateSettings : Base
+  # Base class for the multi-axis feedrate settings
+  Name
+  feedMode: MultiAxisFeedMode
+  isValid
+  objectType
+  Name()
+  classType()
+
+MultiAxisFeedrateSettingsInput : Base
+  # Input class for creating MultiAxisFeedrateSettings objects.
+  Name
+  dpmType: MultiAxisDegreesPerMinuteType
+  feedMode: MultiAxisFeedMode
+  isValid
+  objectType
+  Name()
+  classType()
+
+MultiAxisInverseTimeFeedrateSettings : MultiAxisFeedrateSettings
+  # Specialization of MultiAxisFeedrateSettings for inverse time feedrates.
+  Name
+  feedMode
+  inverseTimeUnit: MultiAxisInverseTimeUnit
+  isValid
+  maximumFeedrate: float
+  objectType
+  Name()
+  classType()
+
+MultiAxisInverseTimeUnit
+  MultiAxisInverseTimeUnit_Minutes()
+  MultiAxisInverseTimeUnit_Seconds()
+  Name()
+
+MultiAxisMachineElement : MachineElement
+  # Machine element representing multi-axis machine settings.
+  Name
+  elementId
+  feedrateSettings: MultiAxisFeedrateSettings
+  isUsingTiltedWorkplane: bool
+  isUsingVirtualTooltip: bool
+  isValid
+  objectType
+  retractAndReconfigureSettings: MultiAxisRetractAndReconfigureSettings
+  singularitySettings: MultiAxisSingularitySettings
+  typeId
+  Name()
+  classType()
+  createFeedrateSettings(input: MultiAxisFeedrateSettingsInput) -> MultiAxisFeedrateSettings
+  createFeedrateSettingsInput() -> MultiAxisFeedrateSettingsInput
+  createRetractAndReconfigureSettings() -> MultiAxisRetractAndReconfigureSettings
+  createSingularitySettings() -> MultiAxisSingularitySettings
+  deleteMe() -> void
+  @static staticTypeId() -> str
+
+MultiAxisMachineElementInput : MachineElementInput
+  # Specialization of MachineElementInput for creating a multi-axis machine element.
+  Name
+  inputType
+  isValid
+  objectType
+  Name()
+  classType()
+
+MultiAxisProgrammedFeedrateSettings : MultiAxisFeedrateSettings
+  # Specialization of MultiAxisFeedrateSettings for programmed feedrates.
+  Name
+  feedMode
+  isValid
+  objectType
+  Name()
+  classType()
+
+MultiAxisRetractAndReconfigureSettings : Base
+  # Settings for multi-axis retract and reconfigure.
+  Name
+  isValid
+  objectType
+  retractPreference: MultiAxisRetractPreference
+  rewindPreference: MultiAxisRewindPreference
+  safePlungeFeedrate: float
+  safeRetractDistance: float
+  safeRetractFeedrate: float
+  stockExpansion: Vector3D
+  Name()
+  classType()
+
+MultiAxisRetractPreference
+  MultiAxisRetractPreference_RetractAtApex()
+  MultiAxisRetractPreference_StayAtApex()
+  Name()
+
+MultiAxisRewindPreference
+  MultiAxisRewindPreference_RewindAtLinear()
+  MultiAxisRewindPreference_RewindAtRapid()
+  Name()
+
+MultiAxisSingularityLinearizationSettings : Base
+  # The class for the multi-axis singularity linearization settings.
+  Name
+  isValid
+  linearizationTolerance: float
+  linearizeMethod: MultiAxisSingularityLinearizeMethod
+  objectType
+  Name()
+  classType()
+
+MultiAxisSingularityLinearizeMethod
+  MultiAxisSingularityLinearize_Linear()
+  MultiAxisSingularityLinearize_Rotary()
+  Name()
+
+MultiAxisSingularitySettings : Base
+  # Base class for multi-axis singularity settings.
+  Name
+  angle: float
+  cone: float
+  isValid
+  linearizationSettings: MultiAxisSingularityLinearizationSettings
+  objectType
+  tolerance: float
+  Name()
+  classType()
+  createLinearizationSettings() -> MultiAxisSingularityLinearizationSettings
+
 NCProgram : OperationBase
   # Object that represents an existing NC program.
   Name
@@ -685,6 +2207,16 @@ NCProgram : OperationBase
   removeReferences(entity: Base, removeFromChildren: bool) -> bool
   updatePostParameters(parameters: CAMParameters) -> bool
 
+NCProgramInput : Base
+  Name
+  displayName: str
+  isValid
+  objectType
+  operations: OperationBase]
+  parameters: CAMParameters
+  Name()
+  classType()
+
 NCProgramPostProcessOptions : Base
   Name
   fusionHubExecutionBehavior: FusionHubExecutionBehaviors
@@ -695,6 +2227,18 @@ NCProgramPostProcessOptions : Base
   Name()
   classType()
   @static create() -> NCProgramPostProcessOptions
+
+NCPrograms *collection<NCProgram>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(input: NCProgramInput) -> NCProgram
+  classType()
+  createInput() -> NCProgramInput
+  itemByName(name: str) -> NCProgram
+  itemByOperationId(id: int) -> NCProgram
 
 Operation : OperationBase
   # Object that represents an operation in an existing Setup, Folder or Pattern.
@@ -744,6 +2288,260 @@ Operation : OperationBase
   moveBefore(operation: OperationBase) -> bool
   moveInto(container: OperationBase) -> bool
   removeReferences(entity: Base, removeFromChildren: bool) -> bool
+
+OperationBase : Base
+  # Base class object representing all operations, folders, patterns and setups.
+  Name
+  attributes: Attributes
+  error: str
+  generatedDataCollection: GeneratedDataCollection
+  hasError: bool
+  hasWarning: bool
+  isLightBulbOn: bool
+  isOptional: bool
+  isProtected: bool
+  isSelected: bool
+  isSuppressed: bool
+  isValid
+  isVisible: bool
+  name: str
+  notes: str
+  objectType
+  operationId: int
+  parameters: CAMParameters
+  parentSetup: Setup
+  strategy: str
+  warning: str
+  Name()
+  classType()
+  copyAfter(operation: OperationBase) -> bool
+  copyBefore(operation: OperationBase) -> bool
+  copyInto(container: OperationBase) -> bool
+  deleteMe() -> bool
+  duplicate() -> bool
+  hasMissingReferences() -> bool
+  modifyUtility(utility: ModifyUtilityTypes) -> ModifyUtility
+  moveAfter(operation: OperationBase) -> bool
+  moveBefore(operation: OperationBase) -> bool
+  moveInto(container: OperationBase) -> bool
+  removeReferences(entity: Base, removeFromChildren: bool) -> bool
+
+OperationBaseCommandButtonPressedEventArgs : CAMEventArgs
+  # Event arguments specific to an operationBaseCommandButtonPressed event.
+  buttonName: str
+
+OperationBaseCommandStartedEventArgs : CAMEventArgs
+  # Event arguments specific to an operationBaseCommandStarted event.
+  isEdit: bool
+
+OperationBaseEvent : Event
+  add(handler: OperationBaseEventHandler) -> bool
+  remove(handler: OperationBaseEventHandler) -> bool
+
+OperationBaseEventArgs : EventArgs
+  # The OperationEventArgs provides information associated with an operation event.
+  camEventArgs: CAMEventArgs
+  document: Document
+  documentName: str
+  eventState: CAMEventState
+  eventType: OperationBaseEventTypes
+  operationbase: OperationBase
+  operationid: int
+  stateMessage: str
+
+OperationBaseEventHandler
+  notify(eventArgs: OperationBaseEventArgs) -> void
+
+OperationBaseVector
+  append(x: OperationBase) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::cam::OperationBase > >::size_type, x: OperationBase) -> void
+  back() -> OperationBase >::value_type
+  begin() -> OperationBase >::iterator
+  capacity() -> OperationBase >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> OperationBase >::iterator
+  erase() -> OperationBase >::iterator
+  front() -> OperationBase >::value_type
+  get_allocator() -> OperationBase >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> OperationBase >::value_type
+  pop_back() -> void
+  push_back(x: OperationBase) -> void
+  rbegin() -> OperationBase >::reverse_iterator
+  rend() -> OperationBase >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::cam::OperationBase > >::size_type) -> void
+  resize() -> void
+  size() -> OperationBase >::size_type
+  swap(v: list[OperationBase]) -> void
+
+OperationChangedEventArgs : CAMEventArgs
+  # Event arguments specific to an OperationChanged event.
+  changeType: CAMEventChangeType
+
+OperationInput : Base
+  Name
+  displayName: str
+  generationMode: AutomaticGenerationModes
+  isValid
+  objectType
+  parameters: CAMParameters
+  referenceTool: Tool
+  strategy: str
+  tool: Tool
+  toolPreset: ToolPreset
+  Name()
+  classType()
+
+OperationStates
+  IsInvalidOperationState()
+  IsValidOperationState()
+  Name()
+  NoToolpathOperationState()
+  SuppressedOperationState()
+
+OperationStrategy : Base
+  Name
+  description: str
+  is2DStrategy: bool
+  is3DStrategy: bool
+  isAdditiveStrategy: bool
+  isCuttingStrategy: bool
+  isDrillingStrategy: bool
+  isFinishingStrategy: bool
+  isGenerationAllowed: bool
+  isMillingStrategy: bool
+  isRotaryStrategy: bool
+  isSupportStrategy: bool
+  isTurningStrategy: bool
+  isValid
+  name: str
+  objectType
+  title: str
+  Name()
+  classType()
+  @static createFromString(name: str) -> OperationStrategy
+
+OperationStrategyTypes
+  AdaptiveClearing()
+  AdaptiveClearing2D()
+  Bore()
+  Chamfer2D()
+  Circular()
+  Contour()
+  Contour2D()
+  Drilling()
+  Engrave()
+  Face()
+  Flow()
+  Flow2()
+  Horizontal()
+  Jet2D()
+  ManualInspection()
+  ManualMeasure()
+  Morph()
+  MorphedSpiral()
+  MultiAxisContour()
+  MultiAxisMorph()
+  Name()
+  Parallel()
+  PartAlignment()
+  PathMeasure()
+  Pencil()
+  Pocket2D()
+  PocketClearing()
+  ProbeGeometry()
+  ProbeWCS()
+  Projection()
+  Radial()
+  Ramp()
+  RestFinishing()
+  RotaryFinishing()
+  Scallop()
+  Slot()
+  Spiral()
+  SteepAndShallow()
+  SurfaceInspection()
+  Swarf()
+  Thread()
+  Trace()
+  TurningChamfer()
+  TurningFace()
+  TurningGroove()
+  TurningPart()
+  TurningProfile()
+  TurningProfileGroove()
+  TurningStockTransfer()
+  TurningThread()
+
+OperationStrategyVector
+  append(x: OperationStrategy) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::cam::OperationStrategy > >::size_type, x: OperationStrategy) -> void
+  back() -> OperationStrategy >::value_type
+  begin() -> OperationStrategy >::iterator
+  capacity() -> OperationStrategy >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> OperationStrategy >::iterator
+  erase() -> OperationStrategy >::iterator
+  front() -> OperationStrategy >::value_type
+  get_allocator() -> OperationStrategy >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> OperationStrategy >::value_type
+  pop_back() -> void
+  push_back(x: OperationStrategy) -> void
+  rbegin() -> OperationStrategy >::reverse_iterator
+  rend() -> OperationStrategy >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::cam::OperationStrategy > >::size_type) -> void
+  resize() -> void
+  size() -> OperationStrategy >::size_type
+  swap(v: list[OperationStrategy]) -> void
+
+OperationTypes
+  AdditiveOperation()
+  JetOperation()
+  MillingOperation()
+  Name()
+  TurningOperation()
+
+OperationVector
+  append(x: Operation) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::cam::Operation > >::size_type, x: Operation) -> void
+  back() -> Operation >::value_type
+  begin() -> Operation >::iterator
+  capacity() -> Operation >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> Operation >::iterator
+  erase() -> Operation >::iterator
+  front() -> Operation >::value_type
+  get_allocator() -> Operation >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> Operation >::value_type
+  pop_back() -> void
+  push_back(x: Operation) -> void
+  rbegin() -> Operation >::reverse_iterator
+  rend() -> Operation >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::cam::Operation > >::size_type) -> void
+  resize() -> void
+  size() -> Operation >::size_type
+  swap(v: list[Operation]) -> void
+
+Operations *collection<Operation>
+  Name
+  compatibleStrategies: OperationStrategy]
+  count: int
+  isValid
+  objectType
+  Name()
+  add(input: OperationInput) -> OperationBase
+  classType()
+  createInput(strategy: str) -> OperationInput
+  itemByName(name: str) -> Operation
+  itemByOperationId(id: int) -> Operation
 
 PostCapabilities
   Additive()
@@ -875,6 +2673,228 @@ PostProcessingMachineElement : MachineElement
   @static staticTypeId() -> str
   updatePostParameters(parameters: CAMParameters) -> bool
 
+PrintSetting *collection<PrintSettingItem>
+  # Object that represents a PrintSetting.
+  Name
+  count: int
+  description: str
+  id: str
+  isValid
+  name: str
+  objectType
+  technology: str
+  Name()
+  classType()
+  @static createFromXML(xmlContent: str) -> PrintSetting
+  deletePrintSettingItem(name: str) -> void
+  duplicatePrintSettingItem(name: str) -> PrintSettingItem
+  getDefaultPrintSettingItem() -> PrintSettingItem
+  isCompatibleWithMachine(machine: Machine) -> bool
+  itemByName(name: str) -> PrintSettingItem
+  parameters(type: PrintSettingItemTypes) -> CAMParameters
+  setDefaultPrintSettingItem(name: str) -> void
+  syncWithMachine(machine: Machine) -> bool
+  toXML() -> str
+
+PrintSettingItem : Base
+  # Collection that provides access to the print setting parameters.
+  Name
+  description: str
+  isValid
+  name: str
+  objectType
+  parameters: CAMParameters
+  Name()
+  classType()
+
+PrintSettingItemTypes
+  EXPORTER()
+  GENERAL()
+  Name()
+
+PrintSettingLibrary : CAMLibrary
+  Name
+  assetTypeName
+  isValid
+  objectType
+  Name()
+  childAssetURLs(url: URL) -> URL]
+  childFolderURLs(url: URL) -> URL]
+  childPrintSettings(url: URL) -> PrintSetting]
+  classType()
+  createFolder(parentUrl: URL, folderName: str) -> URL
+  createQuery(location: LibraryLocations) -> PrintSettingQuery
+  deleteAsset(url: URL) -> bool
+  deleteFolder(url: URL) -> bool
+  displayName(url: URL) -> str
+  doesPathExist(url: URL) -> bool
+  importPrintSetting(printSetting: PrintSetting, destinationUrl: URL, printSettingName: str) -> URL
+  printSettingAtURL(url: URL) -> PrintSetting
+  updatePrintSetting(url: URL, printSetting: PrintSetting) -> bool
+  urlByLocation(location: LibraryLocations) -> URL
+
+PrintSettingQuery : Base
+  Name
+  filamentDiameter: float
+  isValid
+  layerHeight: float
+  location: LibraryLocations
+  machine: Machine
+  material: str
+  name: str
+  objectType
+  technology: str
+  url: URL
+  vendor: str
+  Name()
+  classType()
+  execute() -> PrintSetting]
+
+PrintSettingVector
+  append(x: PrintSetting) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::cam::PrintSetting > >::size_type, x: PrintSetting) -> void
+  back() -> PrintSetting >::value_type
+  begin() -> PrintSetting >::iterator
+  capacity() -> PrintSetting >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> PrintSetting >::iterator
+  erase() -> PrintSetting >::iterator
+  front() -> PrintSetting >::value_type
+  get_allocator() -> PrintSetting >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> PrintSetting >::value_type
+  pop_back() -> void
+  push_back(x: PrintSetting) -> void
+  rbegin() -> PrintSetting >::reverse_iterator
+  rend() -> PrintSetting >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::cam::PrintSetting > >::size_type) -> void
+  resize() -> void
+  size() -> PrintSetting >::size_type
+  swap(v: list[PrintSetting]) -> void
+
+RecognizedHole : Base
+  # Object that represents a hole, a hole is made of one or more segments.
+  Name
+  axis: Vector3D
+  bottom: Point3D
+  bottomDiameter: float
+  hasErrors: bool
+  hasWarnings: bool
+  isThreaded: bool
+  isThrough: bool
+  isValid
+  objectType
+  segmentCount: int
+  top: Point3D
+  topDiameter: float
+  totalLength: float
+  Name()
+  classType()
+  getHoleSignatureXML() -> str
+  @static recognizeHoles(bodies: list[Base]) -> Base]
+  @static recognizeHolesWithInput(bodies: list[Base], input: RecognizedHolesInput) -> RecognizedHolesInput
+  segment(index: int) -> RecognizedHoleSegment
+
+RecognizedHoleGroup *collection<RecognizedHole>
+  Name
+  count: int
+  hasErrors: bool
+  hasWarnings: bool
+  isValid
+  objectType
+  Name()
+  classType()
+  @static recognizeHoleGroups(bodies: list[Base]) -> Base]
+  @static recognizeHoleGroupsWithInput(bodies: list[Base], input: RecognizedHolesInput) -> RecognizedHolesInput
+
+RecognizedHoleGroups *collection<RecognizedHoleGroup>
+  # Object that represents a collection of hole groups.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+
+RecognizedHoleSegment : Base
+  Name
+  axis: Vector3D
+  bottomDiameter: float
+  face: Base
+  faces: Base]
+  halfAngle: float
+  height: float
+  holeSegmentType: HoleSegmentType
+  isThreaded: bool
+  isValid
+  objectType
+  threadFeatures: ThreadFeature]
+  topDiameter: float
+  Name()
+  classType()
+
+RecognizedHoles *collection<RecognizedHole>
+  # Object that represents a collection of holes.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+
+RecognizedHolesInput : Base
+  # Object that contains the settings used by recognizedHoles and recognizedHoleGroups.
+  Name
+  filterPartialHoles: bool
+  isValid
+  objectType
+  Name()
+  classType()
+  @static create() -> RecognizedHolesInput
+
+RecognizedPocket : Base
+  Name
+  attackVector: Vector3D
+  bottomType: RecognizedPocketBottomType
+  boundaries: Curve3DPath]
+  depth: float
+  faces: BRepFace]
+  isClosed: bool
+  isThrough: bool
+  isValid
+  islands: Curve3DPath]
+  objectType
+  sharedFaces: BRepFace]
+  Name()
+  classType()
+  @static recognizePockets(body: Base, attackVector: Vector3D) -> Vector3D
+  @static recognizePocketsWithInput(input: RecognizedPocketInput) -> RecognizedPocketInput
+
+RecognizedPocketBottomType
+  Name()
+  RecognizedPocketBottomTypeChamfer()
+  RecognizedPocketBottomTypeFillet()
+  RecognizedPocketBottomTypeFlat()
+  RecognizedPocketBottomTypeOther()
+  RecognizedPocketBottomTypeThrough()
+
+RecognizedPocketInput : Base
+  attackVectors: Vector3D]
+  body: Base
+  isIncludingBosses: bool
+  @static create() -> RecognizedPocketInput
+
+RecognizedPockets *collection<RecognizedPocket>
+  # Object that represents a collection of pockets.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+
 Setup : OperationBase
   # Object that represents an existing Setup.
   Name
@@ -935,6 +2955,201 @@ Setup : OperationBase
   moveInto(container: OperationBase) -> bool
   removeReferences(entity: Base, removeFromChildren: bool) -> bool
 
+SetupChangeEvent : Event
+  Name
+  isValid
+  name
+  objectType
+  sender
+  Name()
+  add(handler: SetupChangeEventHandler) -> bool
+  classType()
+  remove(handler: SetupChangeEventHandler) -> bool
+
+SetupChangeEventArgs : EventArgs
+  # The SetupChangeEventArgs provides information associated with a change event of a setup.
+  Name
+  firingEvent
+  info: str
+  isValid
+  objectType
+  setup: Setup
+  type: SetupChangeEventType
+  Name()
+  classType()
+
+SetupChangeEventHandler : EventHandler
+  Name()
+  notify(eventArgs: SetupChangeEventArgs) -> void
+
+SetupChangeEventType
+  Arbitrary()
+  Name()
+  PrintSettingSelection()
+
+SetupEvent : Event
+  # A SetupEvent represents a setup related event.  For example, SetupCreated or SetupDestroying.
+  Name
+  isValid
+  name
+  objectType
+  sender
+  Name()
+  add(handler: SetupEventHandler) -> bool
+  classType()
+  remove(handler: SetupEventHandler) -> bool
+
+SetupEventArgs : EventArgs
+  # The SetupEventArgs provides information associated with a setup event.
+  Name
+  firingEvent
+  isValid
+  objectType
+  setup: Setup
+  Name()
+  classType()
+
+SetupEventHandler : EventHandler
+  # The SetupEventHandler is a client implemented class that can be added as a handler to a SetupEvent.
+  Name()
+  notify(eventArgs: SetupEventArgs) -> void
+
+SetupGroup *collection<Setup>
+  count: int
+  operationType: OperationTypes
+  addSetup(setup: Setup) -> bool
+  copyAfter(operation: OperationBase) -> bool
+  copyBefore(operation: OperationBase) -> bool
+  copyInto(container: OperationBase) -> bool
+  deleteMe() -> bool
+  duplicate() -> bool
+  hasMissingReferences() -> bool
+  modifyUtility(utility: ModifyUtilityTypes) -> ModifyUtility
+  moveAfter(operation: OperationBase) -> bool
+  moveBefore(operation: OperationBase) -> bool
+  moveInto(container: OperationBase) -> bool
+  removeReferences(entity: Base, removeFromChildren: bool) -> bool
+  removeSetup(setup: Setup) -> bool
+
+SetupGroups *collection<SetupGroup>
+  # Collection that provides access to all of the existing Setup Groups in a document.
+  count: int
+  add(name: str, setups: list[Setup]) -> SetupGroup
+  itemByName(name: str) -> SetupGroup
+  itemByOperationId(id: int) -> SetupGroup
+
+SetupInput : Base
+  Name
+  fixtureEnabled: bool
+  fixtures: Base]
+  isUsingPreviousSetupData: bool
+  isValid
+  machine: Machine
+  models: Base]
+  name: str
+  objectType
+  operationType: OperationTypes
+  parameters: CAMParameters
+  printSetting: PrintSetting
+  stockMode: SetupStockModes
+  stockSolids: Base]
+  Name()
+  classType()
+
+SetupSheetFormats
+  ExcelFormat()
+  HTMLFormat()
+  Name()
+
+SetupStockModes
+  FixedBoxStock()
+  FixedCylinderStock()
+  FixedTubeStock()
+  Name()
+  PreviousSetupStock()
+  RelativeBoxStock()
+  RelativeCylinderStock()
+  RelativeTubeStock()
+  SolidStock()
+
+SetupVector
+  append(x: Setup) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::cam::Setup > >::size_type, x: Setup) -> void
+  back() -> Setup >::value_type
+  begin() -> Setup >::iterator
+  capacity() -> Setup >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> Setup >::iterator
+  erase() -> Setup >::iterator
+  front() -> Setup >::value_type
+  get_allocator() -> Setup >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> Setup >::value_type
+  pop_back() -> void
+  push_back(x: Setup) -> void
+  rbegin() -> Setup >::reverse_iterator
+  rend() -> Setup >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::cam::Setup > >::size_type) -> void
+  resize() -> void
+  size() -> Setup >::size_type
+  swap(v: list[Setup]) -> void
+
+SetupVisibilityManager : Base
+  # Class to manage the visibility of various elements of the setup.
+  Name
+  isValid
+  machineBaseVisible: bool
+  machineVisible: bool
+  objectType
+  Name()
+  classType()
+
+Setups *collection<Setup>
+  # Collection that provides access to all of the existing setups in a document.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(input: SetupInput) -> Setup
+  classType()
+  createInput(type: OperationTypes) -> SetupInput
+  itemByName(name: str) -> Setup
+  itemByOperationId(id: int) -> Setup
+
+StrategyCommandDefinition : Base
+  # Holds the UI definitions of a custom strategy.
+  commandBefore: str
+  panelName: str
+  tabName: str
+  @static create() -> StrategyCommandDefinition
+
+StrategyCommandDefinitionVector
+  append(x: StrategyCommandDefinition) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::cam::StrategyCommandDefinition > >::size_type, x: StrategyCommandDefinition) -> void
+  back() -> StrategyCommandDefinition >::value_type
+  begin() -> StrategyCommandDefinition >::iterator
+  capacity() -> StrategyCommandDefinition >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> StrategyCommandDefinition >::iterator
+  erase() -> StrategyCommandDefinition >::iterator
+  front() -> StrategyCommandDefinition >::value_type
+  get_allocator() -> StrategyCommandDefinition >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> StrategyCommandDefinition >::value_type
+  pop_back() -> void
+  push_back(x: StrategyCommandDefinition) -> void
+  rbegin() -> StrategyCommandDefinition >::reverse_iterator
+  rend() -> StrategyCommandDefinition >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::cam::StrategyCommandDefinition > >::size_type) -> void
+  resize() -> void
+  size() -> StrategyCommandDefinition >::size_type
+  swap(v: list[StrategyCommandDefinition]) -> void
+
 Tool : Base
   # Represents a Tool.
   Name
@@ -949,3 +3164,85 @@ Tool : Base
   @static createFromP21(p21: str) -> Tool
   @static createFromP21File(filename: str) -> Tool
   toJson() -> str
+
+ToolLibraries : CAMLibrary
+  # The ToolLibraries object provides utilities to access, import and update tool libraries.
+  Name
+  assetTypeName
+  isValid
+  objectType
+  Name()
+  childAssetURLs(url: URL) -> URL]
+  childFolderURLs(url: URL) -> URL]
+  classType()
+  createFolder(parentUrl: URL, folderName: str) -> URL
+  createQuery(location: LibraryLocations) -> ToolQuery
+  deleteAsset(url: URL) -> bool
+  deleteFolder(url: URL) -> bool
+  displayName(url: URL) -> str
+  doesPathExist(url: URL) -> bool
+  importToolLibrary(toolLibrary: ToolLibrary, destinationUrl: URL, libraryName: str) -> URL
+  toolLibraryAtURL(url: URL) -> ToolLibrary
+  updateToolLibrary(url: URL, toolLibrary: ToolLibrary) -> bool
+  urlByLocation(location: LibraryLocations) -> URL
+
+ToolLibrary *collection<Tool>
+  # ToolLibrary represents a collection of Tool objects.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(tool: Tool) -> bool
+  classType()
+  @static createEmpty() -> ToolLibrary
+  @static createFromJson(json: str) -> ToolLibrary
+  createQuery() -> ToolQuery
+  remove(index: int) -> bool
+  toJson() -> str
+
+ToolPreset : Base
+  # A Preset defines the material specific properties of a Tool.
+  Name
+  id: str
+  isValid
+  name: str
+  objectType
+  parameters: CAMParameters
+  Name()
+  classType()
+
+ToolPresetVector
+  append(x: ToolPreset) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::cam::ToolPreset > >::size_type, x: ToolPreset) -> void
+  back() -> ToolPreset >::value_type
+  begin() -> ToolPreset >::iterator
+  capacity() -> ToolPreset >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> ToolPreset >::iterator
+  erase() -> ToolPreset >::iterator
+  front() -> ToolPreset >::value_type
+  get_allocator() -> ToolPreset >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> ToolPreset >::value_type
+  pop_back() -> void
+  push_back(x: ToolPreset) -> void
+  rbegin() -> ToolPreset >::reverse_iterator
+  rend() -> ToolPreset >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::cam::ToolPreset > >::size_type) -> void
+  resize() -> void
+  size() -> ToolPreset >::size_type
+  swap(v: list[ToolPreset]) -> void
+
+ToolPresets *collection<ToolPreset>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add() -> ToolPreset
+  classType()
+  itemsByName(name: str) -> ToolPreset]
+  remove(index: int) -> bool

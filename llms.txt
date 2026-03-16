@@ -36,6 +36,9 @@ Fetch the relevant domain file based on the task:
 - Commands, palettes, toolbars, UI events:
   https://halletj.github.io/fusion-lap-sdk/lap/fusion-ui.lap
 
+- Enums, settings types, and other uncategorized classes:
+  https://halletj.github.io/fusion-lap-sdk/lap/fusion-misc.lap
+
 ## Rules for Autodesk Fusion Scripts
 
 - Always import: import adsk.core, adsk.fusion, adsk.cam

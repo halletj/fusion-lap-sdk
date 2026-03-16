@@ -77,10 +77,52 @@ import: import adsk.core, adsk.fusion, adsk.cam
 # fusion-core.lap
 
 [types]
+AppearanceSourceTypes: MaterialAppearanceSource | BodyAppearanceSource | OccurrenceAppearanceSource | FaceAppearanceSource | OverrideAppearanceSource
+BoundingBoxEntityTypes: AllEntitiesBoundingBoxEntityType | SolidBRepBodyBoundingBoxEntityType | SurfaceBodyBoundingBoxEntityType | MeshBodyBoundingBoxEntityType | SketchBoundingBoxEntityType | ConstructionBoundingBoxEntityType
+CameraTypes: OrthographicCameraType | PerspectiveCameraType | PerspectiveWithOrthoFacesCameraType
+ChainedCurveOptions: noChainedCurves | connectedChainedCurves | tangentChainedCurves | openEdgesChainedCurves | tangentAndOpenEdgesChainedCurves
+CloseError: CloseCancelledError
+Curve2DTypes: Line2DCurveType | Arc2DCurveType | Circle2DCurveType | Ellipse2DCurveType | EllipticalArc2DCurveType | InfiniteLine2DCurveType | NurbsCurve2DCurveType | Polyline2DCurveType
+Curve3DTypes: Line3DCurveType | Arc3DCurveType | Circle3DCurveType | Ellipse3DCurveType | EllipticalArc3DCurveType | InfiniteLine3DCurveType | NurbsCurve3DCurveType | Polyline3DCurveType
+DeleteMeError: ParameterReferencedByOtherParameterError
+DistanceUnits: MillimeterDistanceUnits | CentimeterDistanceUnits | MeterDistanceUnits | InchDistanceUnits | FootDistanceUnits | YardDistanceUnits | MicronDistanceUnits | HectometerDistanceUnits | MileDistanceUnits | MilDistanceUnits | NauticalMileDistanceUnits
+ExpressionError: CyclicParameterReferenceError
+FutureStates: ProcessingFutureState | FinishedFutureState | FailedFutureState
+GenericErrors: Ok | UnexpectedError | InternalValidationError | BadApiCallError | UnderlyingObjectDeletedError | OperationFailed | ExpressionError | InvalidGeometryError | ClassSpecificError | FunctionSpecificError
+LineStylePatterns: continuousLineStylePattern | centerLineStylePattern | dashedLineStylePattern | dotLineStylePattern | hiddenLineStylePattern | phantomLineStylePattern | tracksLineStylePattern | zigzagLineStylePattern
+LinearDiameterDimensionPreferenceTypes: DefaultLinearDiameterDimensionPreferenceType | PreferLinearDiameterDimensionPreferenceType | AvoidLinearDiameterDimensionPreferenceType
+MachineAnglePreferences: MachineAngleNoPreference | MachineAnglePreferNegative | MachineAnglePreferPositive
+MassUnits: GramMassUnits | KilogramMassUnits | PoundMassUnits | OunceMassUnits | TonMassUnits | SlugMassUnits
+MaterialDisplayUnits: MetricStandardDisplayUnits | MetricMKSDisplayUnits | MetricMMNSDisplayUnits | MetricCGSDisplayUnits | MetricUMNSDisplayUnits | EnglishStandardDisplayUnits | EnglishInchDisplayUnits | EnglishFootDisplayUnits
+MeshUnits: CentimeterMeshUnit | MillimeterMeshUnit | MeterMeshUnit | InchMeshUnit | FootMeshUnit
+MultiAxisSingularityLinearizeMethod: MultiAxisSingularityLinearize_Linear | MultiAxisSingularityLinearize_Rotary
+NurbsSurfaceProperties: OpenNurbsSurface | ClosedNurbsSurface | PeriodicNurbsSurface | RationalNurbsSurface
+OpenDocumentError: DocumentNotFoundError
+ParameterValueTypes: NumericParameterValueType | TextParameterValueType
 PointContainment: PointInsidePointContainment | PointOnPointContainment | PointOutsidePointContainment | UnknownPointContainment
+ProgrammingLanguages: PromptForLanguage | PythonProgrammingLanguage | CPPProgramminglanguage | TypeScriptProgrammingLanguage
+SaveLocalErrors: SaveCancelledSaveLocalError | DiskFullSaveLocalError | FileReadOnlySaveLocalError
+ScriptSourceLocations: AppStoreScriptSourceLocation | OtherInstalledScriptSourceLocation | UserDefinedScriptSourceLocation | InternalScriptSourceLocation | SamplesScriptSourceLocation | LinkedScriptSourceLocation
+SketchCurveConstructionStates: ToggleSketchCurveConstructionState | ConstructionSketchCurveConstructionState | NormalSketchCurveConstructionState
+SketchLineCenterlineStates: ToggleSketchLineCenterlineState | CenterlineSketchLineCenterlineState | NormalSketchLineCenterlineState
+UnitSystems: CustomUnitSystem | MillimeterGramUnitSystem | CentimeterGramUnitSystem | MeterKilogramUnitSystem | InchOunceUnitSystem | FootPoundUnitSystem
+ValueInputError: ValueNotOfTypeError
 VectorError: ZeroLengthVectorError
 
 [classes]
+APIPreferences : Base
+  # Provides access to the various preferences associated with the API.
+  Name
+  debuggingPort: int
+  defaultAddInLanguage: ProgrammingLanguages
+  defaultPathForScriptsAndAddIns: str
+  defaultScriptLanguage: ProgrammingLanguages
+  isDeveloperToolsEnabled: bool
+  isValid
+  objectType
+  Name()
+  classType()
+
 AdditiveFEAOperationInput : OperationInput
   base64PRMData: str
   generationType: AdditiveFEAGenerationType
@@ -122,6 +164,68 @@ AngleValueCommandInput : CommandInput
   classType()
   deleteMe() -> bool
   setManipulator(origin: Point3D, xDirection: Vector3D, yDirection: Vector3D) -> bool
+
+Appearance : Base
+  # An appearance.
+  Name
+  appearanceProperties: Properties
+  hasTexture: bool
+  id: str
+  isUsed: bool
+  isValid
+  name: str
+  objectType
+  parent: Base
+  usedBy: ObjectCollection
+  Name()
+  classType()
+  copyTo(target: Base) -> bool
+  deleteMe() -> bool
+
+AppearanceSourceTypes
+  BodyAppearanceSource()
+  FaceAppearanceSource()
+  MaterialAppearanceSource()
+  Name()
+  OccurrenceAppearanceSource()
+  OverrideAppearanceSource()
+
+AppearanceTexture : Base
+  # Provides access to a list of properties that define a texture.
+  Name
+  isValid
+  objectType
+  properties: Properties
+  textureType: TextureTypes
+  Name()
+  changeTextureImage(imageFilename: str) -> bool
+  classType()
+
+AppearanceTextureProperty : Property
+  # A texture value property associated with a material or appearance.
+  Name
+  id
+  isReadOnly
+  isUsed: bool
+  isValid
+  name
+  objectType
+  parent
+  value: AppearanceTexture
+  Name()
+  classType()
+
+Appearances *collection<Appearance>
+  # A collection of appearances.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  addByCopy(appearanceToCopy: Appearance, name: str) -> Appearance
+  classType()
+  itemById(id: str) -> Appearance
+  itemByName(name: str) -> Appearance
 
 Application : Base
   Name
@@ -187,6 +291,72 @@ Application : Base
   @static log() -> void
   registerCustomEvent(eventId: str) -> CustomEvent
   unregisterCustomEvent(eventId: str) -> bool
+
+Arc2D : Curve2D
+  Name
+  asNurbsCurve: NurbsCurve2D
+  center: Point2D
+  curveType
+  endAngle: float
+  endPoint: Point2D
+  evaluator
+  isClockwise: bool
+  isValid
+  objectType
+  radius: float
+  startAngle: float
+  startPoint: Point2D
+  Name()
+  classType()
+  copy() -> Arc2D
+  @static createByCenter(center: Point2D, radius: float, startAngle: float, endAngle: float, isClockwise: bool) -> Point2D
+  @static createByThreePoints(startPoint: Point2D, point: Point2D, endPoint: Point2D) -> Point2D
+  getData() -> bool
+  set(center: Point2D, radius: float, startAngle: float, endAngle: float, isClockwise: bool) -> bool
+  transformBy(matrix: Matrix2D) -> bool
+
+Arc3D : Curve3D
+  Name
+  asNurbsCurve: NurbsCurve3D
+  center: Point3D
+  curveType
+  endAngle: float
+  endPoint: Point3D
+  evaluator
+  isValid
+  normal: Vector3D
+  objectType
+  radius: float
+  referenceVector: Vector3D
+  startAngle: float
+  startPoint: Point3D
+  Name()
+  classType()
+  copy() -> Arc3D
+  @static createByCenter(center: Point3D, normal: Vector3D, referenceVector: Vector3D, radius: float, startAngle: float, endAngle: float) -> Vector3D
+  @static createByThreePoints(pointOne: Point3D, pointTwo: Point3D, pointThree: Point3D) -> Point3D
+  getData() -> bool
+  set(center: Point3D, normal: Vector3D, referenceVector: Vector3D, radius: float, startAngle: float, endAngle: float) -> bool
+  setAxes(normal: Vector3D, referenceVector: Vector3D) -> bool
+  transformBy(matrix: Matrix3D) -> bool
+
+AreaProperties : Base
+  # The Area properties of a sketch profile or planar surface.
+  Name
+  accuracy: CalculationAccuracy
+  area: float
+  centroid: Point3D
+  isValid
+  objectType
+  perimeter: float
+  rotationToPrincipal: float
+  Name()
+  classType()
+  getCentroidMomentsOfInertia() -> bool
+  getMomentsOfInertia() -> bool
+  getPrincipalAxes() -> bool
+  getPrincipalMomentsOfInertia() -> bool
+  getRadiusOfGyration() -> bool
 
 Arrange2DEnvelopeInput : ArrangeEnvelopeInput
   Name
@@ -343,6 +513,55 @@ AsymmetricFilletEdgeSetInput : FilletEdgeSetInput
   offsetOne: ValueInput
   offsetTwo: ValueInput
 
+Attribute : Base
+  Name
+  groupName: str
+  isValid
+  name: str
+  objectType
+  otherParents: ObjectCollection
+  parent: Base
+  value: str
+  Name()
+  classType()
+  deleteMe() -> bool
+
+AttributeVector
+  append(x: Attribute) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::core::Attribute > >::size_type, x: Attribute) -> void
+  back() -> Attribute >::value_type
+  begin() -> Attribute >::iterator
+  capacity() -> Attribute >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> Attribute >::iterator
+  erase() -> Attribute >::iterator
+  front() -> Attribute >::value_type
+  get_allocator() -> Attribute >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> Attribute >::value_type
+  pop_back() -> void
+  push_back(x: Attribute) -> void
+  rbegin() -> Attribute >::reverse_iterator
+  rend() -> Attribute >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::core::Attribute > >::size_type) -> void
+  resize() -> void
+  size() -> Attribute >::size_type
+  swap(v: list[Attribute]) -> void
+
+Attributes *collection<Attribute>
+  Name
+  count: int
+  groupNames: list[str]
+  isValid
+  objectType
+  Name()
+  add(groupName: str, name: str, value: str) -> Attribute
+  classType()
+  itemByName(groupName: str, name: str) -> Attribute
+  itemsByGroup(groupName: str) -> Attribute]
+
 AutoConstrainInput : Base
   datumPoint: SketchPoint
   dimensionStrategy: DimensionStrategyTypes
@@ -481,6 +700,45 @@ BoundaryFillFeatureInput : Base
   cancel() -> bool
   classType()
 
+BoundingBox2D : Base
+  Name
+  isValid
+  maxPoint: Point2D
+  minPoint: Point2D
+  objectType
+  Name()
+  classType()
+  combine(boundingBox: BoundingBox2D) -> bool
+  contains(point: Point2D) -> bool
+  copy() -> BoundingBox2D
+  @static create(minPoint: Point2D, maxPoint: Point2D) -> Point2D
+  expand(point: Point2D) -> bool
+  intersects(boundingBox: BoundingBox2D) -> bool
+
+BoundingBox3D : Base
+  Name
+  isValid
+  maxPoint: Point3D
+  minPoint: Point3D
+  objectType
+  Name()
+  classType()
+  combine(boundingBox: BoundingBox3D) -> bool
+  contains(point: Point3D) -> bool
+  copy() -> BoundingBox3D
+  @static create(minPoint: Point3D, maxPoint: Point3D) -> Point3D
+  expand(point: Point3D) -> bool
+  intersects(boundingBox: BoundingBox3D) -> bool
+
+BoundingBoxEntityTypes
+  AllEntitiesBoundingBoxEntityType()
+  ConstructionBoundingBoxEntityType()
+  MeshBodyBoundingBoxEntityType()
+  Name()
+  SketchBoundingBoxEntityType()
+  SolidBRepBodyBoundingBoxEntityType()
+  SurfaceBodyBoundingBoxEntityType()
+
 BrowserCommandInput : CommandInput
   Name
   commandInputs
@@ -527,6 +785,39 @@ ButtonRowCommandInput : CommandInput
   classType()
   deleteMe() -> bool
 
+CAMParameter : Base
+  # Base class for representing parameter of an operation.
+  Name
+  error: str
+  expression: str
+  fullTitle: str
+  isDeprecated: bool
+  isEditable: bool
+  isEnabled: bool
+  isValid
+  isVisible: bool
+  name: str
+  objectType
+  systemDefaultExpression: str
+  title: str
+  userDefaultExpression: str
+  value: ParameterValue
+  warning: str
+  Name()
+  classType()
+  saveExpressionAsUserDefault() -> bool
+
+CAMParameters *collection<CAMParameter>
+  # Collection that provides access to the parameters of an existing operation.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemByName(internalName: str) -> CAMParameter
+  resetToSystemDefaults() -> bool
+
 CAMTemplateOperationInput : Base
   Name
   displayName: str
@@ -561,6 +852,36 @@ Camera : Base
   getExtents() -> bool
   setExtents(width: float, height: float) -> bool
 
+CameraEvent : Event
+  Name
+  isValid
+  name
+  objectType
+  sender
+  Name()
+  add(handler: CameraEventHandler) -> bool
+  classType()
+  remove(handler: CameraEventHandler) -> bool
+
+CameraEventArgs : EventArgs
+  Name
+  firingEvent
+  isValid
+  objectType
+  viewport: Viewport
+  Name()
+  classType()
+
+CameraEventHandler : EventHandler
+  Name()
+  notify(eventArgs: CameraEventArgs) -> void
+
+CameraTypes
+  Name()
+  OrthographicCameraType()
+  PerspectiveCameraType()
+  PerspectiveWithOrthoFacesCameraType()
+
 CanvasInput : Base
   Name
   creationOccurrence: Occurrence
@@ -579,6 +900,14 @@ CanvasInput : Base
   classType()
   flipHorizontal() -> bool
   flipVertical() -> bool
+
+ChainedCurveOptions
+  Name()
+  connectedChainedCurves()
+  noChainedCurves()
+  openEdgesChainedCurves()
+  tangentAndOpenEdgesChainedCurves()
+  tangentChainedCurves()
 
 ChamferFeatureInput : Base
   Name
@@ -607,6 +936,43 @@ ChordLengthFilletEdgeSetInput : FilletEdgeSetInput
   Name()
   classType()
 
+Circle2D : Curve2D
+  Name
+  asNurbsCurve: NurbsCurve2D
+  center: Point2D
+  curveType
+  evaluator
+  isValid
+  objectType
+  radius: float
+  Name()
+  classType()
+  copy() -> Circle2D
+  @static createByCenter(center: Point2D, radius: float) -> Point2D
+  @static createByThreePoints(pointOne: Point2D, pointTwo: Point2D, pointThree: Point2D) -> Point2D
+  getData() -> bool
+  set(center: Point2D, radius: float) -> bool
+  transformBy(matrix: Matrix2D) -> bool
+
+Circle3D : Curve3D
+  Name
+  asNurbsCurve: NurbsCurve3D
+  center: Point3D
+  curveType
+  evaluator
+  isValid
+  normal: Vector3D
+  objectType
+  radius: float
+  Name()
+  classType()
+  copy() -> Circle3D
+  @static createByCenter(center: Point3D, normal: Vector3D, radius: float) -> Vector3D
+  @static createByThreePoints(pointOne: Point3D, pointTwo: Point3D, pointThree: Point3D) -> Point3D
+  getData() -> bool
+  set(center: Point3D, normal: Vector3D, radius: float) -> bool
+  transformBy(matrix: Matrix3D) -> bool
+
 CircularPatternConstraintInput : Base
   Name
   centerPoint: SketchPoint
@@ -633,6 +999,10 @@ CircularPatternFeatureInput : Base
   totalAngle: ValueInput
   Name()
   classType()
+
+CloseError
+  CloseCancelledError()
+  Name()
 
 CoilFeatureInput : Base
   # This class defines the methods and properties that pertain to the definition of a coil feature.
@@ -716,6 +1086,15 @@ ConstantRadiusFilletEdgeSetInput : FilletEdgeSetInput
   objectType
   radius: ValueInput
   tangencyWeight
+  Name()
+  classType()
+
+ConstructionAxisByLineDefinition : ConstructionAxisDefinition
+  Name
+  axis: InfiniteLine3D
+  isValid
+  objectType
+  parentConstructionAxis
   Name()
   classType()
 
@@ -806,6 +1185,191 @@ CreateFromCAMTemplateInput : Base
   classType()
   @static create() -> CreateFromCAMTemplateInput
 
+Curve2D : Base
+  # The base class for all 2D transient geometry classes.
+  Name
+  curveType: Curve2DTypes
+  evaluator: CurveEvaluator2D
+  isValid
+  objectType
+  Name()
+  classType()
+  transformBy(matrix: Matrix2D) -> bool
+
+Curve2DTypes
+  Arc2DCurveType()
+  Circle2DCurveType()
+  Ellipse2DCurveType()
+  EllipticalArc2DCurveType()
+  InfiniteLine2DCurveType()
+  Line2DCurveType()
+  Name()
+  NurbsCurve2DCurveType()
+  Polyline2DCurveType()
+
+Curve3D : Base
+  # The base class for all 3D transient geometry classes.
+  Name
+  curveType: Curve3DTypes
+  evaluator: CurveEvaluator3D
+  isValid
+  objectType
+  Name()
+  classType()
+  transformBy(matrix: Matrix3D) -> bool
+
+Curve3DPath *collection<Curve3D>
+  # Object that represents a collection of connected Curve3D objects.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+
+Curve3DPathVector
+  append(x: Curve3DPath) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::core::Curve3DPath > >::size_type, x: Curve3DPath) -> void
+  back() -> Curve3DPath >::value_type
+  begin() -> Curve3DPath >::iterator
+  capacity() -> Curve3DPath >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> Curve3DPath >::iterator
+  erase() -> Curve3DPath >::iterator
+  front() -> Curve3DPath >::value_type
+  get_allocator() -> Curve3DPath >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> Curve3DPath >::value_type
+  pop_back() -> void
+  push_back(x: Curve3DPath) -> void
+  rbegin() -> Curve3DPath >::reverse_iterator
+  rend() -> Curve3DPath >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::core::Curve3DPath > >::size_type) -> void
+  resize() -> void
+  size() -> Curve3DPath >::size_type
+  swap(v: list[Curve3DPath]) -> void
+
+Curve3DTypes
+  Arc3DCurveType()
+  Circle3DCurveType()
+  Ellipse3DCurveType()
+  EllipticalArc3DCurveType()
+  InfiniteLine3DCurveType()
+  Line3DCurveType()
+  Name()
+  NurbsCurve3DCurveType()
+  Polyline3DCurveType()
+
+Curve3DVector
+  append(x: Curve3D) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::core::Curve3D > >::size_type, x: Curve3D) -> void
+  back() -> Curve3D >::value_type
+  begin() -> Curve3D >::iterator
+  capacity() -> Curve3D >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> Curve3D >::iterator
+  erase() -> Curve3D >::iterator
+  front() -> Curve3D >::value_type
+  get_allocator() -> Curve3D >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> Curve3D >::value_type
+  pop_back() -> void
+  push_back(x: Curve3D) -> void
+  rbegin() -> Curve3D >::reverse_iterator
+  rend() -> Curve3D >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::core::Curve3D > >::size_type) -> void
+  resize() -> void
+  size() -> Curve3D >::size_type
+  swap(v: list[Curve3D]) -> void
+
+CurveEvaluator2D : Base
+  Name
+  isValid
+  objectType
+  Name()
+  classType()
+  getCurvature(parameter: float) -> bool
+  getCurvatures(parameters: list[float]) -> bool
+  getEndPoints() -> bool
+  getFirstDerivative(parameter: float) -> bool
+  getFirstDerivatives(parameters: list[float]) -> bool
+  getLengthAtParameter(fromParameter: float, toParameter: float) -> bool
+  getParameterAtLength(fromParameter: float, length: float) -> bool
+  getParameterAtPoint(point: Point2D) -> bool
+  getParameterExtents() -> bool
+  getParametersAtPoints(points: list[Point2D]) -> bool
+  getPointAtParameter(parameter: float) -> bool
+  getPointsAtParameters(parameters: list[float]) -> bool
+  getSecondDerivative(parameter: float) -> bool
+  getSecondDerivatives(parameters: list[float]) -> bool
+  getStrokes(fromParameter: float, toParameter: float, tolerance: float) -> bool
+  getTangent(parameter: float) -> bool
+  getTangents(parameters: list[float]) -> bool
+  getThirdDerivative(parameter: float) -> bool
+  getThirdDerivatives(parameters: list[float]) -> bool
+
+CurveEvaluator3D : Base
+  Name
+  isValid
+  objectType
+  Name()
+  classType()
+  getCurvature(parameter: float) -> bool
+  getCurvatures(parameters: list[float]) -> bool
+  getEndPoints() -> bool
+  getFirstDerivative(parameter: float) -> bool
+  getFirstDerivatives(parameters: list[float]) -> bool
+  getLengthAtParameter(fromParameter: float, toParameter: float) -> bool
+  getParameterAtLength(fromParameter: float, length: float) -> bool
+  getParameterAtPoint(point: Point3D) -> bool
+  getParameterExtents() -> bool
+  getParametersAtPoints(points: list[Point3D]) -> bool
+  getPointAtParameter(parameter: float) -> bool
+  getPointsAtParameters(parameters: list[float]) -> bool
+  getSecondDerivative(parameter: float) -> bool
+  getSecondDerivatives(parameters: list[float]) -> bool
+  getStrokes(fromParameter: float, toParameter: float, tolerance: float) -> bool
+  getTangent(parameter: float) -> bool
+  getTangents(parameters: list[float]) -> bool
+  getThirdDerivative(parameter: float) -> bool
+  getThirdDerivatives(parameters: list[float]) -> bool
+
+CurveSelection : GeometrySelection
+  # Base class of all curve based geometry selections.
+  Name
+  error
+  hasError
+  hasWarning
+  inputGeometry: Base]
+  isValid
+  objectType
+  outputGeometry: Curve3DPath]
+  value
+  warning
+  Name()
+  classType()
+
+CurveSelections *collection<CurveSelection>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  clear() -> void
+  createNewChainSelection() -> ChainSelection
+  createNewFaceContourSelection() -> FaceContourSelection
+  createNewPocketRecognitionSelection() -> PocketRecognitionSelection
+  createNewPocketSelection() -> PocketSelection
+  createNewSilhouetteSelection() -> SilhouetteSelection
+  createNewSketchSelection() -> SketchSelection
+  remove(index: int) -> void
+  removeByObject(selection: CurveSelection) -> void
+
 CustomFeatureInput : Base
   Name
   features: Base]
@@ -817,6 +1381,116 @@ CustomFeatureInput : Base
   classType()
   setStartAndEndFeatures(startFeature: Base, endFeature: Base) -> bool
 
+CustomFeatureParameter : ModelParameter
+  Name
+  attributes
+  comment
+  component
+  createdBy
+  dependencyParameters
+  dependentParameters
+  entityToken
+  expression
+  id: str
+  isDeletable
+  isFavorite
+  isValid
+  isVisible: bool
+  modelParameters
+  name
+  objectType
+  parentCustomFeature: CustomFeature
+  role
+  textValue
+  unit
+  value
+  valueType
+  Name()
+  classType()
+  deleteMe() -> bool
+
+CustomFeatureParameters *collection<CustomFeatureParameter>
+  # A collection of custom parameters associated with a particular custom feature.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemById(id: str) -> CustomFeatureParameter
+
+CustomGraphicsCurve : CustomGraphicsEntity
+  Name
+  billBoarding
+  boundingBox
+  color
+  cullMode
+  curve: Curve3D
+  depthPriority
+  id
+  isSelectable
+  isValid
+  isVisible
+  lineStylePattern: LineStylePatterns
+  lineStyleScale: float
+  name
+  objectType
+  parent
+  transform
+  viewPlacement
+  viewScale
+  weight: float
+  Name()
+  classType()
+  deleteMe() -> bool
+  getOpacity() -> bool
+  setOpacity(opacity: float, isOverride: bool) -> bool
+
+CustomGraphicsLines : CustomGraphicsEntity
+  # Represents lines drawn in the graphics window.
+  Name
+  billBoarding
+  boundingBox
+  color
+  coordinates: CustomGraphicsCoordinates
+  cullMode
+  depthPriority
+  id
+  indexList: list[int]
+  isLineStrip: bool
+  isScreenSpaceLineStyle: bool
+  isSelectable
+  isValid
+  isVisible
+  lineStripLengths: list[int]
+  lineStylePattern: LineStylePatterns
+  lineStyleScale: float
+  name
+  objectType
+  parent
+  transform
+  viewPlacement
+  viewScale
+  weight: float
+  Name()
+  classType()
+  deleteMe() -> bool
+  getOpacity() -> bool
+  setOpacity(opacity: float, isOverride: bool) -> bool
+
+CustomNamedValues : Base
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  addOrSetValue(id: str, value: str) -> bool
+  classType()
+  idByIndex(index: int) -> str
+  isExistingValue(id: str) -> bool
+  remove(id: str) -> bool
+  value(id: str) -> str
+
 CustomOperationDefinitionInput : Base
   addinName: str
   addinPath: str
@@ -826,6 +1500,111 @@ CustomOperationDefinitionInput : Base
   strategyDefinition: str
   strategyRegistrationIssues: StrategyRegistrationIssues
   @static create() -> CustomOperationDefinitionInput
+
+Data : Base
+  # The Data class provides access to data files
+  Name
+  activeFolder: DataFolder
+  activeHub: DataHub
+  activeProject: DataProject
+  activeSpaceCollectionId: str
+  dataHubs: DataHubs
+  dataProjects: DataProjects
+  isDataPanelVisible: bool
+  isValid
+  objectType
+  personalUseLimits: PersonalUseLimits
+  Name()
+  classType()
+  findFileById(id: str) -> DataFile
+  findFolderById(id: str) -> DataFolder
+  refreshDataPanel() -> bool
+
+DataComponent : Base
+  Name
+  component: Base
+  id: str
+  isValid
+  mfgdmModelId: str
+  objectType
+  timestamp: str
+  versionId: str
+  Name()
+  classType()
+
+DataFile : Base
+  # A data file in a data folder.
+  Name
+  childReferences: DataFiles
+  configurationRowId: str
+  configurationTable: Base
+  createdBy: User
+  dataObject: DataObjectFuture
+  dateCreated: int
+  dateModified: int
+  description: str
+  fileExtension: str
+  fusionWebURL: str
+  hasChildReferences: bool
+  hasOutofDateChildReferences: bool
+  hasParentReferences: bool
+  id: str
+  inUseBy: User]
+  isComplete: bool
+  isConfiguration: bool
+  isConfiguredDesign: bool
+  isInUse: bool
+  isMilestone: bool
+  isReadOnly: bool
+  isValid
+  lastUpdatedBy: User
+  latestVersion: DataFile
+  latestVersionNumber: int
+  milestone: Milestone
+  milestones: Milestones
+  name: str
+  objectType
+  parentFolder: DataFolder
+  parentProject: DataProject
+  parentReferences: DataFiles
+  publicLink: str
+  sharedLink: SharedLink
+  thumbnail: DataObjectFuture
+  versionId: str
+  versionNumber: int
+  versions: DataFiles
+  Name()
+  assemblyPIMData(noTraverse: bool) -> str
+  classType()
+  copy(targetFolder: DataFolder) -> DataFile
+  copyWithInput(input: CopyFileInput) -> DataFileFuture
+  createCopyDesignFileInput(folder: DataFolder) -> CopyDesignFileInput
+  createCopyFileInput(folder: DataFolder) -> CopyFileInput
+  createDataVersion(versionDescription: str) -> bool
+  createMilestone(milestoneName: str) -> Milestone
+  deleteMe() -> bool
+  download(path: str, handler: DataEventHandler) -> bool
+  move(targetFolder: DataFolder) -> bool
+  promote() -> bool
+  refresh(handler: DataEventHandler) -> bool
+
+DataFolder : Base
+  # A data folder that contains a collection of data items.
+  Name
+  dataFiles: DataFiles
+  dataFolders: DataFolders
+  id: str
+  isRoot: bool
+  isValid
+  name: str
+  objectType
+  parentFolder: DataFolder
+  parentProject: DataProject
+  Name()
+  classType()
+  deleteMe() -> bool
+  uploadAssembly(filenames: list[str]) -> DataFileFuture
+  uploadFile(filename: str) -> DataFileFuture
 
 DecalInput : Base
   Name
@@ -841,6 +1620,18 @@ DecalInput : Base
   Name()
   classType()
 
+DefaultUnitsPreferences : Base
+  Name
+  isValid
+  name: str
+  objectType
+  Name()
+  classType()
+
+DeleteMeError
+  Name()
+  ParameterReferencedByOtherParameterError()
+
 DeriveFeatureInput : Base
   # This class defines the methods and properties that pertain to the definition of a derive feature.
   excludedEntities: Base]
@@ -849,6 +1640,70 @@ DeriveFeatureInput : Base
   isPlaceObjectsAtOrigin: bool
   sourceDesign: Design
   sourceEntities: Base]
+
+DerivedParameter : Parameter
+  # Represents a parameter that is derived from another design.
+  deriveFeature: DeriveFeature
+
+Design : Product
+  Name
+  activeComponent: Component
+  activeEditObject: Base
+  activeOccurrence: Occurrence
+  allComponents: Components
+  allParameters: ParameterList
+  analyses: Analyses
+  appearances: Appearances
+  attributes
+  configurationRowId: str
+  configurationTopTable: ConfigurationTopTable
+  contactSets: ContactSets
+  derivedParameters: DerivedParameter]
+  designIntent: DesignIntentTypes
+  designPlasticRules: PlasticRules
+  designSheetMetalRules: SheetMetalRules
+  designType: DesignTypes
+  exportManager: ExportManager
+  fusionUnitsManager: FusionUnitsManager
+  isAdaptiveGroundPlane: bool
+  isConfiguration: bool
+  isConfiguredDesign: bool
+  isContactAnalysisEnabled: bool
+  isContactSetAnalysis: bool
+  isModelingInAssemblyEnabled: bool
+  isRootComponentActive: bool
+  isValid
+  libraryPlasticRules: PlasticRules
+  librarySheetMetalRules: SheetMetalRules
+  materials: Materials
+  namedViews
+  objectType
+  objectVisibility: ObjectVisibility
+  parentDocument
+  productType
+  renderManager: RenderManager
+  rootComponent: Component
+  rootDataComponent: DataComponent
+  selectionSets
+  snapshots: Snapshots
+  timeline: Timeline
+  unitsManager
+  userParameters: UserParameters
+  workspaces
+  Name()
+  activateRootComponent() -> bool
+  analyzeInterference(input: InterferenceInput) -> InterferenceResults
+  areaProperties() -> AreaProperties
+  classType()
+  computeAll() -> bool
+  createConfiguredDesign() -> ConfigurationTopTable
+  createInterferenceInput(entities: ObjectCollection) -> InterferenceInput
+  deleteEntities(entities: ObjectCollection) -> bool
+  findAttributes(groupName: str, attributeName: str) -> Attribute]
+  findEntityByToken(entityToken: str) -> Base]
+  modifyParameters(parameters: list[Parameter], values: list[ValueInput]) -> bool
+  physicalProperties() -> PhysicalProperties
+  setGroundPlaneOffset(offset: float) -> bool
 
 DirectionCommandInput : CommandInput
   Name
@@ -873,6 +1728,20 @@ DirectionCommandInput : CommandInput
   classType()
   deleteMe() -> bool
   setManipulator(origin: Point3D, direction: Vector3D) -> bool
+
+DistanceUnits
+  CentimeterDistanceUnits()
+  FootDistanceUnits()
+  HectometerDistanceUnits()
+  InchDistanceUnits()
+  MeterDistanceUnits()
+  MicronDistanceUnits()
+  MilDistanceUnits()
+  MileDistanceUnits()
+  MillimeterDistanceUnits()
+  Name()
+  NauticalMileDistanceUnits()
+  YardDistanceUnits()
 
 DistanceValueCommandInput : CommandInput
   Name
@@ -935,6 +1804,39 @@ Document : Base
   saveMilestone(milestoneName: str, versionDescription: str) -> bool
   updateAllReferences() -> bool
 
+DocumentReference : Base
+  # Represents a reference to a document from another document.
+  Name
+  dataFile: DataFile
+  isOutOfDate: bool
+  isValid
+  objectType
+  parentDocument: Document
+  referencedDocument: Document
+  version: int
+  Name()
+  classType()
+  getLatestVersion() -> bool
+
+DocumentReferences *collection<DocumentReference>
+  # Provides access to the list of documents referenced from a document.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+
+Documents *collection<Document>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add() -> Document
+  classType()
+  open(dataFile: DataFile, visible: bool) -> Document
+
 DraftFeatureInput : Base
   Name
   angleOne: ValueInput
@@ -976,6 +1878,92 @@ DropDownCommandInput : CommandInput
   classType()
   deleteMe() -> bool
 
+Ellipse2D : Curve2D
+  Name
+  asNurbsCurve: NurbsCurve2D
+  center: Point2D
+  curveType
+  evaluator
+  isValid
+  majorAxis: Vector2D
+  majorRadius: float
+  minorRadius: float
+  objectType
+  Name()
+  classType()
+  copy() -> Ellipse2D
+  @static create(center: Point2D, majorAxis: Vector2D, majorRadius: float, minorRadius: float) -> Vector2D
+  getData() -> bool
+  set(center: Point2D, majorAxis: Vector2D, majorRadius: float, minorRadius: float) -> bool
+  transformBy(matrix: Matrix2D) -> bool
+
+Ellipse3D : Curve3D
+  Name
+  asNurbsCurve: NurbsCurve3D
+  center: Point3D
+  curveType
+  evaluator
+  isValid
+  majorAxis: Vector3D
+  majorRadius: float
+  minorRadius: float
+  normal: Vector3D
+  objectType
+  Name()
+  classType()
+  copy() -> Ellipse3D
+  @static create(center: Point3D, normal: Vector3D, majorAxis: Vector3D, majorRadius: float, minorRadius: float) -> Vector3D
+  getData() -> bool
+  set(center: Point3D, normal: Vector3D, majorAxis: Vector3D, majorRadius: float, minorRadius: float) -> bool
+  transformBy(matrix: Matrix3D) -> bool
+
+EllipticalArc2D : Curve2D
+  Name
+  asNurbsCurve: NurbsCurve2D
+  center: Point2D
+  curveType
+  endAngle: float
+  endPoint: Point2D
+  evaluator
+  isCircular: bool
+  isClockwise: bool
+  isValid
+  majorAxis: Vector2D
+  majorRadius: float
+  minorRadius: float
+  objectType
+  startAngle: float
+  startPoint: Point2D
+  Name()
+  classType()
+  copy() -> EllipticalArc2D
+  @static create(center: Point2D, majorAxis: Vector2D, majorRadius: float, minorRadius: float, startAngle: float, endAngle: float) -> Vector2D
+  getData() -> bool
+  set(center: Point2D, majorAxis: Vector2D, majorRadius: float, minorRadius: float, startAngle: float, endAngle: float) -> bool
+  transformBy(matrix: Matrix2D) -> bool
+
+EllipticalArc3D : Curve3D
+  Name
+  asNurbsCurve: NurbsCurve3D
+  center: Point3D
+  curveType
+  endAngle: float
+  evaluator
+  isValid
+  majorAxis: Vector3D
+  majorRadius: float
+  minorRadius: float
+  normal: Vector3D
+  objectType
+  startAngle: float
+  Name()
+  classType()
+  copy() -> EllipticalArc3D
+  @static create(center: Point3D, normal: Vector3D, majorAxis: Vector3D, majorRadius: float, minorRadius: float, startAngle: float, endAngle: float) -> Vector3D
+  getData() -> bool
+  set(center: Point3D, normal: Vector3D, majorAxis: Vector3D, majorRadius: float, minorRadius: float, startAngle: float, endAngle: float) -> bool
+  transformBy(matrix: Matrix3D) -> bool
+
 EmbossFeatureInput : Base
   # This class defines the methods and properties that pertain to the definition of an emboss feature.
   Name
@@ -992,6 +1980,41 @@ EmbossFeatureInput : Base
   verticalDistance: ValueInput
   Name()
   classType()
+
+ExportManager : Base
+  # Provides support for exporting model data to various formats.
+  Name
+  isValid
+  objectType
+  Name()
+  classType()
+  createC3MFExportOptions() -> C3MFExportOptions
+  createDXFFlatPatternExportOptions(filename: str, flatPattern: FlatPattern) -> DXFFlatPatternExportOptions
+  createDXFSketchExportOptions(filename: str, sketch: Sketch) -> DXFSketchExportOptions
+  createFusionArchiveExportOptions() -> FusionArchiveExportOptions
+  createIGESExportOptions() -> IGESExportOptions
+  createOBJExportOptions() -> OBJExportOptions
+  createSATExportOptions() -> SATExportOptions
+  createSMTExportOptions() -> SMTExportOptions
+  createSTEPExportOptions() -> STEPExportOptions
+  createSTLExportOptions() -> STLExportOptions
+  createUSDExportOptions() -> USDExportOptions
+  execute(exportOptions: ExportOptions) -> bool
+
+ExportOptions : Base
+  Name
+  filename: str
+  geometry: Base
+  isIncludingInvisibleBodies: bool
+  isIncludingInvisibleComponents: bool
+  isValid
+  objectType
+  Name()
+  classType()
+
+ExpressionError
+  CyclicParameterReferenceError()
+  Name()
 
 ExtendFeatureInput : Base
   # This class defines the methods and properties that pertain to the definition of an extend feature.
@@ -1043,6 +2066,30 @@ ExtrudeFeatureInput : Base
 
 ExtruderMachineElementInput : MachineElementInput
   # Specialization of MachineElementInput for creating an additive FFF extruder element.
+
+FavoriteAppearances *collection<Appearance>
+  # Collection of the favorite appearances.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(appearance: Appearance) -> Appearance
+  classType()
+  itemById(id: str) -> Appearance
+  itemByName(name: str) -> Appearance
+
+FavoriteMaterials *collection<Material>
+  # Collection of the favorite materials.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(material: Material) -> Material
+  classType()
+  itemById(id: str) -> Material
+  itemByName(name: str) -> Material
 
 FilletEdgeSetInput : Base
   # Represents the input to define a fillet edge set.
@@ -1138,6 +2185,152 @@ FullRoundFilletFeatureInput : Base
   Name()
   classType()
 
+FusionArchiveExportOptions : ExportOptions
+  # Defines that a Fusion Archive export is to be done and specifies the various options.
+  Name
+  filename
+  geometry
+  isValid
+  objectType
+  Name()
+  classType()
+
+FusionArchiveImportOptions : ImportOptions
+  # Defines that a Fusion Archive import is to be done and specifies the various options.
+  Name
+  filename
+  isValid
+  isViewFit
+  objectType
+  Name()
+  classType()
+
+FusionDefaultUnitsPreferences : DefaultUnitsPreferences
+  Name
+  defaultUnitSystem: UnitSystems
+  distanceDisplayUnits: DistanceUnits
+  isValid
+  massDisplayUnits: MassUnits
+  name
+  objectType
+  Name()
+  classType()
+
+FusionProductPreferences : ProductPreferences
+  # Fusion General Design Preferences
+  Name
+  defaultDesignType: DefaultDesignTypeOptions
+  defaultWorkspace: DefaultWorkspaces
+  is3DSketchingAllowed: bool
+  isActiveComponentVisibilityUsed: bool
+  isAllowReferencesDuringEditInPlace: bool
+  isAutoHideSketchOnFeatureCreation: bool
+  isAutoLookAtSketch: bool
+  isAutoLookAtSketch2: AutoLookAtSketchSettings
+  isAutoProjectEdgesOnReference: bool
+  isAutoProjectGeometry: bool
+  isDimensionEditedWhenCreated: bool
+  isEnableArrangeAndSimplifyTools: bool
+  isFirstComponentGroundToParent: bool
+  isGhostedResultBodyShown: bool
+  isJointPreviewAnimated: bool
+  isSketchScaledWithFirstDimension: bool
+  isValid
+  name
+  objectType
+  Name()
+  classType()
+
+FutureStates
+  FailedFutureState()
+  FinishedFutureState()
+  Name()
+  ProcessingFutureState()
+
+GeneralPreferences : Base
+  # Provides access to the general preferences.
+  Name
+  activeUserInterfaceTheme: UserInterfaceThemes
+  areAutodesk360NotificationsShown: bool
+  areInCommandErrorsAndWarningsShown: bool
+  areTipsAndTricksShown: bool
+  areTooltipsShown: bool
+  automateVersioningTimeInterval: int
+  defaultModelingOrientation: DefaultModelingOrientations
+  defaultOrbit: DefaultOrbits
+  graphicsDriver: GraphicsDrivers
+  isAutomaticSaveOnCloseEnabled: bool
+  isAutomaticVersioningEnabled: bool
+  isCameraPivotEnabled: bool
+  isCommandPromptShown: bool
+  isDefaultMeasureShown: bool
+  isGestureBasedViewNavigationUsed: bool
+  isHangDetectionEnabled: bool
+  isSkipCreationWhenLiveUpdate: bool
+  isValid
+  isZoomDirectionReversed: bool
+  objectType
+  offlineCachePeriod: float
+  panZoomOrbitShortcuts: PanZoomOrbitShortcuts
+  userInterfaceTheme: UserInterfaceThemes
+  userLanguage: UserLanguages
+  Name()
+  classType()
+
+GenericErrors
+  BadApiCallError()
+  ClassSpecificError()
+  ExpressionError()
+  FunctionSpecificError()
+  InternalValidationError()
+  InvalidGeometryError()
+  Name()
+  Ok()
+  OperationFailed()
+  UnderlyingObjectDeletedError()
+  UnexpectedError()
+
+GraphNodeProperties *collection<GraphNodeProperty>
+  # A collection of properties of a graph node.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemByName(propertyName: str) -> GraphNodeProperty
+
+GraphicsPreferences : Base
+  # The GraphicsPreferences object provides access to the various graphics related preferences.
+  Name
+  autoThrottleEffects: bool
+  canvasEffects: CanvasEffects
+  degradedSelectionDisplayStyle: DegradedSelectionDisplayStyles
+  graphicsPreset: GraphicsPresets
+  hiddenEdgeDimming: int
+  isAnimateViewTransitions: bool
+  isDynamic: bool
+  isHighResolutionCanvasGraphicsEnabled: bool
+  isLimitEffectsDuringNavigation: bool
+  isSurfaceNormalDisplayDisabled: int
+  isValid
+  isWoodBumpEnabled: bool
+  minimumFramesPerSecond: float
+  objectType
+  selectionDisplayStyle: SelectionDisplayStyles
+  transparencyEffects: TransparencyDisplayEffects
+  Name()
+  classType()
+
+GridPreferences : Base
+  # The GridPreferences object provides access to grid related preferences.
+  Name
+  isLayoutGridLockEnabled: bool
+  isValid
+  objectType
+  Name()
+  classType()
+
 GroupCommandInput : CommandInput
   Name
   children: CommandInputs
@@ -1207,6 +2400,26 @@ HoleFeatureInput : Base
   setToSimpleHole() -> bool
   setToTappedHole(threadInfo: ThreadInfo) -> bool
 
+HttpResponse : Base
+  # An object that provides the data associated with an HTTP response.
+  Name
+  data: str
+  isValid
+  objectType
+  request: HttpRequest
+  statusCode: int
+  Name()
+  classType()
+  getHeader(name: str) -> str
+  hasHeader(name: str) -> bool
+  headers() -> bool
+
+IAddIn
+  # The interface implemented by an add-in.
+  Name()
+  onActivate()
+  onDeactivate()
+
 ImageCommandInput : CommandInput
   # Provides an image command input for including an image in a command dialog.
   Name
@@ -1229,6 +2442,33 @@ ImageCommandInput : CommandInput
   classType()
   deleteMe() -> bool
 
+ImportManager : Base
+  # Provides access to functionality to support importing various modeling formats into Fusion.
+  Name
+  isValid
+  objectType
+  Name()
+  classType()
+  createDXF2DImportOptions(filename: str, planarEntity: Base) -> DXF2DImportOptions
+  createFusionArchiveImportOptions(filename: str) -> FusionArchiveImportOptions
+  createIGESImportOptions(filename: str) -> IGESImportOptions
+  createSATImportOptions(filename: str) -> SATImportOptions
+  createSMTImportOptions(filename: str) -> SMTImportOptions
+  createSTEPImportOptions(filename: str) -> STEPImportOptions
+  createSVGImportOptions(fullFilename: str) -> SVGImportOptions
+  importToNewDocument(importOptions: ImportOptions) -> Document
+  importToTarget(importOptions: ImportOptions, target: Base) -> bool
+  importToTarget2(importOptions: ImportOptions, target: Base) -> ObjectCollection
+
+ImportOptions : Base
+  Name
+  filename: str
+  isValid
+  isViewFit: bool
+  objectType
+  Name()
+  classType()
+
 InferredJointInput : Base
   Name
   geometricRelationships: GeometricRelationships
@@ -1236,6 +2476,25 @@ InferredJointInput : Base
   objectType
   Name()
   classType()
+
+InfiniteLine3D : Curve3D
+  Name
+  curveType
+  direction: Vector3D
+  evaluator
+  isValid
+  objectType
+  origin: Point3D
+  Name()
+  classType()
+  copy() -> InfiniteLine3D
+  @static create(origin: Point3D, direction: Vector3D) -> Vector3D
+  getData() -> bool
+  intersectWithCurve(curve: Curve3D) -> ObjectCollection
+  intersectWithSurface(surface: Surface) -> ObjectCollection
+  isColinearTo(line: InfiniteLine3D) -> bool
+  set(origin: Point3D, direction: Vector3D) -> bool
+  transformBy(matrix: Matrix3D) -> bool
 
 IntegerSliderCommandInput : SliderCommandInput
   # Provides a command input to get the value of a slider from the user, the value type is integer.
@@ -1302,6 +2561,30 @@ InterferenceInput : Base
   Name()
   classType()
 
+IsoCurveAnalyses *collection<IsoCurveAnalysis>
+  # Provides access to any Iso Curve analyses results in the design.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemByName(name: str) -> IsoCurveAnalysis
+
+IsoCurveAnalysis : Analysis
+  # Represents any existing Iso Curve Analysis that exist in the design.
+  Name
+  attributes
+  entityToken
+  isLightBulbOn
+  isValid
+  isVisible
+  name
+  objectType
+  Name()
+  classType()
+  deleteMe() -> bool
+
 JointInput : Base
   Name
   angle: ValueInput
@@ -1345,6 +2628,121 @@ JointOriginInput : Base
 LaserMachineElementInput : MachineElementInput
   # Specialization of MachineElementInput for creating an additive MPBF laser element.
 
+Line2D : Curve2D
+  Name
+  asNurbsCurve: NurbsCurve2D
+  curveType
+  endPoint: Point2D
+  evaluator
+  isValid
+  objectType
+  startPoint: Point2D
+  Name()
+  classType()
+  copy() -> Line2D
+  @static create(startPoint: Point2D, endPoint: Point2D) -> Point2D
+  getData() -> bool
+  set(startPoint: Point2D, endPoint: Point2D) -> bool
+  transformBy(matrix: Matrix2D) -> bool
+
+Line3D : Curve3D
+  Name
+  asNurbsCurve: NurbsCurve3D
+  curveType
+  endPoint: Point3D
+  evaluator
+  isValid
+  objectType
+  startPoint: Point3D
+  Name()
+  asInfiniteLine() -> InfiniteLine3D
+  classType()
+  copy() -> Line3D
+  @static create(startPoint: Point3D, endPoint: Point3D) -> Point3D
+  getData() -> bool
+  intersectWithCurve(curve: Curve3D) -> ObjectCollection
+  intersectWithSurface(surface: Surface) -> ObjectCollection
+  isColinearTo(line: Line3D) -> bool
+  set(startPoint: Point3D, endPoint: Point3D) -> bool
+  transformBy(matrix: Matrix3D) -> bool
+
+LineOnPlanarSurfaceConstraint : GeometricConstraint
+  # A sketch constraint defining that a line that lies on a planar face or construction plane.
+  Name
+  assemblyContext
+  attributes
+  entityToken
+  isDeletable
+  isValid
+  line: SketchLine
+  nativeObject: LineOnPlanarSurfaceConstraint
+  objectType
+  parentSketch
+  planarSurface: Base
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> LineOnPlanarSurfaceConstraint
+  deleteMe() -> bool
+
+LineParallelToPlanarSurfaceConstraint : GeometricConstraint
+  # A sketch constraint defining that a line is parallel to a planar face or construction plane.
+  Name
+  assemblyContext
+  attributes
+  entityToken
+  isDeletable
+  isValid
+  line: SketchLine
+  nativeObject: LineParallelToPlanarSurfaceConstraint
+  objectType
+  parentSketch
+  planarSurface: Base
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> LineParallelToPlanarSurfaceConstraint
+  deleteMe() -> bool
+
+LineStylePatterns
+  Name()
+  centerLineStylePattern()
+  continuousLineStylePattern()
+  dashedLineStylePattern()
+  dotLineStylePattern()
+  hiddenLineStylePattern()
+  phantomLineStylePattern()
+  tracksLineStylePattern()
+  zigzagLineStylePattern()
+
+LinearMachineAxis : MachineAxis
+  # Object that represents an axis with linear motion (e.g. X, Y, and Z).
+  Name
+  axisType
+  direction: Vector3D
+  hasLimits
+  homePosition
+  isValid
+  name
+  objectType
+  physicalRange
+  toolChangePosition
+  Name()
+  classType()
+  useContinuousResolution() -> void
+
+LinearMachineAxisConfiguration : MachineAxisConfiguration
+  Name
+  coordinate
+  isReversed
+  isValid
+  maxNormalSpeed
+  maxRapidSpeed
+  objectType
+  partId
+  type
+  Name()
+  classType()
+  deleteMe() -> void
+
 LinearMachineAxisInput : MachineAxisInput
   # Object that defines the properties required to create a new linear machine axis object.
   Name
@@ -1359,6 +2757,39 @@ LinearMachineAxisInput : MachineAxisInput
   Name()
   classType()
   useContinuousResolution() -> void
+
+LinearMarkingMenu : Base
+  Name
+  controls: ToolbarControls
+  isValid
+  objectType
+  Name()
+  classType()
+  clear() -> bool
+
+LoftCenterLineOrRail : Base
+  # Represent a centerline or a single rail used by a loft feature.
+  Name
+  edgeCondition: LoftRailEdgeConditions
+  entity: Base
+  isCenterLine: bool
+  isValid
+  objectType
+  Name()
+  classType()
+  deleteMe() -> bool
+
+LoftCenterLineOrRails *collection<LoftCenterLineOrRail>
+  # Defines a single centerline or one or more rails for a loft feature.
+  Name
+  count: int
+  isCenterLine: bool
+  isValid
+  objectType
+  Name()
+  addCenterLine(entity: Base) -> LoftCenterLineOrRail
+  addRail(entity: Base) -> LoftCenterLineOrRail
+  classType()
 
 LoftFeatureInput : Base
   Name
@@ -1377,6 +2808,12 @@ LoftFeatureInput : Base
   targetBaseFeature: BaseFeature
   Name()
   classType()
+
+MachineAnglePreferences
+  MachineAngleNoPreference()
+  MachineAnglePreferNegative()
+  MachineAnglePreferPositive()
+  Name()
 
 MachineAxisInput : Base
   # Object that defines the properties required to create a machine axis object.
@@ -1490,6 +2927,90 @@ ManufacturingModelInput : Base
   objectType
   Name()
   classType()
+
+MassUnits
+  GramMassUnits()
+  KilogramMassUnits()
+  Name()
+  OunceMassUnits()
+  PoundMassUnits()
+  SlugMassUnits()
+  TonMassUnits()
+
+Material : Base
+  # A material.
+  Name
+  appearance: Appearance
+  description: str
+  id: str
+  isUsed: bool
+  isValid
+  materialProperties: Properties
+  name: str
+  objectType
+  parent: Base
+  Name()
+  classType()
+  copyTo(target: Base) -> Material
+  deleteMe() -> bool
+
+MaterialDisplayUnits
+  EnglishFootDisplayUnits()
+  EnglishInchDisplayUnits()
+  EnglishStandardDisplayUnits()
+  MetricCGSDisplayUnits()
+  MetricMKSDisplayUnits()
+  MetricMMNSDisplayUnits()
+  MetricStandardDisplayUnits()
+  MetricUMNSDisplayUnits()
+  Name()
+
+MaterialLibraries *collection<MaterialLibrary>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemById(id: str) -> MaterialLibrary
+  itemByName(name: str) -> MaterialLibrary
+  load(filename: str) -> MaterialLibrary
+
+MaterialLibrary : Base
+  # A material library.
+  Name
+  appearances: Appearances
+  id: str
+  isNative: bool
+  isValid
+  materials: Materials
+  name: str
+  objectType
+  Name()
+  classType()
+  unload() -> bool
+
+MaterialPreferences : Base
+  # Provides access to the material related preferences.
+  Name
+  appearanceOverride: Appearance
+  defaultMaterial: Material
+  isValid
+  objectType
+  Name()
+  classType()
+
+Materials *collection<Material>
+  # Collection of materials within a Library or Design.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  addByCopy(materialToCopy: Material, name: str) -> Material
+  classType()
+  itemById(id: str) -> Material
+  itemByName(name: str) -> Material
 
 Matrix2D : Base
   Name
@@ -1728,6 +3249,14 @@ MeshSmoothFeatureInput : Base
   Name()
   classType()
 
+MeshUnits
+  CentimeterMeshUnit()
+  FootMeshUnit()
+  InchMeshUnit()
+  MeterMeshUnit()
+  MillimeterMeshUnit()
+  Name()
+
 MirrorFeatureInput : Base
   Name
   inputEntities: ObjectCollection
@@ -1740,6 +3269,43 @@ MirrorFeatureInput : Base
   targetBaseFeature: BaseFeature
   Name()
   classType()
+
+ModelParameter : Parameter
+  # Represents a Model Parameter.
+  Name
+  attributes
+  comment
+  component: Component
+  createdBy: Base
+  dependencyParameters
+  dependentParameters
+  entityToken
+  expression
+  isDeletable
+  isFavorite
+  isValid
+  modelParameters: ModelParameters
+  name
+  objectType
+  role: str
+  textValue
+  unit
+  value
+  valueType
+  Name()
+  classType()
+  deleteMe() -> bool
+
+ModelParameters *collection<ModelParameter>
+  # Provides access to the Model Parameters within a component.
+  Name
+  component: Component
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemByName(name: str) -> ModelParameter
 
 MotionLinkInput : Base
   isReversed: bool
@@ -1786,6 +3352,35 @@ MultiAxisMachineElementInput : MachineElementInput
   Name()
   classType()
 
+MultiAxisSingularityLinearizationSettings : Base
+  # The class for the multi-axis singularity linearization settings.
+  Name
+  isValid
+  linearizationTolerance: float
+  linearizeMethod: MultiAxisSingularityLinearizeMethod
+  objectType
+  Name()
+  classType()
+
+MultiAxisSingularityLinearizeMethod
+  MultiAxisSingularityLinearize_Linear()
+  MultiAxisSingularityLinearize_Rotary()
+  Name()
+
+MultiLineTextDefinition : SketchTextDefinition
+  # Defines the information for multi-line text.
+  Name
+  characterSpacing: float
+  horizontalAlignment: HorizontalAlignments
+  isValid
+  objectType
+  parentSketchText
+  rectangleLines: SketchLine]
+  verticalAlignment: VerticalAlignments
+  Name()
+  classType()
+  rotate() -> bool
+
 NCProgramInput : Base
   Name
   displayName: str
@@ -1796,10 +3391,118 @@ NCProgramInput : Base
   Name()
   classType()
 
+NamedValues : Base
+  # Wraps a list of named values.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(name: str, value: ValueInput) -> bool
+  classType()
+  @static create() -> NamedValues
+  getByIndex(index: int) -> bool
+  getValueByName(name: str) -> bool
+
 NetworkMachineIntegrationInput : Base
   description: str
   displayName: str
   @static create(displayName: str, description: str) -> NetworkMachineIntegrationInput
+
+NetworkPreferences : Base
+  # The NetworkPreferences object provides access to network related preferences.
+  Name
+  isValid
+  networkProxySetting: NetworkProxySettings
+  objectType
+  proxyHost: str
+  proxyPort: int
+  Name()
+  classType()
+
+NurbsCurve2D : Curve2D
+  Name
+  controlPointCount: int
+  controlPoints: Point2D]
+  curveType
+  degree: int
+  evaluator
+  isClosed: bool
+  isPeriodic: bool
+  isRational: bool
+  isValid
+  knotCount: int
+  knots: list[float]
+  objectType
+  Name()
+  classType()
+  copy() -> NurbsCurve2D
+  @static createNonRational(controlPoints: list[Point2D], degree: int, knots: list[float], isPeriodic: bool) -> Point2D], list[float]
+  @static createRational(controlPoints: list[Point2D], degree: int, knots: list[float], weights: list[float], isPeriodic: bool) -> Point2D], list[float], list[float]
+  extract(startParam: float, endParam: float) -> NurbsCurve2D
+  getData() -> bool
+  merge(nurbsCurve: NurbsCurve2D) -> NurbsCurve2D
+  reverse() -> bool
+  set(controlPoints: list[Point2D], degree: int, knots: list[float], isRational: bool, weights: list[float], isPeriodic: bool) -> bool
+  transformBy(matrix: Matrix2D) -> bool
+
+NurbsCurve3D : Curve3D
+  Name
+  controlPointCount: int
+  controlPoints: Point3D]
+  curveType
+  degree: int
+  evaluator
+  isClosed: bool
+  isPeriodic: bool
+  isRational: bool
+  isValid
+  knotCount: int
+  knots: list[float]
+  objectType
+  Name()
+  classType()
+  copy() -> NurbsCurve3D
+  @static createNonRational(controlPoints: list[Point3D], degree: int, knots: list[float], isPeriodic: bool) -> Point3D], list[float]
+  @static createRational(controlPoints: list[Point3D], degree: int, knots: list[float], weights: list[float], isPeriodic: bool) -> Point3D], list[float], list[float]
+  extract(startParam: float, endParam: float) -> NurbsCurve3D
+  getData() -> bool
+  merge(nurbsCurve: NurbsCurve3D) -> NurbsCurve3D
+  reverse() -> bool
+  set(controlPoints: list[Point3D], degree: int, knots: list[float], isRational: bool, weights: list[float], isPeriodic: bool) -> bool
+  transformBy(matrix: Matrix3D) -> bool
+
+NurbsSurface : Surface
+  Name
+  controlPointCountU: int
+  controlPointCountV: int
+  controlPoints: Point3D]
+  degreeU: int
+  degreeV: int
+  evaluator
+  isValid
+  knotCountU: int
+  knotCountV: int
+  knotsU: list[float]
+  knotsV: list[float]
+  objectType
+  propertiesU: NurbsSurfaceProperties
+  propertiesV: NurbsSurfaceProperties
+  surfaceType
+  Name()
+  classType()
+  copy() -> NurbsSurface
+  @static create(degreeU: int, degreeV: int, controlPointCountU: int, controlPointCountV: int, controlPoints: list[Point3D], knotsU: list[float], knotsV: list[float], weights: list[float], propertiesU: NurbsSurfaceProperties, propertiesV: NurbsSurfaceProperties) -> Point3D], list[float], list[float], list[float]
+  getData() -> bool
+  set(degreeU: int, degreeV: int, controlPointCountU: int, controlPointCountV: int, controlPoints: list[Point3D], knotsU: list[float], knotsV: list[float], weights: list[float], propertiesU: NurbsSurfaceProperties, propertiesV: NurbsSurfaceProperties) -> bool
+  transformBy(matrix: Matrix3D) -> bool
+
+NurbsSurfaceProperties
+  ClosedNurbsSurface()
+  Name()
+  OpenNurbsSurface()
+  PeriodicNurbsSurface()
+  RationalNurbsSurface()
 
 ObjectCollection *collection<Base>
   # Generic collection used to handle lists of any object type.
@@ -1849,6 +3552,10 @@ OffsetFeatureInput : Base
   Name()
   classType()
 
+OpenDocumentError
+  DocumentNotFoundError()
+  Name()
+
 OperationInput : Base
   Name
   displayName: str
@@ -1862,6 +3569,58 @@ OperationInput : Base
   toolPreset: ToolPreset
   Name()
   classType()
+
+OrientedBoundingBox3D : Base
+  Name
+  centerPoint: Point3D
+  height: float
+  heightDirection: Vector3D
+  isValid
+  length: float
+  lengthDirection: Vector3D
+  objectType
+  width: float
+  widthDirection: Vector3D
+  Name()
+  classType()
+  contains(point: Point3D) -> bool
+  copy() -> OrientedBoundingBox3D
+  @static create(centerPoint: Point3D, lengthDirection: Vector3D, widthDirection: Vector3D, length: float, width: float, height: float) -> Vector3D
+  setOrientation(lengthDirection: Vector3D, widthDirection: Vector3D) -> bool
+
+Parameter : Base
+  # The base class Parameter object that can represent model or user parameters.
+  Name
+  attributes: Attributes
+  comment: str
+  dependencyParameters: ParameterList
+  dependentParameters: ParameterList
+  entityToken: str
+  expression: str
+  isDeletable: bool
+  isFavorite: bool
+  isValid
+  name: str
+  objectType
+  textValue: str
+  unit: str
+  value: float
+  valueType: ParameterValueTypes
+  Name()
+  classType()
+
+ParameterValue : Base
+  Name
+  isValid
+  objectType
+  parent: Base
+  Name()
+  classType()
+
+ParameterValueTypes
+  Name()
+  NumericParameterValueType()
+  TextParameterValueType()
 
 PatchFeatureInput : Base
   # This class defines the methods and properties that pertain to the definition of a patch feature.
@@ -1901,6 +3660,25 @@ PathPatternFeatureInput : Base
   Name()
   classType()
 
+PhysicalProperties : Base
+  # The physical properties of a Component, Occurrence or BRepBody
+  Name
+  accuracy: CalculationAccuracy
+  area: float
+  centerOfMass: Point3D
+  density: float
+  isValid
+  mass: float
+  objectType
+  volume: float
+  Name()
+  classType()
+  getPrincipalAxes() -> bool
+  getPrincipalMomentsOfInertia() -> bool
+  getRadiusOfGyration() -> bool
+  getRotationToPrincipal() -> bool
+  getXYZMomentsOfInertia() -> bool
+
 PipeFeatureInput : Base
   # This class defines the methods and properties that pertain to the definition of a Pipe
     feature.
@@ -1920,6 +3698,33 @@ PipeFeatureInput : Base
   targetBaseFeature: BaseFeature
   Name()
   classType()
+
+Plane : Surface
+  Name
+  evaluator
+  isValid
+  normal: Vector3D
+  objectType
+  origin: Point3D
+  surfaceType
+  uDirection: Vector3D
+  vDirection: Vector3D
+  Name()
+  classType()
+  copy() -> Plane
+  @static create(origin: Point3D, normal: Vector3D) -> Vector3D
+  @static createUsingDirections(origin: Point3D, uDirection: Vector3D, vDirection: Vector3D) -> Vector3D
+  intersectWithCurve(curve: Curve3D) -> ObjectCollection
+  intersectWithLine(line: InfiniteLine3D) -> Point3D
+  intersectWithPlane(plane: Plane) -> InfiniteLine3D
+  intersectWithSurface(surface: Surface) -> ObjectCollection
+  isCoPlanarTo(plane: Plane) -> bool
+  isParallelToLine(line: Line3D) -> bool
+  isParallelToPlane(plane: Plane) -> bool
+  isPerpendicularToLine(line: Line3D) -> bool
+  isPerpendicularToPlane(plane: Plane) -> bool
+  setUVDirections(uDirection: Vector3D, vDirection: Vector3D) -> bool
+  transformBy(matrix: Matrix3D) -> bool
 
 Point2D : Base
   Name
@@ -2046,6 +3851,101 @@ PostProcessInput : Base
   Name()
   classType()
   @static create(programName: str, postConfiguration: str, outputFolder: str, outputUnits: PostOutputUnitOptions) -> PostProcessInput
+
+Preferences : Base
+  Name
+  apiPreferences: APIPreferences
+  defaultUnitsPreferences: DefaultUnitsPreferencesCollection
+  generalPreferences: GeneralPreferences
+  graphicsPreferences: GraphicsPreferences
+  gridPreferences: GridPreferences
+  isValid
+  materialPreferences: MaterialPreferences
+  networkPreferences: NetworkPreferences
+  objectType
+  productPreferences: ProductPreferencesCollection
+  productUsageData: ProductUsageData
+  unitAndValuePreferences: UnitAndValuePreferences
+  Name()
+  classType()
+
+Product : Base
+  Name
+  attributes: Attributes
+  isValid
+  namedViews: NamedViews
+  objectType
+  parentDocument: Document
+  productType: str
+  selectionSets: SelectionSets
+  unitsManager: UnitsManager
+  workspaces: WorkspaceList
+  Name()
+  classType()
+  deleteEntities(entities: ObjectCollection) -> bool
+  findAttributes(groupName: str, attributeName: str) -> Attribute]
+
+ProductPreferences : Base
+  Name
+  isValid
+  name: str
+  objectType
+  Name()
+  classType()
+
+Products *collection<Product>
+  # The Products object provides access to all of the products that exist in the document.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemByProductType(productType: str) -> Product
+
+ProfileCurve : Base
+  # A single curve in a profile.
+  Name
+  assemblyContext: Occurrence
+  boundingBox: BoundingBox3D
+  geometry: Curve3D
+  geometryType: Curve3DTypes
+  isValid
+  nativeObject: ProfileCurve
+  objectType
+  parentProfile: Profile
+  parentProfileLoop: ProfileLoop
+  parentSketch: Sketch
+  sketchEntity: SketchEntity
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> ProfileCurve
+
+ProfileCurves *collection<ProfileCurve>
+  # A collection of profile curves within a profile loop.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+
+ProgrammingLanguages
+  CPPProgramminglanguage()
+  Name()
+  PromptForLanguage()
+  PythonProgrammingLanguage()
+
+Properties *collection<Property>
+  # A collection of properties that are associated with a material or appearance.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+  itemById(id: str) -> Property
+  itemByName(name: str) -> Property
 
 RadioButtonGroupCommandInput : CommandInput
   # Provides a command input to get the choice from a radio button group from the user.
@@ -2216,6 +4116,25 @@ RuledSurfaceFeatureInput : Base
   Name()
   classType()
 
+SaveImageFileOptions : Base
+  Name
+  filename: str
+  height: int
+  isAntiAliased: bool
+  isBackgroundTransparent: bool
+  isValid
+  objectType
+  width: int
+  Name()
+  classType()
+  @static create(filename: str) -> SaveImageFileOptions
+
+SaveLocalErrors
+  DiskFullSaveLocalError()
+  FileReadOnlySaveLocalError()
+  Name()
+  SaveCancelledSaveLocalError()
+
 ScaleFeatureInput : Base
   Name
   inputEntities: ObjectCollection
@@ -2247,6 +4166,28 @@ ScriptInput : Base
   version: str
   Name()
   classType()
+
+ScriptSourceLocations
+  AppStoreScriptSourceLocation()
+  InternalScriptSourceLocation()
+  LinkedScriptSourceLocation()
+  Name()
+  OtherInstalledScriptSourceLocation()
+  SamplesScriptSourceLocation()
+  UserDefinedScriptSourceLocation()
+
+Scripts *collection<Script>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  addExisting(scriptFolderPath: str) -> Script
+  addNew(input: ScriptInput) -> Script
+  classType()
+  createScriptInput(name: str, programmingLanguage: ProgrammingLanguages, isAddIn: bool) -> ScriptInput
+  itemByPath(folderPath: str) -> Script
+  itemsByName(name: str) -> Script]
 
 SectionAnalysisInput : Base
   Name
@@ -2359,6 +4300,582 @@ SilhouetteSplitFeatureInput : Base
 SimAttributeInput : Base
   entities: Base]
 
+SketchArc : SketchCurve
+  # An arc in a sketch.
+  Name
+  assemblyContext
+  attributes
+  boundingBox
+  centerSketchPoint: SketchPoint
+  endSketchPoint: SketchPoint
+  entityToken
+  geometricConstraints
+  geometry: Arc3D
+  is2D
+  isConstruction
+  isDeletable
+  isFixed
+  isFullyConstrained
+  isLinked
+  isReference
+  isValid
+  isVisible
+  length
+  nativeObject: SketchArc
+  objectType
+  parentSketch
+  radius: float
+  referencedEntity
+  sketchDimensions
+  startSketchPoint: SketchPoint
+  worldGeometry: Arc3D
+  Name()
+  breakCurve(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> SketchArc
+  deleteMe() -> bool
+  extend(endPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  intersections(sketchCurves: ObjectCollection) -> bool
+  split(splitPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  trim(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+
+SketchArcs *collection<SketchArc>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  addByCenterStartEnd() -> SketchArc
+  addByCenterStartSweep(centerPoint: Base, startPoint: Base, sweepAngle: float) -> SketchArc
+  addByThreePoints(startPoint: Base, point: Point3D, endPoint: Base) -> SketchArc
+  addFillet(firstEntity: SketchCurve, firstEntityPoint: Point3D, secondEnitity: SketchCurve, secondEntityPoint: Point3D, radius: float) -> SketchArc
+  classType()
+
+SketchCircle : SketchCurve
+  # A circle in a sketch.
+  Name
+  area: float
+  assemblyContext
+  attributes
+  boundingBox
+  centerSketchPoint: SketchPoint
+  entityToken
+  geometricConstraints
+  geometry: Circle3D
+  is2D
+  isConstruction
+  isDeletable
+  isFixed
+  isFullyConstrained
+  isLinked
+  isReference
+  isValid
+  isVisible
+  length
+  nativeObject: SketchCircle
+  objectType
+  parentSketch
+  radius: float
+  referencedEntity
+  sketchDimensions
+  worldGeometry: Circle3D
+  Name()
+  breakCurve(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> SketchCircle
+  deleteMe() -> bool
+  extend(endPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  intersections(sketchCurves: ObjectCollection) -> bool
+  split(splitPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  trim(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+
+SketchCircles *collection<SketchCircle>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  addByCenterRadius(centerPoint: Base, radius: float) -> SketchCircle
+  addByThreePoints(pointOne: Point3D, pointTwo: Point3D, pointThree: Point3D) -> SketchCircle
+  addByThreeTangents(tangentOne: SketchLine, tangentTwo: SketchLine, tangentThree: SketchLine, hintPoint: Point3D) -> SketchCircle
+  addByTwoPoints(pointOne: Point3D, pointTwo: Point3D) -> SketchCircle
+  addByTwoTangents(tangentOne: SketchLine, tangentTwo: SketchLine, radius: float, hintPoint: Point3D) -> SketchCircle
+  classType()
+
+SketchConcentricCircleDimension : SketchDimension
+  # A concentric circle dimension in a sketch.
+  Name
+  assemblyContext
+  attributes
+  circleOne: SketchCurve
+  circleTwo: SketchCurve
+  entityToken
+  isDeletable
+  isDriving
+  isValid
+  nativeObject: SketchConcentricCircleDimension
+  objectType
+  parameter
+  parentSketch
+  textPosition
+  value
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> SketchConcentricCircleDimension
+  deleteMe() -> bool
+
+SketchConicCurve : SketchCurve
+  # The SketchConicCurve class represents conic curves in a sketch.
+  Name
+  apexSketchPoint: SketchPoint
+  assemblyContext
+  attributes
+  boundingBox
+  endSketchPoint: SketchPoint
+  entityToken
+  evaluator: CurveEvaluator3D
+  geometricConstraints
+  geometry: NurbsCurve3D
+  is2D
+  isConstruction
+  isDeletable
+  isFixed
+  isFullyConstrained
+  isLinked
+  isReference
+  isValid
+  isVisible
+  length
+  nativeObject: SketchConicCurve
+  objectType
+  parentSketch
+  referencedEntity
+  rhoValue: float
+  sketchDimensions
+  startSketchPoint: SketchPoint
+  worldGeometry: NurbsCurve3D
+  Name()
+  breakCurve(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> SketchConicCurve
+  deleteMe() -> bool
+  extend(endPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  intersections(sketchCurves: ObjectCollection) -> bool
+  split(splitPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  trim(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+
+SketchConicCurves *collection<SketchConicCurve>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(startPoint: Base, endPoint: Base, apexPoint: Base, rhoValue: float) -> SketchConicCurve
+  classType()
+
+SketchCurve : SketchEntity
+  # A single sketch curve. This is the base class for the specific curve types.
+  Name
+  assemblyContext
+  attributes
+  boundingBox
+  entityToken
+  geometricConstraints
+  is2D
+  isConstruction: bool
+  isDeletable
+  isFixed
+  isFullyConstrained
+  isLinked
+  isReference
+  isValid
+  isVisible
+  length: float
+  objectType
+  parentSketch
+  referencedEntity
+  sketchDimensions
+  Name()
+  breakCurve(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  classType()
+  deleteMe() -> bool
+  extend(endPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  intersections(sketchCurves: ObjectCollection) -> bool
+  split(splitPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  trim(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+
+SketchCurveConstructionStates
+  ConstructionSketchCurveConstructionState()
+  Name()
+  NormalSketchCurveConstructionState()
+  ToggleSketchCurveConstructionState()
+
+SketchCurveVector
+  append(x: SketchCurve) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::SketchCurve > >::size_type, x: SketchCurve) -> void
+  back() -> SketchCurve >::value_type
+  begin() -> SketchCurve >::iterator
+  capacity() -> SketchCurve >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> SketchCurve >::iterator
+  erase() -> SketchCurve >::iterator
+  front() -> SketchCurve >::value_type
+  get_allocator() -> SketchCurve >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> SketchCurve >::value_type
+  pop_back() -> void
+  push_back(x: SketchCurve) -> void
+  rbegin() -> SketchCurve >::reverse_iterator
+  rend() -> SketchCurve >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::SketchCurve > >::size_type) -> void
+  resize() -> void
+  size() -> SketchCurve >::size_type
+  swap(v: list[SketchCurve]) -> void
+
+SketchCurves *collection<SketchCurve>
+  Name
+  count: int
+  isValid
+  objectType
+  sketchArcs: SketchArcs
+  sketchCircles: SketchCircles
+  sketchConicCurves: SketchConicCurves
+  sketchControlPointSplines: SketchControlPointSplines
+  sketchEllipses: SketchEllipses
+  sketchEllipticalArcs: SketchEllipticalArcs
+  sketchFittedSplines: SketchFittedSplines
+  sketchFixedSplines: SketchFixedSplines
+  sketchLines: SketchLines
+  Name()
+  classType()
+
+SketchDistanceBetweenLineAndPlanarSurfaceDimension : SketchDimension
+  # A linear dimension in a sketch between a sketch line and a planar surface.
+  Name
+  assemblyContext
+  attributes
+  entityToken
+  isDeletable
+  isDriving
+  isValid
+  line: SketchLine
+  nativeObject: SketchDistanceBetweenLineAndPlanarSurfaceDimension
+  objectType
+  parameter
+  parentSketch
+  planarSurface: Base
+  textPosition
+  value
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> SketchDistanceBetweenLineAndPlanarSurfaceDimension
+  deleteMe() -> bool
+
+SketchEllipse : SketchCurve
+  # An ellipse in a sketch.
+  Name
+  assemblyContext
+  attributes
+  boundingBox
+  centerSketchPoint: SketchPoint
+  entityToken
+  geometricConstraints
+  geometry: Ellipse3D
+  is2D
+  isConstruction
+  isDeletable
+  isFixed
+  isFullyConstrained
+  isLinked
+  isReference
+  isValid
+  isVisible
+  length
+  majorAxis: Vector3D
+  majorAxisLine: SketchLine
+  majorAxisRadius: float
+  minorAxisLine: SketchLine
+  minorAxisRadius: float
+  nativeObject: SketchEllipse
+  objectType
+  parentSketch
+  referencedEntity
+  sketchDimensions
+  worldGeometry: Ellipse3D
+  Name()
+  breakCurve(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> SketchEllipse
+  deleteMe() -> bool
+  extend(endPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  intersections(sketchCurves: ObjectCollection) -> bool
+  split(splitPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  trim(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+
+SketchEllipseMajorRadiusDimension : SketchDimension
+  # An ellipse major radius dimension in a sketch.
+  Name
+  assemblyContext
+  attributes
+  ellipse: SketchCurve
+  entityToken
+  isDeletable
+  isDriving
+  isValid
+  nativeObject: SketchEllipseMajorRadiusDimension
+  objectType
+  parameter
+  parentSketch
+  textPosition
+  value
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> SketchEllipseMajorRadiusDimension
+  deleteMe() -> bool
+
+SketchEllipseMinorRadiusDimension : SketchDimension
+  # An ellipse minor radius dimension in a sketch.
+  Name
+  assemblyContext
+  attributes
+  ellipse: SketchCurve
+  entityToken
+  isDeletable
+  isDriving
+  isValid
+  nativeObject: SketchEllipseMinorRadiusDimension
+  objectType
+  parameter
+  parentSketch
+  textPosition
+  value
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> SketchEllipseMinorRadiusDimension
+  deleteMe() -> bool
+
+SketchEllipses *collection<SketchEllipse>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  add(centerPoint: Base, majorAxisPoint: Point3D, point: Point3D) -> SketchEllipse
+  classType()
+
+SketchEllipticalArc : SketchCurve
+  # An elliptical arc in a sketch.
+  Name
+  assemblyContext
+  attributes
+  boundingBox
+  centerSketchPoint: SketchPoint
+  endSketchPoint: SketchPoint
+  entityToken
+  geometricConstraints
+  geometry: EllipticalArc3D
+  is2D
+  isConstruction
+  isDeletable
+  isFixed
+  isFullyConstrained
+  isLinked
+  isReference
+  isValid
+  isVisible
+  length
+  majorAxis: Vector3D
+  majorAxisRadius: float
+  minorAxisRadius: float
+  nativeObject: SketchEllipticalArc
+  objectType
+  parentSketch
+  referencedEntity
+  sketchDimensions
+  startSketchPoint: SketchPoint
+  worldGeometry: EllipticalArc3D
+  Name()
+  breakCurve(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> SketchEllipticalArc
+  deleteMe() -> bool
+  extend(endPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  intersections(sketchCurves: ObjectCollection) -> bool
+  split(splitPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  trim(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+
+SketchEllipticalArcs *collection<SketchEllipticalArc>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  addByAngle(centerPoint: Base, majorAxis: Vector3D, minorAxis: Vector3D, startAngle: float, sweepAngle: float) -> SketchEllipticalArc
+  addByEndPoints(centerPoint: Base, majorAxis: Vector3D, minorAxis: Vector3D, startPoint: Base, endPoint: Base) -> SketchEllipticalArc
+  classType()
+
+SketchLine : SketchCurve
+  # A line in a sketch.
+  Name
+  assemblyContext
+  attributes
+  boundingBox
+  endSketchPoint: SketchPoint
+  entityToken
+  geometricConstraints
+  geometry: Line3D
+  is2D
+  isCenterLine: bool
+  isConstruction
+  isDeletable
+  isFixed
+  isFullyConstrained
+  isLinked
+  isReference
+  isValid
+  isVisible
+  length
+  nativeObject: SketchLine
+  objectType
+  parentSketch
+  referencedEntity
+  sketchDimensions
+  startSketchPoint: SketchPoint
+  worldGeometry: Line3D
+  Name()
+  breakCurve(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> SketchLine
+  deleteMe() -> bool
+  extend(endPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  intersections(sketchCurves: ObjectCollection) -> bool
+  split(splitPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  trim(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+
+SketchLineCenterlineStates
+  CenterlineSketchLineCenterlineState()
+  Name()
+  NormalSketchLineCenterlineState()
+  ToggleSketchLineCenterlineState()
+
+SketchLineList *collection<SketchLine>
+  # A list of sketch lines.
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  classType()
+
+SketchLineVector
+  append(x: SketchLine) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::fusion::SketchLine > >::size_type, x: SketchLine) -> void
+  back() -> SketchLine >::value_type
+  begin() -> SketchLine >::iterator
+  capacity() -> SketchLine >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> SketchLine >::iterator
+  erase() -> SketchLine >::iterator
+  front() -> SketchLine >::value_type
+  get_allocator() -> SketchLine >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> SketchLine >::value_type
+  pop_back() -> void
+  push_back(x: SketchLine) -> void
+  rbegin() -> SketchLine >::reverse_iterator
+  rend() -> SketchLine >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::fusion::SketchLine > >::size_type) -> void
+  resize() -> void
+  size() -> SketchLine >::size_type
+  swap(v: list[SketchLine]) -> void
+
+SketchLinearDiameterDimension : SketchDimension
+  # A linear diameter dimension in a sketch.
+  Name
+  assemblyContext
+  attributes
+  entityToken
+  entityTwo: SketchEntity
+  isDeletable
+  isDriving
+  isValid
+  line: SketchLine
+  nativeObject: SketchLinearDiameterDimension
+  objectType
+  parameter
+  parentSketch
+  textPosition
+  value
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> SketchLinearDiameterDimension
+  deleteMe() -> bool
+
+SketchLinearDimension : SketchDimension
+  # A linear dimension in a sketch.
+  Name
+  assemblyContext
+  attributes
+  entityOne: SketchEntity
+  entityToken
+  entityTwo: SketchEntity
+  isDeletable
+  isDriving
+  isValid
+  nativeObject: SketchLinearDimension
+  objectType
+  orientation: DimensionOrientations
+  parameter
+  parentSketch
+  textPosition
+  value
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> SketchLinearDimension
+  deleteMe() -> bool
+
+SketchLines *collection<SketchLine>
+  Name
+  count: int
+  isValid
+  objectType
+  Name()
+  addAngleChamfer(firstLine: SketchLine, firstLinePoint: Point3D, secondLine: SketchLine, secondLinePoint: Point3D, distance: float, angle: float) -> SketchLine
+  addByMidpoint(midPoint: Base, secondPoint: Base) -> SketchLine
+  addByTwoPoints(startPoint: Base, endPoint: Base) -> SketchLine
+  addCenterPointRectangle(centerPoint: Point3D, cornerPoint: Base) -> SketchLineList
+  addDistanceChamfer(firstLine: SketchLine, firstLinePoint: Point3D, secondLine: SketchLine, secondLinePoint: Point3D, distanceOne: float, distanceTwo: float) -> SketchLine
+  addEdgePolygon(pointOne: Base, pointTwo: Base, isRight: bool, edgeCount: int) -> SketchLineList
+  addScribedPolygon(centerPoint: Base, edgeCount: int, angle: float, radius: float, isInscribed: bool) -> SketchLineList
+  addThreePointRectangle(pointOne: Base, pointTwo: Base, pointThree: Point3D) -> SketchLineList
+  addTwoPointRectangle(pointOne: Base, pointTwo: Base) -> SketchLineList
+  classType()
+
+SketchOffsetCurvesDimension : SketchDimension
+  # A SketchOffsetCurvesDimension object is created automatically whenever curves are offset.
+  Name
+  assemblyContext
+  attributes
+  entityToken
+  isDeletable
+  isDriving
+  isValid
+  nativeObject: SketchOffsetCurvesDimension
+  objectType
+  offsetConstraint: OffsetConstraint
+  parameter
+  parentSketch
+  textPosition
+  value
+  Name()
+  classType()
+  createForAssemblyContext(occurrence: Occurrence) -> SketchOffsetCurvesDimension
+  deleteMe() -> bool
+
 SketchTextInput : Base
   Name
   angle: float
@@ -2457,6 +4974,64 @@ StitchFeatureInput : Base
   Name()
   classType()
 
+StockMaterial : Base
+  # Represents a StockMaterial.
+  Name
+  category: str
+  designators: list[str]
+  hardness: float
+  isValid
+  name: str
+  objectType
+  Name()
+  classType()
+  @static createFromJson(json: str) -> StockMaterial
+  toJson() -> str
+
+StockMaterialLibrary : CAMLibrary
+  Name
+  assetTypeName
+  isValid
+  objectType
+  Name()
+  childAssetURLs(url: URL) -> URL]
+  childFolderURLs(url: URL) -> URL]
+  childStockMaterials(url: URL) -> StockMaterial]
+  classType()
+  createFolder(parentUrl: URL, folderName: str) -> URL
+  deleteAsset(url: URL) -> bool
+  deleteFolder(url: URL) -> bool
+  displayName(url: URL) -> str
+  doesPathExist(url: URL) -> bool
+  importStockMaterial(stockMaterial: StockMaterial, destinationUrl: URL, stockMaterialName: str) -> URL
+  stockMaterialAtURL(url: URL) -> StockMaterial
+  updateStockMaterial(url: URL, stockMaterial: StockMaterial) -> bool
+  urlByLocation(location: LibraryLocations) -> URL
+
+StockMaterialVector
+  append(x: StockMaterial) -> void
+  assign(n: std::vector< adsk::core::Ptr< adsk::cam::StockMaterial > >::size_type, x: StockMaterial) -> void
+  back() -> StockMaterial >::value_type
+  begin() -> StockMaterial >::iterator
+  capacity() -> StockMaterial >::size_type
+  clear() -> void
+  empty() -> bool
+  end() -> StockMaterial >::iterator
+  erase() -> StockMaterial >::iterator
+  front() -> StockMaterial >::value_type
+  get_allocator() -> StockMaterial >::allocator_type
+  insert() -> void
+  iterator() -> swig::SwigPyIterator
+  pop() -> StockMaterial >::value_type
+  pop_back() -> void
+  push_back(x: StockMaterial) -> void
+  rbegin() -> StockMaterial >::reverse_iterator
+  rend() -> StockMaterial >::reverse_iterator
+  reserve(n: std::vector< adsk::core::Ptr< adsk::cam::StockMaterial > >::size_type) -> void
+  resize() -> void
+  size() -> StockMaterial >::size_type
+  swap(v: list[StockMaterial]) -> void
+
 StringValueCommandInput : CommandInput
   # Provides a command input to get a string value from the user.
   Name
@@ -2484,6 +5059,37 @@ StringValueCommandInput : CommandInput
 StructuralConstraintInput : SimAttributeInput
   type: ConstraintTypes
   setTargets(entities: list[Base]) -> bool
+
+SurfaceEvaluator : Base
+  Name
+  area: float
+  isClosedInU: bool
+  isClosedInV: bool
+  isValid
+  objectType
+  Name()
+  classType()
+  getCurvature(parameter: Point2D) -> bool
+  getCurvatures(parameters: list[Point2D]) -> bool
+  getFirstDerivative(parameter: Point2D) -> bool
+  getFirstDerivatives(parameters: list[Point2D]) -> bool
+  getIsoCurve(parameter: float, isUDirection: bool) -> ObjectCollection
+  getModelCurveFromParametricCurve(parametricCurve: Curve2D) -> ObjectCollection
+  getNormalAtParameter(parameter: Point2D) -> bool
+  getNormalAtPoint(point: Point3D) -> bool
+  getNormalsAtParameters(parameters: list[Point2D]) -> bool
+  getNormalsAtPoints(points: list[Point3D]) -> bool
+  getParamAnomaly() -> bool
+  getParameterAtPoint(point: Point3D) -> bool
+  getParametersAtPoints(points: list[Point3D]) -> bool
+  getPointAtParameter(parameter: Point2D) -> bool
+  getPointsAtParameters(parameters: list[Point2D]) -> bool
+  getSecondDerivative(parameter: Point2D) -> bool
+  getSecondDerivatives(parameters: list[Point2D]) -> bool
+  getThirdDerivative(parameter: Point2D) -> bool
+  getThirdDerivatives(parameters: list[Point2D]) -> bool
+  isParameterOnFace(parameter: Point2D) -> bool
+  parametricRange() -> BoundingBox2D
 
 SweepFeatureInput : Base
   Name
@@ -2655,6 +5261,43 @@ ThreadFeatureInput : Base
   Name()
   classType()
 
+Timeline *collection<TimelineObject>
+  # A collection of TimelineObjects in a parametric design.
+  Name
+  count: int
+  isValid
+  markerPosition: int
+  objectType
+  timelineGroups: TimelineGroups
+  Name()
+  classType()
+  deleteAllAfterMarker() -> bool
+  moveToBeginning() -> bool
+  moveToEnd() -> bool
+  moveToPreviousStep() -> bool
+  movetoNextStep() -> bool
+  play() -> bool
+
+TimelineObject : Base
+  # Represents an object in the timeline.
+  Name
+  entity: Base
+  errorOrWarningMessage: str
+  healthState: FeatureHealthStates
+  index: int
+  isGroup: bool
+  isRolledBack: bool
+  isSuppressed: bool
+  isValid
+  name: str
+  objectType
+  parentGroup: TimelineGroup
+  Name()
+  canReorder(beforeIndex: int) -> bool
+  classType()
+  reorder(beforeIndex: int) -> bool
+  rollTo(rollBefore: bool) -> bool
+
 ToolingCapabilitiesMachineElementInput : MachineElementInput
   # Input class for creating ToolingCapabilitiesMachineElement objects.
   Name
@@ -2759,6 +5402,53 @@ TrimFeatureInput : Base
   cancel() -> bool
   classType()
 
+UnitAndValuePreferences : Base
+  Name
+  angularPrecision: int
+  areAbbreviationsForUnitDisplayed: bool
+  areSymbolsForUnitDisplayed: bool
+  areTrailingZerosHidden: bool
+  degreeDisplayFormat: DegreeDisplayFormats
+  footAndInchDisplayFormat: FootAndInchDisplayFormats
+  generalPrecision: int
+  isPeriodDecimalPoint: bool
+  isScientificNotationUsed: bool
+  isValid
+  materialDisplayUnit: MaterialDisplayUnits
+  minimumPrecisionWhenHidingZeros: int
+  objectType
+  scientificNotationPrecision: int
+  useScientficNotationAbove: int
+  useScientficNotationBelow: int
+  Name()
+  classType()
+
+UnitSystems
+  CentimeterGramUnitSystem()
+  CustomUnitSystem()
+  FootPoundUnitSystem()
+  InchOunceUnitSystem()
+  MeterKilogramUnitSystem()
+  MillimeterGramUnitSystem()
+  Name()
+
+UnitsManager : Base
+  Name
+  defaultLengthUnits: str
+  internalUnits: str
+  isValid
+  objectType
+  product: Product
+  Name()
+  classType()
+  convert(valueInInputUnits: float, inputUnits: str, outputUnits: str) -> float
+  evaluateExpression() -> float
+  formatInternalValue() -> str
+  formatUnits(units: str) -> str
+  formatValue() -> str
+  isValidExpression(expression: str, units: str) -> bool
+  standardizeExpression() -> str
+
 UntrimFeatureInput : Base
   # This class defines the methods and properties that pertain to the definition of an Untrim feature.
   Name
@@ -2772,6 +5462,56 @@ UntrimFeatureInput : Base
   classType()
   setLoops(loops: list[BRepLoop]) -> bool
   setLoopsFromFaces(faces: list[BRepFace], untrimLoopType: UntrimLoopTypes) -> bool
+
+User : Base
+  # A class that represents a Fusion User
+  Name
+  displayName: str
+  email: str
+  isValid
+  objectType
+  userId: str
+  userName: str
+  Name()
+  classType()
+
+UserParameter : Parameter
+  # Represents a User Parameter.
+  Name
+  attributes
+  comment
+  dependencyParameters
+  dependentParameters
+  design: Design
+  entityToken
+  expression
+  isDeletable
+  isFavorite
+  isValid
+  name
+  objectType
+  textValue
+  unit
+  userParameters: UserParameters
+  value
+  valueType
+  Name()
+  classType()
+  deleteMe() -> bool
+
+UserParameters *collection<UserParameter>
+  Name
+  count: int
+  design: Design
+  isValid
+  objectType
+  Name()
+  add(name: str, value: ValueInput, units: str, comment: str) -> UserParameter
+  asArray() -> UserParameter]
+  classType()
+  exportUserParameters(userParameterArray: list[UserParameter], filename: str) -> bool
+  importUserParameters(filename: str) -> bool
+  itemByName(name: str) -> UserParameter
 
 ValueCommandInput : CommandInput
   # Provides a command input to get a unit based value from the user.
@@ -2818,6 +5558,10 @@ ValueInput : Base
   @static createByObject(objectReference: Base) -> ValueInput
   @static createByReal(realValue: float) -> ValueInput
   @static createByString(stringValue: str) -> ValueInput
+
+ValueInputError
+  Name()
+  ValueNotOfTypeError()
 
 VariableRadiusFilletEdgeSetInput : FilletEdgeSetInput
   # Provides access to the edges and the parameters associated with a variable radius fillet.
