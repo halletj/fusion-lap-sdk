@@ -1,17 +1,17 @@
-# Fusion LAP SDK
+# Autodesk Fusion LAP SDK
 
 Compressed, LLM-optimized API reference for the Autodesk Fusion SDK.
 
-**114K tokens** covering 1,553 classes — the entire Fusion API in a format any LLM can use.
+**114K tokens** covering 1,553 classes — the entire Autodesk Fusion API in a format any LLM can use.
 
 ## Use with any LLM
 
 Paste this into any LLM prompt (ChatGPT, Claude, Gemini, etc.):
 
 ```
-Read https://halletj.github.io/fusion-lap-sdk/lap/fusion-base.lap for the Fusion API reference.
+Read https://halletj.github.io/fusion-lap-sdk/lap/fusion-base.lap for the Autodesk Fusion API reference.
 For additional API domains see https://halletj.github.io/fusion-lap-sdk/CLAUDE.md
-Help me write a Fusion script that [your task here].
+Help me write an Autodesk Fusion script that [your task here].
 ```
 
 ## Use with Claude Code
@@ -42,7 +42,7 @@ Pre-built `.lap` files are in the `lap/` directory, hosted at `https://halletj.g
 
 ## Regenerating
 
-If you have Fusion installed, you can regenerate the `.lap` files from your local API stubs:
+If you have Autodesk Fusion installed, you can regenerate the `.lap` files from your local API stubs:
 
 ```bash
 pip install -e .
@@ -50,7 +50,7 @@ python -m fusion_lap
 ```
 
 The tool automatically:
-1. Finds Fusion API stubs from your local install
+1. Finds Autodesk Fusion API stubs from your local install
 2. Clones [FusionAPIReference](https://github.com/AutodeskFusion360/FusionAPIReference) for HTML descriptions
 3. Merges stubs (types/signatures) + HTML (descriptions)
 4. Renders partitioned `.lap` files to `lap/`
@@ -68,7 +68,7 @@ lap/                Generated .lap files (checked in, ready to use)
 fusion_lap/         Python converter package
   __main__.py       Entry point: python -m fusion_lap
   ir.py             Intermediate representation
-  discover.py       Auto-find Fusion stubs
+  discover.py       Auto-find Autodesk Fusion stubs
   stubs.py          Parse .py/.pyi stubs into IR
   scraper.py        Parse FusionAPIReference HTML docs
   enrich.py         Merge stubs + HTML descriptions

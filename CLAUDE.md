@@ -1,8 +1,8 @@
-# Fusion API Reference
+# Autodesk Fusion API Reference
 
-Compressed API reference for Autodesk Fusion SDK in .lap format.
+Compressed API reference for the Autodesk Fusion SDK in .lap format.
 
-## Always read before writing Fusion scripts:
+## Always read before writing Autodesk Fusion scripts:
 - lap/fusion-base.lap (navigation graph, gotchas, core types — ~20K tokens)
 
 ## Load the relevant domain file when needed:
@@ -24,7 +24,7 @@ Compressed API reference for Autodesk Fusion SDK in .lap format.
 - https://halletj.github.io/fusion-lap-sdk/lap/fusion-drawing.lap
 - https://halletj.github.io/fusion-lap-sdk/lap/fusion-ui.lap
 
-## When writing Fusion scripts:
+## When writing Autodesk Fusion scripts:
 - Always import: import adsk.core, adsk.fusion, adsk.cam
 - Units are centimeters internally
 - Check return values for None
