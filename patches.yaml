@@ -1,0 +1,9 @@
+# Manual corrections applied to the IR before rendering.
+# Use this to fix upstream data gaps in the SWIG stubs or HTML docs.
+
+gotchas:
+  - "CoilFeatures is read-only — coils cannot be created via the API despite CoilFeatureInput existing"
+
+classes:
+  CoilFeatures:
+    description: "Read-only collection. Coil features cannot be created via the API."

@@ -8,6 +8,7 @@ import yaml
 from .discover import find_stubs
 from .enrich import enrich_ir
 from .ir import IR
+from .patches import apply_patches
 from .render import render_domain, render_gotchas, render_graph, render_meta, render_remaining
 from .scraper import scrape_local_docs
 from .stubs import parse_stubs
@@ -28,12 +29,14 @@ DEFAULT_GOTCHAS = [
 _REPO_ROOT = Path(__file__).parent.parent
 _DEFAULT_OUTPUT = _REPO_ROOT / "lap"
 _DEFAULT_DOMAINS = _REPO_ROOT / "domains.yaml"
+_DEFAULT_PATCHES = _REPO_ROOT / "patches.yaml"
 
 
 def build_lap_files(
     output_dir: str | Path = _DEFAULT_OUTPUT,
     stubs_path: str | None = None,
     domains_yaml: str | Path = _DEFAULT_DOMAINS,
+    patches_yaml: str | Path = _DEFAULT_PATCHES,
 ):
     """Run the full build pipeline. Finds stubs, scrapes HTML, enriches, renders."""
     out = Path(output_dir)
@@ -58,8 +61,11 @@ def build_lap_files(
     else:
         logger.warning("No HTML docs found. Proceeding with stubs only.")
 
+    # Stage 2.5: Apply manual patches
+    apply_patches(ir, patches_yaml)
+
     # Add default gotchas
-    ir.gotchas = DEFAULT_GOTCHAS
+    ir.gotchas = DEFAULT_GOTCHAS + ir.gotchas
 
     # Stage 3: Classify & render
     domains = _load_domains(domains_yaml)

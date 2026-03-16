@@ -67,6 +67,7 @@ Application
 - Sketch profiles only available after geometry is fully closed
 - Point3D.create() takes cm, not mm or inches
 - Collections are 0-indexed, use .item(i) or [i]
+- CoilFeatures is read-only — coils cannot be created via the API despite CoilFeatureInput existing
 
 [meta]
 api: Autodesk Fusion

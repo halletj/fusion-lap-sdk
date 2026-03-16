@@ -1347,6 +1347,7 @@ CoilFeatureTypes
   SpiralCoilFeatureType()
 
 CoilFeatures *collection<CoilFeature>
+  # Read-only collection. Coil features cannot be created via the API.
   Name
   count: int
   isValid
