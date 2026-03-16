@@ -1,0 +1,58 @@
+# Fusion LAP SDK — LLM Reference Guide
+
+Compressed API reference for the Autodesk Fusion Python SDK.
+Use these .lap files to write Fusion scripts, add-ins, and automations.
+
+## Quick Start
+
+Fetch the base reference (always start here, ~20K tokens):
+https://halletj.github.io/fusion-lap-sdk/lap/fusion-base.lap
+
+This contains the object navigation graph, common gotchas, and core types
+(Application, Point3D, Vector3D, ValueInput, etc.).
+
+## Domain Files
+
+Fetch the relevant domain file based on the task:
+
+- Sketches, curves, constraints, profiles:
+  https://halletj.github.io/fusion-lap-sdk/lap/fusion-sketch.lap
+
+- Extrude, revolve, loft, sweep, fillet, chamfer, etc.:
+  https://halletj.github.io/fusion-lap-sdk/lap/fusion-features.lap
+
+- BRep bodies, faces, edges, mesh, T-spline:
+  https://halletj.github.io/fusion-lap-sdk/lap/fusion-bodies.lap
+
+- Components, joints, occurrences, assembly:
+  https://halletj.github.io/fusion-lap-sdk/lap/fusion-assembly.lap
+
+- CAM setup, toolpaths, operations:
+  https://halletj.github.io/fusion-lap-sdk/lap/fusion-cam.lap
+
+- Drawing views, dimensions, annotations:
+  https://halletj.github.io/fusion-lap-sdk/lap/fusion-drawing.lap
+
+- Commands, palettes, toolbars, UI events:
+  https://halletj.github.io/fusion-lap-sdk/lap/fusion-ui.lap
+
+## Rules
+
+- Always import: import adsk.core, adsk.fusion, adsk.cam
+- Units are always centimeters internally, regardless of UI display settings
+- Check return values for None — operations fail silently
+- Use the [graph] section in fusion-base.lap to navigate the object model
+- Input objects must be fully configured before calling .add()
+- Sketch profiles are only available after geometry is fully closed
+- Collections are 0-indexed, use .item(i) or [i]
+
+## Format
+
+Files use .lap format: classes with ":" for inheritance, properties without parens,
+methods with parens, *collection<T> for collection classes. The format is plain text
+and self-describing.
+
+## Source
+
+Repository: https://github.com/halletj/fusion-lap-sdk
+Generated from Autodesk Fusion Python API stubs + FusionAPIReference HTML docs.
