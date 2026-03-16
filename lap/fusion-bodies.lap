@@ -25,12 +25,18 @@ MeshUnits: CentimeterMeshUnit | MillimeterMeshUnit | MeterMeshUnit | InchMeshUni
 BRepBodies *collection<BRepBody>
   # The BRepBodies collection provides access to all of the B-Rep
     bodies within a component.
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   add() -> BRepBody
+  classType()
   itemByName(name: str) -> BRepBody
 
 BRepBody : Base
   # Represents a B-Rep (Boundary Representation) body.
+  Name
   appearance: Appearance
   appearanceSourceType: AppearanceSourceTypes
   area: float
@@ -51,12 +57,14 @@ BRepBody : Base
   isSolid: bool
   isTemporary: bool
   isTransient: bool
+  isValid
   isVisible: bool
   lumps: BRepLumps
   material: Material
   meshManager: MeshManager
   name: str
   nativeObject: BRepBody
+  objectType
   opacity: float
   orientedMinimumBoundingBox: OrientedBoundingBox3D
   parentComponent: Component
@@ -69,6 +77,8 @@ BRepBody : Base
   visibleOpacity: float
   volume: float
   wires: BRepWires
+  Name()
+  classType()
   convert(options: BRepConvertOptions) -> BRepBody
   copy() -> bool
   copyToComponent(target: Base) -> BRepBody
@@ -82,9 +92,14 @@ BRepBody : Base
   pointContainment(point: Point3D) -> PointContainment
 
 BRepBodyDefinition : Base
+  Name
   doFullHealing: bool
+  isValid
   lumpDefinitions: BRepLumpDefinitions
+  objectType
   outcomeInfo: list[str]
+  Name()
+  classType()
   @static create() -> BRepBodyDefinition
   createBody() -> BRepBody
   createEdgeDefinitionByCurve(startVertex: BRepVertexDefinition, endVertex: BRepVertexDefinition, modelSpaceCurve: Curve3D) -> BRepEdgeDefinition
@@ -116,15 +131,26 @@ BRepBodyVector
 
 BRepCell : Base
   # Object that represents an existing BRepCell.
+  Name
   cellBody: BRepBody
   isSelected: bool
+  isValid
+  objectType
   sourceTools: ObjectCollection
+  Name()
+  classType()
 
 BRepCells *collection<BRepCell>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
+  classType()
 
 BRepCoEdge : Base
   # Represents the use of a BRepEdge by a BRepFace.
+  Name
   assemblyContext: Occurrence
   body: BRepBody
   edge: BRepEdge
@@ -133,26 +159,53 @@ BRepCoEdge : Base
   geometry: Curve2D
   isOpposedToEdge: bool
   isParamReversed: bool
+  isValid
   loop: BRepLoop
   nativeObject: BRepCoEdge
   next: BRepCoEdge
+  objectType
   partner: BRepCoEdge
   previous: BRepCoEdge
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> BRepCoEdge
 
 BRepCoEdgeDefinition : Base
+  Name
   edgeDefinition: BRepEdgeDefinition
   isOpposedToEdge: bool
+  isValid
+  objectType
+  Name()
+  classType()
 
 BRepCoEdgeDefinitions *collection<BRepCoEdgeDefinition>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   add(edgeDefinition: BRepEdgeDefinition, isOpposedToEdge: bool) -> BRepCoEdgeDefinition
+  classType()
 
 BRepCoEdges *collection<BRepCoEdge>
   # BRepCoEdge Collection.
+  Name
   count: int
+  isValid
+  objectType
+  Name()
+  classType()
+
+BRepConvertOptions
+  AnalyticsToNURBSConversion()
+  Name()
+  PlanesToNURBSConversion()
+  ProceduralToNURBSConversion()
+  SplitPeriodicFacesConversion()
 
 BRepEdge : Base
+  Name
   assemblyContext: Occurrence
   attributes: Attributes
   body: BRepBody
@@ -166,23 +219,32 @@ BRepEdge : Base
   isDegenerate: bool
   isParamReversed: bool
   isTolerant: bool
+  isValid
   length: float
   nativeObject: BRepEdge
+  objectType
   pointOnEdge: Point3D
   shell: BRepShell
   startVertex: BRepVertex
   tangentiallyConnectedEdges: ObjectCollection
   tempId: int
   tolerance: float
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> BRepEdge
 
 BRepEdgeDefinition : Base
   # Represents the definition of a B-Rep edge that can be used as input to create a BRepBody.
+  Name
   associativeID: int
   endVertex: BRepVertexDefinition
   isMergeable: bool
+  isValid
   modelSpaceCurve: Curve3D
+  objectType
   startVertex: BRepVertexDefinition
+  Name()
+  classType()
 
 BRepEdgeVector
   append(x: BRepEdge) -> void
@@ -210,10 +272,23 @@ BRepEdgeVector
 
 BRepEdges *collection<BRepEdge>
   # BRepEdge collection.
+  Name
   count: int
+  isValid
+  objectType
+  Name()
+  classType()
+
+BRepEntityTypes
+  BRepBodyEntityType()
+  BRepEdgeEntityType()
+  BRepFaceEntityType()
+  BRepVertexEntityType()
+  Name()
 
 BRepFace : Base
   # Represent a connected region on a single geometric surface.
+  Name
   appearance: Appearance
   appearanceSourceType: AppearanceSourceTypes
   area: float
@@ -227,27 +302,41 @@ BRepFace : Base
   evaluator: SurfaceEvaluator
   geometry: Surface
   isParamReversed: bool
+  isValid
   loops: BRepLoops
   meshManager: MeshManager
   nativeObject: BRepFace
+  objectType
   pointOnFace: Point3D
   shell: BRepShell
   tangentiallyConnectedFaces: BRepFaces
   tempId: int
   vertices: BRepVertices
+  Name()
+  classType()
   convert(options: BRepConvertOptions) -> BRepBody
   createForAssemblyContext(occurrence: Occurrence) -> BRepFace
   isPointOnFace(point: Point3D, tolerance: float) -> bool
 
 BRepFaceDefinition : Base
+  Name
   associativeID: int
   isParamReversed: bool
+  isValid
   loopDefinitions: BRepLoopDefinitions
+  objectType
   surfaceGeometry: Surface
+  Name()
+  classType()
 
 BRepFaceDefinitions *collection<BRepFaceDefinition>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   add(surfaceGeometry: Surface, isParamReversed: bool) -> BRepFaceDefinition
+  classType()
 
 BRepFaceVector
   append(x: std::vector< adsk::core::Ptr< adsk::fusion::BRepFace > >::value_type const) -> void
@@ -299,10 +388,16 @@ BRepFaceVector
 
 BRepFaces *collection<BRepFace>
   # BRepFace collection.
+  Name
   count: int
+  isValid
+  objectType
+  Name()
+  classType()
 
 BRepLoop : Base
   # Represents a connected portion of a BRepFace boundary. It consists of a chain of BRepCoEdges.
+  Name
   assemblyContext: Occurrence
   body: BRepBody
   boundingBox: BoundingBox3D
@@ -311,15 +406,29 @@ BRepLoop : Base
   entityToken: str
   face: BRepFace
   isOuter: bool
+  isValid
   nativeObject: BRepLoop
+  objectType
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> BRepLoop
 
 BRepLoopDefinition : Base
+  Name
   bRepCoEdgeDefinitions: BRepCoEdgeDefinitions
+  isValid
+  objectType
+  Name()
+  classType()
 
 BRepLoopDefinitions *collection<BRepLoopDefinition>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   add() -> BRepLoopDefinition
+  classType()
 
 BRepLoopVector
   append(x: BRepLoop) -> void
@@ -347,10 +456,16 @@ BRepLoopVector
 
 BRepLoops *collection<BRepLoop>
   # BRepLoop collection.
+  Name
   count: int
+  isValid
+  objectType
+  Name()
+  classType()
 
 BRepLump : Base
   # Represents an entirely connected set of entities. A BRepBody consists of BRepLumps.
+  Name
   area: float
   assemblyContext: Occurrence
   body: BRepBody
@@ -359,28 +474,48 @@ BRepLump : Base
   entityToken: str
   faces: BRepFaces
   isClosed: bool
+  isValid
   meshManager: MeshManager
   nativeObject: BRepLump
+  objectType
   shells: BRepShells
   vertices: BRepVertices
   volume: float
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> BRepLump
   pointContainment(point: Point3D) -> PointContainment
 
 BRepLumpDefinition : Base
   # Represents the definition of a B-Rep lump which is used in defining the topology of a B-Rep body.
+  Name
+  isValid
+  objectType
   shellDefinitions: BRepShellDefinitions
+  Name()
+  classType()
 
 BRepLumpDefinitions *collection<BRepLumpDefinition>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   add() -> BRepLumpDefinition
+  classType()
 
 BRepLumps *collection<BRepLump>
   # BRepLump collection.
+  Name
   count: int
+  isValid
+  objectType
+  Name()
+  classType()
 
 BRepShell : Base
   # Represents an entirely connected set of BRepFaces. A BRepLump may contain multiple BRepShells.
+  Name
   area: float
   assemblyContext: Occurrence
   body: BRepBody
@@ -389,30 +524,50 @@ BRepShell : Base
   entityToken: str
   faces: BRepFaces
   isClosed: bool
+  isValid
   isVoid: bool
   lump: BRepLump
   meshManager: MeshManager
   nativeObject: BRepShell
+  objectType
   vertices: BRepVertices
   volume: float
   wire: BRepWire
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> BRepShell
   pointContainment(point: Point3D) -> PointContainment
 
 BRepShellDefinition : Base
+  Name
   faceDefinitions: BRepFaceDefinitions
+  isValid
+  objectType
   wireDefinition: BRepWireDefinition
+  Name()
+  classType()
 
 BRepShellDefinitions *collection<BRepShellDefinition>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   add() -> BRepShellDefinition
+  classType()
 
 BRepShells *collection<BRepShell>
   # BRepShell collection.
+  Name
   count: int
+  isValid
+  objectType
+  Name()
+  classType()
 
 BRepVertex : Base
   # A 0-dimensional topological entity that bounds a BRepEdge.
+  Name
   assemblyContext: Occurrence
   attributes: Attributes
   body: BRepBody
@@ -421,54 +576,99 @@ BRepVertex : Base
   faces: BRepFaces
   geometry: Point3D
   isTolerant: bool
+  isValid
   nativeObject: BRepVertex
+  objectType
   shell: BRepShell
   tempId: int
   tolerance: float
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> BRepVertex
 
 BRepVertexDefinition : Base
+  Name
+  isValid
+  objectType
   position: Point3D
+  Name()
+  classType()
 
 BRepVertices *collection<BRepVertex>
   # BRepVertex collection.
+  Name
   count: int
+  isValid
+  objectType
+  Name()
+  classType()
 
 BRepWire : Base
+  Name
   assemblyContext: Occurrence
   coEdges: BRepCoEdges
   edges: BRepEdges
   isPlanar: bool
+  isValid
   nativeObject: BRepWire
+  objectType
   parent: BRepBody
   vertices: BRepVertices
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> BRepWire
   offsetPlanarWire(planeNormal: Vector3D, distance: float, cornerType: OffsetCornerTypes) -> BRepBody
 
 BRepWireDefinition : Base
+  Name
+  isValid
+  objectType
   wireEdgeDefinitions: BRepWireEdgeDefinitions
+  Name()
+  classType()
 
 BRepWireEdgeDefinition : Base
+  Name
   associativeID: int
   endVertex: BRepVertexDefinition
+  isValid
   modelSpaceCurve: Curve3D
+  objectType
   startVertex: BRepVertexDefinition
+  Name()
+  classType()
 
 BRepWireEdgeDefinitions *collection<BRepWireEdgeDefinition>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   add(startVertex: BRepVertexDefinition, endVertex: BRepVertexDefinition, modelSpaceCurve: Curve3D) -> BRepWireEdgeDefinition
+  classType()
 
 BRepWires *collection<BRepWire>
   # Provides access to B-Rep wire bodies.
+  Name
   count: int
+  isValid
+  objectType
+  Name()
+  classType()
 
 MeshBodies *collection<MeshBody>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   add() -> MeshBodyList
   addByTriangleMeshData(coordinates: list[float], coordinateIndexList: list[int], normalVectors: list[float], normalIndexList: list[int]) -> MeshBody
+  classType()
 
 MeshBody : Base
   # Provides access to a mesh body.
+  Name
   appearance: Appearance
   appearanceSourceType: AppearanceSourceTypes
   area: float
@@ -484,17 +684,21 @@ MeshBody : Base
   isLightBulbOn: bool
   isOriented: bool
   isSelectable: bool
+  isValid
   isVisible: bool
   material: Material
   mesh: PolygonMesh
   name: str
   nativeObject: MeshBody
+  objectType
   opacity: float
   orientedMinimumBoundingBox: OrientedBoundingBox3D
   parentComponent: Component
   textureMapControl: TextureMapControl
   visibleOpacity: float
   volume: float
+  Name()
+  classType()
   copy() -> bool
   copyToComponent(target: Base) -> MeshBody
   createComponent() -> MeshBody
@@ -506,12 +710,22 @@ MeshBody : Base
 
 MeshBodyDisplayOverrides : Base
   # Container for overrides that control how the mesh is displayed in the interactive 3D view.
+  Name
   isSuppressFaceGroupColors: bool
   isSuppressTriangleEdges: bool
+  isValid
+  objectType
+  Name()
+  classType()
 
 MeshBodyList *collection<MeshBody>
   # Provides access to a list of MeshBody objects.
+  Name
   count: int
+  isValid
+  objectType
+  Name()
+  classType()
 
 MeshBodyVector
   append(x: MeshBody) -> void
@@ -539,112 +753,287 @@ MeshBodyVector
 
 MeshCombineFaceGroupsFeature : MeshFeature
   # Object that represents an existing mesh combine face groups feature in a design.
+  Name
+  assemblyContext
+  attributes
+  baseFeature
+  bodies
+  entityToken
+  errorOrWarningMessage
+  faces
+  healthState
   inputFaceGroups: FaceGroup]
+  isParametric
+  isSuppressed
+  isValid
+  linkedFeatures
   mesh: Base
+  name
   nativeObject: MeshCombineFaceGroupsFeature
+  objectType
+  parentComponent
+  timelineObject
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> MeshCombineFaceGroupsFeature
   deleteMe() -> bool
   dissolve() -> bool
 
 MeshCombineFaceGroupsFeatureInput : Base
+  Name
   inputFaceGroups: FaceGroup]
+  isValid
+  objectType
   targetBaseFeature: BaseFeature
+  Name()
+  classType()
 
 MeshCombineFaceGroupsFeatures *collection<MeshCombineFaceGroupsFeature>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   add(input: MeshCombineFaceGroupsFeatureInput) -> MeshCombineFaceGroupsFeature
+  classType()
   createInput(inputFaceGroups: list[FaceGroup]) -> MeshCombineFaceGroupsFeatureInput
   itemByName(name: str) -> MeshCombineFaceGroupsFeature
 
 MeshCombineFeature : MeshFeature
   # Object that represents an existing mesh combine feature in a design.
+  Name
+  assemblyContext
+  attributes
+  baseFeature
+  bodies
+  entityToken
+  errorOrWarningMessage
+  faces
+  healthState
   isKeepToolBodies: bool
   isNewComponent: bool
+  isParametric
+  isSuppressed
+  isValid
+  linkedFeatures
   meshCombineOperationType: MeshCombineOperationTypes
+  name
   nativeObject: MeshCombineFeature
+  objectType
+  parentComponent
   targetBody: MeshBody
+  timelineObject
   toolBodies: MeshBody]
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> MeshCombineFeature
   deleteMe() -> bool
   dissolve() -> bool
 
 MeshCombineFeatureInput : Base
+  Name
   algorithmType: MeshCombineAlgorithmTypes
   isKeepToolBodies: bool
   isNewComponent: bool
+  isValid
   meshCombineOperationType: MeshCombineOperationTypes
+  objectType
   targetBaseFeature: BaseFeature
   targetBody: MeshBody
   toolBodies: MeshBody]
+  Name()
+  classType()
 
 MeshCombineFeatures *collection<MeshCombineFeature>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   add(input: MeshCombineFeatureInput) -> MeshCombineFeature
+  classType()
   createInput(targetBody: MeshBody, toolBodies: list[MeshBody]) -> MeshCombineFeatureInput
   itemByName(name: str) -> MeshCombineFeature
 
+MeshCombineOperationTypes
+  CutMeshCombineType()
+  IntersectMeshCombineType()
+  JoinMeshCombineType()
+  MergeMeshCombineType()
+  Name()
+
+MeshConvertAccuracyTypes
+  HighMeshConvertAccuracyType()
+  LowMeshConvertAccuracyType()
+  MediumMeshConvertAccuracyType()
+  Name()
+  PreciseMeshConvertAccuracyType()
+
 MeshConvertFeature : Feature
+  Name
+  assemblyContext
+  attributes
+  baseFeature
+  bodies
+  entityToken
+  errorOrWarningMessage
+  faces
+  healthState
   inputBodies: MeshBody]
+  isParametric
   isPreprocessHoles: bool
+  isSuppressed
+  isValid
+  linkedFeatures
   meshConvertAccuracyType: MeshConvertAccuracyTypes
   meshConvertMethodType: MeshConvertMethodTypes
   meshConvertResolutionType: MeshConvertResolutionTypes
+  name
   nativeObject: MeshConvertFeature
   numberOfFaces: ModelParameter
+  objectType
+  parentComponent
+  timelineObject
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> MeshConvertFeature
   deleteMe() -> bool
   dissolve() -> bool
 
 MeshConvertFeatureInput : Base
+  Name
   inputBodies: MeshBody]
   isPreprocessHoles: bool
+  isValid
   meshConvertAccuracyType: MeshConvertAccuracyTypes
   meshConvertMethodType: MeshConvertMethodTypes
   meshConvertOperationType: MeshConvertOperationTypes
   meshConvertResolutionType: MeshConvertResolutionTypes
   numberOfFaces: ValueInput
+  objectType
   targetBaseFeature: BaseFeature
+  Name()
+  classType()
 
 MeshConvertFeatures *collection<MeshConvertFeature>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   add(input: MeshConvertFeatureInput) -> MeshConvertFeature
+  classType()
   createInput(inputBodies: list[MeshBody]) -> MeshConvertFeatureInput
   itemByName(name: str) -> MeshConvertFeature
 
+MeshConvertMethodTypes
+  FacetedMeshConvertMethodType()
+  Name()
+  OrganicMeshConvertMethodType()
+  PrismaticMeshConvertMethodType()
+
+MeshConvertOperationTypes
+  BaseFeatureMeshConvertOperationType()
+  Name()
+  ParametricFeatureMeshConvertOperationType()
+
+MeshConvertResolutionTypes
+  ByAccuracyMeshConvertResolutionType()
+  ByFacetNumberMeshConvertResolutionType()
+  Name()
+
 MeshFeature : Feature
+  Name
+  assemblyContext
+  attributes
+  baseFeature
+  bodies
+  entityToken
+  errorOrWarningMessage
+  faces
+  healthState
+  isParametric
+  isSuppressed
+  isValid
+  linkedFeatures
+  name
+  objectType
+  parentComponent
+  timelineObject
+  Name()
+  classType()
   deleteMe() -> bool
   dissolve() -> bool
 
 MeshGenerateFaceGroupsFeature : MeshFeature
   # Object that represents an existing mesh generate face groups feature in a design.
+  Name
   angleThreshold: ModelParameter
+  assemblyContext
+  attributes
+  baseFeature
+  bodies
   boundaryTolerance: ModelParameter
+  entityToken
+  errorOrWarningMessage
+  faces
+  healthState
+  isParametric
+  isSuppressed
+  isValid
+  linkedFeatures
   mesh: Base
   meshGenerateFaceGroupsMethodType: MeshGenerateFaceGroupsMethodTypes
   minimumFaceGroupSize: ModelParameter
+  name
   nativeObject: MeshGenerateFaceGroupsFeature
+  objectType
+  parentComponent
+  timelineObject
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> MeshGenerateFaceGroupsFeature
   deleteMe() -> bool
   dissolve() -> bool
 
 MeshGenerateFaceGroupsFeatureInput : Base
+  Name
   angleThreshold: ValueInput
   boundaryTolerance: ValueInput
+  isValid
   mesh: Base
   meshGenerateFaceGroupsMethodType: MeshGenerateFaceGroupsMethodTypes
   minimumFaceGroupSize: ValueInput
+  objectType
   targetBaseFeature: BaseFeature
+  Name()
+  classType()
 
 MeshGenerateFaceGroupsFeatures *collection<MeshGenerateFaceGroupsFeature>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   add(input: MeshGenerateFaceGroupsFeatureInput) -> MeshGenerateFaceGroupsFeature
+  classType()
   createInput(mesh: Base) -> MeshGenerateFaceGroupsFeatureInput
   itemByName(name: str) -> MeshGenerateFaceGroupsFeature
 
+MeshGenerateFaceGroupsMethodTypes
+  AccurateGenerateFaceGroupsType()
+  FastGenerateFaceGroupsType()
+  Name()
+
 MeshManager : Base
   # Provides access to meshes that approximate a B-Rep and T-Spline.
+  Name
   displayMeshes: TriangleMeshList
+  isValid
+  objectType
   parent: Base
+  Name()
+  classType()
   createMeshCalculator() -> TriangleMeshCalculator
 
 MeshPlaneCutFeature : MeshFeature
@@ -673,58 +1062,139 @@ MeshPlaneCutFeatures *collection<MeshPlaneCutFeature>
   itemByName(name: str) -> MeshPlaneCutFeature
 
 MeshReduceFeature : MeshFeature
+  Name
+  assemblyContext
+  attributes
+  baseFeature
+  bodies
+  entityToken
+  errorOrWarningMessage
   facecount: ModelParameter
+  faces
+  healthState
+  isParametric
+  isSuppressed
+  isValid
+  linkedFeatures
   maximumDeviation: ModelParameter
   mesh: Base
   meshReduceMethodType: MeshReduceMethodTypes
   meshReduceTargetType: MeshReduceTargetTypes
+  name
   nativeObject: MeshReduceFeature
+  objectType
+  parentComponent
   proportion: ModelParameter
+  timelineObject
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> MeshReduceFeature
   deleteMe() -> bool
   dissolve() -> bool
 
 MeshReduceFeatureInput : Base
+  Name
   facecount: ValueInput
+  isValid
   maximumDeviation: ValueInput
   mesh: Base
   meshReduceMethodType: MeshReduceMethodTypes
   meshReduceTargetType: MeshReduceTargetTypes
+  objectType
   proportion: ValueInput
   targetBaseFeature: BaseFeature
+  Name()
+  classType()
 
 MeshReduceFeatures *collection<MeshReduceFeature>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   add(input: MeshReduceFeatureInput) -> MeshReduceFeature
+  classType()
   createInput(mesh: Base) -> MeshReduceFeatureInput
   itemByName(name: str) -> MeshReduceFeature
 
+MeshReduceMethodTypes
+  AdaptiveReduceType()
+  Name()
+  UniformReduceType()
+
+MeshReduceTargetTypes
+  FaceCountMeshReduceTargetType()
+  MaximumDeviationMeshReduceTargetType()
+  Name()
+  ProportionMeshReduceTargetType()
+
+MeshRefinementSettings
+  MeshRefinementCustom()
+  MeshRefinementHigh()
+  MeshRefinementLow()
+  MeshRefinementMedium()
+  Name()
+
 MeshRemeshFeature : MeshFeature
+  Name
+  assemblyContext
+  attributes
+  baseFeature
+  bodies
   density: ModelParameter
+  entityToken
+  errorOrWarningMessage
+  faces
+  healthState
+  isParametric
   isPreserveBoundariesEnabled: bool
   isPreserveSharpEdgesEnabled: bool
+  isSuppressed
+  isValid
+  linkedFeatures
   mesh: Base
   meshRemeshMethodType: MeshRemeshMethodTypes
+  name
   nativeObject: MeshRemeshFeature
+  objectType
+  parentComponent
   shapePreservation: ModelParameter
+  timelineObject
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> MeshRemeshFeature
   deleteMe() -> bool
   dissolve() -> bool
 
 MeshRemeshFeatureInput : Base
+  Name
   density: ValueInput
   isPreserveBoundariesEnabled: bool
   isPreserveSharpEdgesEnabled: bool
+  isValid
   mesh: Base
   meshRemeshMethodType: MeshRemeshMethodTypes
+  objectType
   shapePreservation: ValueInput
   targetBaseFeature: BaseFeature
+  Name()
+  classType()
 
 MeshRemeshFeatures *collection<MeshRemeshFeature>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   add(input: MeshRemeshFeatureInput) -> MeshRemeshFeature
+  classType()
   createInput(mesh: Base) -> MeshRemeshFeatureInput
   itemByName(name: str) -> MeshRemeshFeature
+
+MeshRemeshMethodTypes
+  AdaptiveRemeshType()
+  Name()
+  UniformRemeshType()
 
 MeshRemoveFeature : MeshFeature
   # Object that represents an existing mesh remove feature in a design.
@@ -769,69 +1239,175 @@ MeshRemoveFeatures *collection<MeshRemoveFeature>
   itemByName(name: str) -> MeshRemoveFeature
 
 MeshRepairFeature : MeshFeature
+  Name
+  assemblyContext
+  attributes
+  baseFeature
+  bodies
   density: ModelParameter
+  entityToken
+  errorOrWarningMessage
+  faces
+  healthState
+  isParametric
+  isSuppressed
+  isValid
+  linkedFeatures
   mesh: Base
   meshRepairRebuildType: MeshRepairRebuildTypes
   meshRepairType: MeshRepairTypes
+  name
   nativeObject: MeshRepairFeature
+  objectType
   offset: ModelParameter
+  parentComponent
+  timelineObject
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> MeshRepairFeature
   deleteMe() -> bool
   dissolve() -> bool
 
 MeshRepairFeatureInput : Base
+  Name
   density: ValueInput
+  isValid
   mesh: Base
   meshRepairRebuildType: MeshRepairRebuildTypes
   meshRepairType: MeshRepairTypes
+  objectType
   offset: ValueInput
   targetBaseFeature: BaseFeature
+  Name()
+  classType()
 
 MeshRepairFeatures *collection<MeshRepairFeature>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   add(input: MeshRepairFeatureInput) -> MeshRepairFeature
+  classType()
   createInput(mesh: Base) -> MeshRepairFeatureInput
   itemByName(name: str) -> MeshRepairFeature
 
+MeshRepairRebuildTypes
+  AccurateMeshRepairRebuildType()
+  BlockyMeshRepairRebuildType()
+  FastMeshRepairRebuildType()
+  Name()
+  PreserveSharpEdgesMeshRepairRebuildType()
+
+MeshRepairTypes
+  CloseHolesMeshRepairType()
+  Name()
+  RebuildMeshRepairType()
+  StitchAndRemoveMeshRepairType()
+  WrapMeshRepairType()
+
 MeshReverseNormalFeature : MeshFeature
+  Name
+  assemblyContext
+  attributes
+  baseFeature
+  bodies
+  entityToken
+  errorOrWarningMessage
+  faces
+  healthState
+  isParametric
+  isSuppressed
+  isValid
+  linkedFeatures
   mesh: Base
+  name
   nativeObject: MeshReverseNormalFeature
+  objectType
+  parentComponent
+  timelineObject
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> MeshReverseNormalFeature
   deleteMe() -> bool
   dissolve() -> bool
 
 MeshReverseNormalFeatureInput : Base
+  Name
+  isValid
   mesh: Base
+  objectType
   targetBaseFeature: BaseFeature
+  Name()
+  classType()
 
 MeshReverseNormalFeatures *collection<MeshReverseNormalFeature>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   add(input: MeshReverseNormalFeatureInput) -> MeshReverseNormalFeature
+  classType()
   createInput(mesh: Base) -> MeshReverseNormalFeatureInput
   itemByName(name: str) -> MeshReverseNormalFeature
 
 MeshSeparateFeature : MeshFeature
+  Name
+  assemblyContext
+  attributes
+  baseFeature
+  bodies
+  entityToken
+  errorOrWarningMessage
+  faces
+  healthState
   isKeepBody: bool
   isMultipleBodies: bool
+  isParametric
+  isSuppressed
+  isValid
+  linkedFeatures
   mesh: Base
   meshSeparateType: MeshSeparateTypes
+  name
   nativeObject: MeshSeparateFeature
+  objectType
+  parentComponent
+  timelineObject
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> MeshSeparateFeature
   deleteMe() -> bool
   dissolve() -> bool
 
 MeshSeparateFeatureInput : Base
+  Name
   isKeepBody: bool
   isMultipleBodies: bool
+  isValid
   mesh: Base
   meshSeparateType: MeshSeparateTypes
+  objectType
   targetBaseFeature: BaseFeature
+  Name()
+  classType()
 
 MeshSeparateFeatures *collection<MeshSeparateFeature>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   add(input: MeshSeparateFeatureInput) -> MeshSeparateFeature
+  classType()
   createInput(mesh: Base) -> MeshSeparateFeatureInput
   itemByName(name: str) -> MeshSeparateFeature
+
+MeshSeparateTypes
+  FaceGroupMeshSeparateType()
+  Name()
+  ShellMeshSeparateType()
 
 MeshSettings : Base
   # Object that represents simulation mesh settings.
@@ -847,55 +1423,131 @@ MeshSettings : Base
   modelBasedElementSize: float
 
 MeshShellFeature : MeshFeature
+  Name
+  assemblyContext
+  attributes
+  baseFeature
+  bodies
+  entityToken
+  errorOrWarningMessage
+  faces
+  healthState
+  isParametric
+  isSuppressed
+  isValid
+  linkedFeatures
   mesh: Base
+  name
   nativeObject: MeshShellFeature
+  objectType
+  parentComponent
   thickness: ModelParameter
+  timelineObject
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> MeshShellFeature
   deleteMe() -> bool
   dissolve() -> bool
 
 MeshShellFeatureInput : Base
+  Name
+  isValid
   mesh: Base
+  objectType
   targetBaseFeature: BaseFeature
   thickness: ValueInput
+  Name()
+  classType()
 
 MeshShellFeatures *collection<MeshShellFeature>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   add(input: MeshShellFeatureInput) -> MeshShellFeature
+  classType()
   createInput(mesh: Base) -> MeshShellFeatureInput
   itemByName(name: str) -> MeshShellFeature
 
 MeshSmoothFeature : MeshFeature
+  Name
+  assemblyContext
+  attributes
+  baseFeature
+  bodies
+  entityToken
+  errorOrWarningMessage
+  faces
+  healthState
+  isParametric
+  isSuppressed
+  isValid
+  linkedFeatures
   mesh: Base
+  name
   nativeObject: MeshSmoothFeature
+  objectType
+  parentComponent
   smoothness: ModelParameter
+  timelineObject
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> MeshSmoothFeature
   deleteMe() -> bool
   dissolve() -> bool
 
 MeshSmoothFeatureInput : Base
+  Name
+  isValid
   mesh: Base
+  objectType
   smoothness: ValueInput
   targetBaseFeature: BaseFeature
+  Name()
+  classType()
 
 MeshSmoothFeatures *collection<MeshSmoothFeature>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   add(input: MeshSmoothFeatureInput) -> MeshSmoothFeature
+  classType()
   createInput(mesh: Base) -> MeshSmoothFeatureInput
   itemByName(name: str) -> MeshSmoothFeature
 
+MeshUnits
+  CentimeterMeshUnit()
+  FootMeshUnit()
+  InchMeshUnit()
+  MeterMeshUnit()
+  MillimeterMeshUnit()
+  Name()
+
 TSplineBodies *collection<TSplineBody>
   # A collection of TSpline bodies.
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   addByTSMDescription(tsmDescription: str) -> TSplineBody
   addByTSMFile(tsmFilename: str) -> TSplineBody
+  classType()
   itemByName(name: str) -> TSplineBody
 
 TSplineBody : Base
   # A TSpline body.
+  Name
   entityToken: str
+  isValid
   name: str
+  objectType
   parentFormFeature: FormFeature
   textureMapControl: TextureMapControl
+  Name()
+  classType()
   getTSMDescription() -> str
   saveAsTSMFile(filename: str) -> bool

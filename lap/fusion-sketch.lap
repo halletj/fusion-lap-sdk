@@ -7,6 +7,7 @@ SketchLineCenterlineStates: ToggleSketchLineCenterlineState | CenterlineSketchLi
 [classes]
 AssemblyConstraint : Base
   # Represents an assembly constraint.
+  Name
   assemblyContext: Occurrence
   attributes: Attributes
   entityToken: str
@@ -15,79 +16,153 @@ AssemblyConstraint : Base
   healthState: FeatureHealthStates
   isLightBulbOn: bool
   isSuppressed: bool
+  isValid
   isVisible: bool
   name: str
   nativeObject: AssemblyConstraint
+  objectType
   parentComponent: Component
   timelineObject: TimelineObject
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> AssemblyConstraint
   deleteMe() -> bool
 
 CircularPatternConstraint : GeometricConstraint
   # A circular pattern constraint in a sketch.
+  Name
+  assemblyContext
+  attributes
   centerPoint: SketchPoint
   createdEntities: SketchEntity]
   entities: SketchEntity]
+  entityToken
+  isDeletable
   isSuppressed: list[bool]
   isSymmetric: bool
+  isValid
   nativeObject: CircularPatternConstraint
+  objectType
+  parentSketch
   quantity: ModelParameter
   totalAngle: ModelParameter
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> CircularPatternConstraint
   deleteMe() -> bool
 
 CoincidentConstraint : GeometricConstraint
   # A coincident constraint in a sketch.
+  Name
+  assemblyContext
+  attributes
   entity: SketchEntity
+  entityToken
+  isDeletable
+  isValid
   nativeObject: CoincidentConstraint
+  objectType
+  parentSketch
   point: SketchPoint
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> CoincidentConstraint
   deleteMe() -> bool
 
 CoincidentToSurfaceConstraint : GeometricConstraint
   # A sketch constraint defining that a point is coincident to a surface.
+  Name
+  assemblyContext
+  attributes
+  entityToken
+  isDeletable
+  isValid
   nativeObject: CoincidentToSurfaceConstraint
+  objectType
+  parentSketch
   point: SketchPoint
   surface: Base
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> CoincidentToSurfaceConstraint
   deleteMe() -> bool
 
 CollinearConstraint : GeometricConstraint
   # A collinear constraint in a sketch.
+  Name
+  assemblyContext
+  attributes
+  entityToken
+  isDeletable
+  isValid
   lineOne: SketchLine
   lineTwo: SketchLine
   nativeObject: CollinearConstraint
+  objectType
+  parentSketch
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> CollinearConstraint
   deleteMe() -> bool
 
 ConcentricConstraint : GeometricConstraint
   # A concentric constraint in a sketch.
+  Name
+  assemblyContext
+  attributes
   entityOne: SketchCurve
+  entityToken
   entityTwo: SketchCurve
+  isDeletable
+  isValid
   nativeObject: ConcentricConstraint
+  objectType
+  parentSketch
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> ConcentricConstraint
   deleteMe() -> bool
 
 EqualConstraint : GeometricConstraint
   # An equal constraint in a sketch.
+  Name
+  assemblyContext
+  attributes
   curveOne: SketchCurve
   curveTwo: SketchCurve
+  entityToken
+  isDeletable
+  isValid
   nativeObject: EqualConstraint
+  objectType
+  parentSketch
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> EqualConstraint
   deleteMe() -> bool
 
 GeometricConstraint : Base
   # The base class for all geometric constraints.
+  Name
   assemblyContext: Occurrence
   attributes: Attributes
   entityToken: str
   isDeletable: bool
+  isValid
+  objectType
   parentSketch: Sketch
+  Name()
+  classType()
   deleteMe() -> bool
 
 GeometricConstraintList *collection<GeometricConstraint>
   # A list of geometric constraints.
+  Name
   count: int
+  isValid
+  objectType
+  Name()
+  classType()
 
 GeometricConstraintVector
   append(x: GeometricConstraint) -> void
@@ -114,7 +189,11 @@ GeometricConstraintVector
   swap(v: list[GeometricConstraint]) -> void
 
 GeometricConstraints *collection<GeometricConstraint>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   addCircularPattern(input: CircularPatternConstraintInput) -> CircularPatternConstraint
   addCoincident(point: SketchPoint, entity: SketchEntity) -> CoincidentConstraint
   addCoincidentToSurface(point: SketchPoint, surface: Base) -> CoincidentToSurfaceConstraint
@@ -139,141 +218,281 @@ GeometricConstraints *collection<GeometricConstraint>
   addTwoSidesOffset(input: OffsetConstraintInput, linkOffsets: bool) -> OffsetConstraint]
   addVertical(line: SketchLine) -> VerticalConstraint
   addVerticalPoints(pointOne: SketchPoint, pointTwo: SketchPoint) -> VerticalPointsConstraint
+  classType()
   createCircularPatternInput(inputEntities: list[SketchEntity], centerPoint: SketchPoint) -> CircularPatternConstraintInput
   createOffsetInput(curves: list[SketchCurve], offset: ValueInput) -> OffsetConstraintInput
   createRectangularPatternInput(entities: list[SketchEntity], distanceType: PatternDistanceType) -> RectangularPatternConstraintInput
 
 HorizontalConstraint : GeometricConstraint
   # A horizontal constraint in a sketch.
+  Name
+  assemblyContext
+  attributes
+  entityToken
+  isDeletable
+  isValid
   line: SketchLine
   nativeObject: HorizontalConstraint
+  objectType
+  parentSketch
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> HorizontalConstraint
   deleteMe() -> bool
 
 HorizontalPointsConstraint : GeometricConstraint
   # A horizontal constraint between two points in a sketch.
+  Name
+  assemblyContext
+  attributes
+  entityToken
+  isDeletable
+  isValid
   nativeObject: HorizontalPointsConstraint
+  objectType
+  parentSketch
   pointOne: SketchPoint
   pointTwo: SketchPoint
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> HorizontalPointsConstraint
   deleteMe() -> bool
 
 LineOnPlanarSurfaceConstraint : GeometricConstraint
   # A sketch constraint defining that a line that lies on a planar face or construction plane.
+  Name
+  assemblyContext
+  attributes
+  entityToken
+  isDeletable
+  isValid
   line: SketchLine
   nativeObject: LineOnPlanarSurfaceConstraint
+  objectType
+  parentSketch
   planarSurface: Base
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> LineOnPlanarSurfaceConstraint
   deleteMe() -> bool
 
 LineParallelToPlanarSurfaceConstraint : GeometricConstraint
   # A sketch constraint defining that a line is parallel to a planar face or construction plane.
+  Name
+  assemblyContext
+  attributes
+  entityToken
+  isDeletable
+  isValid
   line: SketchLine
   nativeObject: LineParallelToPlanarSurfaceConstraint
+  objectType
+  parentSketch
   planarSurface: Base
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> LineParallelToPlanarSurfaceConstraint
   deleteMe() -> bool
 
 MidPointConstraint : GeometricConstraint
   # A midpoint constraint in a sketch.
+  Name
+  assemblyContext
+  attributes
+  entityToken
+  isDeletable
+  isValid
   midPointCurve: SketchCurve
   nativeObject: MidPointConstraint
+  objectType
+  parentSketch
   point: SketchPoint
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> MidPointConstraint
   deleteMe() -> bool
 
 OffsetConstraint : GeometricConstraint
   # An offset constraint in a sketch.
+  Name
+  assemblyContext
+  attributes
   childCurves: SketchCurve]
   dimension: SketchDimension
   distance: float
+  entityToken
+  isDeletable
   isTopologyMatched: bool
+  isValid
   nativeObject: OffsetConstraint
+  objectType
   parentCurves: SketchCurve]
+  parentSketch
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> OffsetConstraint
   deleteMe() -> bool
 
 ParallelConstraint : GeometricConstraint
   # A parallel constraint in a sketch.
+  Name
+  assemblyContext
+  attributes
+  entityToken
+  isDeletable
+  isValid
   lineOne: SketchLine
   lineTwo: SketchLine
   nativeObject: ParallelConstraint
+  objectType
+  parentSketch
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> ParallelConstraint
   deleteMe() -> bool
 
 PerpendicularConstraint : GeometricConstraint
   # A perpendicular constraint in a sketch.
+  Name
+  assemblyContext
+  attributes
+  entityToken
+  isDeletable
+  isValid
   lineOne: SketchLine
   lineTwo: SketchLine
   nativeObject: PerpendicularConstraint
+  objectType
+  parentSketch
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> PerpendicularConstraint
   deleteMe() -> bool
 
 PerpendicularToSurfaceConstraint : GeometricConstraint
+  Name
+  assemblyContext
+  attributes
   curve: SketchCurve
+  entityToken
+  isDeletable
+  isValid
   nativeObject: PerpendicularToSurfaceConstraint
+  objectType
+  parentSketch
   surface: Base
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> PerpendicularToSurfaceConstraint
   deleteMe() -> bool
 
 PolygonConstraint : GeometricConstraint
   # A polygon constraint in a sketch.
+  Name
+  assemblyContext
+  attributes
   centerPoint: SketchPoint
+  entityToken
+  isDeletable
+  isValid
   lines: SketchLine]
+  objectType
+  parentSketch
   points: SketchPoint]
+  Name()
+  classType()
   deleteMe() -> bool
 
 Profile : Base
+  Name
   assemblyContext: Occurrence
   boundingBox: BoundingBox3D
   entityToken: str
   face: BRepFace
+  isValid
   nativeObject: Profile
+  objectType
   parentSketch: Sketch
   plane: Plane
   profileLoops: ProfileLoops
+  Name()
   areaProperties() -> AreaProperties
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> Profile
 
 ProfileCurve : Base
   # A single curve in a profile.
+  Name
   assemblyContext: Occurrence
   boundingBox: BoundingBox3D
   geometry: Curve3D
   geometryType: Curve3DTypes
+  isValid
   nativeObject: ProfileCurve
+  objectType
   parentProfile: Profile
   parentProfileLoop: ProfileLoop
   parentSketch: Sketch
   sketchEntity: SketchEntity
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> ProfileCurve
 
 ProfileCurves *collection<ProfileCurve>
   # A collection of profile curves within a profile loop.
+  Name
   count: int
+  isValid
+  objectType
+  Name()
+  classType()
 
 ProfileLoop : Base
   # A loop within a profile.
+  Name
   assemblyContext: Occurrence
   isOuter: bool
+  isValid
   nativeObject: ProfileLoop
+  objectType
   parentProfile: Profile
   profileCurves: ProfileCurves
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> ProfileLoop
 
 ProfileLoops *collection<ProfileLoop>
   # A collection of loops within a Profile.
+  Name
   count: int
+  isValid
+  objectType
+  Name()
+  classType()
 
 ProfilePlaneStartDefinition : ExtentDefinition
+  Name
+  isValid
+  objectType
+  parentFeature
   profilePlane: Plane
+  Name()
+  classType()
   @static create() -> ProfilePlaneStartDefinition
 
 Profiles *collection<Profile>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
+  classType()
 
 RectangularPatternConstraint : GeometricConstraint
   # A rectangular pattern constraint in a sketch.
+  Name
+  assemblyContext
+  attributes
   createdEntities: SketchEntity]
   directionOneEntity: SketchLine
   directionTwoEntity: SketchLine
@@ -281,12 +500,19 @@ RectangularPatternConstraint : GeometricConstraint
   distanceTwo: ModelParameter
   distanceType: PatternDistanceType
   entities: SketchEntity]
+  entityToken
+  isDeletable
   isSuppressed: list[bool]
   isSymmetricInDirectionOne: bool
   isSymmetricInDirectionTwo: bool
+  isValid
   nativeObject: RectangularPatternConstraint
+  objectType
+  parentSketch
   quantityOne: ModelParameter
   quantityTwo: ModelParameter
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> RectangularPatternConstraint
   deleteMe() -> bool
   setDirectionOne(directionOneEntity: SketchLine, quantityOne: ValueInput, distanceOne: ValueInput) -> bool
@@ -294,6 +520,7 @@ RectangularPatternConstraint : GeometricConstraint
 
 Sketch : Base
   # Represents a sketch within a component.
+  Name
   areConstraintsShown: bool
   areDimensionsShown: bool
   arePointsShown: bool
@@ -315,9 +542,11 @@ Sketch : Base
   isModelSliced: bool
   isParametric: bool
   isProjectedGeometryShown: bool
+  isValid
   isVisible: bool
   name: str
   nativeObject: Sketch
+  objectType
   origin: Point3D
   originPoint: SketchPoint
   parentComponent: Component
@@ -332,10 +561,12 @@ Sketch : Base
   transform: Matrix3D
   xDirection: Vector3D
   yDirection: Vector3D
+  Name()
   addCenterPointSlot() -> Base]
   addCenterToCenterSlot() -> Base]
   addOverallSlot() -> Base]
   autoConstrain(input: AutoConstrainInput) -> AutoConstrainResult
+  classType()
   copy() -> ObjectCollection
   createAutoConstrainInput() -> AutoConstrainInput
   createForAssemblyContext(occurrence: Occurrence) -> Sketch
@@ -361,22 +592,58 @@ Sketch : Base
 
 SketchAngularDimension : SketchDimension
   # An angular dimension in a sketch.
+  Name
+  assemblyContext
+  attributes
+  entityToken
+  isDeletable
+  isDriving
+  isValid
   lineOne: SketchLine
   lineTwo: SketchLine
   nativeObject: SketchAngularDimension
+  objectType
+  parameter
+  parentSketch
+  textPosition
+  value
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> SketchAngularDimension
   deleteMe() -> bool
 
 SketchArc : SketchCurve
   # An arc in a sketch.
+  Name
+  assemblyContext
+  attributes
+  boundingBox
   centerSketchPoint: SketchPoint
   endSketchPoint: SketchPoint
+  entityToken
+  geometricConstraints
   geometry: Arc3D
+  is2D
+  isConstruction
+  isDeletable
+  isFixed
+  isFullyConstrained
+  isLinked
+  isReference
+  isValid
+  isVisible
+  length
   nativeObject: SketchArc
+  objectType
+  parentSketch
   radius: float
+  referencedEntity
+  sketchDimensions
   startSketchPoint: SketchPoint
   worldGeometry: Arc3D
+  Name()
   breakCurve(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> SketchArc
   deleteMe() -> bool
   extend(endPoint: Point3D, createConstraints: bool) -> ObjectCollection
@@ -385,21 +652,48 @@ SketchArc : SketchCurve
   trim(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
 
 SketchArcs *collection<SketchArc>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   addByCenterStartEnd() -> SketchArc
   addByCenterStartSweep(centerPoint: Base, startPoint: Base, sweepAngle: float) -> SketchArc
   addByThreePoints(startPoint: Base, point: Point3D, endPoint: Base) -> SketchArc
   addFillet(firstEntity: SketchCurve, firstEntityPoint: Point3D, secondEnitity: SketchCurve, secondEntityPoint: Point3D, radius: float) -> SketchArc
+  classType()
 
 SketchCircle : SketchCurve
   # A circle in a sketch.
+  Name
   area: float
+  assemblyContext
+  attributes
+  boundingBox
   centerSketchPoint: SketchPoint
+  entityToken
+  geometricConstraints
   geometry: Circle3D
+  is2D
+  isConstruction
+  isDeletable
+  isFixed
+  isFullyConstrained
+  isLinked
+  isReference
+  isValid
+  isVisible
+  length
   nativeObject: SketchCircle
+  objectType
+  parentSketch
   radius: float
+  referencedEntity
+  sketchDimensions
   worldGeometry: Circle3D
+  Name()
   breakCurve(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> SketchCircle
   deleteMe() -> bool
   extend(endPoint: Point3D, createConstraints: bool) -> ObjectCollection
@@ -408,32 +702,73 @@ SketchCircle : SketchCurve
   trim(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
 
 SketchCircles *collection<SketchCircle>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   addByCenterRadius(centerPoint: Base, radius: float) -> SketchCircle
   addByThreePoints(pointOne: Point3D, pointTwo: Point3D, pointThree: Point3D) -> SketchCircle
   addByThreeTangents(tangentOne: SketchLine, tangentTwo: SketchLine, tangentThree: SketchLine, hintPoint: Point3D) -> SketchCircle
   addByTwoPoints(pointOne: Point3D, pointTwo: Point3D) -> SketchCircle
   addByTwoTangents(tangentOne: SketchLine, tangentTwo: SketchLine, radius: float, hintPoint: Point3D) -> SketchCircle
+  classType()
 
 SketchConcentricCircleDimension : SketchDimension
   # A concentric circle dimension in a sketch.
+  Name
+  assemblyContext
+  attributes
   circleOne: SketchCurve
   circleTwo: SketchCurve
+  entityToken
+  isDeletable
+  isDriving
+  isValid
   nativeObject: SketchConcentricCircleDimension
+  objectType
+  parameter
+  parentSketch
+  textPosition
+  value
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> SketchConcentricCircleDimension
   deleteMe() -> bool
 
 SketchConicCurve : SketchCurve
   # The SketchConicCurve class represents conic curves in a sketch.
+  Name
   apexSketchPoint: SketchPoint
+  assemblyContext
+  attributes
+  boundingBox
   endSketchPoint: SketchPoint
+  entityToken
   evaluator: CurveEvaluator3D
+  geometricConstraints
   geometry: NurbsCurve3D
+  is2D
+  isConstruction
+  isDeletable
+  isFixed
+  isFullyConstrained
+  isLinked
+  isReference
+  isValid
+  isVisible
+  length
   nativeObject: SketchConicCurve
+  objectType
+  parentSketch
+  referencedEntity
   rhoValue: float
+  sketchDimensions
   startSketchPoint: SketchPoint
   worldGeometry: NurbsCurve3D
+  Name()
   breakCurve(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> SketchConicCurve
   deleteMe() -> bool
   extend(endPoint: Point3D, createConstraints: bool) -> ObjectCollection
@@ -442,23 +777,50 @@ SketchConicCurve : SketchCurve
   trim(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
 
 SketchConicCurves *collection<SketchConicCurve>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   add(startPoint: Base, endPoint: Base, apexPoint: Base, rhoValue: float) -> SketchConicCurve
+  classType()
 
 SketchControlPointSpline : SketchCurve
   # A control point spline in a sketch.
+  Name
+  assemblyContext
+  attributes
+  boundingBox
   controlFrameLines: SketchLine]
   controlPoints: SketchPoint]
   degree: SplineDegrees
   endSketchPoint: SketchPoint
+  entityToken
   evaluator: CurveEvaluator3D
+  geometricConstraints
   geometry: NurbsCurve3D
+  is2D
+  isConstruction
   isControlFrameDisplayed: bool
+  isDeletable
+  isFixed
+  isFullyConstrained
+  isLinked
+  isReference
+  isValid
+  isVisible
+  length
   nativeObject: SketchControlPointSpline
+  objectType
+  parentSketch
+  referencedEntity
+  sketchDimensions
   startSketchPoint: SketchPoint
   worldGeometry: NurbsCurve3D
+  Name()
   addControlPoint(parameter: float) -> bool
   breakCurve(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> SketchControlPointSpline
   deleteMe() -> bool
   extend(endPoint: Point3D, createConstraints: bool) -> ObjectCollection
@@ -468,19 +830,50 @@ SketchControlPointSpline : SketchCurve
 
 SketchControlPointSplines *collection<SketchControlPointSpline>
   # The collection of control point splines in a sketch.
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   add(controlPoints: list[Base], degree: SplineDegrees) -> SketchControlPointSpline
+  classType()
 
 SketchCurve : SketchEntity
   # A single sketch curve. This is the base class for the specific curve types.
+  Name
+  assemblyContext
+  attributes
+  boundingBox
+  entityToken
+  geometricConstraints
+  is2D
   isConstruction: bool
+  isDeletable
+  isFixed
+  isFullyConstrained
+  isLinked
+  isReference
+  isValid
+  isVisible
   length: float
+  objectType
+  parentSketch
+  referencedEntity
+  sketchDimensions
+  Name()
   breakCurve(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  classType()
   deleteMe() -> bool
   extend(endPoint: Point3D, createConstraints: bool) -> ObjectCollection
   intersections(sketchCurves: ObjectCollection) -> bool
   split(splitPoint: Point3D, createConstraints: bool) -> ObjectCollection
   trim(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+
+SketchCurveConstructionStates
+  ConstructionSketchCurveConstructionState()
+  Name()
+  NormalSketchCurveConstructionState()
+  ToggleSketchCurveConstructionState()
 
 SketchCurveVector
   append(x: SketchCurve) -> void
@@ -507,7 +900,10 @@ SketchCurveVector
   swap(v: list[SketchCurve]) -> void
 
 SketchCurves *collection<SketchCurve>
+  Name
   count: int
+  isValid
+  objectType
   sketchArcs: SketchArcs
   sketchCircles: SketchCircles
   sketchConicCurves: SketchConicCurves
@@ -517,30 +913,56 @@ SketchCurves *collection<SketchCurve>
   sketchFittedSplines: SketchFittedSplines
   sketchFixedSplines: SketchFixedSplines
   sketchLines: SketchLines
+  Name()
+  classType()
 
 SketchDiameterDimension : SketchDimension
   # An diameter dimension in a sketch.
+  Name
+  assemblyContext
+  attributes
   entity: SketchCurve
+  entityToken
+  isDeletable
+  isDriving
+  isValid
   nativeObject: SketchDiameterDimension
+  objectType
+  parameter
+  parentSketch
+  textPosition
+  value
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> SketchDiameterDimension
   deleteMe() -> bool
 
 SketchDimension : Base
   # The base class for the all sketch dimensions.
+  Name
   assemblyContext: Occurrence
   attributes: Attributes
   entityToken: str
   isDeletable: bool
   isDriving: bool
+  isValid
+  objectType
   parameter: ModelParameter
   parentSketch: Sketch
   textPosition: Point3D
   value: float
+  Name()
+  classType()
   deleteMe() -> bool
 
 SketchDimensionList *collection<SketchDimension>
   # A list of sketch dimensions.
+  Name
   count: int
+  isValid
+  objectType
+  Name()
+  classType()
 
 SketchDimensionVector
   append(x: SketchDimension) -> void
@@ -567,7 +989,11 @@ SketchDimensionVector
   swap(v: list[SketchDimension]) -> void
 
 SketchDimensions *collection<SketchDimension>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   addAngularDimension(lineOne: SketchLine, lineTwo: SketchLine, textPoint: Point3D, isDriving: bool) -> SketchAngularDimension
   addConcentricCircleDimension(circleOne: SketchCurve, circleTwo: SketchCurve, textPoint: Point3D, isDriving: bool) -> SketchConcentricCircleDimension
   addDiameterDimension(entity: SketchCurve, textPoint: Point3D, isDriving: bool) -> SketchDiameterDimension
@@ -580,35 +1006,86 @@ SketchDimensions *collection<SketchDimension>
   addOffsetDimension(line: SketchLine, entityTwo: SketchEntity, textPoint: Point3D, isDriving: bool) -> SketchOffsetDimension
   addRadialDimension(entity: SketchCurve, textPoint: Point3D, isDriving: bool) -> SketchRadialDimension
   addTangentDistanceDimension(entityOne: SketchEntity, isCloseToEnityTwo: bool, entityTwo: SketchCurve, isCloseToEnityOne: bool, textPoint: Point3D, isDriving: bool) -> SketchTangentDistanceDimension
+  classType()
 
 SketchDistanceBetweenLineAndPlanarSurfaceDimension : SketchDimension
   # A linear dimension in a sketch between a sketch line and a planar surface.
+  Name
+  assemblyContext
+  attributes
+  entityToken
+  isDeletable
+  isDriving
+  isValid
   line: SketchLine
   nativeObject: SketchDistanceBetweenLineAndPlanarSurfaceDimension
+  objectType
+  parameter
+  parentSketch
   planarSurface: Base
+  textPosition
+  value
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> SketchDistanceBetweenLineAndPlanarSurfaceDimension
   deleteMe() -> bool
 
 SketchDistanceBetweenPointAndSurfaceDimension : SketchDimension
   # A linear dimension in a sketch between a sketch point and a surface.
+  Name
+  assemblyContext
+  attributes
+  entityToken
+  isDeletable
+  isDriving
+  isValid
   nativeObject: SketchDistanceBetweenPointAndSurfaceDimension
+  objectType
+  parameter
+  parentSketch
   point: SketchPoint
   surface: Base
+  textPosition
+  value
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> SketchDistanceBetweenPointAndSurfaceDimension
   deleteMe() -> bool
 
 SketchEllipse : SketchCurve
   # An ellipse in a sketch.
+  Name
+  assemblyContext
+  attributes
+  boundingBox
   centerSketchPoint: SketchPoint
+  entityToken
+  geometricConstraints
   geometry: Ellipse3D
+  is2D
+  isConstruction
+  isDeletable
+  isFixed
+  isFullyConstrained
+  isLinked
+  isReference
+  isValid
+  isVisible
+  length
   majorAxis: Vector3D
   majorAxisLine: SketchLine
   majorAxisRadius: float
   minorAxisLine: SketchLine
   minorAxisRadius: float
   nativeObject: SketchEllipse
+  objectType
+  parentSketch
+  referencedEntity
+  sketchDimensions
   worldGeometry: Ellipse3D
+  Name()
   breakCurve(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> SketchEllipse
   deleteMe() -> bool
   extend(endPoint: Point3D, createConstraints: bool) -> ObjectCollection
@@ -618,34 +1095,89 @@ SketchEllipse : SketchCurve
 
 SketchEllipseMajorRadiusDimension : SketchDimension
   # An ellipse major radius dimension in a sketch.
+  Name
+  assemblyContext
+  attributes
   ellipse: SketchCurve
+  entityToken
+  isDeletable
+  isDriving
+  isValid
   nativeObject: SketchEllipseMajorRadiusDimension
+  objectType
+  parameter
+  parentSketch
+  textPosition
+  value
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> SketchEllipseMajorRadiusDimension
   deleteMe() -> bool
 
 SketchEllipseMinorRadiusDimension : SketchDimension
   # An ellipse minor radius dimension in a sketch.
+  Name
+  assemblyContext
+  attributes
   ellipse: SketchCurve
+  entityToken
+  isDeletable
+  isDriving
+  isValid
   nativeObject: SketchEllipseMinorRadiusDimension
+  objectType
+  parameter
+  parentSketch
+  textPosition
+  value
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> SketchEllipseMinorRadiusDimension
   deleteMe() -> bool
 
 SketchEllipses *collection<SketchEllipse>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   add(centerPoint: Base, majorAxisPoint: Point3D, point: Point3D) -> SketchEllipse
+  classType()
 
 SketchEllipticalArc : SketchCurve
   # An elliptical arc in a sketch.
+  Name
+  assemblyContext
+  attributes
+  boundingBox
   centerSketchPoint: SketchPoint
   endSketchPoint: SketchPoint
+  entityToken
+  geometricConstraints
   geometry: EllipticalArc3D
+  is2D
+  isConstruction
+  isDeletable
+  isFixed
+  isFullyConstrained
+  isLinked
+  isReference
+  isValid
+  isVisible
+  length
   majorAxis: Vector3D
   majorAxisRadius: float
   minorAxisRadius: float
   nativeObject: SketchEllipticalArc
+  objectType
+  parentSketch
+  referencedEntity
+  sketchDimensions
   startSketchPoint: SketchPoint
   worldGeometry: EllipticalArc3D
+  Name()
   breakCurve(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> SketchEllipticalArc
   deleteMe() -> bool
   extend(endPoint: Point3D, createConstraints: bool) -> ObjectCollection
@@ -654,11 +1186,17 @@ SketchEllipticalArc : SketchCurve
   trim(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
 
 SketchEllipticalArcs *collection<SketchEllipticalArc>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   addByAngle(centerPoint: Base, majorAxis: Vector3D, minorAxis: Vector3D, startAngle: float, sweepAngle: float) -> SketchEllipticalArc
   addByEndPoints(centerPoint: Base, majorAxis: Vector3D, minorAxis: Vector3D, startPoint: Base, endPoint: Base) -> SketchEllipticalArc
+  classType()
 
 SketchEntity : Base
+  Name
   assemblyContext: Occurrence
   attributes: Attributes
   boundingBox: BoundingBox3D
@@ -670,15 +1208,24 @@ SketchEntity : Base
   isFullyConstrained: bool
   isLinked: bool
   isReference: bool
+  isValid
   isVisible: bool
+  objectType
   parentSketch: Sketch
   referencedEntity: Base
   sketchDimensions: SketchDimensionList
+  Name()
+  classType()
   deleteMe() -> bool
 
 SketchEntityList *collection<SketchEntity>
   # A list of sketch entities.
+  Name
   count: int
+  isValid
+  objectType
+  Name()
+  classType()
 
 SketchEntityVector
   append(x: SketchEntity) -> void
@@ -706,17 +1253,39 @@ SketchEntityVector
 
 SketchFittedSpline : SketchCurve
   # A fitted spline in a sketch.
+  Name
+  assemblyContext
+  attributes
+  boundingBox
   endSketchPoint: SketchPoint
+  entityToken
   fitPoints: SketchPointList
+  geometricConstraints
   geometry: NurbsCurve3D
+  is2D
   isClosed: bool
+  isConstruction
+  isDeletable
+  isFixed
+  isFullyConstrained
+  isLinked
+  isReference
+  isValid
+  isVisible
+  length
   nativeObject: SketchFittedSpline
+  objectType
+  parentSketch
+  referencedEntity
+  sketchDimensions
   startSketchPoint: SketchPoint
   worldGeometry: NurbsCurve3D
+  Name()
   activateCurvatureHandle(fitPoint: SketchPoint) -> SketchArc
   activateTangentHandle(fitPoint: SketchPoint) -> SketchLine
   addFitPoint(parameter: float) -> SketchPoint
   breakCurve(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> SketchFittedSpline
   deleteMe() -> bool
   extend(endPoint: Point3D, createConstraints: bool) -> ObjectCollection
@@ -727,18 +1296,45 @@ SketchFittedSpline : SketchCurve
   trim(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
 
 SketchFittedSplines *collection<SketchFittedSpline>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   add(fitPoints: ObjectCollection) -> SketchFittedSpline
   addByNurbsCurve(nurbsCurve: NurbsCurve3D) -> SketchFittedSpline
+  classType()
 
 SketchFixedSpline : SketchCurve
+  Name
+  assemblyContext
+  attributes
+  boundingBox
   endSketchPoint: SketchPoint
+  entityToken
   evaluator: CurveEvaluator3D
+  geometricConstraints
   geometry: NurbsCurve3D
+  is2D
+  isConstruction
+  isDeletable
+  isFixed
+  isFullyConstrained
+  isLinked
+  isReference
+  isValid
+  isVisible
+  length
   nativeObject: SketchFixedSpline
+  objectType
+  parentSketch
+  referencedEntity
+  sketchDimensions
   startSketchPoint: SketchPoint
   worldGeometry: NurbsCurve3D
+  Name()
   breakCurve(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> SketchFixedSpline
   deleteMe() -> bool
   extend(endPoint: Point3D, createConstraints: bool) -> ObjectCollection
@@ -748,18 +1344,45 @@ SketchFixedSpline : SketchCurve
   trim(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
 
 SketchFixedSplines *collection<SketchFixedSpline>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   addByNurbsCurve(nurbsCurve: NurbsCurve3D) -> SketchFixedSpline
+  classType()
 
 SketchLine : SketchCurve
   # A line in a sketch.
+  Name
+  assemblyContext
+  attributes
+  boundingBox
   endSketchPoint: SketchPoint
+  entityToken
+  geometricConstraints
   geometry: Line3D
+  is2D
   isCenterLine: bool
+  isConstruction
+  isDeletable
+  isFixed
+  isFullyConstrained
+  isLinked
+  isReference
+  isValid
+  isVisible
+  length
   nativeObject: SketchLine
+  objectType
+  parentSketch
+  referencedEntity
+  sketchDimensions
   startSketchPoint: SketchPoint
   worldGeometry: Line3D
+  Name()
   breakCurve(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> SketchLine
   deleteMe() -> bool
   extend(endPoint: Point3D, createConstraints: bool) -> ObjectCollection
@@ -767,9 +1390,20 @@ SketchLine : SketchCurve
   split(splitPoint: Point3D, createConstraints: bool) -> ObjectCollection
   trim(segmentPoint: Point3D, createConstraints: bool) -> ObjectCollection
 
+SketchLineCenterlineStates
+  CenterlineSketchLineCenterlineState()
+  Name()
+  NormalSketchLineCenterlineState()
+  ToggleSketchLineCenterlineState()
+
 SketchLineList *collection<SketchLine>
   # A list of sketch lines.
+  Name
   count: int
+  isValid
+  objectType
+  Name()
+  classType()
 
 SketchLineVector
   append(x: SketchLine) -> void
@@ -797,23 +1431,55 @@ SketchLineVector
 
 SketchLinearDiameterDimension : SketchDimension
   # A linear diameter dimension in a sketch.
+  Name
+  assemblyContext
+  attributes
+  entityToken
   entityTwo: SketchEntity
+  isDeletable
+  isDriving
+  isValid
   line: SketchLine
   nativeObject: SketchLinearDiameterDimension
+  objectType
+  parameter
+  parentSketch
+  textPosition
+  value
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> SketchLinearDiameterDimension
   deleteMe() -> bool
 
 SketchLinearDimension : SketchDimension
   # A linear dimension in a sketch.
+  Name
+  assemblyContext
+  attributes
   entityOne: SketchEntity
+  entityToken
   entityTwo: SketchEntity
+  isDeletable
+  isDriving
+  isValid
   nativeObject: SketchLinearDimension
+  objectType
   orientation: DimensionOrientations
+  parameter
+  parentSketch
+  textPosition
+  value
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> SketchLinearDimension
   deleteMe() -> bool
 
 SketchLines *collection<SketchLine>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   addAngleChamfer(firstLine: SketchLine, firstLinePoint: Point3D, secondLine: SketchLine, secondLinePoint: Point3D, distance: float, angle: float) -> SketchLine
   addByMidpoint(midPoint: Base, secondPoint: Base) -> SketchLine
   addByTwoPoints(startPoint: Base, endPoint: Base) -> SketchLine
@@ -823,28 +1489,77 @@ SketchLines *collection<SketchLine>
   addScribedPolygon(centerPoint: Base, edgeCount: int, angle: float, radius: float, isInscribed: bool) -> SketchLineList
   addThreePointRectangle(pointOne: Base, pointTwo: Base, pointThree: Point3D) -> SketchLineList
   addTwoPointRectangle(pointOne: Base, pointTwo: Base) -> SketchLineList
+  classType()
 
 SketchOffsetCurvesDimension : SketchDimension
   # A SketchOffsetCurvesDimension object is created automatically whenever curves are offset.
+  Name
+  assemblyContext
+  attributes
+  entityToken
+  isDeletable
+  isDriving
+  isValid
   nativeObject: SketchOffsetCurvesDimension
+  objectType
   offsetConstraint: OffsetConstraint
+  parameter
+  parentSketch
+  textPosition
+  value
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> SketchOffsetCurvesDimension
   deleteMe() -> bool
 
 SketchOffsetDimension : SketchDimension
   # An offset dimension in a sketch.
+  Name
+  assemblyContext
+  attributes
+  entityToken
   entityTwo: SketchEntity
+  isDeletable
+  isDriving
+  isValid
   line: SketchLine
   nativeObject: SketchOffsetDimension
+  objectType
+  parameter
+  parentSketch
+  textPosition
+  value
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> SketchOffsetDimension
   deleteMe() -> bool
 
 SketchPoint : SketchEntity
   # A point within a sketch.
+  Name
+  assemblyContext
+  attributes
+  boundingBox
   connectedEntities: SketchEntityList
+  entityToken
+  geometricConstraints
   geometry: Point3D
+  is2D
+  isDeletable
+  isFixed
+  isFullyConstrained
+  isLinked
+  isReference
+  isValid
+  isVisible
   nativeObject: SketchPoint
+  objectType
+  parentSketch
+  referencedEntity
+  sketchDimensions
   worldGeometry: Point3D
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> SketchPoint
   deleteMe() -> bool
   detach(curve: SketchCurve) -> SketchPoint
@@ -853,11 +1568,21 @@ SketchPoint : SketchEntity
 
 SketchPointHolePositionDefinition : HolePositionDefinition
   # Provides positioning information for a hole that is positioned by a sketch point.
+  Name
+  isValid
+  objectType
   sketchPoint: SketchPoint
+  Name()
+  classType()
 
 SketchPointList *collection<SketchPoint>
   # A list of sketch points.
+  Name
   count: int
+  isValid
+  objectType
+  Name()
+  classType()
 
 SketchPointVector
   append(x: SketchPoint) -> void
@@ -885,52 +1610,126 @@ SketchPointVector
 
 SketchPoints *collection<SketchPoint>
   # A collection of sketch points.
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   add(point: Point3D) -> SketchPoint
+  classType()
 
 SketchPointsBossPositionDefinition : BossPositionDefinition
   # Provides positioning information for a boss feature that is positioned by a sketch point(s).
+  Name
+  isValid
+  objectType
   sketchPoints: ObjectCollection
+  Name()
+  classType()
 
 SketchPointsHolePositionDefinition : HolePositionDefinition
   # Provides positioning information for a hole that is positioned by a sketch point.
+  Name
+  isValid
+  objectType
   sketchPoints: ObjectCollection
+  Name()
+  classType()
 
 SketchRadialDimension : SketchDimension
   # An radial dimension in a sketch.
+  Name
+  assemblyContext
+  attributes
   entity: SketchCurve
+  entityToken
+  isDeletable
+  isDriving
+  isValid
   nativeObject: SketchRadialDimension
+  objectType
+  parameter
+  parentSketch
+  textPosition
+  value
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> SketchRadialDimension
   deleteMe() -> bool
 
 SketchSelection : CurveSelection
+  Name
+  error
+  hasError
+  hasWarning
+  inputGeometry
+  isValid
   loopType: LoopTypes
+  objectType
   sideType: SideTypes
+  value
+  warning
+  Name()
+  classType()
 
 SketchTangentDistanceDimension : SketchDimension
   # A distance dimension measuring to the tangent on one or two circles or arcs.
+  Name
+  assemblyContext
+  attributes
   circleOrArc: SketchCurve
   entityOne: SketchEntity
+  entityToken
+  isDeletable
+  isDriving
+  isValid
   nativeObject: SketchTangentDistanceDimension
+  objectType
+  parameter
+  parentSketch
+  textPosition
+  value
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> SketchTangentDistanceDimension
   deleteMe() -> bool
 
 SketchText : SketchEntity
   # Text in a sketch.
+  Name
   angle: float
+  assemblyContext
+  attributes
   boundaryLines: SketchLineList
+  boundingBox
   definition: SketchTextDefinition
+  entityToken
   fontName: str
+  geometricConstraints
   height: float
   heightParameter: ModelParameter
+  is2D
+  isDeletable
+  isFixed
+  isFullyConstrained
   isHorizontalFlip: bool
+  isLinked
+  isReference
+  isValid
   isVerticalFlip: bool
+  isVisible
   nativeObject: SketchText
+  objectType
+  parentSketch
   position: Point3D
+  referencedEntity
+  sketchDimensions
   text: str
   textParameter: ModelParameter
   textStyle: TextStyles
+  Name()
   asCurves() -> Curve3D]
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> SketchText
   deleteMe() -> bool
   explode() -> SketchCurve]
@@ -939,9 +1738,15 @@ SketchText : SketchEntity
 
 SketchTextDefinition : Base
   # The base class for the classes that define how text can be defined.
+  Name
+  isValid
+  objectType
   parentSketchText: SketchText
+  Name()
+  classType()
 
 SketchTextInput : Base
+  Name
   angle: float
   definition: SketchTextDefinition
   expression: str
@@ -949,17 +1754,26 @@ SketchTextInput : Base
   height: float
   height2: ValueInput
   isHorizontalFlip: bool
+  isValid
   isVerticalFlip: bool
+  objectType
   position: Point3D
   text: str
   textStyle: TextStyles
+  Name()
+  classType()
   setAsAlongPath(path: Base, isAbovePath: bool, horizontalAlignment: HorizontalAlignments, characterSpacing: float) -> bool
   setAsFitOnPath(path: Base, isAbovePath: bool) -> bool
   setAsMultiLine(cornerPoint: Base, diagonalPoint: Base, horizontalAlignment: HorizontalAlignments, verticalAlignment: VerticalAlignments, characterSpacing: float) -> bool
 
 SketchTexts *collection<SketchText>
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   add(input: SketchTextInput) -> SketchText
+  classType()
   createInput(formattedText: str, height: float, position: Point3D) -> SketchTextInput
   createInput2(formattedText: str, height: float) -> SketchTextInput
   createInput3(expression: str, height: ValueInput) -> SketchTextInput
@@ -991,17 +1805,32 @@ SketchVector
 Sketches *collection<Sketch>
   # Provides access to the sketches within a design and provides
     methods to create new sketches.
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   add() -> Sketch
   addToBaseOrFormFeature(planarEntity: Base, targetBaseOrFormFeature: Base, includeFaceEdges: bool) -> Sketch
   addWithoutEdges() -> Sketch
+  classType()
   itemByName(name: str) -> Sketch
 
 SmoothConstraint : GeometricConstraint
   # A smooth constraint in a sketch.
+  Name
+  assemblyContext
+  attributes
   curveOne: SketchCurve
   curveTwo: SketchCurve
+  entityToken
+  isDeletable
+  isValid
   nativeObject: SmoothConstraint
+  objectType
+  parentSketch
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> SmoothConstraint
   deleteMe() -> bool
 
@@ -1014,32 +1843,72 @@ StructuralConstraint : SimAttribute
 
 SymmetryConstraint : GeometricConstraint
   # A symmetry constraint in a sketch.
+  Name
+  assemblyContext
+  attributes
   entityOne: SketchEntity
+  entityToken
   entityTwo: SketchEntity
+  isDeletable
+  isValid
   nativeObject: SymmetryConstraint
+  objectType
+  parentSketch
   symmetryLine: SketchLine
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> SymmetryConstraint
   deleteMe() -> bool
 
 TangentConstraint : GeometricConstraint
   # A tangent constraint in a sketch.
+  Name
+  assemblyContext
+  attributes
   curveOne: SketchCurve
   curveTwo: SketchCurve
+  entityToken
+  isDeletable
+  isValid
   nativeObject: TangentConstraint
+  objectType
+  parentSketch
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> TangentConstraint
   deleteMe() -> bool
 
 VerticalConstraint : GeometricConstraint
   # A vertical constraint in a sketch.
+  Name
+  assemblyContext
+  attributes
+  entityToken
+  isDeletable
+  isValid
   line: SketchLine
   nativeObject: VerticalConstraint
+  objectType
+  parentSketch
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> VerticalConstraint
   deleteMe() -> bool
 
 VerticalPointsConstraint : GeometricConstraint
   # A vertical constraint between two points in a sketch.
+  Name
+  assemblyContext
+  attributes
+  entityToken
+  isDeletable
+  isValid
   nativeObject: VerticalPointsConstraint
+  objectType
+  parentSketch
   pointOne: SketchPoint
   pointTwo: SketchPoint
+  Name()
+  classType()
   createForAssemblyContext(occurrence: Occurrence) -> VerticalPointsConstraint
   deleteMe() -> bool

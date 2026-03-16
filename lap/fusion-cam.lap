@@ -12,8 +12,10 @@ PostProcessExecutionBehaviors: PostProcessExecutionBehavior_OmitInvalidAndEmptyO
 [classes]
 CAM : Product
   # Object that represents the CAM environment of a Fusion document.
+  Name
   allMachines: Machine]
   allOperations: ObjectCollection
+  attributes
   customGraphicsGroups: CustomGraphicsGroups
   designRootOccurrence: Occurrence
   documentStockMaterialLibrary: DocumentStockMaterialLibrary
@@ -23,9 +25,15 @@ CAM : Product
   genericPostFolder: str
   importManager: CAMImportManager
   inspectionResults: CAMInspectionResults
+  isValid
   manufacturingModels: ManufacturingModels
+  namedViews
   ncPrograms: NCPrograms
+  objectType
+  parentDocument
   personalPostFolder: str
+  productType
+  selectionSets
   setupActivated: SetupEvent
   setupActivating: SetupEvent
   setupChanged: SetupChangeEvent
@@ -36,9 +44,13 @@ CAM : Product
   setupGroups: SetupGroups
   setups: Setups
   temporaryFolder: str
+  unitsManager
+  workspaces
+  Name()
   checkAllToolpaths() -> bool
   checkToolpath(operations: Base) -> bool
   checkValidity() -> void
+  classType()
   clearAllToolpaths() -> bool
   clearMissingReferences() -> void
   clearToolpath(operations: Base) -> bool
@@ -56,34 +68,60 @@ CAM : Product
 
 CAM3MFExportMetadataOptions : Base
   # Class providing read and write access to meta data of a 3MF file.
+  Name
   copyright: str
   creationDate: str
   description: str
   designer: str
   enabled: bool
+  isValid
   licenseTerms: str
   modificationDate: str
+  objectType
   title: str
+  Name()
+  classType()
 
 CAM3MFExportOptions : CAMExportOptions
+  Name
   areSimulationSurrogatesSplit: bool
   areSimulationThickeningStructuresKept: bool
   areSupportsIncluded: bool
+  error
+  exportObject
+  fullFilename
   isMachineInformationIncluded: bool
   isProcessSimulationDataIncluded: bool
   isSimulationPostProcessingIncluded: bool
   isSliceDataIncluded: bool
+  isThumbnailSupported
+  isValid
   isVolumetricDataIncluded: bool
   metadata: CAM3MFExportMetadataOptions
+  objectType
   supportInclusion: CAM3MFSupportInclusionType
+  thumbnailPath
   volumetricDataResolution: int
+  Name()
+  classType()
+
+CAM3MFSupportInclusionType
+  IncludeAsModelType()
+  IncludeAsSupportType()
+  Name()
+  NotIncluded()
 
 CAMAdditiveBuildExportFilter : Base
   # Export filter used by CAMAdditiveMachineBuildFileExportOptions.
+  Name
   extension: str
   id: str
   isMultiFileExport: bool
+  isValid
   name: str
+  objectType
+  Name()
+  classType()
 
 CAMAdditiveBuildExportFilterVector
   append(x: CAMAdditiveBuildExportFilter) -> void
@@ -110,13 +148,46 @@ CAMAdditiveBuildExportFilterVector
   swap(v: list[CAMAdditiveBuildExportFilter]) -> void
 
 CAMAdditiveBuildExportOptions : CAMExportOptions
+  Name
+  error
   exportFilters: CAMAdditiveBuildExportFilter]
+  exportObject
+  fullFilename
+  isThumbnailSupported
+  isValid
+  objectType
   selectedExportFilterId: str
+  thumbnailPath
+  Name()
+  classType()
 
 CAMAdditiveContainer : OperationBase
+  Name
   allOperations: ObjectCollection
+  attributes
   children: ChildOperationList
+  error
+  generatedDataCollection
+  hasError
+  hasWarning
+  isLightBulbOn
+  isOptional
+  isProtected
+  isSelected
+  isSuppressed
+  isValid
+  isVisible
+  name
+  notes
+  objectType
+  operationId
+  parameters
   parent: Base
+  parentSetup
+  strategy
+  warning
+  Name()
+  classType()
   copyAfter(operation: OperationBase) -> bool
   copyBefore(operation: OperationBase) -> bool
   copyInto(container: OperationBase) -> bool
@@ -129,8 +200,21 @@ CAMAdditiveContainer : OperationBase
   moveInto(container: OperationBase) -> bool
   removeReferences(entity: Base, removeFromChildren: bool) -> bool
 
+CAMAdditiveContainerTypes
+  AdditiveProcessSimulationCAMAdditiveContainerType()
+  BodyPresetCAMAdditiveContainerType()
+  Name()
+  OptimizedOrientationCAMAdditiveContainerType()
+  SupportCAMAdditiveContainerType()
+
 CAMArrangeParameterValue : ParameterValue
+  Name
+  isValid
+  objectType
+  parent
+  Name()
   applyArrangeSelections(arrangeSelections: ArrangeSelections) -> void
+  classType()
   getArrangeSelections() -> ArrangeSelections
 
 CAMAutodeskCLDExportOptions : CAMExportOptions
@@ -158,13 +242,23 @@ CAMEventManager : Base
 
 CAMExportFuture : Base
   # Used to check the state and get back the results of an operation generation.
+  Name
   error: str
   exportOptions: CAMExportOptions
   isGenerationCompleted: bool
+  isValid
+  objectType
   progress: float
   warning: str
+  Name()
+  classType()
 
 CAMExportManager : Base
+  Name
+  isValid
+  objectType
+  Name()
+  classType()
   create3MFOptions() -> CAM3MFExportOptions
   createAutodeskCLDExportOptions() -> CAMAutodeskCLDExportOptions
   createCAMAdditiveBuildExportOptions() -> CAMAdditiveBuildExportOptions
@@ -174,22 +268,50 @@ CAMExportManager : Base
   executeWithExportFuture(exportOptions: CAMExportOptions) -> CAMExportFuture
 
 CAMExportOptions : Base
+  Name
   error: str
   exportObject: Base
   fullFilename: str
   isThumbnailSupported: bool
+  isValid
+  objectType
   thumbnailPath: str
+  Name()
+  classType()
 
 CAMFolder : OperationBase
   # Object that represents a folder in an existing Setup, Folder or Pattern.
+  Name
   allOperations: ObjectCollection
+  attributes
   children: ChildOperationList
+  error
   folders: CAMFolders
+  generatedDataCollection
+  hasError
+  hasWarning
   isActive: bool
+  isLightBulbOn
+  isOptional
+  isProtected
+  isSelected
+  isSuppressed
+  isValid
+  isVisible
+  name
+  notes
+  objectType
+  operationId
   operations: Operations
+  parameters
   parent: Base
+  parentSetup
   patterns: CAMPatterns
+  strategy
+  warning
+  Name()
   activate() -> bool
+  classType()
   copyAfter(operation: OperationBase) -> bool
   copyBefore(operation: OperationBase) -> bool
   copyInto(container: OperationBase) -> bool
@@ -208,8 +330,13 @@ CAMFolder : OperationBase
 
 CAMFolders *collection<CAMFolder>
   # Collection that provides access to the folders within an existing setup, folder or pattern.
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   addFolder(name: str) -> CAMFolder
+  classType()
   itemByName(name: str) -> CAMFolder
   itemByOperationId(id: int) -> CAMFolder
 
@@ -220,13 +347,36 @@ CAMFormlabsExportOptions : CAMExportOptions
 
 CAMHoleRecognition : OperationBase
   # Object that represents a hole recognition object in an existing Setup, Folder or Pattern.
+  Name
   allOperations: OperationBase]
+  attributes
   children: ChildOperationList
+  error
   folders: CAMFolders
+  generatedDataCollection
+  hasError
+  hasWarning
   isActive: bool
+  isLightBulbOn
+  isOptional
+  isProtected
+  isSelected
+  isSuppressed
+  isValid
+  isVisible
+  name
+  notes
+  objectType
+  operationId
   operations: Operations
+  parameters
   parent: Base
+  parentSetup
+  strategy
+  warning
+  Name()
   activate() -> bool
+  classType()
   copyAfter(operation: OperationBase) -> bool
   copyBefore(operation: OperationBase) -> bool
   copyInto(container: OperationBase) -> bool
@@ -256,9 +406,14 @@ CAMInspectionResults *collection<CAMMeasure>
 
 CAMLibrary : Base
   # The CAMLibrary is the base-class for all other asset-specific libraries.
+  Name
   assetTypeName: str
+  isValid
+  objectType
+  Name()
   childAssetURLs(url: URL) -> URL]
   childFolderURLs(url: URL) -> URL]
+  classType()
   createFolder(parentUrl: URL, folderName: str) -> URL
   deleteAsset(url: URL) -> bool
   deleteFolder(url: URL) -> bool
@@ -267,24 +422,34 @@ CAMLibrary : Base
   urlByLocation(location: LibraryLocations) -> URL
 
 CAMLibraryManager : Base
+  Name
   fusion360MachineFolder: str
   fusion360PostFolder: str
+  isValid
   localMachineFolder: str
   localPostFolder: str
   machineLibrary: MachineLibrary
   networkMachineFolder: str
+  objectType
   postLibrary: PostLibrary
   printSettingLibrary: PrintSettingLibrary
   stockMaterialLibrary: StockMaterialLibrary
   templateLibrary: CAMTemplateLibrary
   toolLibraries: ToolLibraries
+  Name()
+  classType()
 
 CAMManager : Base
+  Name
   camEventManager: CAMEventManager
   customStrategyManager: CAMCustomStrategyManager
+  isValid
   libraryManager: CAMLibraryManager
   networkMachineIntegrationManager: NetworkMachineIntegrationManager
+  objectType
   postEnginePath: str
+  Name()
+  classType()
   @static get() -> CAMManager
 
 CAMMeasure : Base
@@ -293,30 +458,70 @@ CAMMeasure : Base
 
 CAMParameter : Base
   # Base class for representing parameter of an operation.
+  Name
   error: str
   expression: str
   fullTitle: str
   isDeprecated: bool
   isEditable: bool
   isEnabled: bool
+  isValid
   isVisible: bool
   name: str
+  objectType
   systemDefaultExpression: str
   title: str
   userDefaultExpression: str
   value: ParameterValue
   warning: str
+  Name()
+  classType()
   saveExpressionAsUserDefault() -> bool
 
 CAMParameters *collection<CAMParameter>
   # Collection that provides access to the parameters of an existing operation.
+  Name
   count: int
+  isValid
+  objectType
+  Name()
+  classType()
   itemByName(internalName: str) -> CAMParameter
   resetToSystemDefaults() -> bool
 
 CAMPattern : CAMFolder
   # Object that represents a pattern in an existing Setup, Folder or Pattern.
+  Name
+  allOperations
+  attributes
+  children
+  error
+  folders
+  generatedDataCollection
+  hasError
+  hasWarning
+  isActive
+  isLightBulbOn
+  isOptional
+  isProtected
+  isSelected
+  isSuppressed
+  isValid
+  isVisible
+  name
+  notes
+  objectType
+  operationId
+  operations
+  parameters
+  parent
+  parentSetup
+  patterns
+  strategy
+  warning
+  Name()
   activate() -> bool
+  classType()
   copyAfter(operation: OperationBase) -> bool
   copyBefore(operation: OperationBase) -> bool
   copyInto(container: OperationBase) -> bool
@@ -335,16 +540,26 @@ CAMPattern : CAMFolder
 
 CAMPatterns *collection<CAMPattern>
   # Collection that provides access to the patterns within an existing setup, folder or pattern.
+  Name
   count: int
+  isValid
+  objectType
+  Name()
+  classType()
   itemByName(name: str) -> CAMPattern
   itemByOperationId(id: int) -> CAMPattern
 
 CAMTemplate : Base
+  Name
   attributes: Attributes
   description: str
   isHoleTemplate: bool
+  isValid
   name: str
+  objectType
   operations: CAMTemplateOperations
+  Name()
+  classType()
   @static createEmpty() -> CAMTemplate
   @static createFromFile(filePath: str) -> CAMTemplate
   @static createFromOperations(operations: list[Operation]) -> Operation]
@@ -355,9 +570,15 @@ CAMTemplate : Base
   setHoleSignatureXML(xmlSnippet: str) -> bool
 
 CAMTemplateLibrary : CAMLibrary
+  Name
+  assetTypeName
+  isValid
+  objectType
+  Name()
   childAssetURLs(url: URL) -> URL]
   childFolderURLs(url: URL) -> URL]
   childTemplates(url: URL) -> CAMTemplate]
+  classType()
   createFolder(parentUrl: URL, folderName: str) -> URL
   deleteAsset(url: URL) -> bool
   deleteFolder(url: URL) -> bool
@@ -369,18 +590,28 @@ CAMTemplateLibrary : CAMLibrary
   urlByLocation(location: LibraryLocations) -> URL
 
 CAMTemplateOperationInput : Base
+  Name
   displayName: str
   geometryIndexCount: int
+  isValid
+  objectType
   parameters: CAMParameters
   strategy: str
   tool: Tool
   toolPreset: ToolPreset
+  Name()
+  classType()
   isGeometryIndexEnabled(index: int) -> bool
   setGeometryIndexEnabled(index: int, enabled: bool) -> void
 
 CAMTemplateOperations : Base
+  Name
   count: int
+  isValid
+  objectType
+  Name()
   add(input: CAMTemplateOperationInput) -> void
+  classType()
   get(operationIndex: int) -> CAMTemplateOperationInput
   makeInput(strategyType: str) -> CAMTemplateOperationInput
   set(operationIndex: int, input: CAMTemplateOperationInput) -> void
@@ -411,12 +642,35 @@ CAMTemplateVector
 
 NCProgram : OperationBase
   # Object that represents an existing NC program.
+  Name
+  attributes
+  error
   filteredOperations: OperationBase]
   fusionHubFolder: DataFolder
+  generatedDataCollection
+  hasError
+  hasWarning
+  isLightBulbOn
+  isOptional
+  isProtected
+  isSelected
+  isSuppressed
+  isValid
+  isVisible
   machine: Machine
+  name
+  notes
+  objectType
+  operationId
   operations: OperationBase]
+  parameters
+  parentSetup
   postConfiguration: PostConfiguration
   postParameters: CAMParameters
+  strategy
+  warning
+  Name()
+  classType()
   copyAfter(operation: OperationBase) -> bool
   copyBefore(operation: OperationBase) -> bool
   copyInto(container: OperationBase) -> bool
@@ -432,25 +686,53 @@ NCProgram : OperationBase
   updatePostParameters(parameters: CAMParameters) -> bool
 
 NCProgramPostProcessOptions : Base
+  Name
   fusionHubExecutionBehavior: FusionHubExecutionBehaviors
   isFailOnToolNumberDuplication: bool
+  isValid
+  objectType
   postProcessExecutionBehavior: PostProcessExecutionBehaviors
+  Name()
+  classType()
   @static create() -> NCProgramPostProcessOptions
 
 Operation : OperationBase
   # Object that represents an operation in an existing Setup, Folder or Pattern.
+  Name
+  attributes
+  error
+  generatedDataCollection
   generatingProgress: str
+  hasError
   hasToolpath: bool
+  hasWarning
   isGenerating: bool
+  isLightBulbOn
+  isOptional
+  isProtected
+  isSelected
+  isSuppressed
   isToolpathValid: bool
+  isValid
+  isVisible
+  name
+  notes
+  objectType
+  operationId
   operationState: OperationStates
+  parameters
   parent: Base
+  parentSetup
   referenceTool: Tool
+  strategy
   strategyType: OperationStrategyTypes
   tool: Tool
   toolJson: str
   toolPreset: ToolPreset
   toolPresetId: str
+  warning
+  Name()
+  classType()
   copyAfter(operation: OperationBase) -> bool
   copyBefore(operation: OperationBase) -> bool
   copyInto(container: OperationBase) -> bool
@@ -463,22 +745,45 @@ Operation : OperationBase
   moveInto(container: OperationBase) -> bool
   removeReferences(entity: Base, removeFromChildren: bool) -> bool
 
+PostCapabilities
+  Additive()
+  Cascading()
+  Inspection()
+  Intermediate()
+  Jet()
+  MachineSimulation()
+  Milling()
+  Name()
+  SetupSheet()
+  Turning()
+  Undefined()
+
 PostConfiguration : Base
   # Object that represents a post configuration.
+  Name
   capability: PostCapabilities
   description: str
   extension: str
+  isValid
   keywords: list[str]
   mimetype: str
+  objectType
   vendor: str
   version: str
+  Name()
+  classType()
   @static createFromContent(content: str) -> PostConfiguration
 
 PostConfigurationQuery : Base
+  Name
   capability: PostCapabilities
+  isValid
   location: LibraryLocations
+  objectType
   url: URL
   vendor: str
+  Name()
+  classType()
   execute() -> PostConfiguration]
 
 PostConfigurationVector
@@ -506,9 +811,15 @@ PostConfigurationVector
   swap(v: list[PostConfiguration]) -> void
 
 PostLibrary : CAMLibrary
+  Name
+  assetTypeName
+  isValid
+  objectType
+  Name()
   childAssetURLs(url: URL) -> URL]
   childFolderURLs(url: URL) -> URL]
   childPostConfigurations(url: URL) -> PostConfiguration]
+  classType()
   createFolder(parentUrl: URL, folderName: str) -> URL
   createQuery(location: LibraryLocations) -> PostConfigurationQuery
   deleteAsset(url: URL) -> bool
@@ -519,47 +830,95 @@ PostLibrary : CAMLibrary
   postConfigurationAtURL(url: URL) -> PostConfiguration
   urlByLocation(location: LibraryLocations) -> URL
 
+PostOutputUnitOptions
+  DocumentUnitsOutput()
+  InchesOutput()
+  MillimetersOutput()
+  Name()
+
+PostProcessExecutionBehaviors
+  # Defined in namespace "adsk::cam" and the header file is <Cam\CamTypeDefs.h>
+  Name()
+  PostProcessExecutionBehavior_Fail()
+  PostProcessExecutionBehavior_OmitInvalidAndEmptyOperations()
+  PostProcessExecutionBehavior_PostAll()
+
 PostProcessInput : Base
+  Name
   areToolChangesMinimized: bool
   isOpenInEditor: bool
+  isValid
   machine: Machine
+  objectType
   outputFolder: str
   outputUnits: PostOutputUnitOptions
   postConfiguration: str
   postProperties: NamedValues
   programComment: str
   programName: str
+  Name()
+  classType()
   @static create(programName: str, postConfiguration: str, outputFolder: str, outputUnits: PostOutputUnitOptions) -> PostProcessInput
 
 PostProcessingMachineElement : MachineElement
   # Machine element representing the post processor and post properties.
+  Name
+  elementId
+  isValid
+  objectType
   outputFolder: str
   postParameters: CAMParameters
   postURL: URL
+  typeId
+  Name()
+  classType()
   @static staticTypeId() -> str
   updatePostParameters(parameters: CAMParameters) -> bool
 
 Setup : OperationBase
   # Object that represents an existing Setup.
+  Name
   allOperations: ObjectCollection
+  attributes
   children: ChildOperationList
+  error
   fixtureEnabled: bool
   fixtures: ObjectCollection
   folders: CAMFolders
+  generatedDataCollection
+  hasError
+  hasWarning
   isActive: bool
+  isLightBulbOn
+  isOptional
+  isProtected
+  isSelected
+  isSuppressed
+  isValid
+  isVisible
   machine: Machine
   models: ObjectCollection
+  name
+  notes
+  objectType
+  operationId
   operationType: OperationTypes
   operations: Operations
+  parameters
+  parentSetup
   patterns: CAMPatterns
   printSetting: PrintSetting
   stockMaterial: StockMaterial
   stockMode: SetupStockModes
   stockSolids: ObjectCollection
+  strategy
   visibilityManager: SetupVisibilityManager
+  warning
   workCoordinateSystem: Matrix3D
+  Name()
   activate() -> bool
   additiveContainerByType(containerType: CAMAdditiveContainerTypes) -> CAMAdditiveContainer
+  classType()
   copyAfter(operation: OperationBase) -> bool
   copyBefore(operation: OperationBase) -> bool
   copyInto(container: OperationBase) -> bool
@@ -578,9 +937,14 @@ Setup : OperationBase
 
 Tool : Base
   # Represents a Tool.
+  Name
   description: str
+  isValid
+  objectType
   parameters: CAMParameters
   presets: ToolPresets
+  Name()
+  classType()
   @static createFromJson(json: str) -> Tool
   @static createFromP21(p21: str) -> Tool
   @static createFromP21File(filename: str) -> Tool

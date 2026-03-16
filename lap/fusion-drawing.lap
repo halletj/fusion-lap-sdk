@@ -3,73 +3,151 @@
 [classes]
 ConfigurationAppearanceTable : ConfigurationTable
   # Represents a configuration table that defines the appearances assigned to bodies and components.
+  Name
   columns: ConfigurationAppearanceColumns
+  id
+  isValid
   name: str
+  objectType
   parentTableColumn: ConfigurationThemeColumn
+  rows
+  Name()
+  classType()
   clear() -> bool
   getCell(column: int, row: int) -> ConfigurationCell
 
 ConfigurationCustomThemeTable : ConfigurationTable
   # API object representing a custom theme configuration table associated with a top table.
+  Name
   columns: ConfigurationColumns
+  id
+  isValid
   name: str
+  objectType
   parentTableColumn: ConfigurationThemeColumn
+  rows
+  Name()
+  classType()
   deleteMe(deleteColumns: bool) -> bool
   getCell(column: int, row: int) -> ConfigurationCell
   moveColumns(columns: list[ConfigurationColumn], targetTable: ConfigurationTable) -> ConfigurationColumn]
 
 ConfigurationMaterialTable : ConfigurationTable
   # Represents a configuration table that defines materials assigned to bodies and components.
+  Name
   columns: ConfigurationMaterialColumns
+  id
+  isValid
   name: str
+  objectType
   parentTableColumn: ConfigurationThemeColumn
+  rows
+  Name()
+  classType()
   clear() -> bool
   getCell(column: int, row: int) -> ConfigurationCell
 
 ConfigurationPlasticRuleTable : ConfigurationTable
   # Represents a configuration table that defines different plastic rules.
+  Name
   columns: ConfigurationPlasticRuleColumns
+  id
+  isValid
   name: str
+  objectType
   parentTableColumn: ConfigurationThemeColumn
+  rows
+  Name()
+  classType()
   clear() -> bool
   getCell(column: int, row: int) -> ConfigurationCell
 
 ConfigurationSheetMetalRuleTable : ConfigurationTable
   # Represents a configuration table that defines different sheet metal rules.
+  Name
   columns: ConfigurationSheetMetalRuleColumns
+  id
+  isValid
   name: str
+  objectType
   parentTableColumn: ConfigurationThemeColumn
+  rows
+  Name()
+  classType()
   clear() -> bool
   getCell(column: int, row: int) -> ConfigurationCell
 
 ConfigurationTable : Base
   # The base class of all configuration tables.
+  Name
   id: str
+  isValid
+  objectType
   rows: ConfigurationRows
+  Name()
+  classType()
   getCell(column: int, row: int) -> ConfigurationCell
 
 ConfigurationTopTable : ConfigurationTable
+  Name
   activeRow: ConfigurationRow
   appearanceTable: ConfigurationAppearanceTable
   columns: ConfigurationColumns
   customThemeTables: ConfigurationCustomThemeTables
+  id
+  isValid
   materialTable: ConfigurationMaterialTable
   name: str
+  objectType
   plasticRuleTable: ConfigurationPlasticRuleTable
+  rows
   sheetMetalRuleTable: ConfigurationSheetMetalRuleTable
+  Name()
+  classType()
   getCell(column: int, row: int) -> ConfigurationCell
   moveColumns(columns: list[ConfigurationColumn], targetTable: ConfigurationCustomThemeTable) -> ConfigurationColumn]
 
 Drawing : Product
   # Object that represents the drawing specific data within a drawing document.
+  Name
+  attributes
   exportManager: DrawingExportManager
+  isValid
+  namedViews
+  objectType
+  parentDocument
+  productType
+  selectionSets
+  unitsManager
+  workspaces
+  Name()
+  classType()
   deleteEntities(entities: ObjectCollection) -> bool
   findAttributes(groupName: str, attributeName: str) -> Attribute]
 
 DrawingDocument : Document
   # Object that represents a Fusion 360 drawing document.
+  Name
+  allDocumentReferences
+  attributes
+  creationId
+  dataFile
+  documentReferences
   drawing: Drawing
+  isActive
+  isModified
+  isSaved
+  isUpToDate
+  isValid
+  isVisible
+  name
+  objectType
+  parent
+  products
+  version
+  Name()
   activate() -> bool
+  classType()
   close(saveChanges: bool) -> bool
   save(description: str) -> bool
   saveAs(name: str, dataFolder: DataFolder, description: str, tag: str) -> bool
@@ -79,8 +157,18 @@ DrawingDocument : Document
 
 DrawingExportManager : Base
   # Provides support to export the drawing in various formats.
+  Name
+  isValid
+  objectType
+  Name()
+  classType()
   createPDFExportOptions(filename: str) -> PDFExportOptions
   execute(exportOptions: DrawingExportOptions) -> bool
 
 DrawingExportOptions : Base
+  Name
   filename: str
+  isValid
+  objectType
+  Name()
+  classType()

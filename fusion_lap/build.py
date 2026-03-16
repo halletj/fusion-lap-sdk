@@ -9,7 +9,7 @@ from .discover import find_stubs
 from .enrich import enrich_ir
 from .ir import IR
 from .render import render_domain, render_gotchas, render_graph, render_meta
-from .scraper import fetch_class_page, parse_class_page, scrape_class_index
+from .scraper import scrape_local_docs
 from .stubs import parse_stubs
 
 logger = logging.getLogger(__name__)
@@ -51,19 +51,12 @@ def build_lap_files(
             logger.warning("No stubs found. Building from HTML only.")
             ir = IR()
 
-    # Stage 2: Scrape & enrich
-    logger.info("Scraping Autodesk CloudHelp for descriptions...")
-    class_names = scrape_class_index()
-    scraped = {}
-    for class_name in class_names:
-        html = fetch_class_page(class_name)
-        if html:
-            scraped[class_name] = parse_class_page(class_name, html)
+    # Stage 2: Enrich from local HTML docs
+    scraped = scrape_local_docs()
     if scraped:
         enrich_ir(ir, scraped)
-        logger.info(f"Enriched with {len(scraped)} classes from HTML")
     else:
-        logger.warning("No HTML docs fetched. Proceeding with stubs only.")
+        logger.warning("No HTML docs found. Proceeding with stubs only.")
 
     # Add default gotchas
     ir.gotchas = DEFAULT_GOTCHAS

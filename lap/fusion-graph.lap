@@ -2,6 +2,7 @@
 
 [graph]
 Application
+  .Name -> 
   .activeDocument -> Document
   .activeEditObject -> Base
   .activeProduct -> Product
@@ -35,10 +36,12 @@ Application
   .isComponentColorsDisplayed -> bool
   .isOffLine -> bool
   .isStartupComplete -> bool
+  .isValid -> 
   .lightingEnvironment -> LightingEnvironments
   .materialLibraries -> MaterialLibraries
   .measureManager -> MeasureManager
   .mfgdmDataReady -> MFGDMDataEvent
+  .objectType -> 
   .onlineStatusChanged -> ApplicationEvent
   .openedFromURL -> WebRequestEvent
   .openingFromURL -> WebRequestEvent
